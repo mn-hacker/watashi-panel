@@ -11816,3 +11816,67 @@ msgstr "متن‌ها"
 # watashi v12.3.44dev
 msgid "the owner"
 msgstr "مالک پنل"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Check the tunnel service and firewall on the relay server and make sure port 443 (and port 80 for SSL) are forwarded to this server."
+msgstr "سرویس تانل و فایروال سرور رله را بررسی کنید و مطمئن شوید پورت 443 (و پورت 80 برای گرفتن گواهی SSL) به این سرور فوروارد شده است."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Nothing answered TLS on port 443"
+msgstr "پورت 443 به TLS پاسخ نداد"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server answers with a different certificate than the one on this server. If you recently moved the panel to a new server, the tunnel on the relay server is still pointing to the old server IP, or the relay server is terminating TLS itself."
+msgstr "پورت 443 روی سرور رله گواهی متفاوتی با گواهی این سرور برمی‌گرداند. اگر به‌تازگی سرور پنل را عوض کرده‌اید، تانل روی سرور رله هنوز به IP سرور قبلی وصل است، یا خود سرور رله دارد TLS را باز می‌کند."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server forwards traffic to this server as expected."
+msgstr "پورت 443 سرور رله همان‌طور که باید، ترافیک را به این سرور می‌فرستد."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server is not responding"
+msgstr "پورت 443 روی سرور رله پاسخ نمی‌دهد"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server is not responding, and port 80 is not forwarded to this server either. Fix the tunnel on the relay server so ports 443 and 80 reach this server, then ask again."
+msgstr "پورت 443 روی سرور رله پاسخ نمی‌دهد و پورت 80 هم به این سرور فوروارد نشده است. ابتدا تانل روی سرور رله را برقرار کنید تا پورت‌های 443 و 80 به این سرور برسند، سپس دوباره درخواست بدهید."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server reaches this server, but validation over port 443 did not succeed and port 80 is not forwarded from the relay server to this server. Forward TCP port 80 from the relay server to this server as well, then ask again."
+msgstr "تانل پورت 443 از سرور رله به این سرور برقرار است، اما اعتبارسنجی روی پورت 443 انجام نشد و پورت 80 هم از سرور رله به این سرور فوروارد نشده است. پورت 80 را هم روی سرور رله به این سرور فوروارد کنید و دوباره درخواست بدهید."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate expires soon"
+msgstr "گواهی SSL به‌زودی منقضی می‌شود"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate has expired"
+msgstr "گواهی SSL منقضی شده است"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate is not trusted"
+msgstr "گواهی SSL معتبر نیست"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate is self-signed"
+msgstr "گواهی SSL خودامضاست"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The relay server is answering on port 443 with another server’s certificate (not forwarding traffic to this server). If you moved the panel to a new server, update the tunnel target IP on the relay server to this server’s IP and forward ports 80 and 443, then ask again."
+msgstr "سرور رله روی پورت 443 گواهی سرور دیگری را برمی‌گرداند و ترافیک را به این سرور نمی‌فرستد. اگر سرور پنل را عوض کرده‌اید، IP مقصد تانل را روی سرور رله به IP این سرور تغییر دهید و پورت‌های 80 و 443 را فوروارد کنید، سپس دوباره درخواست بدهید."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The relay tunnel does not point to this server"
+msgstr "تانل سرور رله به این سرور وصل نیست"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "This domain is set to Relay mode, but its DNS record points to this server itself instead of the relay server."
+msgstr "این دامنه روی حالت رله تنظیم شده، اما رکورد DNS آن به‌جای سرور رله به همین سرور اشاره می‌کند."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "This server could not complete a TLS handshake with the relay server on port 443, so the tunnel is down or port 443 is closed on the relay."
+msgstr "این سرور نتوانست روی پورت 443 با سرور رله ارتباط TLS برقرار کند؛ یعنی تانل روی سرور رله قطع است یا پورت 443 بسته است."
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
+msgstr "نشانی IP مقصد تانل را روی سرور رله به IP همین سرور تغییر دهید و دوباره بررسی کنید."

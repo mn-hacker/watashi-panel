@@ -3461,3 +3461,67 @@ msgstr "Журналы не найдены"
 
 msgid "No data yet"
 msgstr "Данных пока нет"
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Check the tunnel service and firewall on the relay server and make sure port 443 (and port 80 for SSL) are forwarded to this server."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Nothing answered TLS on port 443"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server answers with a different certificate than the one on this server. If you recently moved the panel to a new server, the tunnel on the relay server is still pointing to the old server IP, or the relay server is terminating TLS itself."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server forwards traffic to this server as expected."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server is not responding"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server is not responding, and port 80 is not forwarded to this server either. Fix the tunnel on the relay server so ports 443 and 80 reach this server, then ask again."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Port 443 on the relay server reaches this server, but validation over port 443 did not succeed and port 80 is not forwarded from the relay server to this server. Forward TCP port 80 from the relay server to this server as well, then ask again."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate expires soon"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate has expired"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate is not trusted"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The SSL certificate is self-signed"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The relay server is answering on port 443 with another server’s certificate (not forwarding traffic to this server). If you moved the panel to a new server, update the tunnel target IP on the relay server to this server’s IP and forward ports 80 and 443, then ask again."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "The relay tunnel does not point to this server"
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "This domain is set to Relay mode, but its DNS record points to this server itself instead of the relay server."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "This server could not complete a TLS handshake with the relay server on port 443, so the tunnel is down or port 443 is closed on the relay."
+msgstr ""
+
+# watashi v12.3.47b: relay tunnel and ssl diagnostics
+msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
+msgstr ""

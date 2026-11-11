@@ -735,6 +735,10 @@
         sslInvalid: {{ _('This is not a name an authority issues certificates for.')|tojson }},
         sslNoDns: {{ _('This domain has no DNS record, so no authority could check it.')|tojson }},
         sslElsewhere: {{ _('This domain does not point at this server, so no authority could check it. Point it at this server, wait a few minutes, then ask again.')|tojson }},
+        sslRelayNo80: {{ _('Port 443 on the relay server reaches this server, but validation over port 443 did not succeed and port 80 is not forwarded from the relay server to this server. Forward TCP port 80 from the relay server to this server as well, then ask again.')|tojson }},
+        sslRelayWrongTarget: {{ _('The relay server is answering on port 443 with another server’s certificate (not forwarding traffic to this server). If you moved the panel to a new server, update the tunnel target IP on the relay server to this server’s IP and forward ports 80 and 443, then ask again.')|tojson }},
+        sslRelayNo443: {{ _('Port 443 on the relay server is not responding, and port 80 is not forwarded to this server either. Fix the tunnel on the relay server so ports 443 and 80 reach this server, then ask again.')|tojson }},
+        sslRelayPointsHere: {{ _('This domain is set to Relay mode, but its DNS record points to this server itself instead of the relay server.')|tojson }},
         sslInstall: {{ _('A certificate was issued but could not be put in place. The log below says why.')|tojson }},
         sslFailed: {{ _('No authority issued a certificate. The domain keeps its previous certificate, or a self-signed one. The log below says why.')|tojson }},
         sslStale: {{ _('The last request stopped before it finished.')|tojson }},
@@ -1239,15 +1243,20 @@
                 line.appendChild(word);
             }
             if ((report.ips || []).length) {
+                var ipState = report.ip_state || report.state || 'ok';
                 var tone = 'neutral';
+                var ipIcon = 'fa-solid fa-triangle-exclamation';
                 if (report.behind_cdn) {
                     tone = 'cloud';
-                } else if (report.state === 'ok') {
+                    ipIcon = 'fa-solid fa-cloud';
+                } else if (ipState === 'ok') {
                     tone = 'match';
-                } else if (report.state === 'bad') {
+                    ipIcon = 'fa-solid fa-circle-check';
+                } else if (ipState === 'bad') {
                     tone = 'mismatch';
+                    ipIcon = 'fa-solid fa-circle-xmark';
                 }
-                ipLine(id, report.ips, tone, report.behind_cdn ? 'fa-solid fa-cloud' : 'fa-solid fa-circle-check');
+                ipLine(id, report.ips, tone, ipIcon);
             }
             paintCert(id, report.cert || null);
             reports[id] = report;
@@ -1320,8 +1329,10 @@
 
         function healthLines(report) {
             var out = [];
-            (report.notes || []).forEach(function (note) {
-                out.push({ tone: report.state === 'bad' ? 'bad' : (report.state === 'warn' ? 'warn' : 'ok'), text: note });
+            var tones = report.note_tones || [];
+            var fallbackTone = report.state === 'bad' ? 'bad' : (report.state === 'warn' ? 'warn' : 'ok');
+            (report.notes || []).forEach(function (note, idx) {
+                out.push({ tone: tones[idx] || fallbackTone, text: note });
             });
             if ((report.ips || []).length) {
                 out.push({ tone: 'ok', text: TXT.seenAt + ' ' + iso((report.ips || []).join(', ')) });
@@ -1860,9 +1871,11 @@
             btn.appendChild(word);
         }
 
-        function sslVerdict(job) {
+        function sslVerdict(job, id) {
             var result = (job && job.result) || '';
             var reason = (job && job.reason) || '';
+            var row = id ? rowOf(id) : null;
+            var isRelay = !!(row && row.mode === 'relay');
             if (result === 'ok') {
                 if (job.days !== null && typeof job.days !== 'undefined') {
                     return { tone: 'ok', text: fill(TXT.sslOk, { '@N@': job.days }) };
@@ -1890,7 +1903,16 @@
             if (result === 'nodns' || (result === 'failed' && reason === 'dns-none')) {
                 return { tone: 'bad', text: TXT.sslNoDns };
             }
-            if (result === 'failed' && reason === 'dns-elsewhere') {
+            if (result === 'failed' && reason === 'relay-no-80') {
+                return { tone: 'bad', text: TXT.sslRelayNo80 };
+            }
+            if (result === 'failed' && (reason === 'relay-wrong-target' || (isRelay && reason === 'dns-elsewhere-other'))) {
+                return { tone: 'bad', text: TXT.sslRelayWrongTarget };
+            }
+            if (result === 'failed' && (reason === 'relay-no-443' || (isRelay && reason === 'dns-elsewhere'))) {
+                return { tone: 'bad', text: TXT.sslRelayNo443 };
+            }
+            if (result === 'failed' && (reason === 'dns-elsewhere' || reason === 'dns-elsewhere-other')) {
                 return { tone: 'bad', text: TXT.sslElsewhere };
             }
             if (result === 'failed' && reason === 'install') {
@@ -1905,16 +1927,28 @@
             return { tone: 'warn', text: TXT.sslUnknown };
         }
 
-        // what the last check said about the dns, without asking it again
-        function sslDnsElsewhere(id) {
+        // what the last check said about the dns or relay tunnel, without asking it again
+        function sslDnsWarning(id) {
             var report = reports[id];
-            if (!report || report.wants !== 'here' || !(report.ips || []).length) {
-                return false;
+            if (!report || !(report.ips || []).length) {
+                return '';
             }
             var mine = report.server_ips || [];
-            return !(report.ips || []).some(function (ip) {
+            var hasMine = (report.ips || []).some(function (ip) {
                 return mine.indexOf(ip) >= 0;
             });
+            if (report.wants === 'here' && !hasMine) {
+                return TXT.sslDnsBad;
+            }
+            if (report.wants === 'relay') {
+                if (hasMine) {
+                    return TXT.sslRelayPointsHere;
+                }
+                if (report.ip_state === 'bad' && (report.notes || []).length) {
+                    return report.notes[0] + (report.advice ? ' ' + report.advice : '');
+                }
+            }
+            return '';
         }
 
         function sslPaint(id, job) {
@@ -1940,7 +1974,7 @@
                 lines.push({ tone: 'wait', text: TXT.sslRunning });
                 go.style.display = 'none';
             } else if (phase === 'done' && job) {
-                var end = sslVerdict(job);
+                var end = sslVerdict(job, id);
                 verdict.className = 'dm-verdict dm-state ' + end.tone;
                 verdict.style.display = '';
                 var mark = document.createElement('i');
@@ -1954,11 +1988,12 @@
             } else {
                 lines.push({ tone: 'ok', text: TXT.sslIntro });
                 lines.push({ tone: 'warn', text: TXT.sslLimit });
-                if (sslDnsElsewhere(id)) {
-                    lines.push({ tone: 'bad', text: TXT.sslDnsBad });
+                var dnsWarn = sslDnsWarning(id);
+                if (dnsWarn) {
+                    lines.push({ tone: 'bad', text: dnsWarn });
                 }
                 if (job && job.state !== 'none' && job.state !== 'running' && job.result) {
-                    var last = sslVerdict(job);
+                    var last = sslVerdict(job, id);
                     lines.push({ tone: last.tone, text: TXT.sslLast + ' ' + last.text });
                 }
                 go.style.display = '';

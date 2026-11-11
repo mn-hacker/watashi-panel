@@ -30,6 +30,7 @@ from flask_admin import expose
 import os as ws_os  # watashi v12.3.39dev: the certificate job of a domain
 import time as ws_time  # watashi v12.3.39dev
 import subprocess as ws_subprocess  # watashi v12.3.39dev
+import hashlib as ws_hashlib
 # Define a custom field type for the related domains
 
 
@@ -203,7 +204,8 @@ def ws_cert_state(domain, host=None):
     # server's good certificate on every card and looked fine while every
     # config failed.
     answer = {'days': None, 'issuer': '', 'trusted': None, 'note': '',
-              'where': 'here' if host else 'dns', 'self_signed': False}
+              'where': 'here' if host else 'dns', 'self_signed': False,
+              'fingerprint': ''}
     if not domain:
         return answer
     target = host or domain
@@ -214,6 +216,9 @@ def ws_cert_state(domain, host=None):
         with socket.create_connection((target, 443), timeout=5) as plain:
             with strict.wrap_socket(plain, server_hostname=domain) as tls:
                 raw = tls.getpeercert()
+                der = tls.getpeercert(binary_form=True)
+                if der:
+                    answer['fingerprint'] = ws_hashlib.sha256(der).hexdigest()
                 trusted = True
     except ssl.SSLCertVerificationError as err:
         trusted = False
@@ -230,6 +235,8 @@ def ws_cert_state(domain, host=None):
             with socket.create_connection((target, 443), timeout=5) as plain:
                 with loose.wrap_socket(plain, server_hostname=domain) as tls:
                     der = tls.getpeercert(binary_form=True)
+            if der:
+                answer['fingerprint'] = ws_hashlib.sha256(der).hexdigest()
             from cryptography import x509
             parsed = x509.load_der_x509_certificate(der)
             end = getattr(parsed, 'not_valid_after_utc', None) or parsed.not_valid_after
@@ -446,57 +453,74 @@ def ws_cert_job(domain):
     return out
 
 
-def ws_cert_notes(answer, name, hard, local=False):
+def ws_add_note(answer, text, tone):
+    answer['notes'].append(text)
+    answer.setdefault('note_tones', []).append(tone)
+
+
+def ws_cert_notes(answer, name, hard, local=False, cert=None):
     'Adds what the certificate of the domain says. hard means it must be valid.'
     # watashi v12.3.39dev: local is for the modes where this server answers the tls
     # handshake itself. The certificate is read from this server first, and
     # only when nothing answers here from the address in the dns.
-    cert = None
-    if local:
+    if cert is not None and cert.get('days') is None:
+        cert = None
+    if cert is None and local:
         cert = ws_cert_state(name, host='127.0.0.1')
         if cert.get('days') is None:
             cert = None
     if cert is None:
         cert = ws_cert_state(name)
     answer['cert'] = cert
+    was_ok = answer.get('state') == 'ok'
     # watashi v12.2.130bl: the card needs to know whose certificate it is
     # showing. A cdn hostname is served by the provider, so the days on
     # screen are the provider's days and no button here can change them.
     cert['cdn_managed'] = ws_cdn_shared_host(name)
     if cert['cdn_managed']:
-        answer['notes'].append(__('The certificate of this domain is kept by the CDN, not by this server.'))
+        ws_add_note(answer, __('The certificate of this domain is kept by the CDN, not by this server.'), 'ok')
         hard = False
     days = cert.get('days')
     if days is None:
         if hard:
             answer['state'] = 'bad'
-            answer['notes'].append(__('Nothing answered TLS on port 443 for this domain.'))
+            if was_ok:
+                answer['title'] = __('Nothing answered TLS on port 443')
+            ws_add_note(answer, __('Nothing answered TLS on port 443 for this domain.'), 'bad')
         else:
-            answer['notes'].append(__('No certificate could be read from this domain.'))
+            ws_add_note(answer, __('No certificate could be read from this domain.'), 'warn')
         return
     if days < 0:
         answer['state'] = 'bad'
-        answer['notes'].append(__('The certificate of this domain has already expired.'))
+        if was_ok:
+            answer['title'] = __('The SSL certificate has expired')
+        ws_add_note(answer, __('The certificate of this domain has already expired.'), 'bad')
         return
     if days <= 14:
         if answer['state'] == 'ok':
             answer['state'] = 'warn'
-        answer['notes'].append(__('The certificate of this domain expires very soon.'))
+        if was_ok:
+            answer['title'] = __('The SSL certificate expires soon')
+        ws_add_note(answer, __('The certificate of this domain expires very soon.'), 'warn')
         return
     # watashi v12.3.39dev: a self signed certificate here is what the clients get, and
     # they refuse it, so this is broken, not merely worth a look.
     if cert.get('trusted') is False and cert.get('where') == 'here':
         if hard:
             answer['state'] = 'bad'
+            if was_ok:
+                answer['title'] = __('The SSL certificate is self-signed') if cert.get('self_signed') else __('The SSL certificate is not trusted')
         if cert.get('self_signed'):
-            answer['notes'].append(__('This server holds only a self-signed certificate for this domain, and the clients refuse it.'))
+            ws_add_note(answer, __('This server holds only a self-signed certificate for this domain, and the clients refuse it.'), 'bad' if hard else 'warn')
         else:
-            answer['notes'].append(__('The certificate of this domain is not trusted by browsers yet.'))
+            ws_add_note(answer, __('The certificate of this domain is not trusted by browsers yet.'), 'bad' if hard else 'warn')
         return
     if hard and cert.get('trusted') is False:
         if answer['state'] == 'ok':
             answer['state'] = 'warn'
-        answer['notes'].append(__('The certificate of this domain is not trusted by browsers yet.'))
+        if was_ok:
+            answer['title'] = __('The SSL certificate is not trusted')
+        ws_add_note(answer, __('The certificate of this domain is not trusted by browsers yet.'), 'warn')
 
 
 def ws_domain_health(model, want_cert=True):
@@ -526,8 +550,10 @@ def ws_domain_health(model, want_cert=True):
         'mode_label': str(ws_mode_label(model.mode)),
         'tone': ws_mode_tone(mode),
         'state': 'ok',
+        'ip_state': 'ok',
         'title': '',
         'notes': [],
+        'note_tones': [],
         'ips': [],
         'server_ips': server_ips,
         'behind_cdn': False,
@@ -541,15 +567,17 @@ def ws_domain_health(model, want_cert=True):
     # nothing to ask the network about
     if mode in WS_MODE_NOWHERE or not name:
         answer['state'] = 'off'
+        answer['ip_state'] = 'off'
         answer['wants'] = 'nothing'
         answer['title'] = __('No test needed')
-        answer['notes'].append(__('A fake name lives only inside the configs, so no DNS record is asked for it.'))
+        ws_add_note(answer, __('A fake name lives only inside the configs, so no DNS record is asked for it.'), 'ok')
         return answer
     if name.startswith('*.'):
         answer['state'] = 'off'
+        answer['ip_state'] = 'off'
         answer['wants'] = 'nothing'
         answer['title'] = __('No test needed')
-        answer['notes'].append(__('A wildcard domain cannot be looked up by itself.'))
+        ws_add_note(answer, __('A wildcard domain cannot be looked up by itself.'), 'ok')
         return answer
 
     found = ws_domain_lookup(name)
@@ -559,8 +587,9 @@ def ws_domain_health(model, want_cert=True):
 
     if not found:
         answer['state'] = 'bad'
+        answer['ip_state'] = 'bad'
         answer['title'] = __('This domain has no DNS record')
-        answer['notes'].append(__('No address came back for this domain, so nobody can reach it.'))
+        ws_add_note(answer, __('No address came back for this domain, so nobody can reach it.'), 'bad')
         answer['advice'] = __('Add an A or AAAA record for this domain where your DNS is managed.')
         return answer
 
@@ -569,17 +598,18 @@ def ws_domain_health(model, want_cert=True):
         answer['wants'] = 'foreign'
         if mine:
             answer['state'] = 'warn'
+            answer['ip_state'] = 'warn'
             answer['title'] = __('The cover site points at this server')
-            answer['notes'].append(__('A Reality cover site has to be a foreign website, but this name answers with the IP of this server.'))
+            ws_add_note(answer, __('A Reality cover site has to be a foreign website, but this name answers with the IP of this server.'), 'warn')
             answer['advice'] = __('Use a well known foreign website here, or choose a mode that belongs to your own domain.')
         else:
             answer['title'] = __('The cover site answers normally')
-            answer['notes'].append(__('The IP of a cover site has nothing to do with this server, so a foreign address is the right answer here.'))
+            ws_add_note(answer, __('The IP of a cover site has nothing to do with this server, so a foreign address is the right answer here.'), 'ok')
         if want_cert:
             ws_cert_notes(answer, name, hard=True)
         names = (model.servernames or '').strip()
         if names:
-            answer['notes'].append(__('The configs send these cover names:') + ' ' + names)
+            ws_add_note(answer, __('The configs send these cover names:') + ' ' + names, 'ok')
         return answer
 
     # behind a cdn
@@ -587,14 +617,15 @@ def ws_domain_health(model, want_cert=True):
         answer['wants'] = 'cdn'
         if mine and not answer['behind_cdn']:
             answer['state'] = 'warn'
+            answer['ip_state'] = 'warn'
             answer['title'] = __('The CDN proxy looks switched off')
-            answer['notes'].append(__('This domain answers with the IP of this server, so the traffic does not go through the CDN.'))
+            ws_add_note(answer, __('This domain answers with the IP of this server, so the traffic does not go through the CDN.'), 'warn')
             answer['advice'] = __('Switch the proxy on at your CDN, or change the mode to Direct.')
         elif answer['behind_cdn']:
             answer['title'] = __('The domain is served through Cloudflare')
         else:
             answer['title'] = __('The domain is served by another network')
-            answer['notes'].append(__('The address of this domain belongs neither to this server nor to Cloudflare, which is allowed when another CDN sits in front.'))
+            ws_add_note(answer, __('The address of this domain belongs neither to this server nor to Cloudflare, which is allowed when another CDN sits in front.'), 'ok')
         if want_cert:
             ws_cert_notes(answer, name, hard=False)
         return answer
@@ -604,31 +635,57 @@ def ws_domain_health(model, want_cert=True):
         answer['wants'] = 'relay'
         if mine:
             answer['state'] = 'warn'
+            answer['ip_state'] = 'warn'
             answer['title'] = __('The relay domain points at this server')
-            answer['notes'].append(__('A relay domain has to point at the relay machine, not at this server.'))
+            ws_add_note(answer, __('A relay domain has to point at the relay machine, not at this server.'), 'warn')
             answer['advice'] = __('Point this domain at the relay machine, or change the mode to Direct.')
+            if want_cert:
+                ws_cert_notes(answer, name, hard=True, local=True)
+            return answer
+        local_cert = ws_cert_state(name, host='127.0.0.1')
+        remote_cert = ws_cert_state(name, host=found[0])
+        here_fp = local_cert.get('fingerprint') or ''
+        there_fp = remote_cert.get('fingerprint') or ''
+        if not there_fp:
+            answer['state'] = 'bad'
+            answer['ip_state'] = 'bad'
+            answer['title'] = __('Port 443 on the relay server is not responding')
+            ws_add_note(answer, __('This server could not complete a TLS handshake with the relay server on port 443, so the tunnel is down or port 443 is closed on the relay.'), 'bad')
+            answer['advice'] = __('Check the tunnel service and firewall on the relay server and make sure port 443 (and port 80 for SSL) are forwarded to this server.')
+            if want_cert:
+                ws_cert_notes(answer, name, hard=False, local=True, cert=local_cert)
+        elif here_fp and there_fp != here_fp:
+            answer['state'] = 'bad'
+            answer['ip_state'] = 'bad'
+            answer['title'] = __('The relay tunnel does not point to this server')
+            ws_add_note(answer, __('Port 443 on the relay server answers with a different certificate than the one on this server. If you recently moved the panel to a new server, the tunnel on the relay server is still pointing to the old server IP, or the relay server is terminating TLS itself.'), 'bad')
+            answer['advice'] = __('Update the tunnel destination IP on the relay server to point to this server, then check again.')
+            if want_cert:
+                ws_cert_notes(answer, name, hard=False, local=True, cert=local_cert)
         else:
+            answer['ip_state'] = 'ok'
             answer['title'] = __('The relay domain answers normally')
-            answer['notes'].append(__('A relay domain is expected to answer with the IP of the relay machine.'))
-        if want_cert:
-            # watashi v12.3.39dev: the relay passes tls on to this server, so the clients get
-            # the certificate of this server and refuse a self signed one
-            ws_cert_notes(answer, name, hard=True, local=True)
+            ws_add_note(answer, __('Port 443 on the relay server forwards traffic to this server as expected.'), 'ok')
+            if want_cert:
+                ws_cert_notes(answer, name, hard=True, local=True, cert=local_cert)
         return answer
 
     # straight to this server
     answer['wants'] = 'here'
     if mine:
+        answer['ip_state'] = 'ok'
         answer['title'] = __('The domain points at this server')
     elif answer['behind_cdn']:
         answer['state'] = 'warn'
+        answer['ip_state'] = 'warn'
         answer['title'] = __('Cloudflare answers for this domain')
-        answer['notes'].append(__('This mode needs a straight connection, but Cloudflare answers for the domain.'))
+        ws_add_note(answer, __('This mode needs a straight connection, but Cloudflare answers for the domain.'), 'warn')
         answer['advice'] = __('Switch the proxy off at Cloudflare, or change the mode to CDN.')
     else:
         answer['state'] = 'bad'
+        answer['ip_state'] = 'bad'
         answer['title'] = __('The domain points somewhere else')
-        answer['notes'].append(__('None of the addresses of this domain belong to this server.'))
+        ws_add_note(answer, __('None of the addresses of this domain belong to this server.'), 'bad')
         answer['advice'] = __('Point this domain at the IP of this server.')
     if want_cert:
         ws_cert_notes(answer, name, hard=(answer['state'] != 'bad'), local=True)  # watashi v12.3.39dev
