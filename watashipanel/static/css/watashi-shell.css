@@ -736,15 +736,15 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
         .nav-header-left { display: flex; align-items: center; }
         .nav-header-left i { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
 
-        .nav-text { opacity: 0; white-space: nowrap; transition: opacity 0.25s ease; display: inline-block; vertical-align: middle; font-size: 14px; backface-visibility: hidden; } .nav-text:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { margin-left: 16px; } .nav-text:where(:root[dir="rtl"], :root[dir="rtl"] *) { margin-right: 16px; } /* watashi v12.3.44dev: right-to-left twin */
+        .nav-text { opacity: 0; white-space: nowrap; transition: opacity 0.12s ease; display: inline-block; vertical-align: middle; font-size: 14px; backface-visibility: hidden; } .nav-text:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { margin-left: 16px; } .nav-text:where(:root[dir="rtl"], :root[dir="rtl"] *) { margin-right: 16px; } /* watashi v12.3.50dev: the label vanishes before the width glide can clip it - the old 0.25s fade outlived the box and painted half letters */
         .sidebar.expanded .nav-text { opacity: 1; transition: opacity 0.3s ease 0.15s; }
 
-        .chevron { position: absolute; opacity: 0; font-size: 12px; transition: opacity 0.2s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; } .chevron:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { right: 16px; } .chevron:where(:root[dir="rtl"], :root[dir="rtl"] *) { left: 16px; } /* watashi v12.3.44dev: right-to-left twin */
+        .chevron { position: absolute; opacity: 0; font-size: 12px; transition: opacity 0.12s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; } .chevron:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { right: 16px; } .chevron:where(:root[dir="rtl"], :root[dir="rtl"] *) { left: 16px; } /* watashi v12.3.50dev: same fast fade as nav-text so no half arrow survives the collapse */
         .sidebar.expanded .chevron { opacity: 1; transition: opacity 0.3s 0.1s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .nav-item-group.open .chevron { transform: rotate(180deg); }
 
         .nav-accordion { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s; display: flex; flex-direction: column; gap: 4px; margin-top: 0; }
-        .sidebar.expanded .nav-item-group.open .nav-accordion { max-height: 160px; opacity: 1; margin-top: 4px; margin-bottom: 8px; }
+        .sidebar.expanded .nav-item-group.open .nav-accordion { max-height: 480px; opacity: 1; margin-top: 4px; margin-bottom: 8px; } /* watashi v12.3.50dev: the 160px cap clipped the six-row system group */
 
         .nav-item { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease; margin-inline: 16px; } /* watashi v12.3.49dev: margin-inline twins the margins in RTL; `all` narrowed so the expand glide cannot re-trigger the row transition */
         .sidebar.expanded:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) .nav-item { padding: 10px 16px 10px 40px; } .sidebar.expanded:where(:root[dir="rtl"], :root[dir="rtl"] *) .nav-item { padding: 10px 40px 10px 16px; } /* watashi v12.3.44dev: right-to-left twin */

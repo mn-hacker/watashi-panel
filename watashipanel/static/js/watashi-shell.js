@@ -440,7 +440,6 @@ try {
                 sidebar.classList.remove('expanded');
             };
             sidebar.addEventListener('mouseenter', railWake);
-            sidebar.addEventListener('mousemove', railWake);
             sidebar.addEventListener('mouseleave', railShut);
             sidebar.addEventListener('pointerdown', function () {
                 railHeld = true;
