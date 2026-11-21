@@ -712,7 +712,7 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
         .sidebar.expanded .logo-text { opacity: 1; transition: opacity 0.3s ease 0.15s; }
         .logo-text .highlight { color: var(--primary-purple); }
 
-        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; align-items: stretch; padding: 10px 0; width: 100%; overflow-y: auto; overflow-x: hidden; margin-bottom: 30px; }
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; align-items: stretch; padding: 10px 0; width: 100%; overflow-y: auto; overflow-x: hidden; margin-bottom: 30px; overflow-anchor: none; touch-action: pan-y; -webkit-overflow-scrolling: touch; } /* watashi v12.3.50dev: anchoring re-anchored to the top whenever the accordion folded mid-scroll (the jump-home report); pan-y lets a touch screen drag the list instead of dragging the page */
         .nav-menu::-webkit-scrollbar { width: 0; }
 
         .nav-item-group { display: flex; flex-direction: column; }
@@ -760,6 +760,17 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
 
         .nav-accordion .nav-item:first-child { margin-top: 4px; }
         .nav-accordion .nav-item:last-child { margin-bottom: 4px; }
+
+        /* watashi v12.3.50dev: touch laptops - a screen you tap next to a
+           touchpad. any-pointer is fine and hover works, so the tablet blocks
+           above never apply to them; these rules do. taps must not wait for
+           the double-tap zoom timer, rows need a finger-sized target, and a
+           tap must not leave a stuck hover slide. */
+        @media (any-pointer: coarse) {
+            .nav-item-header, .nav-item, .sidebar-toggle, .nav-menu a { touch-action: manipulation; }
+            .nav-item-header, .nav-item { min-height: 44px; }
+            .nav-item:hover { transform: none; }
+        }
         .nav-item.active { background: linear-gradient(90deg, rgb(var(--ws-i)) 0%, rgb(var(--ws-a-500)) 100%); color: #fff; box-shadow: 0 4px 15px rgb(var(--ws-i) / 0.25); } /* watashi v12.3.44dev: palette colour */
         .nav-item.active i { opacity: 1; color: #fff; }
 

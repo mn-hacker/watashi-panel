@@ -424,19 +424,34 @@ try {
             // closes it whenever the pointer is seen outside with no drag in
             // hand, so no swallowed event can leave it stuck open again.
             var railHeld = false;
+            var menuEl = sidebar.querySelector('.nav-menu');
+            var lastMenuTop = 0;
+            // the collapsed rail folds every open accordion to zero height, so
+            // a single stray shut mid-scroll made the browser clamp scrollTop
+            // back to the top - the "scrollbar jumps home" report. the position
+            // is remembered here and put back whenever the rail wakes again.
             var railIn = function (ev) {
                 if (!ev || ev.clientX === undefined || ev.clientY === undefined) { return false; }
                 var box = sidebar.getBoundingClientRect();
                 return ev.clientX >= box.left && ev.clientX <= box.right &&
                        ev.clientY >= box.top && ev.clientY <= box.bottom;
             };
+            var restoreTop = function () {
+                if (menuEl && lastMenuTop > 0) { menuEl.scrollTop = lastMenuTop; }
+            };
             var railWake = function () {
                 if (document.body.classList.contains('compact-mode')) { return; }
+                var wasExpanded = sidebar.classList.contains('expanded');
                 sidebar.classList.add('expanded');
+                if (!wasExpanded && lastMenuTop > 0) {
+                    requestAnimationFrame(restoreTop);
+                    setTimeout(restoreTop, 480); // once the width glide settles
+                }
             };
             var railShut = function () {
                 if (railHeld) { return; }
                 if (document.body.classList.contains('compact-mode')) { return; }
+                if (menuEl) { lastMenuTop = menuEl.scrollTop; }
                 sidebar.classList.remove('expanded');
             };
             sidebar.addEventListener('mouseenter', railWake);
@@ -445,10 +460,16 @@ try {
                 railHeld = true;
                 railWake();
             });
-            window.addEventListener('pointerup', function (ev) {
+            var railRelease = function (ev) {
                 if (!railHeld) { return; }
                 railHeld = false;
-                if (!railIn(ev)) { railShut(); }
+                if (ev && !railIn(ev)) { railShut(); }
+            };
+            window.addEventListener('pointerup', railRelease);
+            // a touch screen hands the gesture to the scroller with a cancel,
+            // never an up: without this the rail stayed held open forever.
+            window.addEventListener('pointercancel', function () {
+                railHeld = false;
             });
             window.addEventListener('blur', function () {
                 railHeld = false;
@@ -460,9 +481,11 @@ try {
                 if (railIn(ev)) { return; }
                 railShut();
             }, true);
-            var railMenu = sidebar.querySelector('.nav-menu');
-            if (railMenu) {
-                railMenu.addEventListener('scroll', railWake);
+            if (menuEl) {
+                menuEl.addEventListener('scroll', function () {
+                    lastMenuTop = menuEl.scrollTop;
+                    railWake();
+                });
             }
         }
 
