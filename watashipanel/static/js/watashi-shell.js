@@ -61,6 +61,14 @@ try {
                 if (!hit || !hit.scrollIntoView) {
                     return;
                 }
+                // watashi v12.3.50dev: a folded rail has nothing worth aiming
+                // at - the expanded class is gone, every accordion is shut,
+                // and gliding the list now is what yanked it back to the top
+                // the moment the rail closed (the jump-home report). reveal
+                // only scrolls an open rail.
+                if (!bar.classList.contains('expanded') && window.innerWidth > 768) {
+                    return;
+                }
                 // watashi v12.2.89: only scroll when the row really is out
                 // of sight, and glide when it is. jumping the list on every
                 // class change was a second small jolt of its own.
@@ -86,8 +94,15 @@ try {
                 reveal();
                 if (window.MutationObserver) {
                     var watch = new MutationObserver(function () {
+                        // watashi v12.3.50dev: a closing rail must not re-run
+                        // reveal - its own class change lands here, the glide
+                        // it started re-anchored the list, and in RTL the
+                        // relayout kept the observer fed in a loop. measure
+                        // alone is safe: it only sets accordion heights.
                         measure();
-                        window.setTimeout(reveal, 470);  // watashi v12.2.89: after the glide, not during it
+                        if (bar.classList.contains('expanded')) {
+                            window.setTimeout(reveal, 470);  // watashi v12.2.89: after the glide, not during it
+                        }
                     });
                     watch.observe(bar, { attributes: true, attributeFilter: ['class'], subtree: true });
                 }
@@ -475,16 +490,9 @@ try {
                 railHeld = false;
                 railShut();
             });
-            document.addEventListener('mousemove', function (ev) {
-                if (railHeld) { return; }
-                if (!sidebar.classList.contains('expanded')) { return; }
-                if (railIn(ev)) { return; }
-                railShut();
-            }, true);
             if (menuEl) {
                 menuEl.addEventListener('scroll', function () {
                     lastMenuTop = menuEl.scrollTop;
-                    railWake();
                 });
             }
         }
