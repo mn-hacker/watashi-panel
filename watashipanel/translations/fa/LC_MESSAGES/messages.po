@@ -8364,7 +8364,7 @@ msgstr ""
 "نوع مصرف : {}\n"
 "\n"
 "\n"
-"با آرزوی موفقیت. 🎉 🎉 🎉 "
+"با آرزوی موفقیت. 🎉 🎉 🎉 \n"
 
 # watashi v12.2.104
 msgid "Domain (%(domain)s)-> IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
@@ -8609,7 +8609,7 @@ msgstr ""
 "روزهای باقی ‌مانده : {} \n"
 "\n"
 "\n"
-"با آرزوی موفقیت. 🎉 🎉 🎉 "
+"با آرزوی موفقیت. 🎉 🎉 🎉 \n"
 
 # watashi v12.2.104
 msgid "access log entries"
@@ -11880,3 +11880,7 @@ msgstr "این سرور نتوانست روی پورت 443 با سرور رله 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
 msgstr "نشانی IP مقصد تانل را روی سرور رله به IP همین سرور تغییر دهید و دوباره بررسی کنید."
+
+# watashi v12.3.49dev: title block for the quick setup wizard page
+msgid "Quick Setup"
+msgstr "راه‌اندازی سریع"

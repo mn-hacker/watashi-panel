@@ -218,6 +218,13 @@ def ws_inspect(bag, wants=None):
             report['plan']['users'] = report['counts'].get('users', 0)
         if wants.get('enable_domain_restore'):
             report['plan']['domains'] = report['counts'].get('domains', 0)
+        # watashi v12.3.50dev: the admins section forgot its own line here, so a
+        # restore that only asked for the admins fell through to nothing_picked
+        # and never started - the owner had to tick "replace root admin" as well
+        # to make any plan exist. Bringing back the sub admins is its own path,
+        # separate from replacing the root admin, and needs no other switch.
+        if wants.get('enable_admin_restore'):
+            report['plan']['admins'] = report['counts'].get('admin_users', 0)
         if not report['plan']:
             report['fatal'].append('nothing_picked')
         if wants.get('enable_config_restore') and not report['counts'].get('hconfigs'):
@@ -226,6 +233,8 @@ def ws_inspect(bag, wants=None):
             report['fatal'].append('users_asked_but_absent')
         if wants.get('enable_domain_restore') and 'domains' not in report['counts']:
             report['fatal'].append('domains_asked_but_absent')
+        if wants.get('enable_admin_restore') and 'admin_users' not in report['counts']:
+            report['fatal'].append('admins_asked_but_absent')
 
     report['ok'] = not report['fatal']
     return report

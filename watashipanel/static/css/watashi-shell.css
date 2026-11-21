@@ -603,6 +603,9 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
             .header-left, .header-right { display: contents; }
             .menu-toggle { grid-column: 1; grid-row: 1; display: block; } .menu-toggle:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { margin-right: 10px; } .menu-toggle:where(:root[dir="rtl"], :root[dir="rtl"] *) { margin-left: 10px; } /* watashi v12.3.44dev: right-to-left twin */
             .header-title { display: none; }
+            /* watashi v12.3.49dev: the mode pill fell into the hidden-title column and showed as an empty bubble in the middle of the header; place it next to the theme switch */
+            #wsModePill { grid-column: 3; grid-row: 1; margin: 0; justify-self: start; }
+            .header-right > .star-btn { display: none; }
             .theme-switch-wrapper { grid-column: 3; grid-row: 1; margin: 0; }
             .user-profile { grid-column: 4; grid-row: 1; font-size: 0; }
             .header-btn-group { grid-column: 1 / -1; grid-row: 2; display: flex; width: 100%; justify-content: space-between; margin-top: 5px; }

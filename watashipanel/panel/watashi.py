@@ -421,6 +421,10 @@ def replace_backup_child_unique_id(backupdata: dict, old_child_unique_id: str, n
                 v[0]['unique_id'] = new_child_unique_id
         else:
             for item in v:
+                # watashi v12.3.50dev: admin rows have no child_unique_id; a
+                # KeyError here killed an admins-only restore before it began.
+                if 'child_unique_id' not in item:
+                    continue
                 if item['child_unique_id'] == old_child_unique_id or item['child_unique_id'] == 'self' or item['child_unique_id'] == 'default':
                     item['child_unique_id'] = new_child_unique_id
 

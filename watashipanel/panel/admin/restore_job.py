@@ -145,8 +145,17 @@ def restore_backup(json_path, restore_options):
             wrote_db = True
 
             # remove default user if exists
-            if default := User.by_id(1):
-                default.remove()
+            # watashi v12.3.50dev: this used to delete whoever held id=1. On a
+            # fresh panel the first user the restore writes back takes id=1, so
+            # the restore destroyed a real customer and orphaned everything
+            # pointing at it. The seeded row is the one init_db created with
+            # name="default"; only that one may go.
+            seeded = User.by_id(1)
+            if seeded and seeded.name == "default":
+                log("removing the seeded default user")
+                seeded.remove()
+            elif seeded:
+                log(f"user id=1 is '{seeded.name}', not the seeded default - it stays")
 
             # Remove default sslip.io domain if a direct domain exists
             # watashi v12.2.130cc: housekeeping, so it says what went wrong and

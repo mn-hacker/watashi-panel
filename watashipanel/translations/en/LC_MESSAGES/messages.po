@@ -7443,3 +7443,7 @@ msgstr "This server could not complete a TLS handshake with the relay server on 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
 msgstr "Update the tunnel destination IP on the relay server to point to this server, then check again."
+
+# watashi v12.3.49dev: title block for the quick setup wizard page
+msgid "Quick Setup"
+msgstr "Quick Setup"

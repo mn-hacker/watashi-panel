@@ -283,7 +283,7 @@
 </div>
 <!-- watashi v12.2.91: apexcharts had one caller left, the live metric popup, and that popup now draws on the same canvas as the cards. no caller, no script. -->
 <script>
-    var refresh_s = 2;
+    var refresh_s = 1;  // watashi v12.3.49dev: the owner wants live figures at 1s; the stats poll is a lightweight ajax call, so the page stays smooth
     var isFetching = false;
     
     var maxPoints = 30;  // watashi v12.2.84
