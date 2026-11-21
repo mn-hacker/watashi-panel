@@ -10,34 +10,42 @@ msgstr ""
 "Language-Team: fa <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 msgid "[Admin only visible message:] You can change this message from settings"
 msgstr "[پیام اختصاصی ادمین]: قابل تنظیم از طریق تنظیمات"
 
+#, python-format
 msgid "%(count)s records were successfully deleted."
 msgstr "%(count)s رکورد با موفقیت حذف شدند."
 
+#, python-format
 msgid "%(count)s records were successfully disabled."
 msgstr "%(count)s رکورد با موفقیت غیرفعال شد."
 
+#, python-format
 msgid "%(count)s records were successfully enabled."
 msgstr "%(count)s رکوردها با موفقیت فعال شد."
 
+#, python-format
 msgid "%(count)s records were successfully reset days."
-msgstr ""
+msgstr "%(count)s records were successfully reset days."
 
+#, python-format
 msgid "%(count)s records were successfully reset usage."
-msgstr ""
+msgstr "%(count)s records were successfully reset usage."
 
+#, python-format
 msgid "%(count)s users were successfully created."
 msgstr "%(count)s کاربر با موفقیت ایجاد شدند."
 
+#, python-format
 msgid "%(expire_days)s days"
 msgstr "%(expire_days)s روز"
 
+#, python-format
 msgid "%(placeholder)s"
 msgstr "%(placeholder)s"
 
@@ -47,6 +55,7 @@ msgstr "آخرین روز"
 msgid "0 = use global default; >0 = max devices for this user"
 msgstr "۰ = استفاده از پیش‌فرض کل؛ >۰ = حداکثر دستگاه برای این کاربر"
 
+#, python-format
 msgid "<a href=\"%(user_link)s\"> %(user)s</a>"
 msgstr "<a href=\"%(user_link)s\"> %(user)s</a>"
 
@@ -113,9 +122,11 @@ msgstr "همه کاربران در محدوده اتصال مجاز هستند."
 msgid "Apply"
 msgstr "اعمال"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\' recursively?"
 msgstr "آیا از حذف محتویات \\'%(name)s\\' اطمینان دارید؟"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\'?"
 msgstr "آیا از حذف  \\'%(name)s\\'اطمینان دارید؟"
 
@@ -185,6 +196,7 @@ msgstr "ایجاد چندتایی"
 msgid "Bulk Create Users"
 msgstr "ایجاد چندتایی کاربر"
 
+#, python-format
 msgid "CPU %(cores)s Cores"
 msgstr "پردازنده %(cores)s هسته"
 
@@ -302,6 +314,30 @@ msgstr "محدودیت دستگاه"
 msgid "Device Monitoring"
 msgstr "مانیتورینگ دستگاه‌ها"
 
+msgid "Device Limit Enforced"
+msgstr "محدودیت دستگاه فعال"
+
+msgid "No Device Limit"
+msgstr "بدون محدودیت دستگاه"
+
+msgid "App Distribution"
+msgstr "توزیع برنامه‌ها"
+
+msgid "Operator Distribution"
+msgstr "توزیع اپراتورها"
+
+msgid "Unknown app"
+msgstr "برنامه نامشخص"
+
+msgid "Unknown operator"
+msgstr "اپراتور نامشخص"
+
+msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
+msgstr "این صفحه دستگاه‌ها را مستقل از محدودیت ردیابی می‌کند و حتی با خاموش بودن محدودیت دستگاه هم کار می‌کند. بخش‌هایی که فقط با روشن بودن محدودیت معنا دارند: بلاک‌کردن دستگاه اضافه، قفل «برنامه پشتیبانی نمی‌شود» و علامت گذشتن از سقف."
+
+msgid "Turn on the device limit"
+msgstr "روشن‌کردن محدودیت دستگاه"
+
 msgid "Device limit"
 msgstr "محدودیت دستگاه"
 
@@ -412,6 +448,7 @@ msgstr "فعال"
 msgid "Error"
 msgstr "خطا"
 
+#, python-format
 msgid "Error creating users: %(error)s"
 msgstr "خطا در ایجاد کاربران: %(error)s"
 
@@ -457,6 +494,7 @@ msgstr "تمام شد..."
 msgid "Forced"
 msgstr "اجباری"
 
+#, python-format
 msgid "Found %(count)s access log entries"
 msgstr "%(count)s رکورد لاگ دسترسی پیدا شد"
 
@@ -742,6 +780,7 @@ msgstr "پنل مرکزی"
 msgid "Please Wait"
 msgstr "لطفا صبر کنید..."
 
+#, python-format
 msgid "Please click on %(install)s to save the user page."
 msgstr "روی %(install)s کلیک کنید تا صفحه کاربر ذخیره شود."
 
@@ -770,7 +809,7 @@ msgid "Please wait "
 msgstr "لطفا صبر کنید"
 
 msgid "Port 80 and 443 can not be selected"
-msgstr ""
+msgstr "Port 80 and 443 can not be selected"
 
 msgid "Port for tunnel communication"
 msgstr "پورت برای ارتباط تانل"
@@ -843,6 +882,7 @@ msgstr "✅ پایدار"
 msgid "Remaining"
 msgstr "باقیمانده"
 
+#, python-format
 msgid "Remaining about %(relative)s, exactly %(days)s days"
 msgstr "حدود %(relative)s و دقیقا %(days)s روز باقی مانده است"
 
@@ -858,6 +898,7 @@ msgstr "حذف تمام دستگاه‌ها برای"
 msgid "Remove this device?"
 msgstr "آیا این دستگاه حذف شود؟"
 
+#, python-format
 msgid "Removed %(count)s device(s)"
 msgstr "%(count)s دستگاه حذف شد"
 
@@ -969,6 +1010,7 @@ msgstr "برای راحتی انتقال این صفحه به ‌پلتفرم د
 msgid "SingBox"
 msgstr "📦 SingBox"
 
+#, python-format
 msgid "Sort by %(name)s"
 msgstr "مرتب سازی بر اساس %(name)s"
 
@@ -978,9 +1020,11 @@ msgstr "مشخص کردن IP مربوط به CDN فقط برای حالت CDN م
 msgid "Start Date"
 msgstr "زمان شروع"
 
+#, python-format
 msgid "Started %(days)s days ago"
 msgstr "از %(days)s روز پیش شروع شد"
 
+#, python-format
 msgid "Started from %(relative)s"
 msgstr "از %(relative)s شروع شد"
 
@@ -1077,9 +1121,11 @@ msgstr "آزادسازی"
 msgid "Unblock All"
 msgstr "آزادسازی همه"
 
+#, python-format
 msgid "Unblocked %(count)s IPs"
 msgstr "%(count)s آی‌پی آزاد شد"
 
+#, python-format
 msgid "Unblocked %(count)s IPs for user"
 msgstr "%(count)s آی‌پی برای کاربر آزاد شد"
 
@@ -1155,12 +1201,14 @@ msgstr "مشاهده جزییات در تلگرام"
 msgid "Want to enjoy more with telegram?"
 msgstr "ℹ️ وصل کردن حساب کاربری به تلگرام"
 
+#, python-format
 msgid "Welcome %(user)s"
 msgstr "%(user)s عزیز خوش آمدی"
 
 msgid "Why Going to Premium?"
 msgstr "مجوز استفاده از واتاشی چگونه است؟"
 
+#, python-format
 msgid "Will Start in %(days)s days"
 msgstr "از %(days)s روز دیگر شروع خواهد شد"
 
@@ -2707,10 +2755,10 @@ msgid "config.too_advanced.label"
 msgstr "تنظیمات خیلی پیشرفته"
 
 msgid "config.torrent_block.description"
-msgstr "در این قسمت تنظیمات Torrent Block قابل انجام است."
+msgstr "مانع دانلود و اشتراک‌گذاری فایل از طریق تورنت روی اکانت‌ها می‌شود."
 
 msgid "config.torrent_block.label"
-msgstr "تنظیمات Torrent Block"
+msgstr "🧲 مسدودسازی تورنت"
 
 msgid "config.trojan_enable.description"
 msgstr "خودش را شبیه یک سایت HTTPS معمولی نشان می‌دهد. روی شبکه‌های سخت‌گیر خوب جواب می‌دهد و روشن ماندنش ضرری ندارد."
@@ -3823,12 +3871,14 @@ msgstr "ریست همه‌ی کاربران بیش از حد"
 msgid "Reset devices for ALL over-limit users? This removes every registered device for those users."
 msgstr "دستگاه‌های همه‌ی کاربرانِ بیش از حد مجاز ریست شوند؟ این کار همه‌ی دستگاه‌های ثبت‌شده‌ی آن‌ها را حذف می‌کند."
 
+#, python-format
 msgid "Unusual spike: %(count)s new device(s) registered on %(date)s (avg %(avg)s/day) — possible account sharing"
 msgstr "جهش غیرعادی: %(count)s دستگاه جدید در %(date)s ثبت شد (میانگین %(avg)s در روز) — احتمال اشتراک‌گذاری حساب"
 
 msgid "No users are over their device limit"
 msgstr "هیچ کاربری بیش از حد مجاز دستگاه ندارد"
 
+#, python-format
 msgid "Reset %(a)s user(s) and removed %(d)s device(s)"
 msgstr "ریست %(a)s کاربر و حذف %(d)s دستگاه"
 
@@ -3847,18 +3897,23 @@ msgstr " ماه پیش"
 msgid " year ago"
 msgstr " سال پیش"
 
+#, python-format
 msgid "%(count)s selected users will be disabled."
 msgstr "تعداد %(count)s کاربر انتخاب‌شده غیرفعال می‌شوند."
 
+#, python-format
 msgid "%(count)s selected users will be enabled."
 msgstr "تعداد %(count)s کاربر انتخاب‌شده فعال می‌شوند."
 
+#, python-format
 msgid "%(count)s selected users will be permanently deleted."
 msgstr "تعداد %(count)s کاربر انتخاب‌شده برای همیشه حذف می‌شوند."
 
+#, python-format
 msgid "%(days)s day package"
 msgstr "بستهٔ %(days)s روزه"
 
+#, python-format
 msgid "%(days)s days left"
 msgstr "%(days)s روز مانده"
 
@@ -3937,6 +3992,7 @@ msgstr "فعال بودن کاربر"
 msgid "Enable users"
 msgstr "فعال کردن کاربران"
 
+#, python-format
 msgid "Enter a page number between 1 and %(max)s"
 msgstr "یک شمارهٔ صفحه بین 1 تا %(max)s وارد کنید"
 
@@ -4093,6 +4149,7 @@ msgstr "لینک‌های اشتراک"
 msgid "Subscription link copied"
 msgstr "لینک اشتراک کپی شد"
 
+#, python-format
 msgid "The day counter will be reset for %(count)s selected users."
 msgstr "شمارندهٔ روز %(count)s کاربر انتخاب‌شده صفر می‌شود."
 
@@ -4108,6 +4165,7 @@ msgstr "شناسه UUID"
 msgid "Unlimited"
 msgstr "نامحدود"
 
+#, python-format
 msgid "Usage will be reset for %(count)s selected users."
 msgstr "مصرف %(count)s کاربر انتخاب‌شده صفر می‌شود."
 
@@ -4132,6 +4190,7 @@ msgstr "کپی نشد"
 msgid "e.g. John Doe"
 msgstr "مثلاً John Doe"
 
+#, python-format
 msgid "expired %(days)s days ago"
 msgstr "%(days)s روز پیش منقضی شد"
 
@@ -4144,27 +4203,34 @@ msgstr "را بزنید."
 msgid "here"
 msgstr "اینجا"
 
+#, python-format
 msgid "User %(name)s was successfully deleted."
 msgstr "کاربر «%(name)s» با موفقیت حذف شد."
 
 msgid "The user was successfully deleted."
 msgstr "کاربر با موفقیت حذف شد."
 
+#, python-format
 msgid "%(count)s users were successfully enabled."
 msgstr "%(count)s کاربر با موفقیت فعال شد."
 
+#, python-format
 msgid "%(count)s users were successfully disabled."
 msgstr "%(count)s کاربر با موفقیت غیرفعال شد."
 
+#, python-format
 msgid "%(count)s users were successfully deleted."
 msgstr "%(count)s کاربر با موفقیت حذف شد."
 
+#, python-format
 msgid "%(count)s users were successfully updated."
 msgstr "%(count)s کاربر با موفقیت به‌روزرسانی شد."
 
+#, python-format
 msgid "The usage of %(count)s users was successfully reset."
 msgstr "مصرف %(count)s کاربر با موفقیت بازنشانی شد."
 
+#, python-format
 msgid "The day counter of %(count)s users was successfully reset."
 msgstr "شمارش روزهای %(count)s کاربر با موفقیت بازنشانی شد."
 
@@ -4186,12 +4252,15 @@ msgstr "عملیات ناشناخته است."
 msgid "You have too much users!"
 msgstr "تعداد کاربران شما بیش از حد مجاز است!"
 
+#, python-format
 msgid "Error creating user: %(error)s"
 msgstr "خطا در ایجاد کاربر: %(error)s"
 
+#, python-format
 msgid "Error updating user: %(error)s"
 msgstr "خطا در به‌روزرسانی کاربر: %(error)s"
 
+#, python-format
 msgid "Error applying action: %(error)s"
 msgstr "خطا در انجام عملیات: %(error)s"
 
@@ -4270,6 +4339,7 @@ msgstr "هنوز کاربری ساخته نشده است"
 msgid "Create your first user to get started."
 msgstr "برای شروع، نخستین کاربر را بسازید."
 
+#, python-format
 msgid "Showing %(first)s - %(last)s of %(total)s users"
 msgstr "نمایش %(first)s تا %(last)s از %(total)s کاربر"
 
@@ -4294,6 +4364,7 @@ msgstr "ناشناخته"
 msgid "you"
 msgstr "شما"
 
+#, python-format
 msgid "Admin %(id)s"
 msgstr "مدیر %(id)s"
 
@@ -4309,6 +4380,7 @@ msgstr "همهٔ مدیران"
 msgid "Users Under Management"
 msgstr "کاربران تحت مدیریت"
 
+#, python-format
 msgid "%(n)s remaining"
 msgstr "%(n)s باقی‌مانده"
 
@@ -4378,6 +4450,7 @@ msgstr "مدیری پیدا نشد"
 msgid "Change the filters, or add a new admin."
 msgstr "فیلترها را تغییر دهید یا مدیر تازه‌ای بسازید."
 
+#, python-format
 msgid "Showing %(first)s - %(last)s of %(total)s admins"
 msgstr "نمایش %(first)s تا %(last)s از %(total)s مدیر"
 
@@ -4420,21 +4493,26 @@ msgstr "اجازهٔ ساخت مدیر را ندارید."
 msgid "Please write a name for the admin."
 msgstr "لطفاً برای مدیر یک نام بنویسید."
 
+#, python-format
 msgid "Admin %(name)s was created."
 msgstr "مدیر %(name)s ساخته شد."
 
+#, python-format
 msgid "Admin %(name)s was saved."
 msgstr "تغییرات مدیر %(name)s ذخیره شد."
 
+#, python-format
 msgid "Could not save the admin: %(error)s"
 msgstr "ذخیرهٔ مدیر انجام نشد: %(error)s"
 
+#, python-format
 msgid "You reached your user limit! You can have only %(total)s users"
 msgstr "به سقف کاربران خود رسیده‌اید! شما فقط می‌توانید %(total)s کاربر داشته باشید"
 
 msgid "Your traffic quota is finished! Ask your administrator for more data."
 msgstr "حجم شما تمام شده است! برای حجم بیشتر با مدیر خود تماس بگیرید."
 
+#, python-format
 msgid "You have too much users! You can have only %(active)s active users and %(total)s users"
 msgstr "کاربران شما بیش از حد مجاز است! شما فقط می‌توانید %(active)s کاربر فعال و %(total)s کاربر داشته باشید"
 
@@ -4489,9 +4567,11 @@ msgstr "حذف مدیر"
 msgid "Delete user"
 msgstr "حذف کاربر"
 
+#, python-format
 msgid "Are you sure you want to permanently delete the admin “%(name)s”? This action cannot be undone."
 msgstr "آیا از حذف همیشگی مدیر «%(name)s» مطمئن هستید؟ این کار برگشت‌پذیر نیست."
 
+#, python-format
 msgid "Are you sure you want to permanently delete the user “%(name)s”? This action cannot be undone."
 msgstr "آیا از حذف همیشگی کاربر «%(name)s» مطمئن هستید؟ این کار برگشت‌پذیر نیست."
 
@@ -4546,283 +4626,283 @@ msgstr "ویرایش مدیر"
 msgid "You do not have access to this section."
 msgstr "شما به این بخش دسترسی ندارید."
 
-#: my account page
+#: account my page
 msgid "No username yet"
 msgstr "نام کاربری ثبت نشده"
 
-#: my account page
+#: account my page
 msgid "Member since"
 msgstr "عضو از"
 
-#: my account page
+#: account my page
 msgid "Sign in links"
 msgstr "لینک‌های ورود"
 
-#: my account page
+#: account my page
 msgid "Sign out"
 msgstr "خروج از حساب"
 
-#: my account page
+#: account my page
 msgid "My traffic"
 msgstr "ترافیک من"
 
-#: my account page
+#: account my page
 msgid "Unlimited quota"
 msgstr "حجم نامحدود"
 
-#: my account page
+#: account my page
 msgid "My users"
 msgstr "کاربران من"
 
-#: my account page
+#: account my page
 msgid "My admins"
 msgstr "ادمین‌های من"
 
-#: my account page
+#: account my page
 msgid "You may create admins"
 msgstr "اجازه ساخت ادمین دارید"
 
-#: my account page
+#: account my page
 msgid "You may not create admins"
 msgstr "اجازه ساخت ادمین ندارید"
 
-#: my account page
+#: account my page
 msgid "Personal information"
 msgstr "اطلاعات شخصی"
 
-#: my account page
+#: account my page
 msgid "Display name"
 msgstr "نام نمایشی"
 
-#: my account page
+#: account my page
 msgid "Username"
 msgstr "نام کاربری"
 
-#: my account page
+#: account my page
 msgid "The username is used to sign in and cannot be changed here."
 msgstr "نام کاربری برای ورود استفاده می‌شود و از این صفحه قابل تغییر نیست."
 
-#: my account page
+#: account my page
 msgid "Telegram ID"
 msgstr "شناسه تلگرام"
 
-#: my account page
+#: account my page
 msgid "Numbers only. Leave it empty to remove it."
 msgstr "فقط عدد. برای حذف، خالی بگذارید."
 
-#: my account page
+#: account my page
 msgid "A short note for yourself"
 msgstr "یک یادداشت کوتاه برای خودتان"
 
-#: my account page
+#: account my page
 msgid "Preferences"
 msgstr "تنظیمات شخصی"
 
-#: my account page
+#: account my page
 msgid "Panel language"
 msgstr "زبان پنل"
 
-#: my account page
+#: account my page
 msgid "The panel reloads after saving so the new language can be applied."
 msgstr "بعد از ذخیره، پنل دوباره بارگذاری می‌شود تا زبان جدید اعمال شود."
 
-#: my account page
+#: account my page
 msgid "Keep the sidebar collapsed"
 msgstr "منوی کناری جمع‌شده بماند"
 
-#: my account page
+#: account my page
 msgid "Remembered in this browser only."
 msgstr "فقط در همین مرورگر ذخیره می‌شود."
 
-#: my account page
+#: account my page
 msgid "Light theme"
 msgstr "تم روشن"
 
-#: my account page
+#: account my page
 msgid "The same switch that lives at the bottom of the menu."
 msgstr "همان کلیدی که پایین منو قرار دارد."
 
-#: my account page
+#: account my page
 msgid "Security"
 msgstr "امنیت"
 
-#: my account page
+#: account my page
 msgid "Current password"
 msgstr "رمز عبور فعلی"
 
-#: my account page
+#: account my page
 msgid "Leave empty if you never set one"
 msgstr "اگر رمزی تنظیم نکرده‌اید خالی بگذارید"
 
-#: my account page
+#: account my page
 msgid "New password"
 msgstr "رمز عبور جدید"
 
-#: my account page
+#: account my page
 msgid "At least 8 characters."
 msgstr "حداقل 8 کاراکتر."
 
-#: my account page
+#: account my page
 msgid "Repeat the new password"
 msgstr "تکرار رمز عبور جدید"
 
-#: my account page
+#: account my page
 msgid "Change password"
 msgstr "تغییر رمز عبور"
 
-#: my account page
+#: account my page
 msgid "Anyone holding one of these links can reach your panel, so keep them private."
 msgstr "هر کسی این لینک‌ها را داشته باشد به پنل شما دسترسی پیدا می‌کند، پس آن‌ها را محرمانه نگه دارید."
 
-#: my account page
+#: account my page
 msgid "Account key"
 msgstr "کلید حساب"
 
-#: my account page
+#: account my page
 msgid "What I may do"
 msgstr "دسترسی‌های من"
 
-#: my account page
+#: account my page
 msgid "These rights were given to your account by the owner."
 msgstr "این دسترسی‌ها توسط مالک به حساب شما داده شده است."
 
-#: my account page
+#: account my page
 msgid "Danger zone"
 msgstr "بخش خطرناک"
 
-#: my account page
+#: account my page
 msgid "Replace my sign in link"
 msgstr "تعویض لینک ورود من"
 
-#: my account page
+#: account my page
 msgid "A brand new account key is made. Every old link stops working at once, which signs out every other device."
 msgstr "یک کلید حساب کاملاً جدید ساخته می‌شود. همه لینک‌های قبلی بلافاصله از کار می‌افتند و دستگاه‌های دیگر از حساب خارج می‌شوند."
 
-#: my account page
+#: account my page
 msgid "Replace the link"
 msgstr "تعویض لینک"
 
-#: my account page
+#: account my page
 msgid "You have unsaved changes."
 msgstr "تغییرات ذخیره‌نشده دارید."
 
-#: my account page
+#: account my page
 msgid "Discard"
 msgstr "انصراف"
 
-#: my account page
+#: account my page
 msgid "Save changes"
 msgstr "ذخیره تغییرات"
 
-#: my account page
+#: account my page
 msgid "Your account was saved."
 msgstr "حساب شما ذخیره شد."
 
-#: my account page
+#: account my page
 msgid "The change could not be saved."
 msgstr "تغییرات ذخیره نشد."
 
-#: my account page
+#: account my page
 msgid "Copied"
 msgstr "کپی شد"
 
-#: my account page
+#: account my page
 msgid "The text could not be copied."
 msgstr "متن کپی نشد."
 
-#: my account page
+#: account my page
 msgid "Weak"
 msgstr "ضعیف"
 
-#: my account page
+#: account my page
 msgid "Fair"
 msgstr "متوسط"
 
-#: my account page
+#: account my page
 msgid "Good"
 msgstr "خوب"
 
-#: my account page
+#: account my page
 msgid "Strong"
 msgstr "قوی"
 
-#: my account page
+#: account my page
 msgid "The two passwords match."
 msgstr "دو رمز عبور یکسان هستند."
 
-#: my account page
+#: account my page
 msgid "The two passwords are not the same."
 msgstr "دو رمز عبور یکسان نیستند."
 
-#: my account page
+#: account my page
 msgid "Every old link stops working right away and you will be sent to the new address. Continue?"
 msgstr "همه لینک‌های قبلی بلافاصله از کار می‌افتند و شما به آدرس جدید منتقل می‌شوید. ادامه می‌دهید؟"
 
-#: my account page
+#: account my page
 msgid "Yes, replace it"
 msgstr "بله، تعویض کن"
 
-#: my account page
+#: account my page
 msgid "Your new address is opening..."
 msgstr "آدرس جدید در حال باز شدن است..."
 
-#: my account page
+#: account my page
 msgid "English"
 msgstr "انگلیسی"
 
-#: my account page
+#: account my page
 msgid "Persian"
 msgstr "فارسی"
 
-#: my account page
+#: account my page
 msgid "Russian"
 msgstr "روسی"
 
-#: my account page
+#: account my page
 msgid "Chinese"
 msgstr "چینی"
 
-#: my account page
+#: account my page
 msgid "The name cannot be empty."
 msgstr "نام نمی‌تواند خالی باشد."
 
-#: my account page
+#: account my page
 msgid "The telegram identifier must be a number."
 msgstr "شناسه تلگرام باید عدد باشد."
 
-#: my account page
+#: account my page
 msgid "The current password is wrong."
 msgstr "رمز عبور فعلی اشتباه است."
 
-#: my account page
+#: account my page
 msgid "The new password needs at least 8 characters."
 msgstr "رمز عبور جدید باید حداقل 8 کاراکتر باشد."
 
-#: my account page
+#: account my page
 msgid "Your password was changed."
 msgstr "رمز عبور شما تغییر کرد."
 
-#: my account page
+#: account my page
 msgid "Your sign in link was replaced."
 msgstr "لینک ورود شما تعویض شد."
 
-#: my account page
+#: account my page
 msgid "Created by"
 msgstr "ساخته‌شده توسط"
 
-#: my account page
+#: account my page
 msgid "Pick a sign in name"
 msgstr "یک نام برای ورود انتخاب کنید"
 
-#: my account page
+#: account my page
 msgid "Latin letters, numbers, dot, dash and underline. It has to be free and will become your sign in name."
 msgstr "حروف لاتین، عدد، نقطه، خط تیره و زیرخط. باید آزاد باشد و همین نام ورود شما می‌شود."
 
-#: my account page
+#: account my page
 msgid "The sign in name may hold latin letters, numbers, dot, dash and underline only, at least three of them."
 msgstr "نام ورود فقط می‌تواند حروف لاتین، عدد، نقطه، خط تیره و زیرخط داشته باشد و حداقل سه نویسه باشد."
 
-#: my account page
+#: account my page
 msgid "This sign in name is already taken."
 msgstr "این نام ورود قبلاً گرفته شده است."
 
@@ -5172,26 +5252,32 @@ msgid "This domain is not on this server any more."
 msgstr "این دامنه دیگر روی این سرور نیست."
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(done)s of %(all)s checked"
 msgstr "%(done)s از %(all)s بررسی شد"
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s are broken"
 msgstr "%(n)s مورد خراب است"
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s domains"
 msgstr "%(n)s دامنه"
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s need a look"
 msgstr "%(n)s مورد نیاز به بررسی دارد"
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s of them are only marked as older modes"
 msgstr "%(n)s مورد با حالت منسوخ علامت خورده است"
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s of them use a reality mode"
 msgstr "%(n)s مورد از حالت Reality استفاده می‌کند"
 
@@ -5312,6 +5398,7 @@ msgid "The certificate has run out."
 msgstr "گواهی منقضی شده است."
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "The certificate lasts another %(n)s days"
 msgstr "گواهی %(n)s روز دیگر اعتبار دارد"
 
@@ -5484,18 +5571,22 @@ msgid "The certificate runs out very soon."
 msgstr "گواهی خیلی زود منقضی می‌شود."
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(name)s offers it in its own list."
 msgstr "%(name)s آن را در فهرست خودش ارائه می‌دهد."
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(name)s hands out its files through it."
 msgstr "%(name)s فایل‌هایش را از این دامنه ارائه می‌دهد."
 
 #: watashipanel/panel/admin/DomainAdmin.py
+#, python-format
 msgid "Domain IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
 msgstr "آی‌پی دامنه %(domain_ip)s با آی‌پی این سرور %(server_ip)s یکسان نیست، در حالی که حالت مستقیم همین را لازم دارد"
 
 #: watashipanel/panel/admin/DomainAdmin.py
+#, python-format
 msgid "In CDN mode, Domain IP=%(domain_ip)s should be different to your ip=%(server_ip)s"
 msgstr "در حالت CDN، آی‌پی دامنه %(domain_ip)s باید با آی‌پی این سرور %(server_ip)s متفاوت باشد"
 
@@ -5648,6 +5739,7 @@ msgid "This is the only domain left. Without a domain nobody can reach the panel
 msgstr "این تنها دامنهٔ باقی‌مانده است. بدون دامنه هیچ‌کس به پنل نمی‌رسد."
 
 #: watashipanel/panel/admin/templates/domains_list.html
+#, python-format
 msgid "%(n)s picked"
 msgstr "%(n)s مورد انتخاب شد"
 
@@ -6039,9 +6131,11 @@ msgstr "این دامنه در هیچ بخش دیگری به کار نرفته �
 msgid "This mode is kept only for old clients. Pick a newer one when you can."
 msgstr "این حالت تنها برای برنامه‌های قدیمی نگه داشته شده است. اگر می‌توانید حالت تازه‌تری را برگزینید."
 
+#, python-format
 msgid "This domain is already used in the setting \"%(name)s\". Free it there first."
 msgstr "این دامنه همین حالا در تنطیم «%(name)s» به کار رفته است. اول آن را از همان جا آزاد کنید."
 
+#, python-format
 msgid "This domain is already a Reality server name (SNI) of the domain %(domain)s. Pick another domain or free it there first."
 msgstr "این دامنه پیش‌تر به نام سرور (SNI) Reality دامنهٔ %(domain)s بسته شده است. دامنهٔ دیگری برگزینید یا آن را از همان جا آزاد کنید."
 
@@ -7680,6 +7774,9 @@ msgstr "CDN خودکار"
 msgid "Your subscription links"
 msgstr "لینک‌های اشتراک شما"
 
+msgid "Auto Connect"
+msgstr "اتصال خودکار"
+
 msgid "One link for every app, the panel picks the right configs itself"
 msgstr "یک لینک برای همهٔ برنامه‌ها؛ پنل خودش کانفیگ مناسب هر برنامه را می‌فرستد"
 
@@ -7764,59 +7861,59 @@ msgstr "تصویر کد QR کپی شد"
 msgid "Copying the image did not work, please save it by hand"
 msgstr "کپی تصویر انجام نشد؛ لطفاً دستی از آن عکس بگیر"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Copying did not work"
 msgstr "کپی انجام نشد"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Hide"
 msgstr "پنهان"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Keep this link somewhere safe. It is the only way back into the panel."
 msgstr "این لینک را جایی امن نگه دار؛ تنها راه برگشت به پنل همین است."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Language"
 msgstr "زبان"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Nothing is written until you press this button."
 msgstr "تا این دکمه را نزنی هیچ چیزی ذخیره نمی‌شود."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Pick the language of the panel and the country your users dial in from."
 msgstr "زبان پنل و کشوری که کاربرانت از آن وصل می‌شوند را انتخاب کن."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Please wait"
 msgstr "لطفاً صبر کن"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Step @N@ of @T@"
 msgstr "مرحلهٔ @N@ از @T@"
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "The direct domain has to point at this server. A CDN domain is optional and must point somewhere else."
 msgstr "دامنهٔ مستقیم باید به همین سرور اشاره کند. دامنهٔ CDN اختیاری است و باید به جایی دیگر اشاره کند."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "The last step installs the services again, so it takes a few minutes. Do not close this page while it works."
 msgstr "مرحلهٔ آخر سرویس‌ها را از نو نصب می‌کند، پس چند دقیقه طول می‌کشد. تا کار تمام نشده این صفحه را نبند."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "This password guards the whole panel. Eight characters is the floor, longer is better."
 msgstr "این گذرواژه نگهبان کل پنل است. هشت نویسه کف کار است و بلندتر بهتر."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "This wizard runs once. Everything you pick here can be changed later from the panel."
 msgstr "این راهنما یک بار اجرا می‌شود. هر چیزی که اینجا انتخاب می‌کنی بعداً از خود پنل قابل تغییر است."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Turn on only the protocols you plan to hand out. Whatever is off here stays off on the server as well."
 msgstr "فقط پروتکل‌هایی را روشن کن که می‌خواهی ارائه بدهی. هرچه اینجا خاموش باشد روی سرور هم خاموش می‌ماند."
 
-#: watashi quick setup
+#: quick setup watashi
 msgid "Your admin link"
 msgstr "لینک مدیریت تو"
 
@@ -7963,10 +8060,12 @@ msgid "Yes, back up"
 msgstr "بله، پشتیبان بگیر"
 
 # watashi v12.2.65
+#, python-format
 msgid "The backup was written. %(n)s admin(s) received it on Telegram."
 msgstr "پشتیبان نوشته شد. %(n)s مدیر آن را در تلگرام دریافت کردند."
 
 # watashi v12.2.65
+#, python-format
 msgid "The backup did not run: %(why)s"
 msgstr "پشتیبان‌گیری اجرا نشد: %(why)s"
 
@@ -8011,10 +8110,12 @@ msgid "Yes, send"
 msgstr "بله، بفرست"
 
 # watashi v12.2.65
+#, python-format
 msgid "A test message was sent to %(n)s admin(s)."
 msgstr "یک پیام آزمایشی برای %(n)s مدیر فرستاده شد."
 
 # watashi v12.2.65
+#, python-format
 msgid "Nothing was sent: %(why)s"
 msgstr "چیزی فرستاده نشد: %(why)s"
 
@@ -8055,6 +8156,10 @@ msgid "Update available"
 msgstr "بروزرسانی موجود است"
 
 # watashi v12.2.69
+# watashi v12.3.49dev
+msgid "Develop channel"
+msgstr "کانال دولوپر"
+
 msgid "Beta channel"
 msgstr "کانال بتا"
 
@@ -8367,6 +8472,7 @@ msgstr ""
 "با آرزوی موفقیت. 🎉 🎉 🎉 \n"
 
 # watashi v12.2.104
+#, python-format
 msgid "Domain (%(domain)s)-> IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
 msgstr "دامنه (%(domain)s)-> IP=%(domain_ip)s با آی‌پی شما: ip=%(server_ip)s همخوانی ندارد. در حالت مستقیم (Direct Mode) این مورد الزامی است."
 
@@ -8383,6 +8489,7 @@ msgid "INCOMING SPEED.label"
 msgstr "سرعت دریافت"
 
 # watashi v12.2.104
+#, python-format
 msgid ""
 "If the application do not open automatically, please click <a class='btn btn-primary copy-link'\n"
 "                    href='%(sub)s'>this universal link</a> to copy and paste it on\n"
@@ -8392,6 +8499,7 @@ msgstr ""
 "درخواست شما، یا:"
 
 # watashi v12.2.104
+#, python-format
 msgid "It seems that you are using default domain (%(domain)s) which is not recommended."
 msgstr "به نظر می‌رسد شما درحال استفاده از دامنه پیش فرض (<span class='ltr d-inline-block'>%(domain)s</span>) هستید؛ این کار توصیه نمی‌شود. لطفا از بخش دامنه‌ها آن را حذف یا تغییر دهید."
 
@@ -8576,6 +8684,7 @@ msgid "XRAY UPTIME.label"
 msgstr "آپ‌تایم ایکس‌ری"
 
 # watashi v12.2.104
+#, python-format
 msgid "You can download a json formated of configurations by clicking <a href='%(link)s' class='btn btn-primary'>here</a>"
 msgstr ""
 "🔄 پنل واتاشی به صورت خودکار هر ۶ ساعت یک Backup میگیرد. مسیر فایل های Backup روی سرور: ⬇️\n"
@@ -8868,6 +8977,7 @@ msgid "Everything"
 msgstr "همه چیز"
 
 # watashi v12.2.129
+#, python-format
 msgid "%(n)s groups"
 msgstr "%(n)s گروه"
 
@@ -9076,6 +9186,7 @@ msgid "That is more domains than this box takes."
 msgstr "تعداد دامنه‌ها از ظرفیت این کادر بیشتر است."
 
 # watashi v12.2.129
+#, python-format
 msgid "This does not look like a domain: %(n)s"
 msgstr "این شکل یک دامنه نیست: %(n)s"
 
@@ -9088,6 +9199,7 @@ msgid "That is not a routing mode this page knows."
 msgstr "این حالت مسیریابی برای این صفحه شناخته‌شده نیست."
 
 # watashi v12.2.129
+#, python-format
 msgid "This group does not exist: %(n)s"
 msgstr "این گروه وجود ندارد: %(n)s"
 
@@ -9184,6 +9296,7 @@ msgid "Panel folder"
 msgstr "پوشه پنل"
 
 # watashi v12.2.129.4
+#, python-format
 msgid "%(n)s cores"
 msgstr "%(n)s هسته"
 
@@ -9276,6 +9389,7 @@ msgid "Your subscription time has expired."
 msgstr "زمان اشتراک شما تمام شد."
 
 #. watashi v12.2.130ad
+#, python-format
 msgid "Your subscription will expire in %(days)s days."
 msgstr "اشتراک شما تا %(days)s روز دیگر تمام می‌شود."
 
@@ -9284,6 +9398,7 @@ msgid "Your data allowance has been exhausted."
 msgstr "حجم شما تمام شده است."
 
 #. watashi v12.2.130ad
+#, python-format
 msgid "You have used %(percent).1f%% of your data allowance."
 msgstr "%(percent).1f%% از حجم خود را مصرف کرده‌اید."
 
@@ -10080,14 +10195,17 @@ msgid "The certificate of this domain is kept by the CDN, not by this server."
 msgstr "گواهی این دامنه را CDN نگه می‌دارد، نه این سرور."
 
 #. watashi v12.2.130bn
+#, python-format
 msgid "Your user limit leaves room for only %(left)s more users, so that many were created."
 msgstr "سقف کاربران شما فقط جای %(left)s کاربر دیگر دارد، پس همان تعداد ساخته شد."
 
 #. watashi v12.2.130bp
+#, python-format
 msgid "Your traffic quota has room for only %(left)s GB, so a %(need)s GB user does not fit."
 msgstr "از سقف حجم شما فقط %(left)s گیگ باقی مانده، پس کاربر %(need)s گیگی در آن جا نمی‌شود."
 
 #. watashi v12.2.130bp
+#, python-format
 msgid "Your traffic quota leaves room for only %(left)s more users, so that many were created."
 msgstr "سقف حجم شما فقط جای %(left)s کاربر دیگر دارد، پس همان تعداد ساخته شد."
 
@@ -10132,10 +10250,12 @@ msgid "healthy"
 msgstr "سالم"
 
 #. watashi v12.2.130by
+#, python-format
 msgid "testing %(done)s of %(total)s"
 msgstr "تست %(done)s از %(total)s"
 
 #. watashi v12.2.130by
+#, python-format
 msgid "%(good)s of %(tested)s configs answered"
 msgstr "%(good)s از %(tested)s کانفیگ جواب داد"
 
@@ -10160,10 +10280,12 @@ msgid "This page was left open too long. Reload it and try again."
 msgstr "این صفحه زیادی باز مانده است. تازه‌اش کن و دوباره امتحان کن."
 
 #. watashi v12.2.130by
+#, python-format
 msgid "The xray core was not found at %(path)s."
 msgstr "هسته‌ی xray در %(path)s پیدا نشد."
 
 #. watashi v12.2.130by
+#, python-format
 msgid "The sing-box core was not found at %(path)s."
 msgstr "هسته‌ی sing-box در %(path)s پیدا نشد."
 
@@ -10460,6 +10582,7 @@ msgid "xray does not accept this inbound:"
 msgstr "xray این اینباند را قبول نمی‌کند:"
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "There can be at most %(n)s hand built inbounds."
 msgstr "حداکثر %(n)s اینباند دستی می‌شود ساخت."
 
@@ -10468,14 +10591,17 @@ msgid "Pick the simple or the advanced mode."
 msgstr "حالت ساده یا پیشرفته را انتخاب کن."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "Port %(p)s is already used by the panel itself (%(o)s)."
 msgstr "پورت %(p)s را خود پنل استفاده می‌کند (%(o)s)."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "Port %(p)s is already used by the inbound \"%(o)s\"."
 msgstr "پورت %(p)s را اینباند «%(o)s» گرفته است."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "Something on this server already listens on %(p)s/%(t)s. If it is an inbound you just changed, apply first."
 msgstr "روی این سرور چیزی از قبل روی %(p)s/%(t)s گوش می‌دهد. اگر اینباندی است که همین الان عوضش کردی، اول اعمال کن."
 
@@ -10552,6 +10678,7 @@ msgid "TLS needs one of the domains of this panel, its certificate is the one th
 msgstr "TLS به یکی از دامنه‌های همین پنل نیاز دارد؛ گواهی همان دامنه را اینباند نشان می‌دهد."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "The domain %(d)s is not one of the domains of this panel."
 msgstr "دامنهٔ %(d)s جزو دامنه‌های این پنل نیست."
 
@@ -10580,6 +10707,7 @@ msgid "REALITY needs at least one server name."
 msgstr "REALITY حداقل یک Server name لازم دارد."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "This is not a server name: %(n)s"
 msgstr "این Server name معتبر نیست: %(n)s"
 
@@ -10592,6 +10720,7 @@ msgid "The REALITY private key is not a valid key. Press \"New keys\" to make a 
 msgstr "کلید خصوصی REALITY معتبر نیست. برای ساختن یک جفت کلید «کلید جدید» را بزن."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "A short id is up to 16 hex characters, an even number of them: %(n)s"
 msgstr "Short id حداکثر ۱۶ کاراکتر hex و با تعداد زوج است: %(n)s"
 
@@ -10604,6 +10733,7 @@ msgid "The raw JSON is too long."
 msgstr "JSON خام خیلی طولانی است."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "The raw JSON may not change %(k)s, use the fields above for it."
 msgstr "JSON خام نمی‌تواند %(k)s را عوض کند؛ برای آن از فیلدهای بالا استفاده کن."
 
@@ -10616,6 +10746,7 @@ msgid "The raw JSON is not a valid JSON object."
 msgstr "JSON خام یک آبجکت JSON معتبر نیست."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "Port %(p)s is already used by another inbound."
 msgstr "پورت %(p)s را یک اینباند دیگر گرفته است."
 
@@ -10978,6 +11109,7 @@ msgid "Delete this inbound?"
 msgstr "این اینباند حذف شود؟"
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "%(n)s stops serving and its links leave every subscription."
 msgstr "%(n)s دیگر سرویس نمی‌دهد و لینک‌هایش از همهٔ اشتراک‌ها حذف می‌شود."
 
@@ -11102,10 +11234,12 @@ msgid "config.custom_inbounds_keep.description"
 msgstr "روشن باشد، اینباندهای ساخته‌شده در حالت پیشرفته در حالت ساده هم سرویس می‌دهند؛ خاموش باشد، متوقف می‌شوند."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "%(ip)s is not an address of this server, so xray could not listen on it."
 msgstr "%(ip)s آدرسِ این سرور نیست، پس xray نمی‌تواند روی آن گوش بدهد."
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
+#, python-format
 msgid "The domain %(d)s is not one of the domains of this panel any more, so there is no certificate for this inbound."
 msgstr "دامنهٔ %(d)s دیگر جزو دامنه‌های این پنل نیست، پس این اینباند گواهی ندارد."
 
@@ -11122,6 +11256,7 @@ msgid "sing-box does not accept this inbound:"
 msgstr "sing-box این اینباند را قبول نمی‌کند:"
 
 # watashi v12.3.42dev: sing-box protocols on the Inbounds page
+#, python-format
 msgid "%(ip)s is not an address of this server, so sing-box could not listen on it."
 msgstr "%(ip)s آدرسِ این سرور نیست، پس sing-box نمی‌تواند روی آن گوش بدهد."
 
@@ -11146,6 +11281,7 @@ msgid "masquerade can only be the http:// or https:// address of a site, and onl
 msgstr "masquerade فقط می‌تواند آدرس http:// یا https:// یک سایت باشد، و فقط روی Hysteria2."
 
 # watashi v12.3.42dev: sing-box protocols on the Inbounds page
+#, python-format
 msgid "The server key of %(m)s is %(n)s random bytes in base64. Empty the field and a new one is made."
 msgstr "کلید سرورِ %(m)s باید %(n)s بایت تصادفی به‌صورت base64 باشد. فیلد را خالی کن تا یکی تازه ساخته شود."
 
@@ -11884,3 +12020,120 @@ msgstr "نشانی IP مقصد تانل را روی سرور رله به IP هم
 # watashi v12.3.49dev: title block for the quick setup wizard page
 msgid "Quick Setup"
 msgstr "راه‌اندازی سریع"
+
+
+# --- API book: matrix and subscription additions ---
+
+msgid "Parent API"
+msgstr "API والد"
+
+msgid "The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers."
+msgstr "نیمه‌ی حالت ماتریس که پنل والد پاسخ می‌دهد. سطرهای «کلید پنل» با کلید فرزند فراخوانی می‌شوند؛ والد این کلید را پس از ثبت فرزند می‌شناسد."
+
+msgid "Child API"
+msgstr "API فرزند"
+
+msgid "The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers."
+msgstr "نیمه‌ی حالت ماتریس که پنل فرزند پاسخ می‌دهد. سطرهای «کلید پنل» با کلید والد فراخوانی می‌شوند؛ فرزند این کلید را پس از ثبت نزد والد در اختیار دارد."
+
+msgid "Panel key"
+msgstr "کلید پنل"
+
+msgid "Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out."
+msgstr "برنامه‌ی درخواست‌کننده را می‌خواند و در همان قالب جواب می‌دهد. مرورگر صفحه‌ی مشتری را می‌گیرد و برنامه، کانفیگ خودش را. همان یک لینکی که باید دست بدهید."
+
+msgid "The customer page"
+msgstr "صفحه‌ی مشتری"
+
+msgid "The page a customer opens in a browser to pick an app and copy their links."
+msgstr "صفحه‌ای که مشتری در مرورگر باز می‌کند تا برنامه‌اش را انتخاب و لینک‌هایش را کپی کند."
+
+msgid "Text links"
+msgstr "لینک‌های متنی"
+
+msgid "The same links without base64, one per line."
+msgstr "همان لینک‌ها بدون base64، هر خط یکی."
+
+msgid "Xray json"
+msgstr "Xray JSON"
+
+msgid "The whole profile as the json an Xray client imports."
+msgstr "کل پروفایل در قالب جیسونی که یک کلاینت Xray وارد می‌کند."
+
+msgid "Only the proxies"
+msgstr "فقط پروکسی‌ها"
+
+msgid "Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo."
+msgstr "فقط بخش proxies پروفایل، برای کسی که پروفایل خودش را دارد. برای میهومو clash/meta/proxies.yml."
+
+msgid "The whole profile as sing-box json. singbox/ is the same file under a shorter name."
+msgstr "کل پروفایل به صورت sing-box json. نام کوتاه‌تر همین فایل singbox/ است."
+
+msgid "Sing-Box with ssh"
+msgstr "Sing-Box با ssh"
+
+msgid "The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off."
+msgstr "همان sing-box json به‌علاوه‌ی تونل‌های ssh این حساب. اگر سرور ssh خاموش باشد، پیام غیرفعال بودن می‌گیرد."
+
+msgid "Echo the user agent"
+msgstr "بازگرداندن User Agent"
+
+msgid "Debug: answers with the user agent the panel saw. Handy to check what an app sends."
+msgstr "اشکال‌زدایی: همان User Agent را که پنل دیده جواب می‌دهد. برای تست آدرس اشتراک به‌کار می‌آید."
+
+msgid "Does this child exist"
+msgstr "آیا این فرزند وجود دارد"
+
+msgid "A child asks with its unique id before it registers; the answer is whether the parent already holds such a child."
+msgstr "فرزند پیش از ثبت، با شناسه‌ی یکتایش می‌پرسد؛ جواب این است که والد چنین فرزندی را از قبل دارد یا نه."
+
+msgid "Register a child"
+msgstr "ثبت فرزند"
+
+msgid "The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even."
+msgstr "فرزند همه‌ی پنلش را می‌سپارد: مدیران، مشتریان، دامنه‌ها، کانفیگ‌ها و پروکسی‌ها. والد هم مشتریان و مدیران خودش را جواب می‌دهد تا هر دو طرف برابر شروع کنند."
+
+msgid "Sync a child"
+msgstr "همگام‌سازی فرزند"
+
+msgid "The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required."
+msgstr "فرزند دامنه‌ها، کانفیگ‌ها و پروکسی‌هایش را می‌فرستد؛ والد با فهرست کامل مشتریان و مدیران جواب می‌دهد. دست‌کم یکی از سه فهرست لازم است."
+
+msgid "Push the usage"
+msgstr "ارسال مصرف"
+
+msgid "The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds."
+msgstr "فرزند گزارش می‌دهد هر مشتری چقدر مصرف کرده؛ والد فقط افزایش را اضافه می‌کند و مصرفی را که الان دارد جواب می‌دهد."
+
+msgid "Register with a parent"
+msgstr "ثبت نزد والد"
+
+msgid "Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already."
+msgstr "این پنل را فرزندِ یک والد می‌کند. parent_panel نشانی والد و apikey کلید یک مالک آن‌جاست. پنل باید مستقل یا از قبل فرزند باشد."
+
+msgid "Sync now"
+msgstr "همگام‌سازی فوری"
+
+msgid "Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel."
+msgstr "همه‌ی داده‌های والد را می‌کشد و داده‌ی محلی را با آن بازنویسی می‌کند. والد می‌تواند صدا بزند و مالک این پنل هم."
+
+msgid "Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive."
+msgstr "فرمان status را روی این پنل اجرا و ok جواب می‌دهد. والد برای باخبر شدن از زنده بودن فرزند صدایش می‌زند."
+
+msgid "Restarts the services of this panel."
+msgstr "سرویس‌های این پنل را از نو راه می‌اندازد."
+
+msgid "Apply the config"
+msgstr "اعمال کانفیگ"
+
+msgid "Rebuilds the running config from the database, without a full install."
+msgstr "کانفیگ در حال اجرا را از دیتابیس بازسازی می‌کند، بدون نصب کامل."
+
+msgid "Runs the installer again. With full set, it installs everything from the start."
+msgstr "نصب‌کننده را دوباره اجرا می‌کند. با full، همه‌چیز را از ابتدا نصب می‌کند."
+
+msgid "Reads the usage off the cores of this panel right now."
+msgstr "مصرف را همین حالا از هسته‌های این پنل می‌خواند."
+
+msgid "Auto"
+msgstr "خودکار"

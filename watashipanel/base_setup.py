@@ -19,7 +19,7 @@ from sonora.wsgi import grpcWSGI
 
 # watashi v12.2.130ad: the languages the panel actually carries a full
 # catalogue for. Everything else falls back to English.
-WS_SPOKEN = ('en', 'fa')
+WS_SPOKEN = ('en', 'fa', 'ru', 'zh')  # watashi v12.3.49dev: ru and zh have full catalogs and were offered on the sign-in page but never answered here, so those pages fell back to English mid-sentence
 
 
 
@@ -78,9 +78,23 @@ def init_app(app):
             admin_side = 'admin' in request.base_url
             picked = None
             try:
-                picked = getattr(auth.current_account, 'lang', None)
+                # watashi v12.3.49dev: an explicit ?lang= in the address wins
+                # over everything, the same way the user page honours it.
+                picked = request.args.get('lang')
             except BaseException:
                 picked = None
+            try:
+                if not ws_spoken(picked):
+                    picked = getattr(auth.current_account, 'lang', None)
+            except BaseException:
+                picked = None
+            # watashi v12.3.49dev: the language switch on the sign-in page
+            # drops a watashi_lang cookie that nothing ever read back; the
+            # choice died with the next request. It sits between the account
+            # and the workspace default: a person's own setting still wins,
+            # but a visitor's pick is honoured instead of ignored.
+            if not ws_spoken(picked):
+                picked = request.cookies.get('watashi_lang')
             fallback = hconfig(ConfigEnum.admin_lang if admin_side else ConfigEnum.lang)
             g.locale = ws_spoken(picked) or ws_spoken(fallback) or 'en'
             return g.locale

@@ -81,7 +81,11 @@
                     {% if hutils.utils.is_panel_outdated() %}
                     <div class="badge green">{{ _('Update available') }}: v{{ hutils.utils.ws_newest_for_this_box() }}</div>
                     {% endif %}
-                    {% if hutils.utils.ws_release_channel() != 'release' %}
+                    {# watashi v12.3.49dev: three channels now - the badge says which one this box is on. #}
+                    {% set _ws_ch = hutils.utils.ws_release_channel() %}
+                    {% if _ws_ch == 'develop' %}
+                    <div class="badge">{{ _('Develop channel') }}</div>
+                    {% elif _ws_ch != 'release' %}
                     <div class="badge">{{ _('Beta channel') }}</div>
                     {% endif %}
                 </div>
@@ -243,7 +247,7 @@
                         <span><i class="fa-solid fa-arrow-down" style="color:#10b981;"></i> {{ _('Received') }}: <b id="traffic-in-val">{{ (stats.system.net_recv_cumulative_GB | default(0, true)) | round(2) }} GB</b></span>
                         <span><i class="fa-solid fa-arrow-up" style="color:#3b82f6;"></i> {{ _('Sent') }}: <b id="traffic-out-val">{{ (stats.system.net_sent_cumulative_GB | default(0, true)) | round(2) }} GB</b></span>
                     </div>
-                    <div class="ws-why">{{ _('This is what the network card itself counted. Every byte a user spends passes it twice, once coming in and once going out, and the server\'s own updates and backups are counted here too. It being around twice the users\' total is normal, not a mistake.') }}</div>
+                    <div class="ws-why" hidden></div>
                 </div>
 
                 <div class="card" style="display: flex; flex-direction: column; justify-content: center;">
@@ -356,8 +360,14 @@
         // arrivals themselves, so the picture moves at the rate the data really
         // comes in and a late reading merely slows the glide instead of halting
         // it. the cap is there so a dead connection cannot walk the line off
-        // the canvas: past 1.6 intervals with nothing new, it waits.
-        var gap = 2000;
+        // the canvas: past one interval with nothing new, it waits.
+        // watashi v12.3.49dev: the gap now starts at the real poll interval
+        // (1s), not 2000ms. the old start made t reach only half a point
+        // before each new reading reset it, so the line crept forward and
+        // snapped back every second - the jiggle on the cards and in the
+        // popup. t is also clamped at 1: a late reading holds the line
+        // still instead of overshooting left and jumping back.
+        var gap = refresh_s * 1000;
         var lastAt = 0;
         var born = 0;
         var lid = 0;
@@ -415,9 +425,9 @@
             cv.addEventListener('mouseleave', function () { hover = -1; });
         }
         function draw(now) {
-            var age = born ? Math.min(now - born, gap * 1.6) : gap;
-            var t = age / gap;
-            var k = Math.min(1, t);
+            var age = born ? (now - born) : gap;
+            var t = Math.min(1, age / gap);
+            var k = t;
             var ease = k * k * (3 - 2 * k);
             var lim = ceiling();
             var pad = opt.axis ? 18 : 4;
@@ -1021,18 +1031,13 @@
         // watashi v12.2.89: the second argument is the animate flag. it was
         // false, which is why a new point appeared rather than arrived.
         tickCount++;
-        requestAnimationFrame(function () {
-            cpuSpark.push(cpuShown);
-            requestAnimationFrame(function () {
-                memSpark.push(memShown);
-                requestAnimationFrame(function () {
-                    netSpark.push(netShown);
-                    requestAnimationFrame(function () {
-                        refreshMetricModal();
-                    });
-                });
-            });
-        });
+        // watashi v12.3.49dev: the pushes are canvas writes now, not
+        // apexcharts re-renders - the staggered requestAnimationFrame chain
+        // from the old engine only delayed them by frames for nothing.
+        cpuSpark.push(cpuShown);
+        memSpark.push(memShown);
+        netSpark.push(netShown);
+        refreshMetricModal();
     }
 
     wsLoudOnce();

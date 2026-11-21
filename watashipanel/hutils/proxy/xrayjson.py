@@ -85,9 +85,11 @@ def configs_as_json(domains: list[Domain], user: User, expire_days: int, remarks
                 # else:
                 all_configs.append(base)
 
-        else:  # single outbound
+        elif outbounds:  # single outbound
             base_config['outbounds'].insert(0, outbounds[0])
             all_configs = base_config
+        # an empty outbound list stays empty: the "if not all_configs" below
+        # returns '' and the caller falls back to plain subscription links.
 
     if not all_configs:
         return ''

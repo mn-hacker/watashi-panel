@@ -403,4 +403,20 @@ document.querySelectorAll('.setup-tab').forEach(function (tab) {
    refreshed admin pages. The old WS-SHARED css block above was removed
    with it (it only hid the native scrollbar for the overlay). */
 
+/* watashi v12.3.49dev: the panel hides the scrollbar thumb until the page
+   scrolls or the pointer nears the window edge (watashi-ui.js fades it via
+   data-sb). This page loads no ui script, so the same "only when needed"
+   behaviour is three passive listeners: flip html.ws-scrolled while the
+   page is not at rest, and the css above shows/hides the thumb. */
+(function () {
+	var t;
+	function paint() {
+		document.documentElement.classList.toggle('ws-scrolled',
+			window.scrollY > 2 || window.innerWidth - document.documentElement.clientWidth > 0);
+	}
+	addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(paint, 80); }, { passive: true });
+	addEventListener('resize', paint, { passive: true });
+	paint();
+})();
+
 })();

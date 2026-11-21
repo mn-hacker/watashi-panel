@@ -21,7 +21,7 @@ import re
 TEXTS = {'brand': 60, 'note_title': 60, 'hello': 60, 'sub_hello': 140, 'foot': 200}
 LINKS = {'support': 300, 'bot': 300}
 NOTE_ROOM = 1500
-PICKS = {'skin': ('dark', 'light'), 'lang': ('fa', 'en'), 'app_title': ('domain', 'brand')}
+PICKS = {'skin': ('dark', 'light'), 'lang': ('fa', 'en', 'ru', 'zh'), 'app_title': ('domain', 'brand')}
 SECTIONS = ('notice', 'stats', 'links', 'guide', 'rhythm', 'short', 'powered')
 # a logo is shrunk in the browser before it is sent; this is the ceiling
 LOGO_ROOM = 90000

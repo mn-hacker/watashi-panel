@@ -403,6 +403,11 @@ def get_valid_proxies(domains: list[Domain], only_tunnels: bool | None = None) -
     configsmap = {}
     proxeismap = {}
     for domain in domains:
+        # watashi v12.3.49dev: a sub-link-only domain is a signpost for the
+        # subscription picker, never a host. No config may be built on it, so
+        # it is skipped even when a caller hands it over by mistake.
+        if domain.mode == DomainType.sub_link_only:
+            continue
         if domain.child_id not in configsmap:
             configsmap[domain.child_id] = get_hconfigs(domain.child_id)
             proxeismap[domain.child_id] = get_proxies(domain.child_id, only_enabled=True)

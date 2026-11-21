@@ -284,12 +284,12 @@ class ConfigEnum(metaclass=FastEnum):
     telegram_fakedomain = _StrConfigDscr(ConfigCategory.telegram, ApplyMode.reinstall, hide_in_virtual_child=True)
 
     v2ray_enable = _BoolConfigDscr(ConfigCategory.hidden, ApplyMode.reinstall)
-    torrent_block = _BoolConfigDscr(ConfigCategory.general, ApplyMode.apply_config)
     block_ads_enable = _BoolConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)
     block_ads_custom = _StrConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)
     block_malware_enable = _BoolConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)
     block_social_enable = _BoolConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)
     block_nsfw_enable = _BoolConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)  # Includes gambling & adult
+    torrent_block = _BoolConfigDscr(ConfigCategory.adblock, ApplyMode.apply_config)  # watashi v12.3.49dev: was in general, sits with the other blockers now
 
     tuic_enable = _BoolConfigDscr(ConfigCategory.tuic, ApplyMode.apply_config)
     tuic_port = _StrConfigDscr(ConfigCategory.tuic, ApplyMode.apply_config, hide_in_virtual_child=True)

@@ -19,12 +19,16 @@ OWNER = ('super_admin',)
 ADMINS = ('super_admin', 'admin')
 EVERY_ADMIN = ('super_admin', 'admin', 'agent')
 CUSTOMER = ('user',)
+# A row of the matrix mode: called with the key of the panel on the other
+# side, not with the key of any admin or customer of this panel.
+NODE = ('node',)
 
 MODE_WORDS = {
     'super_admin': 'Owner',
     'admin': 'Admin',
     'agent': 'Agent',
     'user': 'Customer',
+    'node': 'Panel key',
 }
 
 # A sentence gets a persian translation. A token a machine reads - a field
@@ -210,9 +214,13 @@ def raw_book():
             'icon': 'fa-solid fa-link',
             'base': 'sub',
             'rows': [
-                _row('sub-auto', 'GET', 'sub/',
+                _row('sub-auto', 'GET', 'auto/',
                      'Auto',
-                     'Reads the app asking and answers in the format that app understands. The one link to hand out.',
+                     'Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out.',
+                     CUSTOMER),
+                _row('sub-page', 'GET', 'new/',
+                     'The customer page',
+                     'The page a customer opens in a browser to pick an app and copy their links.',
                      CUSTOMER),
                 _row('sub-all', 'GET', 'all.txt',
                      'Plain list',
@@ -220,14 +228,34 @@ def raw_book():
                      CUSTOMER,
                      params=[{'name': 'mode', 'kind': 'query', 'note': 'new or old.'},
                              {'name': 'name', 'kind': 'query', 'note': 'The name the app shows.'}]),
+                _row('sub-plain', 'GET', 'sub/',
+                     'Text links',
+                     'The same links without base64, one per line.',
+                     CUSTOMER),
                 _row('sub-b64', 'GET', 'sub64/',
                      'Base64 list', 'The same list, base64 encoded, for older v2ray apps.', CUSTOMER),
+                _row('sub-xray', 'GET', 'xray/',
+                     'Xray json',
+                     'The whole profile as the json an Xray client imports.',
+                     CUSTOMER),
                 _row('sub-clash', 'GET', 'clash/meta/all.yml',
                      'Clash and Meta',
                      'A yaml profile. Use clash/all.yml for plain Clash and meta for Mihomo.',
                      CUSTOMER),
+                _row('sub-clash-proxies', 'GET', 'clash/proxies.yml',
+                     'Only the proxies',
+                     'Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo.',
+                     CUSTOMER),
                 _row('sub-singbox', 'GET', 'full-singbox.json',
-                     'Sing-Box', 'The whole profile as sing-box json.', CUSTOMER),
+                     'Sing-Box', 'The whole profile as sing-box json. singbox/ is the same file under a shorter name.', CUSTOMER),
+                _row('sub-singbox-ssh', 'GET', 'singbox-ssh/',
+                     'Sing-Box with ssh',
+                     'The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off.',
+                     CUSTOMER),
+                _row('sub-ua', 'GET', 'ua',
+                     'Echo the user agent',
+                     'Debug: answers with the user agent the panel saw. Handy to check what an app sends.',
+                     CUSTOMER),
                 _row('sub-wg', 'GET', 'wireguard',
                      'WireGuard file', 'The tunnel as a .conf file. No v2ray app can read it.', CUSTOMER),
                 _row('sub-awg', 'GET', 'amnezia',
@@ -236,6 +264,69 @@ def raw_book():
                      'Mieru file', 'The whole account as the json the Mieru client reads.', CUSTOMER),
                 _row('sub-configs', 'GET', 'configs',
                      'The configs page', 'The page a customer opens to take one config at a time.', CUSTOMER),
+            ],
+        },
+        {
+            'id': 'parent',
+            'name': 'Parent API',
+            'note': 'The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers.',
+            'icon': 'fa-solid fa-sitemap',
+            'base': 'admin',
+            'rows': [
+                _row('parent-status', 'POST', 'api/v2/parent/status/',
+                     'Does this child exist',
+                     'A child asks with its unique id before it registers; the answer is whether the parent already holds such a child.',
+                     NODE, body=['child_unique_id'], gives='{"existance": true}'),
+                _row('parent-register', 'PUT', 'api/v2/parent/register/',
+                     'Register a child',
+                     'The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even.',
+                     OWNER, body=['unique_id', 'name', 'mode', 'panel_data'],
+                     gives='{"parent_unique_id": "...", "users": [], "admin_users": []}'),
+                _row('parent-sync', 'PUT', 'api/v2/parent/sync/',
+                     'Sync a child',
+                     'The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required.',
+                     NODE, body=['domains', 'proxies', 'hconfigs']),
+                _row('parent-usage', 'PUT', 'api/v2/parent/usage/',
+                     'Push the usage',
+                     'The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds.',
+                     NODE, body=['usages']),
+            ],
+        },
+        {
+            'id': 'child',
+            'name': 'Child API',
+            'note': 'The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers.',
+            'icon': 'fa-solid fa-network-wired',
+            'base': 'admin',
+            'rows': [
+                _row('child-register', 'POST', 'api/v2/child/register-parent/',
+                     'Register with a parent',
+                     'Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already.',
+                     OWNER, body=['parent_panel', 'name', 'apikey']),
+                _row('child-sync', 'POST', 'api/v2/child/sync-parent/',
+                     'Sync now',
+                     'Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel.',
+                     NODE),
+                _row('child-status', 'POST', 'api/v2/child/status/',
+                     'Status',
+                     'Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive.',
+                     NODE),
+                _row('child-restart', 'POST', 'api/v2/child/restart/',
+                     'Restart the services',
+                     'Restarts the services of this panel.',
+                     NODE),
+                _row('child-apply', 'POST', 'api/v2/child/apply-config/',
+                     'Apply the config',
+                     'Rebuilds the running config from the database, without a full install.',
+                     NODE),
+                _row('child-install', 'POST', 'api/v2/child/install/',
+                     'Install',
+                     'Runs the installer again. With full set, it installs everything from the start.',
+                     NODE, body=['full']),
+                _row('child-usage', 'POST', 'api/v2/child/update-usage/',
+                     'Refresh the usage',
+                     'Reads the usage off the cores of this panel right now.',
+                     NODE),
             ],
         },
         {
@@ -357,7 +448,11 @@ def curl_of(row, facts):
     url = base + row['path']
     bits = ['curl -X ' + row['method'], "'" + url + "'"]
     if row.get('base') != 'sub':
-        bits.append("-H 'Watashi-API-Key: " + (facts['key'] or '{YOUR-API-KEY}') + "'")
+        if 'node' in row['roles']:
+            # the key of the panel on the other side, never the reader's own
+            bits.append("-H 'Watashi-API-Key: {THE-OTHER-PANEL-KEY}'")
+        else:
+            bits.append("-H 'Watashi-API-Key: " + (facts['key'] or '{YOUR-API-KEY}') + "'")
     if row['method'] in ('POST', 'PATCH', 'PUT') and row.get('body'):
         bits.append("-H 'Content-Type: application/json'")
         pairs = ', '.join('"' + name + '": "..."' for name in row['body'][:3])

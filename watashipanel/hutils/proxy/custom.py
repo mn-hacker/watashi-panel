@@ -93,7 +93,16 @@ WS_STACK_PORTS = {
     9091: 'telegram proxy', 10085: 'xray api', 10086: 'sing-box api', 10087: 'sing-box api',
 }
 
-PATH_RE = re.compile(r'^/[A-Za-z0-9._~\-/]{0,120}$')
+# watashi v12.3.50dev: the path of a ws, httpupgrade and xhttp transport may
+# carry a query string the way clients ask for WebSocket early data, for
+# example /ws?ed=2080. The part before the ? follows the old rules (no leading
+# //); the query is key=value pairs of the same characters, & between pairs,
+# and the ? is only there when a pair follows.
+PATH_BODY = r'[A-Za-z0-9._~\-]{1,120}(?:/[A-Za-z0-9._~\-]+)*'
+PATH_QUERY = r'[A-Za-z0-9._~\-]+=[A-Za-z0-9._~\-]*(?:&[A-Za-z0-9._~\-]+=[A-Za-z0-9._~\-]*)*'
+# the root / alone is fine, anything else needs a nonempty first segment, so
+# //bad and /a//b stay out
+PATH_RE = re.compile(rf'^/(?:{PATH_BODY}(?:\?{PATH_QUERY})?)?$')
 SERVICE_RE = re.compile(r'^[A-Za-z0-9._\-]{1,100}$')
 HOST_RE = re.compile(r'^(?=.{1,253}$)[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$')
 SHORT_ID_RE = re.compile(r'^(?:[0-9a-f]{2}){0,8}$')
@@ -356,8 +365,12 @@ def ws_uses(row_like: dict) -> set:
     return {'tcp'}
 
 
-def ws_port_problem(port: int, uses: set, row_id: int | None = None, check_live: bool = True) -> str:
-    """Why this port cannot be used, or an empty string when it can."""
+def ws_port_problem(port: int, uses: set, row_id: int | None = None, check_live: bool = True,
+                    listen: str = '') -> str:
+    """Why this port cannot be used, or an empty string when it can. Two rows
+    may share a port when each binds its own distinct address: one on
+    127.0.0.1 and one on a real IP of the server do not fight over the socket.
+    A row on all addresses (an empty listen) clashes with every row."""
     for lo, hi, proto, owner in ws_panel_ports():
         if lo <= port <= hi and (proto == 'both' or proto in uses):
             return _('Port %(p)s is already used by the panel itself (%(o)s).', p=port, o=owner)
@@ -367,6 +380,10 @@ def ws_port_problem(port: int, uses: set, row_id: int | None = None, check_live:
             own_port = int(other.port or 0)
             continue
         if int(other.port or 0) == port:
+            other_listen = str(other.to_dict().get('listen') or '')
+            # an empty listen takes every address, a real one only its own
+            if listen and other_listen and listen != other_listen:
+                continue
             other_uses = ws_uses(other.to_dict())
             if other_uses & uses:
                 return _('Port %(p)s is already used by the inbound "%(o)s".', p=port, o=other.remark or other.tag)
@@ -485,13 +502,13 @@ def ws_clean(data: dict, row_id: int | None = None, check_live: bool = True) -> 
         if header == 'http':
             path = s('path', 121, '/') or '/'
             if not PATH_RE.match(path):
-                errors.append(_('A path starts with / and uses letters, digits and . _ ~ - / only.'))
+                errors.append(_('A path starts with / and uses letters, digits and . _ ~ - / only, and may carry a query like ?ed=2080.'))
             opts['path'] = path
             opts['host'] = host
     elif network in ('ws', 'httpupgrade', 'xhttp'):
         path = s('path', 121) or ws_random_path()
         if not PATH_RE.match(path):
-            errors.append(_('A path starts with / and uses letters, digits and . _ ~ - / only.'))
+            errors.append(_('A path starts with / and uses letters, digits and . _ ~ - / only, and may carry a query like ?ed=2080.'))
         opts['path'] = path
         opts['host'] = host
         if network == 'xhttp':
@@ -610,7 +627,37 @@ def ws_clean(data: dict, row_id: int | None = None, check_live: bool = True) -> 
                             walk(value)
                 walk(extra)
                 if 'fallbacks' in found:
-                    errors.append(_('Fallbacks are not offered for hand built inbounds, they could reach into the panel\'s own inbounds.'))
+                    # watashi v12.3.50dev: fallbacks are how several inbounds
+                    # share one port, the way the panel's own defaults do: the
+                    # front inbound hands every connection a path or an ALPN
+                    # does not pick to another inbound. The destination may be
+                    # the tag of one of the other hand built inbounds, or a
+                    # host and a port that is not the panel's own.
+                    ok = isinstance(extra.get('fallbacks'), list) and bool(extra['fallbacks'])
+                    other_tags = {f'{TAG_PREFIX}{r.id}' for r in CustomInbound.all_rows() if r.id != row_id}
+                    for item in (extra.get('fallbacks') or [] if isinstance(extra.get('fallbacks'), list) else []):
+                        if not isinstance(item, dict) or set(item) - {'name', 'path', 'alpn', 'dest', 'xver'}:
+                            ok = False
+                            break
+                        dest = str(item.get('dest') or '').strip()
+                        if not dest or dest.startswith('/'):
+                            ok = False
+                            break
+                        if ':' in dest:
+                            dest_host, _sep, dest_port = dest.rpartition(':')
+                            if not (dest_host and ws_is_host(dest_host.strip('[]'))
+                                    and dest_port.isdigit() and 0 < int(dest_port) < 65536):
+                                ok = False
+                                break
+                            if any(lo <= int(dest_port) <= hi for lo, hi, _p, _o in ws_panel_ports()) \
+                                    or int(dest_port) in WS_STACK_PORTS:
+                                ok = False
+                                break
+                        elif dest not in other_tags:
+                            ok = False
+                            break
+                    if not ok:
+                        errors.append(_('A fallback hands the connection to another inbound: "dest" is the tag of one of your other inbounds (custom-1, custom-2, ...) or a host and a port outside the panel, and only name, path, alpn, dest and xver may be set. The panel\'s own sockets and addresses are not allowed.'))
                 if found & {'certificates', 'certificateFile', 'keyFile', 'certificate', 'key'}:
                     errors.append(_('The raw JSON may not name certificates, TLS takes the certificate of the domain picked above.'))
                 opts['extra'] = json.dumps(extra, ensure_ascii=False, indent=2)
@@ -630,7 +677,7 @@ def ws_clean(data: dict, row_id: int | None = None, check_live: bool = True) -> 
         'settings': opts,
     }
     if not errors and 1 <= port <= 65535:
-        problem = ws_port_problem(port, ws_uses(clean), row_id, check_live=check_live)
+        problem = ws_port_problem(port, ws_uses(clean), row_id, check_live=check_live, listen=str(clean.get("listen") or ""))
         if problem:
             errors.append(problem)
     return clean, errors
@@ -738,7 +785,7 @@ def _clean_singbox(data: dict, raw: dict, row_id, check_live: bool, errors: list
         'settings': opts,
     }
     if not errors and 1 <= port <= 65535:
-        problem = ws_port_problem(port, ws_uses(clean), row_id, check_live=check_live)
+        problem = ws_port_problem(port, ws_uses(clean), row_id, check_live=check_live, listen=str(clean.get("listen") or ""))
         if problem:
             errors.append(problem)
     return clean, errors

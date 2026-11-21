@@ -256,7 +256,7 @@
 				</div>
 				<div class="ud-two" style="margin-block-start: 0.9rem;">
 					{{ ud_pick('skin', _('Light or dark'), _('How the page opens; every user can still switch it.'), [('dark', _('Dark'), 'fa-solid fa-moon'), ('light', _('Light'), 'fa-solid fa-sun')]) }}
-					{{ ud_pick('lang', _('Page language'), _('The language the page opens in, until a user picks another one.'), [('fa', 'فارسی', ''), ('en', 'English', '')]) }}
+					{{ ud_pick('lang', _('Page language'), _('The language the page opens in, until a user picks another one.'), [('fa', 'فارسی', ''), ('en', 'English', ''), ('ru', 'Русский', ''), ('zh', '中文', '')]) }}
 				</div>
 			</section>
 
@@ -332,7 +332,28 @@
 			parts: {{ up_sections | tojson }},
 			words: { saved: {{ _('Saved') | tojson }}, dirty: {{ _('Not saved yet') | tojson }}, busy: {{ _('Saving...') | tojson }},
 				failed: {{ _('That did not work.') | tojson }}, leave: {{ _('The changes are not saved yet.') | tojson }},
-				brand: 'Watashi Manager', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }} }
+				brand: 'Watashi Manager', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }} },
+			// watashi v12.3.49dev: the preview follows the language pick. The
+			// server renders one language only (the page locale), so the two
+			// sets of live labels travel with UP and paint() swaps them.
+			l10n: {
+				en: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
+					used: 'Used', left: 'Left', days: 'days', unlim: 'Unlimited',
+					rhythm: 'The rhythm of the package', links: 'Subscription links', short: 'Short link', guide: 'Setup guide',
+					bot: 'Telegram bot', sup: 'Support', powered: 'Powered by' },
+				fa: { dir: 'rtl', hello: 'صبح بخیر', sub: 'به داشبورد خودت خوش آمدی', note: 'اطلاعیه',
+					used: 'مصرف‌شده', left: 'باقی‌مانده', days: 'روز', unlim: 'نامحدود',
+					rhythm: 'ریتم بسته', links: 'لینک‌های اشتراک', short: 'لینک کوتاه', guide: 'راهنمای نصب',
+					bot: 'ربات تلگرام', sup: 'پشتیبانی', powered: 'قدرت‌گرفته از' },
+				ru: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
+					used: {{ _('Used') | tojson }}, left: {{ _('Left') | tojson }}, days: {{ _('days') | tojson }}, unlim: {{ _('Unlimited') | tojson }},
+					rhythm: {{ _('The rhythm of the package') | tojson }}, links: {{ _('Subscription links') | tojson }}, short: {{ _('Short link') | tojson }}, guide: {{ _('Setup guide') | tojson }},
+					bot: {{ _('Telegram bot') | tojson }}, sup: {{ _('Support') | tojson }}, powered: {{ _('Powered by') | tojson }} },
+				zh: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
+					used: {{ _('Used') | tojson }}, left: {{ _('Left') | tojson }}, days: {{ _('days') | tojson }}, unlim: {{ _('Unlimited') | tojson }},
+					rhythm: {{ _('The rhythm of the package') | tojson }}, links: {{ _('Subscription links') | tojson }}, short: {{ _('Short link') | tojson }}, guide: {{ _('Setup guide') | tojson }},
+					bot: {{ _('Telegram bot') | tojson }}, sup: {{ _('Support') | tojson }}, powered: {{ _('Powered by') | tojson }} }
+			}
 		};
 		var $ = function (id) { return document.getElementById(id); };
 		var draft = JSON.parse(JSON.stringify(UP.mine || {}));
@@ -383,6 +404,34 @@
 			var skin = pick('skin') === 'light' ? 'light' : 'dark';
 			phone.setAttribute('data-skin', skin);
 			phone.style.setProperty('--pb', skin === 'light' ? '#e6eaf0' : row[4]);
+			// watashi v12.3.49dev: the language pick now reshapes the sketch -
+			// direction and the live labels follow fa/en; the admin's own words
+			// still win over the sample ones.
+			var L = UP.l10n[pick('lang')] || UP.l10n[(document.documentElement.lang || 'en').split('-')[0]] || UP.l10n.en;
+			phone.setAttribute('dir', L.dir);
+			// the four stat boxes repaint with the picked language; the <b>
+			// keeps its value, the label text around it changes
+			var statWords = [L.used, L.left, L.days, L.unlim];
+			phone.querySelectorAll('.ph-boxes > span').forEach(function (el, i) {
+				var b = el.querySelector('b');
+				if (!b) { return; }
+				var value = b.textContent;
+				el.textContent = statWords[i] + ' ';
+				el.appendChild(b);
+			});
+			$('pvRhythm').querySelector('.ph-sec').textContent = L.rhythm;
+			$('pvLinks').querySelector('.ph-sec').textContent = L.links;
+			$('pvShort').querySelector('span').textContent = '';
+			var scI = document.createElement('i'); scI.className = 'fa-solid fa-scissors';
+			$('pvShort').querySelector('span').appendChild(scI);
+			$('pvShort').querySelector('span').appendChild(document.createTextNode(' ' + L.short));
+			$('pvGuide').querySelector('.ph-sec').textContent = L.guide;
+			$('pvBot').lastChild && ($('pvBot').lastChild.textContent = ' ' + L.bot);
+			$('pvSup').lastChild && ($('pvSup').lastChild.textContent = ' ' + L.sup);
+			$('pvPowered').innerHTML = '';
+			$('pvPowered').appendChild(document.createTextNode(L.powered + ' '));
+			var pb = document.createElement('b'); pb.innerHTML = 'Watashi <span>Manager</span>';
+			$('pvPowered').appendChild(pb);
 			$('pvG1').setAttribute('stop-color', row[1]); $('pvG2').setAttribute('stop-color', row[3]);
 			var brand = (pick('brand') || UP.words.brand).trim().split(/\s+/);
 			var tail = brand.length > 1 ? brand.pop() : '';
@@ -396,10 +445,10 @@
 			lbox.innerHTML = '';
 			if (draft.logo) { var im = new Image(); im.alt = ''; im.src = draft.logo; lbox.appendChild(im); } else { lbox.innerHTML = '<i class="fa-solid fa-image"></i>'; }
 			$('udLogoDrop').disabled = !draft.logo;
-			$('pvHello').textContent = pick('hello') || UP.words.hello;
-			$('pvSub').textContent = pick('sub_hello') || UP.words.sub;
+			$('pvHello').textContent = pick('hello') || L.hello;
+			$('pvSub').textContent = pick('sub_hello') || L.sub;
 			var note = pick('note'), site = pick('support');
-			$('pvNoteT').textContent = pick('note_title') || UP.words.note;
+			$('pvNoteT').textContent = pick('note_title') || L.note;
 			$('pvNoteB').textContent = note;
 			$('pvNoteB').hidden = !note;
 			$('pvNoteL').textContent = site;

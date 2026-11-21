@@ -100,6 +100,9 @@ def __parse_user_agent(ua: str) -> dict:
     # Example: SFA/1.8.0 (239; sing-box 1.8.0)
     # Example: SFA/1.7.0 (239; sing-box 1.7.0)
     # Example: HiddifyNext/0.13.6 (android) like ClashMeta v2ray sing-box
+    # watashi v12.3.50dev: the real app name is kept, the swap happens on a
+    # copy, so every flag below still sees v2rayNG as v2rayNG.
+    real_ua = ua
     if ua=="v2rayNG/1.8.23": #temporary fix for xray sub in hiddifynext
         ua="HiddifyNextX/3.0.0 (android) like ClashMeta v2ray sing-box"
     uaa = user_agents.parse(ua)
@@ -114,14 +117,33 @@ def __parse_user_agent(ua: str) -> dict:
     res['os_version'] = uaa.os.version
     res['is_clash'] = re.match('^(Clash|Stash)', ua, re.IGNORECASE) and True
     res['is_clash_meta'] = re.match('^(Clash-verge|Clash-?Meta|Stash|NekoBox|NekoRay|Pharos|hiddify-desktop)', ua, re.IGNORECASE) and True
-    res['is_singbox'] = re.match('^(HiddifyNext|Dart|SFI|SFA)', ua, re.IGNORECASE) and True
+    res['is_singbox'] = re.match('^(HiddifyNext|Dart|SFI|SFA|SFT|SFM)', ua, re.IGNORECASE) and True
+    # watashi v12.3.50dev: the family words are searched on the swapped copy
+    # (so the Hiddify temp fix still counts as clash-like), but the real app
+    # name wins at the end: a real v2rayNG is a v2ray app, never sing-box.
+    # Hiddify's UA carries the words "like ClashMeta v2ray sing-box"; that is
+    # a capability note, not an app match, so Hiddify stays a sing-box app.
+    if not res['is_clash'] and not res['is_clash_meta'] and not re.match('^(hiddify)', ua, re.IGNORECASE):
+        if re.search('clash|mihomo|flclash|verge|stash|openclash|karing|party', ua, re.IGNORECASE):
+            res['is_clash'] = True
+            res['is_clash_meta'] = True
+    if not res['is_singbox'] and re.search('sing-?box|hiddify', ua, re.IGNORECASE):
+        res['is_singbox'] = True
+    if real_ua and re.match('^(v2rayNG)', real_ua, re.IGNORECASE):
+        res['is_v2rayng'] = True
+        res['is_singbox'] = None
+        res['is_clash'] = None
+        res['is_clash_meta'] = None
+    # watashi v12.3.50dev: the real v2rayNG wins before the temp fix below
+    # turns it into a Hiddify variant, and the sing-box words the Hiddify
+    # string carries ("like ClashMeta v2ray sing-box") must not turn a real
+    # v2rayNG into a sing-box app.
     res['is_hiddify'] = re.match('^(HiddifyNext)', ua, re.IGNORECASE) and True
     res['is_hiddify_prefere_xray'] = re.match('^(HiddifyNextX)', ua, re.IGNORECASE) and True
     res['is_streisand'] = re.match('^(Streisand)', ua, re.IGNORECASE) and True
     res['is_shadowrocket'] = re.match('^(Shadowrocket)', ua, re.IGNORECASE) and True
-    res['is_v2rayng'] = re.match('^(v2rayNG)', ua, re.IGNORECASE) and True
 
-    if res['is_v2rayng']:
+    if res.get('is_v2rayng'):
         res['v2rayng_version'] = generic_version
     if res['is_singbox']:
         res['singbox_version'] = generic_version

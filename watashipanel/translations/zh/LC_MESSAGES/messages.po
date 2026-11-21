@@ -10,32 +10,38 @@ msgstr ""
 "Language-Team: zh <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Generated-By: Babel 2.16.0\n"
 
-msgid ""
-"[Admin only visible message:] You can change this message from settings"
+msgid "[Admin only visible message:] You can change this message from settings"
 msgstr "[管理员专用消息]：可通过设置自定义。"
 
+#, python-format
 msgid "%(count)s records were successfully deleted."
-msgstr ""
+msgstr "已成功删除 %(count)s 条记录。"
 
+#, python-format
 msgid "%(count)s records were successfully disabled."
 msgstr "%(count)s 条记录已成功禁用。"
 
+#, python-format
 msgid "%(count)s records were successfully enabled."
 msgstr "%(count)s 条记录已成功启用。"
 
+#, python-format
 msgid "%(count)s records were successfully reset days."
-msgstr ""
+msgstr "已成功重置 %(count)s 条记录的天数。"
 
+#, python-format
 msgid "%(count)s records were successfully reset usage."
-msgstr ""
+msgstr "已成功重置 %(count)s 条记录的流量。"
 
+#, python-format
 msgid "%(expire_days)s days"
 msgstr "%(expire_days)s 天"
 
+#, python-format
 msgid "%(placeholder)s"
 msgstr "%(placeholder)s"
 
@@ -43,16 +49,17 @@ msgid "0 - Last day"
 msgstr "最后一天"
 
 msgid "0 = use global default; >0 = max devices for this user"
-msgstr ""
+msgstr "0 = 使用全局默认值；>0 = 此用户的最大设备数"
 
+#, python-format
 msgid "<a href=\"%(user_link)s\"> %(user)s</a>"
-msgstr ""
+msgstr "<a href=\"%(user_link)s\"> %(user)s</a>"
 
 msgid "Access Denied!"
 msgstr "拒绝访问"
 
 msgid "Access log not found. Make sure access logging is enabled in xray config."
-msgstr ""
+msgstr "未找到访问日志。请确认 xray 配置中已启用访问日志。"
 
 msgid "Actions"
 msgstr "行动"
@@ -76,7 +83,7 @@ msgid "Added by"
 msgstr "添加者"
 
 msgid "Admin Links"
-msgstr ""
+msgstr "管理员链接"
 
 msgid "Admins"
 msgstr "管理员"
@@ -93,9 +100,11 @@ msgstr "全部用户"
 msgid "Apply"
 msgstr "应用"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\' recursively?"
 msgstr "是否删除 \\'%(name)s\\' 递归函数？"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\'?"
 msgstr "是否确定删除 \\'%(name)s\\'?"
 
@@ -106,7 +115,7 @@ msgid "Are you sure you want to do this action?"
 msgstr "⚠️您确定要执行此操作吗？"
 
 msgid "Auto-refreshing"
-msgstr ""
+msgstr "自动刷新"
 
 msgid "Back"
 msgstr "返回"
@@ -123,6 +132,7 @@ msgstr "➖ 桥接服务器"
 msgid "Bug"
 msgstr "错误/功能"
 
+#, python-format
 msgid "CPU %(cores)s Cores"
 msgstr "CPU %(cores)s 核心"
 
@@ -130,7 +140,7 @@ msgid "Can add sub admin"
 msgstr "👥 可以添加子管理员"
 
 msgid "Change"
-msgstr ""
+msgstr "更改"
 
 msgid "Check again"
 msgstr "再检查一遍"
@@ -184,16 +194,16 @@ msgid "Current Domain"
 msgstr "当前域名"
 
 msgid "Current session traffic"
-msgstr ""
+msgstr "当前会话流量"
 
 msgid "Currently offline"
-msgstr ""
+msgstr "当前离线"
 
 msgid "Currently online"
-msgstr ""
+msgstr "当前在线"
 
 msgid "Daily usage"
-msgstr ""
+msgstr "每日用量"
 
 msgid "Delete?"
 msgstr "删除？"
@@ -202,25 +212,25 @@ msgid "Develop"
 msgstr "⚠️开发"
 
 msgid "Device Limit"
-msgstr ""
+msgstr "设备限制"
 
 msgid "Device Monitoring"
-msgstr ""
+msgstr "设备监控"
 
 msgid "Device limit"
-msgstr ""
+msgstr "设备限制"
 
 msgid "If enabled, this user is exempt from device limit restrictions."
-msgstr ""
+msgstr "启用后，此用户不受设备数量限制。"
 
 msgid "Device not found"
-msgstr ""
+msgstr "未找到设备"
 
 msgid "Device removed successfully"
-msgstr ""
+msgstr "设备已删除"
 
 msgid "Devices"
-msgstr ""
+msgstr "设备"
 
 msgid "Direct"
 msgstr "➖ 直接"
@@ -229,7 +239,7 @@ msgid "Disable"
 msgstr "禁用"
 
 msgid "Bypass Device Limit"
-msgstr ""
+msgstr "绕过设备限制"
 
 msgid "Disabled"
 msgstr "已禁用"
@@ -244,7 +254,7 @@ msgid "Domain can not be resolved! there is a problem in your domain"
 msgstr "域名无法解析！您的域有问题。请检查您的域配置。"
 
 msgid "Domain cannot be resolved! Please check DNS settings"
-msgstr ""
+msgstr "无法解析域名！请检查 DNS 设置"
 
 msgid "Domain is not REALITY friendly!"
 msgstr "域名对现实不友好！"
@@ -317,16 +327,16 @@ msgid "Enable"
 msgstr "❇️启用"
 
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 msgid "Error fetching logs"
-msgstr ""
+msgstr "获取日志出错"
 
 msgid "Error in auto cdn format"
 msgstr "⚠️ 自动 CDN 格式错误"
 
 msgid "Error reading logs"
-msgstr ""
+msgstr "读取日志出错"
 
 msgid "Error! auto cdn ip can not be find, please contact admin."
 msgstr "自动 CDN IP 错误！找不到，请联系管理员"
@@ -350,10 +360,11 @@ msgid "Finished"
 msgstr "完成的..."
 
 msgid "Forced"
-msgstr ""
+msgstr "强制"
 
+#, python-format
 msgid "Found %(count)s access log entries"
-msgstr ""
+msgstr "找到 %(count)s 条访问日志记录"
 
 msgid "From Last Restart"
 msgstr "从上次重新启动开始"
@@ -389,7 +400,7 @@ msgid "HiddigyN"
 msgstr "HiddifyN <span class='badge badge-success'>推荐</span>"
 
 msgid "Home Link"
-msgstr ""
+msgstr "主页链接"
 
 msgid "Hover the user to see the reason"
 msgstr "将鼠标悬停在用户上即可查看原因"
@@ -464,7 +475,7 @@ msgid "More Applications"
 msgstr "更多应用"
 
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 msgid "Network"
 msgstr "网络"
@@ -473,16 +484,16 @@ msgid "New"
 msgstr "新"
 
 msgid "No access logs found for this user yet."
-msgstr ""
+msgstr "此用户暂无访问日志。"
 
 msgid "No children!"
 msgstr "没有孩子"
 
 msgid "No devices registered yet."
-msgstr ""
+msgstr "尚未注册任何设备。"
 
 msgid "Not Secure"
-msgstr ""
+msgstr "不安全"
 
 msgid "Note"
 msgstr "📝 注意"
@@ -544,6 +555,7 @@ msgstr "家长小组"
 msgid "Please Wait"
 msgstr "请稍等..."
 
+#, python-format
 msgid "Please click on %(install)s to save the user page."
 msgstr "单击 %(install)s 保存用户页面。"
 
@@ -572,7 +584,7 @@ msgid "Please wait "
 msgstr "请稍等"
 
 msgid "Port 80 and 443 can not be selected"
-msgstr ""
+msgstr "不能选择 80 和 443 端口"
 
 msgid "Port is already used! in"
 msgstr "端口已用于："
@@ -616,17 +628,18 @@ msgid "REALITY Fallback domain is not compaitble with server names!"
 msgstr "REALITY 后备域与服务器名称不兼容！"
 
 msgid "REALITY Fallback domain is not compatible with server names!"
-msgstr ""
+msgstr "REALITY 回落域名与服务器名称不兼容！"
 
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 msgid "Registered devices"
-msgstr ""
+msgstr "已注册设备"
 
 msgid "Release"
 msgstr "✅ 发布"
 
+#, python-format
 msgid "Remaining about %(relative)s, exactly %(days)s days"
 msgstr "还剩下大约 %(relative)s，正好 %(days)s 天"
 
@@ -634,13 +647,14 @@ msgid "Remote nodes are not supported yet!"
 msgstr "尚不支持远程节点！"
 
 msgid "Remove all devices for"
-msgstr ""
+msgstr "删除以下用户的所有设备"
 
 msgid "Remove this device?"
-msgstr ""
+msgstr "删除此设备？"
 
+#, python-format
 msgid "Removed %(count)s device(s)"
-msgstr ""
+msgstr "已删除 %(count)s 台设备"
 
 msgid "Rename File"
 msgstr "重新命名文件"
@@ -655,7 +669,7 @@ msgid "Reset Usage Time:"
 msgstr "流量使用重置时间："
 
 msgid "Reset devices"
-msgstr ""
+msgstr "重置设备"
 
 msgid "Reset every month"
 msgstr "每月"
@@ -738,18 +752,21 @@ msgstr "简化了在其他地方使用链接的过程"
 msgid "SingBox"
 msgstr "📦 歌盒"
 
+#, python-format
 msgid "Sort by %(name)s"
 msgstr "以%(name)s排序"
 
 msgid "Specifying CDN IP is only valid for CDN mode"
-msgstr ""
+msgstr "仅 CDN 模式可指定 CDN IP"
 
 msgid "Start Date"
 msgstr "开始日期"
 
+#, python-format
 msgid "Started %(days)s days ago"
 msgstr "已于 %(days)s 天前开始"
 
+#, python-format
 msgid "Started from %(relative)s"
 msgstr "从 %(relative)s 开始"
 
@@ -757,7 +774,7 @@ msgid "Status"
 msgstr "地位"
 
 msgid "SubLink"
-msgstr ""
+msgstr "订阅链接"
 
 msgid "Submit"
 msgstr "提交"
@@ -769,7 +786,7 @@ msgid "Telegram Bot"
 msgstr "Telegram 机器人"
 
 msgid "Telegram Bot Link"
-msgstr ""
+msgstr "Telegram 机器人链接"
 
 msgid "Temporary Short Link"
 msgstr "⏱️临时短链接"
@@ -796,7 +813,7 @@ msgid "Total Usage"
 msgstr "总使用量"
 
 msgid "Total devices"
-msgstr ""
+msgstr "设备总数"
 
 msgid "Turn of VPN"
 msgstr "关闭VPN"
@@ -805,7 +822,7 @@ msgid "Unified link for all application."
 msgstr "所有应用程序的一键设置链接（推荐）"
 
 msgid "Unknown device"
-msgstr ""
+msgstr "未知设备"
 
 msgid "Upload File"
 msgstr "上传文件"
@@ -820,13 +837,13 @@ msgid "User is inactive"
 msgstr "用户处于非活动状态"
 
 msgid "User not found"
-msgstr ""
+msgstr "未找到用户"
 
 msgid "Users over limit"
-msgstr ""
+msgstr "超出限制的用户"
 
 msgid "Users with devices"
-msgstr ""
+msgstr "有设备的用户"
 
 msgid "V2rayNG"
 msgstr ""
@@ -846,12 +863,14 @@ msgstr "在电报中查看"
 msgid "Want to enjoy more with telegram?"
 msgstr "ℹ️ 将您的帐户连接到 Telegram"
 
+#, python-format
 msgid "Welcome %(user)s"
 msgstr "欢迎%(user)s"
 
 msgid "Why Going to Premium?"
 msgstr "为什么要选择高级版？"
 
+#, python-format
 msgid "Will Start in %(days)s days"
 msgstr "将在 %(days)s 天内开始"
 
@@ -916,9 +935,7 @@ msgid "admin.define_mode"
 msgstr "🥇🥈🥉 定义管理模式"
 
 msgid "admin.incomplete_setup_warning"
-msgstr ""
-"看来你还没有完全安装系统。 <a class='btn btn-success' "
-"href='%(quick_setup)s'>单击此处</a>完成设置。"
+msgstr "看来你还没有完全安装系统。 <a class='btn btn-success' href='%(quick_setup)s'>单击此处</a>完成设置。"
 
 msgid "admin.menu.api"
 msgstr "应用程序编程接口"
@@ -986,16 +1003,16 @@ msgid "android"
 msgstr "安卓"
 
 msgid "app.clash_verge_rev.description"
-msgstr ""
+msgstr "app.clash_verge_rev.description"
 
 msgid "app.clash_verge_rev.title"
-msgstr ""
+msgstr "app.clash_verge_rev.title"
 
 msgid "app.cmfa.description"
-msgstr ""
+msgstr "app.cmfa.description"
 
 msgid "app.cmfa.title"
-msgstr ""
+msgstr "app.cmfa.title"
 
 msgid "app.foxray.description"
 msgstr "福克斯射线描述"
@@ -1070,7 +1087,7 @@ msgid "app.streisand.title"
 msgstr "Streisand"
 
 msgid "app.v2rayn.title"
-msgstr ""
+msgstr "app.v2rayn.title"
 
 msgid "app.v2rayng.description"
 msgstr "V2RayNG 说明"
@@ -1296,8 +1313,7 @@ msgid "config.cdn_forced_host.label"
 msgstr "🔂 强制配置使用以下 IP"
 
 msgid "config.cloudflare.description"
-msgstr ""
-"请按照<a href='https://watashi.cyou' target='_blank'>说明</a>并粘贴 Cloudflare API 密钥"
+msgstr "请按照<a href='https://watashi.cyou' target='_blank'>说明</a>并粘贴 Cloudflare API 密钥"
 
 msgid "config.cloudflare.label"
 msgstr "🔑 Cloudflare API"
@@ -1346,10 +1362,10 @@ msgid "config.decoy_domain.label"
 msgstr "📺 诱饵网站"
 
 msgid "config.default_useragent_string.description"
-msgstr ""
+msgstr "config.default_useragent_string.description"
 
 msgid "config.default_useragent_string.label"
-msgstr ""
+msgstr "默认 User Agent"
 
 msgid "config.dns_server.description"
 msgstr ""
@@ -1361,7 +1377,9 @@ msgid "config.dns_server.label"
 msgstr "🖥 DNS 服务器"
 
 msgid "config.domain_fronting.description"
-msgstr "它用于在 SNI 中模拟另一个网站而不是您的网站。因此，GFW 无法过滤您的域名\n<a href='https://watashi.cyou'>指南</a>。 ⚠️CloudFlare 不支持域前置。"
+msgstr ""
+"它用于在 SNI 中模拟另一个网站而不是您的网站。因此，GFW 无法过滤您的域名\n"
+"<a href='https://watashi.cyou'>指南</a>。 ⚠️CloudFlare 不支持域前置。"
 
 msgid "config.domain_fronting.label"
 msgstr "🔒 启用 TLS 域前置"
@@ -1447,26 +1465,25 @@ msgid "config.httpupgrade_enable.label"
 msgstr "🆙 HTTPUpgrade 方法"
 
 msgid "config.hwid_forced.description"
-msgstr ""
+msgstr "每次订阅请求都必须携带设备 ID。无法发送设备 ID 的客户端将被拒绝（404）。"
 
 msgid "config.hwid_forced.label"
-msgstr ""
+msgstr "🚫 要求设备 ID"
 
 msgid "config.hwid_limit_default.description"
-msgstr ""
+msgstr "每个用户的默认最大设备数。0 表示不限。可针对单个用户覆盖。"
 
 msgid "config.hwid_limit_default.label"
-msgstr ""
+msgstr "📱 默认最大设备数"
 
 msgid "config.hwid_limit_enable.description"
-msgstr ""
+msgstr "为每个用户启用设备（HWID）数量限制。需要能发送设备 ID 的客户端（如 Happ、v2RayTun、V2Box Pro）。超出限制的设备将无法获取订阅（404）。"
 
 msgid "config.hwid_limit_enable.label"
-msgstr ""
+msgstr "🔒 启用设备限制"
 
 msgid "config.hysteria.description"
-msgstr ""
-"Hysteria 是一款功能齐全的代理和中继工具，针对有损、不稳定的连接（例如卫星网络、拥挤的公共 Wi-Fi、从中国连接到国外服务器）进行了优化"
+msgstr "Hysteria 是一款功能齐全的代理和中继工具，针对有损、不稳定的连接（例如卫星网络、拥挤的公共 Wi-Fi、从中国连接到国外服务器）进行了优化"
 
 msgid "config.hysteria.label"
 msgstr "Hysteria"
@@ -1611,9 +1628,7 @@ msgid "config.mux_brutal_up_mbps.label"
 msgstr "⬆️ MUX Brutal 上传 (mbps)"
 
 msgid "config.mux_enable.description"
-msgstr ""
-"Mux 需要兼容的客户端。Hiddify Next 和 Singbox 中的 Mux 与 XRay 不兼容。 <a "
-"href=\"https://watashi.cyou\" target=\"_blank\">（阅读更多）</a>"
+msgstr "Mux 需要兼容的客户端。Hiddify Next 和 Singbox 中的 Mux 与 XRay 不兼容。 <a href=\"https://watashi.cyou\" target=\"_blank\">（阅读更多）</a>"
 
 msgid "config.mux_enable.label"
 msgstr "Ⓜ️ MUX（⚠️ 与某些客户端不兼容）"
@@ -1826,10 +1841,10 @@ msgid "config.reality_fallback_domain.label"
 msgstr "🌍 现实后备域"
 
 msgid "config.reality_port.description"
-msgstr ""
+msgstr "Reality 端口"
 
 msgid "config.reality_port.label"
-msgstr ""
+msgstr "config.reality_port.label"
 
 msgid "config.reality_private_key.description"
 msgstr "不要改变它"
@@ -1880,9 +1895,7 @@ msgid "config.shadowsocks.label"
 msgstr "Shadowsocks"
 
 msgid "config.shadowsocks2022_enable.description"
-msgstr ""
-"Shadowsocks 2022 是一种用于 TCP 和 UDP 流量的安全代理协议。代理流量与随机字节流无法区分，因此可以绕过依赖 "
-"DPI（深度数据包检测）的防火墙和互联网审查程序"
+msgstr "Shadowsocks 2022 是一种用于 TCP 和 UDP 流量的安全代理协议。代理流量与随机字节流无法区分，因此可以绕过依赖 DPI（深度数据包检测）的防火墙和互联网审查程序"
 
 msgid "config.shadowsocks2022_enable.label"
 msgstr "⭕️ Shadowsocks 2022"
@@ -1900,9 +1913,7 @@ msgid "config.shadowsocks2022_port.label"
 msgstr "↔️ Shadowsocks 2022 端口"
 
 msgid "config.shadowtls.description"
-msgstr ""
-"向防火墙公开真实的 tls 握手的代理。<inlang-LineFeed><inlang-LineFeed>它的工作原理类似于 "
-"Trojan，但不需要签名证书。防火墙将看到具有您选择的有效证书的真实 tls 握手。"
+msgstr "向防火墙公开真实的 tls 握手的代理。<inlang-LineFeed><inlang-LineFeed>它的工作原理类似于 Trojan，但不需要签名证书。防火墙将看到具有您选择的有效证书的真实 tls 握手。"
 
 msgid "config.shadowtls.label"
 msgstr "ShadowTLS"
@@ -1962,60 +1973,58 @@ msgid "config.ssfaketls_fakedomain.label"
 msgstr "🌍 SS FakeTLS 假域名"
 
 msgid "config.ssh.description"
-msgstr ""
-"ℹ️ SSH 代理，也称为 SSH 隧道或 SSH 端口转发，是一种通过不安全网络在两台计算机之间创建安全通信通道的安全方法。我们有一个与 ssh "
-"服务器完全不同的特定应用程序，无法执行任何命令"
+msgstr "ℹ️ SSH 代理，也称为 SSH 隧道或 SSH 端口转发，是一种通过不安全网络在两台计算机之间创建安全通信通道的安全方法。我们有一个与 ssh 服务器完全不同的特定应用程序，无法执行任何命令"
 
 msgid "config.ssh.label"
 msgstr "SSH 代理"
 
 msgid "config.ssh_host_dsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_dsa_pk.description"
 
 msgid "config.ssh_host_dsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_dsa_pk.label"
 
 msgid "config.ssh_host_dsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_dsa_pub.description"
 
 msgid "config.ssh_host_dsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_dsa_pub.label"
 
 msgid "config.ssh_host_ecdsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pk.description"
 
 msgid "config.ssh_host_ecdsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pk.label"
 
 msgid "config.ssh_host_ecdsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pub.description"
 
 msgid "config.ssh_host_ecdsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pub.label"
 
 msgid "config.ssh_host_ed25519_pk.description"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pk.description"
 
 msgid "config.ssh_host_ed25519_pk.label"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pk.label"
 
 msgid "config.ssh_host_ed25519_pub.description"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pub.description"
 
 msgid "config.ssh_host_ed25519_pub.label"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pub.label"
 
 msgid "config.ssh_host_rsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_rsa_pk.description"
 
 msgid "config.ssh_host_rsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_rsa_pk.label"
 
 msgid "config.ssh_host_rsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_rsa_pub.description"
 
 msgid "config.ssh_host_rsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_rsa_pub.label"
 
 msgid "config.ssh_server_enable.description"
 msgstr "SSH Proxy 与原来的 SSH Server 完全不同"
@@ -2084,9 +2093,7 @@ msgid "config.sub_full_singbox_enable.label"
 msgstr "config.sub_full_singbox_enable.label"
 
 msgid "config.sub_full_xray_json_enable.description"
-msgstr ""
-"XRay 全链路为 XRay 特定设置提供了全面的配置选项。这包括支持 XRay 协议的应用程序（例如 v2rayNG）中的自定义分段和多路复用 "
-"(mux)，以便对 XRay 代理设置进行精细控制。"
+msgstr "XRay 全链路为 XRay 特定设置提供了全面的配置选项。这包括支持 XRay 协议的应用程序（例如 v2rayNG）中的自定义分段和多路复用 (mux)，以便对 XRay 代理设置进行精细控制。"
 
 msgid "config.sub_full_xray_json_enable.label"
 msgstr "⚙️ XRay 完整配置链接"
@@ -2136,8 +2143,7 @@ msgid "config.telegram_fakedomain.label"
 msgstr "📺 Telegram 假域名"
 
 msgid "config.telegram_lib.description"
-msgstr ""
-"您可以在不同的 Telegram 库之间切换。请注意，只有Python可以在所有服务器上运行，其他服务器可能会出现一些问题。更改后测试代理。"
+msgstr "您可以在不同的 Telegram 库之间切换。请注意，只有Python可以在所有服务器上运行，其他服务器可能会出现一些问题。更改后测试代理。"
 
 msgid "config.telegram_lib.label"
 msgstr "🔢 Telegram 代理库"
@@ -2149,9 +2155,7 @@ msgid "config.tls.label"
 msgstr "TLS 设置"
 
 msgid "config.tls_fragment_enable.description"
-msgstr ""
-"在某些情况下，它可以绕过 SNI 黑名单系统。 <a href=\"https://watashi.cyou\" "
-"target=\"_blank\">（阅读更多）</a>"
+msgstr "在某些情况下，它可以绕过 SNI 黑名单系统。 <a href=\"https://watashi.cyou\" target=\"_blank\">（阅读更多）</a>"
 
 msgid "config.tls_fragment_enable.label"
 msgstr "⏯ TLS Fragment"
@@ -2175,9 +2179,7 @@ msgid "config.tls_mixed_case.label"
 msgstr "🔠 TLS 混合 SNI 大小写"
 
 msgid "config.tls_padding_enable.description"
-msgstr ""
-"启用 TLS 碎片填充。 <a href=\"https://watashi.cyou\" "
-"target=\"_blank\">（阅读更多）</a>"
+msgstr "启用 TLS 碎片填充。 <a href=\"https://watashi.cyou\" target=\"_blank\">（阅读更多）</a>"
 
 msgid "config.tls_padding_enable.label"
 msgstr "♒️ TLS Padding"
@@ -2246,10 +2248,10 @@ msgid "config.unique_id.label"
 msgstr "config.unique_id.label"
 
 msgid "config.use_ip_in_config.description"
-msgstr ""
+msgstr "在链接中使用服务器 IP 而非域名。可减少解析服务器 IP 时的问题。将使用所选域名的随机 IP。"
 
 msgid "config.use_ip_in_config.label"
-msgstr ""
+msgstr "在配置中使用 IP"
 
 msgid "config.utls.description"
 msgstr "此选项将模拟不同的浏览器，因此 GFW 无法检测到您的浏览"
@@ -2328,17 +2330,13 @@ msgid "config.warp_sites.label"
 msgstr "🆚 其他 WARP 站点"
 
 msgid "config.wireguard.description"
-msgstr ""
-"WireGuard 是一种轻量级的基于 UDP "
-"的协议，以其简单、高效和强大的安全性而闻名。它提供快速设置、透明代码，并因其在各种操作系统中的易用性而广受欢迎"
+msgstr "WireGuard 是一种轻量级的基于 UDP 的协议，以其简单、高效和强大的安全性而闻名。它提供快速设置、透明代码，并因其在各种操作系统中的易用性而广受欢迎"
 
 msgid "config.wireguard.label"
 msgstr "🐉 WireGuard"
 
 msgid "config.wireguard_enable.description"
-msgstr ""
-"WireGuard 是基于 UDP 的协议。（⚠️ 它在<a href=\"https://github.com/hiddify/hiddify-"
-"next\" target=\"_blank\">Hiddify Next</a>中运行）"
+msgstr "WireGuard 是基于 UDP 的协议。（⚠️ 它在<a href=\"https://github.com/hiddify/hiddify-next\" target=\"_blank\">Hiddify Next</a>中运行）"
 
 msgid "config.wireguard_enable.label"
 msgstr "启用 WireGuard"
@@ -2451,10 +2449,10 @@ msgid "domain.reality.asn_issue"
 msgstr "REALITY 的所选域不在同一 ASN 中。为了更好地使用该协议，最好在同一 ASN 中找到一个域"
 
 msgid "domain.resolveip.description"
-msgstr ""
+msgstr "在代理中使用 IP 代替域名。DNS 干扰严重时很有用。"
 
 msgid "domain.resolveip.label"
-msgstr ""
+msgstr "解析 IP"
 
 msgid "domain.show_domains_description"
 msgstr ""
@@ -2466,10 +2464,10 @@ msgid "download"
 msgstr "直接下载"
 
 msgid "download_domain.description"
-msgstr ""
+msgstr "仅限 XHTTP：例如可让下载和上传走不同的域名。这让检测更困难，也可能提升整体质量。"
 
 msgid "download_domain.label"
-msgstr ""
+msgstr "下载域名"
 
 msgid "fake"
 msgstr "🆎 假网站"
@@ -2508,7 +2506,7 @@ msgid "lang.ru"
 msgstr "🇷🇺 俄语 - Русский"
 
 msgid "lang.zh"
-msgstr "🇨🇳 Chinese - 简体中文"
+msgstr "🇨🇳 简体中文"
 
 msgid "lib.telegram.erlang"
 msgstr "✴️ Erlang：性能良好"
@@ -2625,10 +2623,7 @@ msgid "see the log in the bellow screen"
 msgstr "📑 查看以下屏幕中的日志"
 
 msgid "serverssh.password-login.warning"
-msgstr ""
-"您的服务器很容易受到滥用，因为您的 SSH "
-"中启用了密码身份验证。为了保护您的服务器，请切换到密钥身份验证机制并关闭PasswordAuthentication。<a "
-"href='https://watashi.cyou'>阅读更多...</a>"
+msgstr "您的服务器很容易受到滥用，因为您的 SSH 中启用了密码身份验证。为了保护您的服务器，请切换到密钥身份验证机制并关闭PasswordAuthentication。<a href='https://watashi.cyou'>阅读更多...</a>"
 
 msgid "singbox: ssh"
 msgstr "歌手盒：SSH"
@@ -2896,20 +2891,7 @@ msgid "user.home.tool.all-configs"
 msgstr "所有配置"
 
 msgid "user.home.tool.doh.help"
-msgstr ""
-"<h4>在浏览器上配置 DoH</h4><inlang-LineFeed>有多种浏览器兼容 DNS over HTTPS "
-"(DoH)。此协议允许<inlang-LineFeed>您对与 1.1.1.1 的连接进行加密，以保护您的 DNS "
-"查询免受隐私入侵和篡改。<inlang-LineFeed><inlang-LineFeed>某些浏览器可能已经启用此设置。<inlang-"
-"LineFeed><br /><inlang-LineFeed><h5> ​​Mozilla Firefox</h5><inlang-"
-"LineFeed>选择<b>菜单</b>按钮 "
-"&gt;<b>设置</b>。在常规菜单中，向下滚动以访问<b>网络设置</b>。选择<b>设置</b>。选择<b>启用 HTTPS 上的 DNS</b>"
-" 。<inlang-LineFeed><br /><inlang-LineFeed>​<h5>谷歌浏览器</h5><inlang-"
-"LineFeed>选择浏览器中的<b>三点</b>菜单 &gt;<b>设置</b>。<inlang-LineFeed>选择<b>“隐私和安全”</b> "
-"&gt;“<b>安全”</b> 。<inlang-LineFeed>向下滚动并启用<b>使用安全 DNS</b> 。<inlang-"
-"LineFeed><br /><inlang-LineFeed><h5>​​微软 Edge</h5><inlang-"
-"LineFeed>选择浏览器中的<b>三点</b>菜单 &gt;<b>设置</b>。<inlang-"
-"LineFeed>选择<b>“隐私”、“搜索”和服务</b>，然后向下滚动到<b>“安全”</b> 。<inlang-"
-"LineFeed>启用<b>使用安全 DNS</b> 。<inlang-LineFeed>选择选择服务提供商。"
+msgstr "<h4>在浏览器上配置 DoH</h4><inlang-LineFeed>有多种浏览器兼容 DNS over HTTPS (DoH)。此协议允许<inlang-LineFeed>您对与 1.1.1.1 的连接进行加密，以保护您的 DNS 查询免受隐私入侵和篡改。<inlang-LineFeed><inlang-LineFeed>某些浏览器可能已经启用此设置。<inlang-LineFeed><br /><inlang-LineFeed><h5> ​​Mozilla Firefox</h5><inlang-LineFeed>选择<b>菜单</b>按钮 &gt;<b>设置</b>。在常规菜单中，向下滚动以访问<b>网络设置</b>。选择<b>设置</b>。选择<b>启用 HTTPS 上的 DNS</b> 。<inlang-LineFeed><br /><inlang-LineFeed>​<h5>谷歌浏览器</h5><inlang-LineFeed>选择浏览器中的<b>三点</b>菜单 &gt;<b>设置</b>。<inlang-LineFeed>选择<b>“隐私和安全”</b> &gt;“<b>安全”</b> 。<inlang-LineFeed>向下滚动并启用<b>使用安全 DNS</b> 。<inlang-LineFeed><br /><inlang-LineFeed><h5>​​微软 Edge</h5><inlang-LineFeed>选择浏览器中的<b>三点</b>菜单 &gt;<b>设置</b>。<inlang-LineFeed>选择<b>“隐私”、“搜索”和服务</b>，然后向下滚动到<b>“安全”</b> 。<inlang-LineFeed>启用<b>使用安全 DNS</b> 。<inlang-LineFeed>选择选择服务提供商。"
 
 msgid "user.home.tool.doh.title"
 msgstr "HTTPS 上的 DNS"
@@ -2986,9 +2968,7 @@ msgid "user.user_links"
 msgstr "用户链接"
 
 msgid "vpn.notallowed"
-msgstr ""
-"请不要使用 VPN 访问此页面。您需要从国家/地区 %(expected_country)s 访问，但您当前正在从 %(your_country)s "
-"访问。"
+msgstr "请不要使用 VPN 访问此页面。您需要从国家/地区 %(expected_country)s 访问，但您当前正在从 %(your_country)s 访问。"
 
 msgid "weekly"
 msgstr "📅每周"
@@ -2996,107 +2976,80 @@ msgstr "📅每周"
 msgid "worker"
 msgstr "✴️ Cloudflare Worker"
 
-
-
 msgid "System Overview"
 msgstr "系统总览"
-
 
 msgid "Real-time performance monitoring"
 msgstr "实时性能监控"
 
-
 msgid "Load average:"
 msgstr "平均负载:"
-
 
 msgid "CPU Usage"
 msgstr "CPU 使用率"
 
-
 msgid "Memory Usage"
 msgstr "内存使用情况"
-
 
 msgid "Network History"
 msgstr "网络历史"
 
-
 msgid "INCOMING SPEED"
 msgstr "下载速度"
-
 
 msgid "OUTGOING SPEED"
 msgstr "上传速度"
 
-
 msgid "MEMORY USAGE"
 msgstr "内存使用量"
-
 
 msgid "SWAP USAGE"
 msgstr "SWAP 使用量"
 
-
 msgid "DISK USAGE"
 msgstr "磁盘使用量"
-
 
 msgid "SYSTEM UPTIME"
 msgstr "系统运行时间"
 
-
 msgid "PANEL UPTIME"
 msgstr "面板运行时间"
-
 
 msgid "XRAY UPTIME"
 msgstr "XRAY 运行时间"
 
-
 msgid "Panel Usage"
 msgstr "面板使用情况"
-
 
 msgid "THREADS"
 msgstr "线程数"
 
-
 msgid "PANEL MEMORY"
 msgstr "面板内存"
-
 
 msgid "Users Overview"
 msgstr "用户总览"
 
-
 msgid "Total Users"
 msgstr "总用户数"
-
 
 msgid "Total Traffic"
 msgstr "已发送流量"
 
-
 msgid "Consumed Data"
 msgstr "总使用量"
-
 
 msgid "Time_D"
 msgstr "天"
 
-
 msgid "Time_H"
 msgstr "小时"
-
 
 msgid "Time_M"
 msgstr "分钟"
 
-
 msgid "Time_S"
 msgstr "秒"
-
 
 msgid "Live Chart"
 msgstr "实时图表"
@@ -3104,10 +3057,8 @@ msgstr "实时图表"
 msgid "Live data since the page was opened"
 msgstr "自页面打开后的实时数据"
 
-
 msgid "Dashboard"
 msgstr "仪表盘"
-
 
 msgid "Monitoring"
 msgstr "监控"
@@ -3291,64 +3242,3822 @@ msgstr "暂无数据"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Check the tunnel service and firewall on the relay server and make sure port 443 (and port 80 for SSL) are forwarded to this server."
-msgstr ""
+msgstr "请检查中转服务器上的隧道服务和防火墙，确保端口 443（以及 SSL 所需的端口 80）已转发到此服务器。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Nothing answered TLS on port 443"
-msgstr ""
+msgstr "443 端口上没有任何 TLS 响应"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server answers with a different certificate than the one on this server. If you recently moved the panel to a new server, the tunnel on the relay server is still pointing to the old server IP, or the relay server is terminating TLS itself."
-msgstr ""
+msgstr "中转服务器的 443 端口使用了与此服务器不同的证书响应。如果面板最近迁移到新服务器，可能是中转服务器上的隧道仍指向旧 IP，或中转服务器自行终结了 TLS。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server forwards traffic to this server as expected."
-msgstr ""
+msgstr "中转服务器的 443 端口按预期将流量转发到此服务器。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server is not responding"
-msgstr ""
+msgstr "中转服务器的 443 端口无响应"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server is not responding, and port 80 is not forwarded to this server either. Fix the tunnel on the relay server so ports 443 and 80 reach this server, then ask again."
-msgstr ""
+msgstr "中转服务器的 443 端口无响应，端口 80 也未转发到此服务器。请修复中转服务器上的隧道，使 443 和 80 端口能到达此服务器，然后再申请。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server reaches this server, but validation over port 443 did not succeed and port 80 is not forwarded from the relay server to this server. Forward TCP port 80 from the relay server to this server as well, then ask again."
-msgstr ""
+msgstr "中转服务器的 443 端口能到达此服务器，但通过 443 的验证未成功，且 80 端口未从中转服务器转发。请将中转服务器的 TCP 80 端口也转发到此服务器，然后再申请。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate expires soon"
-msgstr ""
+msgstr "SSL 证书即将过期"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate has expired"
-msgstr ""
+msgstr "SSL 证书已过期"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate is not trusted"
-msgstr ""
+msgstr "SSL 证书不受信任"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate is self-signed"
-msgstr ""
+msgstr "SSL 证书为自签名"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The relay server is answering on port 443 with another server’s certificate (not forwarding traffic to this server). If you moved the panel to a new server, update the tunnel target IP on the relay server to this server’s IP and forward ports 80 and 443, then ask again."
-msgstr ""
+msgstr "中转服务器在 443 端口上使用另一个服务器的证书响应（未将流量转发到此服务器）。如果面板已迁移到新服务器，请将中转服务器上隧道的目标 IP 更新为此服务器的 IP，并转发 80 和 443 端口，然后再申请。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The relay tunnel does not point to this server"
-msgstr ""
+msgstr "中转隧道未指向此服务器"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "This domain is set to Relay mode, but its DNS record points to this server itself instead of the relay server."
-msgstr ""
+msgstr "此域名设置为 Relay 模式，但其 DNS 记录指向此服务器本身而不是中转服务器。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "This server could not complete a TLS handshake with the relay server on port 443, so the tunnel is down or port 443 is closed on the relay."
-msgstr ""
+msgstr "此服务器无法与中转服务器在 443 端口完成 TLS 握手——隧道已断开或中转服务器的 443 端口被关闭。"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
+msgstr "请更新中转服务器上隧道的目标 IP，使其指向此服务器，然后再次检查。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copied"
+msgstr "已复制"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copy"
+msgstr "复制"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copying did not work"
+msgstr "复制失败"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Hide"
+msgstr "隐藏"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Keep this link somewhere safe. It is the only way back into the panel."
+msgstr "请将此链接保存在安全的地方。这是返回面板的唯一途径。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Language"
+msgstr "语言"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Nothing is written until you press this button."
+msgstr "在按下此按钮之前不会写入任何内容。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Off"
+msgstr "关"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "On"
+msgstr "开"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Password"
+msgstr "密码"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Pick the language of the panel and the country your users dial in from."
+msgstr "选择面板语言以及用户接入所在的国家/地区。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Please wait"
+msgstr "请稍候"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Protocols"
+msgstr "协议"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Quick Setup"
+msgstr "快速设置"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Server address"
+msgstr "服务器地址"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Show"
+msgstr "显示"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Step @N@ of @T@"
+msgstr "第 @N@ 步，共 @T@ 步"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "The direct domain has to point at this server. A CDN domain is optional and must point somewhere else."
+msgstr "直连域名必须指向此服务器。CDN 域名可选，且必须指向别处。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "The last step installs the services again, so it takes a few minutes. Do not close this page while it works."
+msgstr "最后一步会重新安装服务，需要几分钟。工作进行中请不要关闭此页面。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "This password guards the whole panel. Eight characters is the floor, longer is better."
+msgstr "此密码保护整个面板。至少八个字符，越长越好。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "This wizard runs once. Everything you pick here can be changed later from the panel."
+msgstr "此向导只运行一次。此处选择的所有内容之后都可以在面板中更改。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Turn on only the protocols you plan to hand out. Whatever is off here stays off on the server as well."
+msgstr "只开启你打算分发的协议。此处未开启的协议在服务器上也将保持关闭。"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Your admin link"
+msgstr "你的管理员链接"
+
+msgid "Download Domain"
+msgstr "下载域名"
+
+msgid "config.adblock.description"
+msgstr "在代理层拦截广告和跟踪器，改善浏览体验"
+
+msgid "config.adblock.label"
+msgstr "🚫 广告拦截"
+
+msgid "config.backup_interval.description"
+msgstr "向 Telegram 机器人发送备份的间隔（小时）。0 表示禁用。"
+
+msgid "config.backup_interval.label"
+msgstr "⏰ 备份间隔"
+
+msgid "config.block_ads.description"
+msgstr "拦截广告和在线跟踪器"
+
+msgid "config.block_ads.label"
+msgstr "🚫 拦截广告"
+
+msgid "config.block_adult.description"
+msgstr "拦截成人内容网站"
+
+msgid "config.block_adult.label"
+msgstr "🔞 拦截成人内容"
+
+msgid "config.block_gambling.description"
+msgstr "拦截赌博和博彩网站"
+
+msgid "config.block_gambling.label"
+msgstr "🎰 拦截赌博"
+
+msgid "config.block_malware.description"
+msgstr "拦截恶意软件和钓鱼域名"
+
+msgid "config.block_malware.label"
+msgstr "🛡️ 拦截恶意软件"
+
+msgid "config.block_social.description"
+msgstr "拦截社交媒体域名"
+
+msgid "config.block_social.label"
+msgstr "📵 拦截社交媒体"
+
+msgid "config.ech_config.description"
+msgstr "ECH 的 DNS 配置。格式：server+dns，例如 cloudflare-ech.com+https://8.8.8.8/dns-query"
+
+msgid "config.ech_config.label"
+msgstr "🔗 ECH 配置"
+
+msgid "config.ech_domains.description"
+msgstr "选择要启用 ECH 的域名。ECH（加密客户端问候）会在 TLS 握手中加密 SNI。"
+
+msgid "config.ech_domains.label"
+msgstr "ECH 域名"
+
+msgid "config.ech_enable.description"
+msgstr "在 TLS 握手中加密域名，网络无法看到用户访问的是哪个域名。非常有效，但支持的客户端很少。"
+
+msgid "config.ech_enable.label"
+msgstr "🔐 启用 ECH"
+
+msgid "config.notify_expiry_days.description"
+msgstr "到期前多少天通知用户"
+
+msgid "config.notify_expiry_days.label"
+msgstr "📆 到期提醒天数"
+
+msgid "config.notify_expiry_enable.description"
+msgstr "订阅到期前通知用户"
+
+msgid "config.notify_expiry_enable.label"
+msgstr "📅 到期提醒"
+
+msgid "config.notify_finished_enable.description"
+msgstr "订阅结束时通知用户"
+
+msgid "config.notify_finished_enable.label"
+msgstr "🔴 结束通知"
+
+msgid "config.notify_usage_enable.description"
+msgstr "用户用量达到指定百分比时发送通知"
+
+msgid "config.notify_usage_enable.label"
+msgstr "📊 用量提醒"
+
+msgid "config.notify_usage_percent.description"
+msgstr "用量达到多少百分比时通知用户"
+
+msgid "config.notify_usage_percent.label"
+msgstr "📈 用量提醒百分比"
+
+msgid "config.path_splithttp.description"
+msgstr "XHTTP 路径"
+
+msgid "config.path_splithttp.label"
+msgstr "XHTTP 路径"
+
+msgid "config.splithttp_enable.description"
+msgstr "与 XHTTP 相同的路径（旧名称）。将流量分散到多个 HTTP 请求中，在丢包网络中依然稳定。"
+
+msgid "config.splithttp_enable.label"
+msgstr "启用 XHTTP"
+
+msgid "config.telegram_bot.description"
+msgstr "用于备份和用户通知的 Telegram 机器人设置"
+
+msgid "config.telegram_bot.label"
+msgstr "🤖 Telegram 机器人"
+
+msgid "config.telegram_bot_info.description"
+msgstr "要启用这些功能，请先在 Telegram 代理设置中填写机器人令牌。"
+
+msgid "config.telegram_bot_info.label"
+msgstr "ℹ️ 重要提示"
+
+msgid "config.use_glass_theme.description"
+msgstr "为管理面板启用现代毛玻璃主题。此功能为实验性功能。"
+
+msgid "config.use_glass_theme.label"
+msgstr "🎨 毛玻璃主题（实验）"
+
+msgid "config.user_limit.description"
+msgstr "限制每个用户的并发连接数"
+
+msgid "config.user_limit.label"
+msgstr "👥 连接限制"
+
+msgid "config.user_limit_block_hours.description"
+msgstr "超出限制后封禁 IP 的小时数。"
+
+msgid "config.user_limit_block_hours.label"
+msgstr "封禁时长（小时）"
+
+msgid "config.user_limit_default.description"
+msgstr "新用户默认最大并发连接数。0 表示不限。"
+
+msgid "config.user_limit_default.label"
+msgstr "📊 默认最大连接数"
+
+msgid "config.user_limit_enable.description"
+msgstr "启用连接限制。超出的连接将被断开。"
+
+msgid "config.user_limit_enable.label"
+msgstr "🔒 启用连接限制"
+
+msgid "Check all"
+msgstr "全选"
+
+msgid "Add Domain"
+msgstr "添加域名"
+
+msgid "Straight to this server"
+msgstr "直连此服务器"
+
+msgid "Through a CDN"
+msgstr "通过 CDN"
+
+msgid "Through another machine"
+msgstr "通过另一台机器"
+
+msgid "Reality"
+msgstr "Reality"
+
+msgid "Only for the subscription link"
+msgstr "仅用于订阅链接"
+
+msgid "Made up name"
+msgstr "虚构名称"
+
+msgid "Domains carry your users to this server. Keep at least one domain that points straight here, and one that hides behind a CDN."
+msgstr "域名把用户带到此服务器。请至少保留一个直连域名和一个隐藏在 CDN 后的域名。"
+
+msgid "Straight here"
+msgstr "直连"
+
+msgid "Behind a CDN"
+msgstr "CDN 后"
+
+msgid "Subscription link"
+msgstr "订阅链接"
+
+msgid "Old mode"
+msgstr "旧模式"
+
+msgid "Not checked yet"
+msgstr "尚未检查"
+
+msgid "Search a domain or a nickname"
+msgstr "搜索域名或别名"
+
+msgid "Every mode"
+msgstr "所有模式"
+
+msgid "No nickname"
+msgstr "无别名"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Looked up each time"
+msgstr "每次查询"
+
+msgid "Health"
+msgstr "健康状况"
+
+msgid "Offers"
+msgstr "提供"
+
+msgid "Subscription link only"
+msgstr "仅订阅链接"
+
+msgid "Itself only"
+msgstr "仅自身"
+
+msgid "Check"
+msgstr "检查"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "No domain is set on this server yet."
+msgstr "此服务器尚未设置域名。"
+
+msgid "The domain itself"
+msgstr "域名本身"
+
+msgid "Nickname"
+msgstr "别名"
+
+msgid "Only for your own eyes"
+msgstr "仅自己可见"
+
+msgid "How it reaches this server"
+msgstr "如何到达此服务器"
+
+msgid "CDN address"
+msgstr "CDN 地址"
+
+msgid "Write the addresses apart with a comma."
+msgstr "用逗号分隔地址。"
+
+msgid "Look the address up again"
+msgstr "重新查询地址"
+
+msgid "Ask the DNS every time"
+msgstr "每次询问 DNS"
+
+msgid "Decoy names"
+msgstr "伪装名称"
+
+msgid "Write the names apart with a comma. Each one must answer on port 443."
+msgstr "用逗号分隔名称。每个名称都必须在 443 端口响应。"
+
+msgid "This domain only hands out the subscription link, so it never carries traffic itself."
+msgstr "此域名只提供订阅链接，本身不承载流量。"
+
+msgid "What it hands to the users"
+msgstr "提供给用户的内容"
+
+msgid "Which domains does it offer?"
+msgstr "提供哪些域名？"
+
+msgid "When you pick nothing, the domain only offers itself."
+msgstr "如果不选择任何项，该域名只提供自身。"
+
+msgid "Files come from"
+msgstr "文件来自"
+
+msgid "This domain itself"
+msgstr "此域名自身"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Health of the domain"
+msgstr "域名健康状况"
+
+msgid "Delete the domain?"
+msgstr "删除域名？"
+
+msgid "Once it is gone, every link that carries this domain stops working."
+msgstr "删除后，所有使用此域名的链接都将失效。"
+
+msgid "Edit the domain"
+msgstr "编辑域名"
+
+msgid "The domain is on your clipboard."
+msgstr "域名已复制到剪贴板。"
+
+msgid "Your browser did not let me copy it."
+msgstr "浏览器阻止了复制。"
+
+msgid "Checking"
+msgstr "正在检查"
+
+msgid "Everything looks right"
+msgstr "一切正常"
+
+msgid "Needs a look"
+msgstr "需要查看"
+
+msgid "Something is broken"
+msgstr "存在问题"
+
+msgid "The server did not answer the check."
+msgstr "服务器未响应检查。"
+
+msgid "No domain matches what you asked for."
+msgstr "没有与搜索匹配的域名。"
+
+#, python-format
+msgid "%(n)s domains"
+msgstr "%(n)s 个域名"
+
+#, python-format
+msgid "%(n)s need a look"
+msgstr "%(n)s 个需要查看"
+
+#, python-format
+msgid "%(n)s are broken"
+msgstr "%(n)s 个存在问题"
+
+msgid "Every domain looks right"
+msgstr "所有域名都正常"
+
+#, python-format
+msgid "%(done)s of %(all)s checked"
+msgstr "已检查 %(done)s / %(all)s"
+
+#, python-format
+msgid "The certificate lasts another %(n)s days"
+msgstr "证书还有 %(n)s 天有效期"
+
+msgid "The certificate has already expired."
+msgstr "证书已过期。"
+
+msgid "I could not read a certificate from this domain."
+msgstr "无法从此域名读取证书。"
+
+msgid "The certificate comes from"
+msgstr "证书由"
+
+msgid "The domain answers from"
+msgstr "域名响应自"
+
+msgid "This server answers from"
+msgstr "此服务器响应自"
+
+msgid "This is the only domain left. Without a domain nobody can reach the panel."
+msgstr "这是最后一个域名。没有域名将无法访问面板。"
+
+#, python-format
+msgid "%(n)s picked"
+msgstr "已选择 %(n)s 个"
+
+msgid "Reading where this domain is used..."
+msgstr "正在查找此域名的使用位置…"
+
+msgid "Direct to this server"
+msgstr "直连此服务器"
+
+msgid "Relay and fake"
+msgstr "中转与伪装"
+
+msgid "Your users reach this server through these domains. It is safer to keep one direct domain and one CDN domain at the same time."
+msgstr "用户通过这些域名访问此服务器。建议同时保留一个直连域名和一个 CDN 域名。"
+
+msgid "All domains"
+msgstr "所有域名"
+
+msgid "Turned off"
+msgstr "已关闭"
+
+msgid "Search a domain or an alias"
+msgstr "搜索域名或别名"
+
+msgid "All modes"
+msgstr "所有模式"
+
+msgid "No alias"
+msgstr "无别名"
+
+msgid "IP address"
+msgstr "IP 地址"
+
+msgid "Read from DNS"
+msgstr "从 DNS 读取"
+
+msgid "Shown in links"
+msgstr "在链接中显示"
+
+msgid "Only itself"
+msgstr "仅自身"
+
+msgid "Use this domain in the links and configs"
+msgstr "在链接和配置中使用此域名"
+
+msgid "Domain information"
+msgstr "域名信息"
+
+msgid "Domain mode"
+msgstr "域名模式"
+
+msgid "Search a mode"
+msgstr "搜索模式"
+
+msgid "old"
+msgstr "旧"
+
+msgid "A short name shown in the client apps"
+msgstr "在客户端应用中显示的短名称"
+
+msgid "Connection settings"
+msgstr "连接设置"
+
+msgid "CDN IP addresses"
+msgstr "CDN IP 地址"
+
+msgid "Separate the IP addresses with a comma."
+msgstr "用逗号分隔 IP 地址。"
+
+msgid "IP lookup"
+msgstr "IP 查询"
+
+msgid "Read the IP from DNS on every request"
+msgstr "每次请求都从 DNS 读取 IP"
+
+msgid "Reality server names (SNI)"
+msgstr "Reality 服务器名称（SNI）"
+
+msgid "Separate the names with a comma. Every name must answer TLS on port 443."
+msgstr "用逗号分隔名称。每个名称都必须在 443 端口响应 TLS。"
+
+msgid "This domain only serves the subscription link and carries no user traffic."
+msgstr "此域名只提供订阅链接，不承载用户流量。"
+
+msgid "Subscription settings"
+msgstr "订阅设置"
+
+msgid "Domains listed in the subscription of this domain"
+msgstr "列在此域名订阅中的域名"
+
+msgid "If you select nothing, only this domain is listed in its own subscription link."
+msgstr "如果不选择，其订阅链接中将只列出此域名。"
+
+msgid "Domain used for downloading config files"
+msgstr "用于下载配置文件的域名"
+
+msgid "This domain is used in the links again."
+msgstr "此域名重新在链接中使用。"
+
+msgid "This domain is kept, but it is left out of every link and config."
+msgstr "域名已保留，但不用于任何链接和配置。"
+
+msgid "The change could not be saved."
+msgstr "无法保存更改。"
+
+msgid "Checked a moment ago"
+msgstr "刚刚检查"
+
+msgid "Checked @N@ minutes ago"
+msgstr "@N@ 分钟前检查"
+
+msgid "Checked @N@ hours ago"
+msgstr "@N@ 小时前检查"
+
+msgid "The panel keeps a check for 6 hours. Press check again for a new answer."
+msgstr "面板保留检查结果 6 小时。再次点击“检查”获取新结果。"
+
+msgid "No mode matches what you typed."
+msgstr "没有与输入匹配的模式。"
+
+msgid "CDN"
+msgstr "CDN"
+
+msgid "CDN with auto clean IP"
+msgstr "自动优选 IP 的 CDN"
+
+msgid "Relay"
+msgstr "中转"
+
+msgid "Cloudflare Worker"
+msgstr "Cloudflare Worker"
+
+msgid "Reality (old)"
+msgstr "Reality（旧）"
+
+msgid "Reality TCP"
+msgstr "Reality TCP"
+
+msgid "Reality XHTTP"
+msgstr "Reality XHTTP"
+
+msgid "Reality gRPC"
+msgstr "Reality gRPC"
+
+msgid "XTLS Direct (old)"
+msgstr "XTLS 直连（旧）"
+
+msgid "The DNS record of this domain must hold the IP of this server. Use it when the server IP is not blocked."
+msgstr "此域名的 DNS 记录必须指向此服务器的 IP。当服务器 IP 未被封禁时使用。"
+
+msgid "The domain is proxied by a CDN such as Cloudflare, so its DNS record holds a CDN IP."
+msgstr "域名通过 CDN（如 Cloudflare）代理，其 DNS 记录指向 CDN 的 IP。"
+
+msgid "Same as CDN, and the panel keeps looking for a clean CDN IP on its own."
+msgstr "与 CDN 相同，但面板会自动持续寻找干净的 CDN IP。"
+
+msgid "The domain belongs to a relay server that forwards the traffic to this server."
+msgstr "域名属于将流量转发到此服务器的中转服务器。"
+
+msgid "The traffic of this domain arrives through a Cloudflare Worker."
+msgstr "此域名的流量经由 Cloudflare Worker 到达。"
+
+msgid "A name that exists only inside the configs. It needs no DNS record at all."
+msgstr "仅存在于配置中的名称。不需要任何 DNS 记录。"
+
+msgid "The old Reality setup. Prefer Reality TCP, XHTTP or gRPC for new domains."
+msgstr "旧的 Reality 方案。新域名建议使用 Reality TCP、XHTTP 或 gRPC。"
+
+msgid "Reality over TCP. Here the domain is a foreign website used as a cover."
+msgstr "基于 TCP 的 Reality。域名在这里是作为掩护的外部网站。"
+
+msgid "Reality over XHTTP. Here the domain is a foreign website used as a cover."
+msgstr "基于 XHTTP 的 Reality。域名在这里是作为掩护的外部网站。"
+
+msgid "Reality over gRPC. Here the domain is a foreign website used as a cover."
+msgstr "基于 gRPC 的 Reality。域名在这里是作为掩护的外部网站。"
+
+msgid "The old XTLS setup, kept only for old client apps."
+msgstr "旧 XTLS 方案，仅为旧客户端应用保留。"
+
+msgid "Nothing answered TLS on port 443 for this domain."
+msgstr "此域名在 443 端口上没有任何 TLS 响应。"
+
+msgid "No certificate could be read from this domain."
+msgstr "无法从此域名读取证书。"
+
+msgid "The certificate of this domain has already expired."
+msgstr "此域名的证书已过期。"
+
+msgid "The certificate of this domain expires very soon."
+msgstr "此域名的证书即将过期。"
+
+msgid "The certificate of this domain is not trusted by browsers yet."
+msgstr "此域名的证书尚未被浏览器信任。"
+
+msgid "No test needed"
+msgstr "无需检测"
+
+msgid "A fake name lives only inside the configs, so no DNS record is asked for it."
+msgstr "伪装名称只存在于配置中，因此无需 DNS 记录。"
+
+msgid "A wildcard domain cannot be looked up by itself."
+msgstr "通配符域名无法单独解析。"
+
+msgid "This domain has no DNS record"
+msgstr "此域名没有 DNS 记录"
+
+msgid "No address came back for this domain, so nobody can reach it."
+msgstr "此域名没有返回任何地址，因此无法访问。"
+
+msgid "Add an A or AAAA record for this domain where your DNS is managed."
+msgstr "请在管理 DNS 的地方为此域名添加 A 或 AAAA 记录。"
+
+msgid "The cover site points at this server"
+msgstr "伪装网站指向此服务器"
+
+msgid "A Reality cover site has to be a foreign website, but this name answers with the IP of this server."
+msgstr "Reality 伪装网站必须是外部网站，但此名称响应的是此服务器的 IP。"
+
+msgid "Use a well known foreign website here, or choose a mode that belongs to your own domain."
+msgstr "请在此处使用知名的外部网站，或选择适合自己域名的模式。"
+
+msgid "The cover site answers normally"
+msgstr "伪装网站响应正常"
+
+msgid "The IP of a cover site has nothing to do with this server, so a foreign address is the right answer here."
+msgstr "伪装网站的 IP 与此服务器无关，因此外部地址是正确的。"
+
+msgid "The configs send these cover names:"
+msgstr "配置中使用的伪装名称："
+
+msgid "The CDN proxy looks switched off"
+msgstr "CDN 代理似乎已关闭"
+
+msgid "This domain answers with the IP of this server, so the traffic does not go through the CDN."
+msgstr "此域名响应的是此服务器的 IP，因此流量没有经过 CDN。"
+
+msgid "Switch the proxy on at your CDN, or change the mode to Direct."
+msgstr "请在 CDN 处开启代理，或将模式改为“直连”。"
+
+msgid "The domain is served through Cloudflare"
+msgstr "域名经由 Cloudflare 提供"
+
+msgid "The domain is served by another network"
+msgstr "域名由其他网络提供"
+
+msgid "The address of this domain belongs neither to this server nor to Cloudflare, which is allowed when another CDN sits in front."
+msgstr "此域名的地址不属于此服务器也不属于 Cloudflare——若前面还有其他 CDN，这是允许的。"
+
+msgid "The relay domain points at this server"
+msgstr "中转域名指向此服务器"
+
+msgid "A relay domain has to point at the relay machine, not at this server."
+msgstr "中转域名应指向中转机，而不是此服务器。"
+
+msgid "Point this domain at the relay machine, or change the mode to Direct."
+msgstr "请将域名指向中转机，或将模式改为“直连”。"
+
+msgid "The relay domain answers normally"
+msgstr "中转域名响应正常"
+
+msgid "A relay domain is expected to answer with the IP of the relay machine."
+msgstr "中转域名应响应中转机的 IP。"
+
+msgid "The domain points at this server"
+msgstr "域名指向此服务器"
+
+msgid "Cloudflare answers for this domain"
+msgstr "域名由 Cloudflare 解析"
+
+msgid "This mode needs a straight connection, but Cloudflare answers for the domain."
+msgstr "此模式需要直连，但域名由 Cloudflare 解析。"
+
+msgid "Switch the proxy off at Cloudflare, or change the mode to CDN."
+msgstr "请在 Cloudflare 关闭代理，或将模式改为 CDN。"
+
+msgid "The domain points somewhere else"
+msgstr "域名指向别处"
+
+msgid "None of the addresses of this domain belong to this server."
+msgstr "此域名的所有地址都不属于此服务器。"
+
+msgid "Point this domain at the IP of this server."
+msgstr "请将域名指向此服务器的 IP。"
+
+msgid "It is the download domain of"
+msgstr "是以下对象的下载域名"
+
+msgid "It is offered in the links of"
+msgstr "在链接中提供"
+
+msgid "It carries the decoy names"
+msgstr "承载伪装名称"
+
+msgid "When this is off, the domain stays in the panel but is left out of every link and config."
+msgstr "关闭后，域名保留在面板中，但不用于任何链接和配置。"
+
+msgid "You are not allowed to see the domains."
+msgstr "您无权查看域名。"
+
+msgid "This domain is not on this server any more."
+msgstr "此域名已不在该服务器上。"
+
+msgid "You are not allowed to change the domains."
+msgstr "您无权更改域名。"
+
+msgid "At least one domain has to stay on, otherwise nobody can reach the panel."
+msgstr "至少要保留一个启用的域名，否则面板将无法访问。"
+
+msgid "Apply the settings so the change reaches the configs."
+msgstr "请应用设置，让更改生效到配置。"
+
+msgid "Direct mode"
+msgstr "直连模式"
+
+msgid "Fake name"
+msgstr "伪装名称"
+
+msgid "Show every IP address"
+msgstr "显示全部 IP 地址"
+
+msgid "Certificate"
+msgstr "证书"
+
+msgid "Choose the domain mode"
+msgstr "选择域名模式"
+
+msgid "IP addresses of the domain"
+msgstr "域名的 IP 地址"
+
+msgid "@N@ days left"
+msgstr "剩余 @N@ 天"
+
+msgid "Expired"
+msgstr "已过期"
+
+msgid "No certificate"
+msgstr "无证书"
+
+msgid "This domain is not used anywhere else."
+msgstr "此域名未在其他任何地方使用。"
+
+msgid "This mode is kept only for old clients. Pick a newer one when you can."
+msgstr "此模式仅为旧客户端保留。请尽量选择更新的模式。"
+
+msgid "Direct mode means you want to use your server directly (for usual use), CDN means that you use your server on behind of a CDN provider."
+msgstr "直连模式表示直接使用服务器（常规用途），CDN 表示服务器位于 CDN 提供商之后。"
+
+msgid "This can be used for giving your users a permanent non blockable links."
+msgstr "可用于为用户提供永久不可封禁的链接。"
+
+#, python-format
+msgid "This domain is already used in the setting \"%(name)s\". Free it there first."
+msgstr "此域名已被设置“%(name)s”使用。请先在那里解除。"
+
+#, python-format
+msgid "This domain is already a Reality server name (SNI) of the domain %(domain)s. Pick another domain or free it there first."
+msgstr "此域名已是域名 %(domain)s 的 Reality 服务器名称（SNI）。请选择其他域名或先在那里解除。"
+
+msgid "This domain is already in the panel. A domain can be added only once."
+msgstr "此域名已存在于面板中。域名只能添加一次。"
+
+#, python-format
+msgid "Domain IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
+msgstr "域名 IP %(domain_ip)s 与您的 IP %(server_ip)s 不匹配，直连模式要求两者一致"
+
+#, python-format
+msgid "In CDN mode, Domain IP=%(domain_ip)s should be different to your ip=%(server_ip)s"
+msgstr "CDN 模式下，域名 IP %(domain_ip)s 应与您的 IP %(server_ip)s 不同"
+
+msgid "The change is saved. Press the button so it reaches the configs."
+msgstr "更改已保存。点击按钮使其生效到配置。"
+
+msgid "Applying..."
+msgstr "正在应用…"
+
+msgid "Core Protocols"
+msgstr "核心协议"
+
+msgid "Transport Layers"
+msgstr "传输层"
+
+msgid "Extra Protocols"
+msgstr "附加协议"
+
+msgid "Panel Features"
+msgstr "面板功能"
+
+msgid "Other Switches"
+msgstr "其他开关"
+
+msgid "Global Proxy Status"
+msgstr "代理总开关"
+
+msgid "Everything below answers only while this stays on."
+msgstr "只有保持开启，以下内容才会生效。"
+
+msgid "Enable All"
+msgstr "全部启用"
+
+msgid "Disable All"
+msgstr "全部禁用"
+
+msgid "Save Changes"
+msgstr "保存更改"
+
+msgid "Search a protocol or a proxy"
+msgstr "搜索协议或代理"
+
+msgid "Nothing here matches what you typed."
+msgstr "没有与输入匹配的内容。"
+
+msgid "Only on"
+msgstr "仅已启用"
+
+msgid "Only off"
+msgstr "仅已禁用"
+
+msgid "@DONE@ of @ALL@ on"
+msgstr "已启用 @DONE@ / @ALL@"
+
+msgid "@N@ on"
+msgstr "已启用 @N@ 个"
+
+msgid "Nothing has changed yet."
+msgstr "尚未有任何更改。"
+
+msgid "Saving..."
+msgstr "正在保存…"
+
+msgid "@N@ changes are waiting"
+msgstr "@N@ 项更改待保存"
+
+msgid "A proxy that is off is left out of every subscription link."
+msgstr "已关闭的代理不会出现在任何订阅链接中。"
+
+msgid "Layer"
+msgstr "层级"
+
+msgid "Transport"
+msgstr "传输"
+
+msgid "Collapse all"
+msgstr "全部收起"
+
+msgid "Expand all"
+msgstr "全部展开"
+
+msgid "This switch is not on this server."
+msgstr "此服务器上没有此开关。"
+
+msgid "This proxy is not on this server any more."
+msgstr "此代理已不在该服务器上。"
+
+msgid "You are not allowed to change the proxies."
+msgstr "您无权更改代理。"
+
+msgid "Nothing was left to save."
+msgstr "没有可保存的内容。"
+
+msgid "Proxies of this group"
+msgstr "此分组的代理"
+
+msgid "Reading..."
+msgstr "正在读取…"
+
+msgid "Edit this proxy"
+msgstr "编辑此代理"
+
+msgid "The name your users see"
+msgstr "用户看到的名称"
+
+msgid "This name is what shows up beside the config inside the user app."
+msgstr "此名称显示在用户应用的配置旁边。"
+
+msgid "Security layer"
+msgstr "安全层"
+
+msgid "The protocol, the transport and the family of a proxy are fixed. Only the parts below can be changed."
+msgstr "代理的协议、传输和所属类别是固定的。只有以下部分可以修改。"
+
+msgid "Advanced parameters"
+msgstr "高级参数"
+
+msgid "Leave this alone unless you know what each key does."
+msgstr "如果您不了解每个键的作用，请不要改动。"
+
+msgid "This has to be sound JSON."
+msgstr "这里必须是有效的 JSON。"
+
+msgid "Turned on for the users"
+msgstr "对用户已启用"
+
+msgid "The proxy was saved."
+msgstr "代理已保存。"
+
+msgid "The proxy could not be saved."
+msgstr "代理保存失败。"
+
+msgid "This proxy was not found any more. Refresh the page."
+msgstr "此代理已不存在。请刷新页面。"
+
+msgid "A name cannot be left empty."
+msgstr "名称不能为空。"
+
+msgid "Bring back the default proxies"
+msgstr "恢复默认代理"
+
+msgid "This puts back every proxy the panel ships with, for the ones that were deleted or renamed. What you turned on or off stays as it is."
+msgstr "这将恢复面板自带的所有代理（用于被删除或改名的）。已启用/禁用状态保持不变。"
+
+msgid "Nothing was missing. Every default proxy is already here."
+msgstr "没有缺失的内容。所有默认代理都在。"
+
+msgid "@N@ proxies were brought back."
+msgstr "已恢复 @N@ 个代理"
+
+msgid "Bring back"
+msgstr "恢复"
+
+msgid "Reading the proxy..."
+msgstr "正在读取代理…"
+
+msgid "Family"
+msgstr "所属类别"
+
+msgid "Protocol"
+msgstr "协议"
+
+msgid "Every proxy at once"
+msgstr "所有代理同时"
+
+msgid "One press turns every proxy below on. The next press turns every one of them off."
+msgstr "一次点击启用以下所有代理，再次点击全部关闭。"
+
+msgid "Protocols on"
+msgstr "已启用协议"
+
+msgid "Proxies on"
+msgstr "已启用代理"
+
+msgid "Not saved yet"
+msgstr "尚未保存"
+
+msgid "Turn every proxy on or off"
+msgstr "启用或禁用所有代理"
+
+msgid "Turn on every protocol"
+msgstr "启用所有协议"
+
+msgid "Turn off every protocol"
+msgstr "禁用所有协议"
+
+msgid "Every proxy is on now."
+msgstr "现在所有代理都已启用。"
+
+msgid "Every proxy is off now."
+msgstr "现在所有代理都已禁用。"
+
+msgid "The proxies that leave the server straight stand on one side, the ones that travel through a CDN on the other."
+msgstr "直连出去的代理在一边，经过 CDN 的在另一边。"
+
+msgid "Tools"
+msgstr "工具"
+
+msgid "The full tunnel page is on the way"
+msgstr "完整的隧道页面即将推出"
+
+msgid "What you see here is an early build. The complete tunnel manager, with more kinds of tunnel and finer settings, arrives in the next releases of the panel."
+msgstr "您看到的是早期版本。完整的隧道管理器（包含更多隧道类型和更精细的设置）将在面板的后续版本中推出。"
+
+msgid "Rathole tunnels already work on this page."
+msgstr "Rathole 隧道已可在此页面使用。"
+
+msgid "New tunnel"
+msgstr "新建隧道"
+
+msgid "Nothing can be built before the Rathole core sits on this server."
+msgstr "在服务器上安装 Rathole 内核之前无法创建隧道。"
+
+msgid "Running"
+msgstr "运行中"
+
+msgid "Stopped"
+msgstr "已停止"
+
+msgid "Iran side"
+msgstr "伊朗侧"
+
+msgid "Kharej side"
+msgstr "国外侧"
+
+msgid "Iran side (server)"
+msgstr "伊朗侧（服务器）"
+
+msgid "Kharej side (client)"
+msgstr "国外侧（客户端）"
+
+msgid "The core is not installed yet"
+msgstr "内核尚未安装"
+
+msgid "Install the core"
+msgstr "安装内核"
+
+msgid "Remove the core"
+msgstr "卸载内核"
+
+msgid "How a tunnel is set up"
+msgstr "隧道的搭建方式"
+
+msgid "Run this on the Iran server first:"
+msgstr "请先在伊朗服务器上执行："
+
+msgid "Then build the Kharej side here on this panel."
+msgstr "然后在此面板上搭建国外侧。"
+
+msgid "Starts on boot"
+msgstr "开机自启"
+
+msgid "Does not start on boot"
+msgstr "不开机自启"
+
+msgid "Turn the tunnel on or off"
+msgstr "开启或关闭隧道"
+
+msgid "Show the token"
+msgstr "显示令牌"
+
+msgid "Copy the token"
+msgstr "复制令牌"
+
+msgid "Delete this tunnel"
+msgstr "删除此隧道"
+
+msgid "No tunnel has been built yet."
+msgstr "尚未创建任何隧道。"
+
+msgid "Build the first one with the green button at the top of the page."
+msgstr "使用页面顶部的绿色按钮创建第一个隧道。"
+
+msgid "Turn every tunnel on"
+msgstr "启用所有隧道"
+
+msgid "Turn every tunnel off"
+msgstr "禁用所有隧道"
+
+msgid "Keep it the same on both sides."
+msgstr "两侧必须保持一致。"
+
+msgid "Send small packets without waiting."
+msgstr "无需等待立即发送小数据包。"
+
+msgid "Keep the line warm so it does not fall asleep."
+msgstr "保持连接活跃，防止空闲断开。"
+
+msgid "Listen on IPv6 as well."
+msgstr "同时监听 IPv6。"
+
+msgid "The tunnel starts by itself once it is saved."
+msgstr "保存后隧道会自动启动。"
+
+msgid "Build the tunnel"
+msgstr "创建隧道"
+
+msgid "Token"
+msgstr "令牌"
+
+msgid "Total Tunnels"
+msgstr "隧道总数"
+
+msgid "It was copied."
+msgstr "已复制。"
+
+msgid "It could not be copied. Copy it by hand."
+msgstr "复制失败，请手动复制。"
+
+msgid "The panel did not answer."
+msgstr "面板未响应。"
+
+msgid "This address is not open on this panel."
+msgstr "此地址未在面板上开放。"
+
+msgid "Something did not go through."
+msgstr "操作未完成。"
+
+msgid "It is done."
+msgstr "已完成。"
+
+msgid "Working..."
+msgstr "处理中…"
+
+msgid "Yes, go ahead"
+msgstr "是的，继续"
+
+msgid "Build the Iran side"
+msgstr "创建伊朗侧"
+
+msgid "Build the Kharej side"
+msgstr "创建国外侧"
+
+msgid "Saving means the tunnel is built again, so it goes quiet for a moment."
+msgstr "保存意味着重建隧道，期间会短暂中断。"
+
+msgid "The address of the Iran server has to be filled in."
+msgstr "必须填写伊朗服务器的地址。"
+
+msgid "The tunnel port has to be filled in."
+msgstr "必须填写隧道端口。"
+
+msgid "A port has to be a number between 1024 and 65535."
+msgstr "端口必须是 1024 到 65535 之间的数字。"
+
+msgid "The ports to forward have to be filled in."
+msgstr "必须填写要转发的端口。"
+
+msgid "The tunnel is on now."
+msgstr "隧道已开启。"
+
+msgid "The tunnel is off now."
+msgstr "隧道已关闭。"
+
+msgid "Restart this tunnel?"
+msgstr "重启此隧道？"
+
+msgid "The tunnel goes down for a breath and comes back."
+msgstr "隧道会短暂中断后恢复。"
+
+msgid "Yes, restart it"
+msgstr "是的，重启"
+
+msgid "Delete this tunnel?"
+msgstr "删除此隧道？"
+
+msgid "The tunnel and its service are removed for good."
+msgstr "隧道及其服务将被永久删除。"
+
+msgid "Yes, delete it"
+msgstr "是的，删除"
+
+msgid "The log of @ID@"
+msgstr "@ID@ 的日志"
+
+msgid "The log is empty."
+msgstr "日志为空。"
+
+msgid "Remove the Rathole core?"
+msgstr "卸载 Rathole 内核？"
+
+msgid "Yes, remove the core"
+msgstr "是的，卸载内核"
+
+msgid "Turn every tunnel on?"
+msgstr "启用所有隧道？"
+
+msgid "Turn every tunnel off?"
+msgstr "禁用所有隧道？"
+
+msgid "Every tunnel on this server starts, and comes up again after a reboot."
+msgstr "此服务器上的所有隧道将启动，并会在重启后自动恢复。"
+
+msgid "Every tunnel on this server stops, and stays down after a reboot."
+msgstr "此服务器上的所有隧道将停止，并在重启后保持关闭。"
+
+msgid "Yes, turn them on"
+msgstr "是的，全部启用"
+
+msgid "Yes, turn them off"
+msgstr "是的，全部禁用"
+
+msgid "This tunnel was not found any more. Refresh the page."
+msgstr "此隧道已不存在。请刷新页面。"
+
+msgid "Download Backup"
+msgstr "下载备份"
+
+msgid "Keep a backup before you change anything big"
+msgstr "在做大改动之前先保留备份"
+
+msgid "A backup file holds every setting, user, admin, and domain of this panel. With it, the whole panel can be brought back on this server or on a fresh one."
+msgstr "备份文件包含面板的所有设置、用户、管理员和域名。用它可以在本服务器或新服务器上恢复整个面板。"
+
+msgid "Backup & Restore"
+msgstr "备份与恢复"
+
+msgid "Everything on this panel is written into one json file that you keep somewhere safe."
+msgstr "面板中的所有内容都会写入一个 json 文件，请妥善保管。"
+
+msgid "Last backup taken from this browser"
+msgstr "此浏览器的上次备份"
+
+msgid "Never"
+msgstr "从未"
+
+msgid "The file carries the keys of every user, so keep it as private as a password."
+msgstr "文件中包含所有用户的密钥，请像密码一样保密保管。"
+
+msgid "Restore from Backup"
+msgstr "从备份恢复"
+
+msgid "Hand the panel a file you saved before, and choose what should come back from it."
+msgstr "向面板提供之前保存的文件，并选择要恢复的内容。"
+
+msgid "Drop your backup file here"
+msgstr "将备份文件拖到此处"
+
+msgid "or click to browse, json files only"
+msgstr "或点击选择；仅支持 json 文件"
+
+msgid "Take this file away"
+msgstr "移除此文件"
+
+msgid "Bring back the settings"
+msgstr "恢复设置"
+
+msgid "Every switch and value of the panel."
+msgstr "面板的所有开关和值。"
+
+msgid "Bring back the users"
+msgstr "恢复用户"
+
+msgid "Users with their keys and their usage."
+msgstr "用户及其密钥和用量。"
+
+msgid "Bring back the domains"
+msgstr "恢复域名"
+
+msgid "Domains with the mode each one had."
+msgstr "域名及其原来的模式。"
+
+msgid "DANGEROUS"
+msgstr "危险"
+
+msgid "Replace the main admin"
+msgstr "替换主管理员"
+
+msgid "The main admin of the file takes the place of the one signed in now."
+msgstr "文件中的主管理员将替换当前登录的管理员。"
+
+msgid "Restore now"
+msgstr "立即恢复"
+
+msgid "At the end of a restore the panel installs itself again, so it goes quiet for a few minutes and you may have to sign in once more."
+msgstr "恢复结束时面板会重新安装自身，期间会静默几分钟，可能需要重新登录。"
+
+msgid "Restore from this file?"
+msgstr "从此文件恢复？"
+
+msgid "What is on the panel now is written over by what is in the file. This cannot be undone."
+msgstr "面板上当前的内容将被文件内容覆盖。此操作无法撤销。"
+
+msgid "Yes, restore it"
+msgstr "是的，恢复"
+
+msgid "The backup is being restored"
+msgstr "正在恢复"
+
+msgid "The panel is working on the file. Please keep this page open until it is finished."
+msgstr "面板正在处理文件。请保持此页面打开直到完成。"
+
+msgid "Starting"
+msgstr "启动"
+
+msgid "Waiting for the first lines..."
+msgstr "等待首行输出…"
+
+msgid "Open the whole log"
+msgstr "打开完整日志"
+
+msgid "Open the panel again"
+msgstr "重新打开面板"
+
+msgid "The file was read. It looks like a panel backup."
+msgstr "文件已读取。看起来是面板备份。"
+
+msgid "Only a json file can be restored."
+msgstr "只能恢复 json 文件。"
+
+msgid "This file is too big to be a panel backup."
+msgstr "此文件太大，不像是面板备份。"
+
+msgid "The file could not be read."
+msgstr "无法读取文件。"
+
+msgid "This file is not a sound json file."
+msgstr "这不是有效的 json 文件。"
+
+msgid "This file does not look like a panel backup."
+msgstr "此文件不像面板备份。"
+
+msgid "The download has started."
+msgstr "下载已开始。"
+
+msgid "Choose a backup file first."
+msgstr "请先选择备份文件。"
+
+msgid "Pick at least one thing to bring back."
+msgstr "请至少选择一项要恢复的内容。"
+
+msgid "comes back"
+msgstr "将恢复"
+
+msgid "stays as it is"
+msgstr "保持不变"
+
+msgid "The restore is finished."
+msgstr "恢复完成。"
+
+msgid "The restore did not finish"
+msgstr "恢复未完成"
+
+msgid "Something went wrong in the middle. Open the whole log to see the last lines."
+msgstr "中途出现了错误。请打开完整日志查看最后的输出。"
+
+msgid "The restore is finished"
+msgstr "恢复完成"
+
+msgid "The panel was installed again with the restored data. Open the panel and sign in."
+msgstr "面板已用恢复的数据重新安装。请打开面板并登录。"
+
+msgid "The panel is busy installing, so it does not answer for a while."
+msgstr "面板正在安装，暂时无法响应。"
+
+msgid "No file was given."
+msgstr "未提供文件。"
+
+msgid "Nothing was picked to bring back."
+msgstr "未选择任何要恢复的内容。"
+
+msgid "The restore could not be started."
+msgstr "无法开始恢复。"
+
+msgid "The restore has started."
+msgstr "恢复已开始。"
+
+msgid "Panel settings"
+msgstr "面板设置"
+
+msgid "Everything the panel runs on lives here. Pick a section on the side, change what you need, then press Save changes at the bottom. Nothing is written until you save."
+msgstr "面板运行所需的一切都在这里。在侧边选择一个分区，修改所需内容，然后点击底部的“保存更改”。保存之前不会写入任何内容。"
+
+msgid "Search in settings"
+msgstr "在设置中搜索"
+
+msgid "Sections"
+msgstr "分区"
+
+msgid "Back to sections"
+msgstr "返回分区"
+
+msgid "Filled in for you"
+msgstr "已为您填写"
+
+msgid "Needs a full reinstall"
+msgstr "需要完全重新安装"
+
+msgid "Needs Apply Changes"
+msgstr "需要“应用更改”"
+
+msgid "We filled this in for you"
+msgstr "我们已为您填写此项"
+
+msgid "Settings marked with a badge only take effect after you apply the changes on the server."
+msgstr "带有标记的设置只有在服务器上应用更改后才会生效。"
+
+msgid "No domain has been added yet."
+msgstr "尚未添加域名。"
+
+msgid "Build a new one"
+msgstr "新建"
+
+msgid "Pick a free port"
+msgstr "选择一个空闲端口"
+
+msgid "Nothing matched your search"
+msgstr "没有匹配的搜索结果"
+
+msgid "Try a shorter word, or the English name of the setting."
+msgstr "请尝试更短的词，或设置项的英文名称。"
+
+msgid "Nothing is written on the server until you save."
+msgstr "保存之前，服务器上不会写入任何内容。"
+
+msgid "Undo my changes"
+msgstr "撤销我的更改"
+
+msgid "Save changes"
+msgstr "保存更改"
+
+msgid "Other settings"
+msgstr "其他设置"
+
+msgid "Basics"
+msgstr "基础"
+
+msgid "Network and transport"
+msgstr "网络与传输"
+
+msgid "Safety and filtering"
+msgstr "安全与过滤"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Admin area"
+msgstr "管理员区域"
+
+msgid "Your brand"
+msgstr "您的品牌"
+
+msgid "Limits for users"
+msgstr "用户限制"
+
+msgid "Which proxies are on"
+msgstr "启用的代理"
+
+msgid "Shadowsocks FakeTLS"
+msgstr "Shadowsocks FakeTLS"
+
+msgid "ShadowTLS"
+msgstr "ShadowTLS"
+
+msgid "TUIC"
+msgstr "TUIC"
+
+msgid "Hysteria"
+msgstr "Hysteria"
+
+msgid "Mieru"
+msgstr "Mieru"
+
+msgid "NaiveProxy"
+msgstr "NaiveProxy"
+
+msgid "AmneziaWG"
+msgstr "AmneziaWG"
+
+msgid "WireGuard"
+msgstr "WireGuard"
+
+msgid "ShadowsocksR"
+msgstr "ShadowsocksR"
+
+msgid "KCP"
+msgstr "KCP"
+
+msgid "RestTLS"
+msgstr "RestTLS"
+
+msgid "TLS tricks"
+msgstr "TLS 技巧"
+
+msgid "Multiplexing"
+msgstr "多路复用"
+
+msgid "Telegram proxy"
+msgstr "Telegram 代理"
+
+msgid "Telegram bot"
+msgstr "Telegram 机器人"
+
+msgid "Blocking and filtering"
+msgstr "拦截与过滤"
+
+msgid "Cloudflare Warp"
+msgstr "Cloudflare Warp"
+
+msgid "Domain fronting"
+msgstr "域名前置"
+
+msgid "For experts only"
+msgstr "仅限专家"
+
+msgid "Language, country and the settings the whole panel is built on."
+msgstr "语言、国家以及整个面板的基础设置。"
+
+msgid "How the admin area behaves."
+msgstr "管理员区域的行为方式。"
+
+msgid "The name, the link and the free text your users see."
+msgstr "用户看到的名称、链接和自由文本。"
+
+msgid "How much traffic and how many days a new user gets, and what happens when the limit is reached."
+msgstr "新用户获得多少流量和天数，以及达到限制后会发生什么。"
+
+msgid "Turn each proxy type on or off and set the paths they use."
+msgstr "启用或禁用每种代理，并设置它们的路径。"
+
+msgid "Certificates and the secure layer between the client and the server."
+msgstr "证书以及客户端与服务器之间的安全层。"
+
+msgid "Plain connections without a certificate."
+msgstr "不使用证书的普通连接。"
+
+msgid "Small tricks that break the traffic into pieces so filtering tools have a harder time."
+msgstr "把流量打碎成小块的小技巧，让过滤工具更难识别。"
+
+msgid "Carry several connections inside one, which makes things faster on a busy line."
+msgstr "在一条连接内承载多个连接，在繁忙线路上更快。"
+
+msgid "Reality keys and the fake sites the traffic hides behind."
+msgstr "Reality 密钥以及流量隐藏其后的伪装网站。"
+
+msgid "The Telegram proxy that runs on this server."
+msgstr "运行在此服务器上的 Telegram 代理。"
+
+msgid "The bot your users can talk to."
+msgstr "您的用户可以与之对话的机器人。"
+
+msgid "Block ads, adult sites, torrent traffic and local addresses."
+msgstr "拦截广告、成人网站、种子流量和本地地址。"
+
+msgid "Send some or all of the outgoing traffic through Cloudflare Warp."
+msgstr "将部分或全部出站流量经由 Cloudflare Warp 转发。"
+
+msgid "Show one domain to the outside world while talking to another."
+msgstr "对外显示一个域名，实际使用另一个。"
+
+msgid "Changing these without knowing what they do can break the panel."
+msgstr "在不了解其作用的情况下更改这些内容可能损坏面板。"
+
+msgid "Your page was open for too long. Please try again."
+msgstr "页面打开时间过长。请重试。"
+
+msgid "@F@ must be a plain domain like example.com, or left empty."
+msgstr "@F@ 必须是 example.com 这样的普通域名，或留空。"
+
+msgid "@F@ must be a UUID. Press the dice button to build a fresh one."
+msgstr "@F@ 必须是 UUID。点击骰子按钮可生成新的。"
+
+msgid "@F@ may only hold English letters and digits, with no slash or space."
+msgstr "@F@ 只能包含英文字母和数字，不能有斜杠或空格。"
+
+msgid "@F@ must be a port number, or several of them split by a comma."
+msgstr "@F@ 必须是端口号，或用逗号分隔的多个端口。"
+
+msgid "@F@ only takes digits."
+msgstr "@F@ 只能填写数字。"
+
+msgid "@F@ must be two numbers with a dash between them, for example 10-20."
+msgstr "@F@ 必须是两个用连字符连接的数字，例如 10-20。"
+
+msgid "Ports 80 and 443 belong to the panel itself, so no other service can take them. Please pick a different port."
+msgstr "80 和 443 端口属于面板本身，其他服务不能占用。请选择其他端口。"
+
+msgid "Port @P@ is already given to @F@. Please pick a different port."
+msgstr "端口 @P@ 已分配给“@F@”。请选择其他端口。"
+
+msgid "The admin path, the user path and the shared path must all be different from each other."
+msgstr "管理员路径、用户路径和共享路径必须互不相同。"
+
+msgid "Everything else was saved. These settings kept their old value because what was typed is not valid: @LIST@"
+msgstr "其余内容已保存。由于输入无效，以下设置保留了旧值：@LIST@"
+
+msgid "Could not copy. Please select the text and copy it by hand."
+msgstr "无法复制。请选中文字手动复制。"
+
+msgid "This box is empty, there is nothing to copy."
+msgstr "此输入框为空，没有可复制的内容。"
+
+msgid "A fresh value was built for you. Do not forget to save."
+msgstr "已为您生成新值。别忘了保存。"
+
+msgid "1 setting was changed and is waiting to be saved"
+msgstr "1 项设置已更改并等待保存"
+
+msgid "@N@ settings were changed and are waiting to be saved"
+msgstr "@N@ 项设置已更改并等待保存"
+
+msgid "Your changes were rolled back."
+msgstr "您的更改已撤销。"
+
+msgid "1 setting matches your search"
+msgstr "1 项设置与搜索匹配"
+
+msgid "@N@ settings match your search"
+msgstr "@N@ 项设置与搜索匹配"
+
+msgid "Panel entrance links"
+msgstr "面板入口链接"
+
+msgid "The web address you open the panel with, and the one your users open."
+msgstr "您打开面板的网址，以及您的用户打开的网址。"
+
+msgid "Address of each protocol"
+msgstr "每个协议的地址"
+
+msgid "The piece of address each protocol is served on. Change these only if a link stopped working."
+msgstr "每个协议服务的地址部分。仅在链接失效时才修改。"
+
+msgid "Ports the server listens on"
+msgstr "服务器监听的端口"
+
+msgid "Which ports the server answers on."
+msgstr "服务器在哪些端口上响应。"
+
+msgid "DNS and Cloudflare"
+msgstr "DNS 与 Cloudflare"
+
+msgid "Where domain names are looked up, and the key that lets the panel manage your Cloudflare records."
+msgstr "域名在哪里解析，以及让面板管理 Cloudflare 记录的密钥。"
+
+msgid "Server protection"
+msgstr "服务器保护"
+
+msgid "Keeps the server quiet for anyone who is not one of your users."
+msgstr "对非您的用户保持服务器隐匿。"
+
+msgid "Bot notifications"
+msgstr "机器人通知"
+
+msgid "What the Telegram bot tells your users, and when."
+msgstr "Telegram 机器人何时向用户通知什么。"
+
+msgid "Parent panel"
+msgstr "父面板"
+
+msgid "Only needed when this server is run by another panel."
+msgstr "仅当此服务器由另一面板管理时才需要。"
+
+msgid "Parent"
+msgstr "父级"
+
+msgid "Child"
+msgstr "子级"
+
+msgid "Standalone"
+msgstr "独立"
+
+msgid "Server up for"
+msgstr "服务器运行时长"
+
+msgid "Panel up for"
+msgstr "面板运行时长"
+
+msgid "Proxy core up for"
+msgstr "代理内核运行时长"
+
+msgid "Open connections"
+msgstr "打开的连接"
+
+msgid "Addresses connected now"
+msgstr "当前连接的地址数"
+
+msgid "Free disk space"
+msgstr "磁盘剩余空间"
+
+msgid "Apply saved settings"
+msgstr "应用已保存的设置"
+
+msgid "Writes everything you saved into the running services. Run this after you change a setting, a domain or a proxy."
+msgstr "将保存的所有内容写入运行中的服务。更改设置、域名或代理后请运行。"
+
+msgid "Safe"
+msgstr "安全"
+
+msgid "Apply now"
+msgstr "立即应用"
+
+msgid "Apply the saved settings now?"
+msgstr "现在应用已保存的设置？"
+
+msgid "The panel rebuilds the service files and loads them again."
+msgstr "面板会重建服务文件并重新加载。"
+
+msgid "Saved settings are written to every service."
+msgstr "已保存的设置会写入所有服务。"
+
+msgid "Services are reloaded one after another."
+msgstr "服务会依次重新加载。"
+
+msgid "Connected people may drop for a few seconds."
+msgstr "已连接的用户可能短暂掉线几秒。"
+
+msgid "Yes, apply"
+msgstr "是的，应用"
+
+msgid "Restart the services"
+msgstr "重启服务"
+
+msgid "Stops and starts the proxy services again without touching any setting. A good first move when something stopped answering."
+msgstr "不改动任何设置，停止并重新启动代理服务。当某些服务失去响应时的首选操作。"
+
+msgid "Restart"
+msgstr "重启"
+
+msgid "Restart the services now?"
+msgstr "现在重启服务？"
+
+msgid "Nothing is reinstalled and no setting is changed."
+msgstr "不会重装任何东西，也不更改任何设置。"
+
+msgid "Every proxy service stops and starts again."
+msgstr "每个代理服务都会停止并重新启动。"
+
+msgid "Connected people drop once and come back on their own."
+msgstr "已连接的用户会掉线一次，然后自动恢复。"
+
+msgid "It usually takes less than a minute."
+msgstr "通常不到一分钟。"
+
+msgid "Yes, restart"
+msgstr "是的，重启"
+
+msgid "Push the user list"
+msgstr "推送用户列表"
+
+msgid "Hands the current list of users to the running services. Use it when a new user cannot connect yet but the settings are already fine."
+msgstr "将当前用户列表传送给运行中的服务。当设置正常但新用户无法连接时使用。"
+
+msgid "Push users"
+msgstr "推送用户"
+
+msgid "Push the user list to the services?"
+msgstr "将用户列表推送到服务？"
+
+msgid "Only the user list is sent. Settings and services stay as they are."
+msgstr "只发送用户列表。设置和服务保持不变。"
+
+msgid "Every service learns about the current users."
+msgstr "每个服务都会获知当前用户。"
+
+msgid "Nobody is disconnected."
+msgstr "没有人会被断开。"
+
+msgid "Yes, push"
+msgstr "是的，推送"
+
+msgid "Read the usage counters"
+msgstr "读取用量计数器"
+
+msgid "Collects how much traffic each user has spent since the last read, and saves it in the panel."
+msgstr "收集自上次读取以来每个用户消耗的流量，并保存到面板。"
+
+msgid "Read now"
+msgstr "立即读取"
+
+msgid "Read the usage counters now?"
+msgstr "现在读取用量计数器？"
+
+msgid "The panel asks every service how much each user spent and stores the answer."
+msgstr "面板会询问每个服务每个用户的用量，并保存结果。"
+
+msgid "User usage numbers are brought up to date."
+msgstr "用户用量数据会更新。"
+
+msgid "Nothing is restarted."
+msgstr "不会重启任何内容。"
+
+msgid "Yes, read"
+msgstr "是的，读取"
+
+msgid "Read WireGuard usage"
+msgstr "读取 WireGuard 用量"
+
+msgid "Collects the traffic WireGuard users have spent. This one is only needed while WireGuard is switched on."
+msgstr "收集 WireGuard 用户的流量。仅在启用 WireGuard 时需要。"
+
+msgid "Read the WireGuard usage now?"
+msgstr "现在读取 WireGuard 用量？"
+
+msgid "Only the WireGuard counters are read."
+msgstr "只读取 WireGuard 计数器。"
+
+msgid "WireGuard usage numbers are brought up to date."
+msgstr "WireGuard 用量数据会更新。"
+
+msgid "Check every service"
+msgstr "检查所有服务"
+
+msgid "Asks the server which services are alive and prints the answer on the log screen."
+msgstr "向服务器询问哪些服务存活，并将结果输出到日志屏幕。"
+
+msgid "Run the check"
+msgstr "运行检查"
+
+msgid "Check every service now?"
+msgstr "现在检查所有服务？"
+
+msgid "This only looks. Nothing on the server is changed."
+msgstr "这只是查看，服务器上不会更改任何内容。"
+
+msgid "The state of every service is written to the log screen."
+msgstr "所有服务的状态会显示在日志屏幕上。"
+
+msgid "Yes, check"
+msgstr "是的，检查"
+
+msgid "Open the log reader"
+msgstr "打开日志查看器"
+
+msgid "The log reader sits at the bottom of this page. Pick any log file and watch it fill in live."
+msgstr "日志查看器位于本页底部。选择任意日志文件，实时查看内容更新。"
+
+msgid "Go to the logs"
+msgstr "前往日志"
+
+msgid "Update the panel"
+msgstr "更新面板"
+
+msgid "Fetches the newest panel release and installs it. Your settings, users and domains are kept."
+msgstr "下载最新版本的面板并安装。设置、用户和域名都会保留。"
+
+msgid "Takes a while"
+msgstr "需要一些时间"
+
+msgid "Give it around five minutes and do not close the page."
+msgstr "请等待约五分钟，不要关闭页面。"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Update the panel now?"
+msgstr "现在更新面板？"
+
+msgid "The newest release is downloaded and installed on top of this one."
+msgstr "最新版本会下载并安装到当前版本之上。"
+
+msgid "Settings, users and domains are kept."
+msgstr "设置、用户和域名都会保留。"
+
+msgid "The panel and the services restart during the work."
+msgstr "过程中面板和服务会重启。"
+
+msgid "The page may look frozen for a few minutes."
+msgstr "页面可能有几分钟看起来无响应。"
+
+msgid "Yes, update"
+msgstr "是的，更新"
+
+msgid "Reinstall everything"
+msgstr "重新安装全部"
+
+msgid "Installs the panel and all services again from scratch. Only reach for this when nothing else helped."
+msgstr "从头重新安装面板和所有服务。只在其他方法都无效时使用。"
+
+msgid "Heavy"
+msgstr "重量级"
+
+msgid "Download a backup first, from the Backup page."
+msgstr "请先在备份页面下载一份备份。"
+
+msgid "Reinstall"
+msgstr "重新安装"
+
+msgid "Reinstall the whole panel?"
+msgstr "重新安装整个面板？"
+
+msgid "Every service is set up again from the beginning. This is the longest and heaviest job on this page."
+msgstr "每个服务都从头重新配置。这是此页面上最漫长、最繁重的任务。"
+
+msgid "All services are installed again."
+msgstr "所有服务都会重新安装。"
+
+msgid "Everyone is disconnected until the work ends."
+msgstr "所有人都会断开，直到任务结束。"
+
+msgid "It can take several minutes."
+msgstr "可能需要几分钟。"
+
+msgid "Make sure you have a backup before you start."
+msgstr "开始前请确认已持有备份。"
+
+msgid "Yes, reinstall"
+msgstr "是的，重装"
+
+msgid "New Reality keys"
+msgstr "新的 Reality 密钥"
+
+msgid "Makes a fresh Reality key pair. Use it when you think the old keys became known."
+msgstr "生成新的 Reality 密钥对。当认为旧密钥已泄露时使用。"
+
+msgid "Users must resubscribe"
+msgstr "用户需重新订阅"
+
+msgid "Everyone connected through Reality needs a new link afterwards."
+msgstr "之后所有通过 Reality 连接的用户都需要新的链接。"
+
+msgid "Make new keys"
+msgstr "生成新密钥"
+
+msgid "Make a new Reality key pair?"
+msgstr "生成新的 Reality 密钥对？"
+
+msgid "The panel writes a new private and public key and asks you to apply the settings afterwards."
+msgstr "面板会生成新的私钥和公钥，之后请您应用设置。"
+
+msgid "A new Reality key pair is stored."
+msgstr "新的 Reality 密钥对已保存。"
+
+msgid "Every Reality link that is already handed out stops working."
+msgstr "所有已发放的 Reality 链接都将失效。"
+
+msgid "You are taken to Settings to apply the change."
+msgstr "您将转到设置页面应用更改。"
+
+msgid "Yes, make new keys"
+msgstr "是的，生成新密钥"
+
+msgid "Find a Reality friendly site"
+msgstr "寻找适合 Reality 的网站"
+
+msgid "Tries a list of well known sites and shows which of them your server can borrow as a Reality front."
+msgstr "尝试一组知名网站，显示哪些可被服务器用作 Reality 伪装。"
+
+msgid "Only looks"
+msgstr "仅查看"
+
+msgid "The test takes up to twenty seconds."
+msgstr "测试最长需要二十秒。"
+
+msgid "Start the test"
+msgstr "开始测试"
+
+msgid "Test sites for Reality now?"
+msgstr "现在为 Reality 测试网站？"
+
+msgid "Nothing on the server is changed. The result is shown right here on this page."
+msgstr "服务器上不会更改任何内容。结果直接显示在此页面。"
+
+msgid "A handful of sites are pinged from this server."
+msgstr "从此服务器对若干网站进行 ping 测试。"
+
+msgid "The best answers are listed with their ping."
+msgstr "响应最好的网站会连同延迟一起列出。"
+
+msgid "Yes, test"
+msgstr "是的，测试"
+
+msgid "Everyday jobs"
+msgstr "日常任务"
+
+msgid "The short, safe jobs you reach for most often."
+msgstr "最常用的简短安全任务。"
+
+msgid "Look and listen"
+msgstr "查看与监听"
+
+msgid "Ways to see what the server is doing right now."
+msgstr "查看服务器当前正在做什么的方式。"
+
+msgid "Update and install"
+msgstr "更新与安装"
+
+msgid "Longer jobs that rebuild the panel. Read the warning before you start one."
+msgstr "会重建面板的耗时任务。运行前请阅读警告。"
+
+msgid "Keys and probing"
+msgstr "密钥与探测"
+
+msgid "Reality keys and the site test that goes with them."
+msgstr "Reality 密钥及配套的网站测试。"
+
+msgid "Every job the server can run for you, in one place. Each card says what it does before it does it."
+msgstr "服务器可以为您执行的所有任务都在一处。每张卡片都会先说明要做什么。"
+
+msgid "Panel"
+msgstr "面板"
+
+msgid "A newer release is out:"
+msgstr "有更新版本可用："
+
+msgid "The panel is up to date"
+msgstr "面板已是最新版本"
+
+msgid "Role"
+msgstr "角色"
+
+msgid "How the server is doing"
+msgstr "服务器运行状况"
+
+msgid "Log reader"
+msgstr "日志查看器"
+
+msgid "Pick a file and watch it fill in. The newest lines are at the bottom."
+msgstr "选择文件并查看其更新。最新内容在底部。"
+
+msgid "Live log"
+msgstr "实时日志"
+
+msgid "Follow"
+msgstr "跟随"
+
+msgid "Lines shown:"
+msgstr "显示行数："
+
+msgid "Reading the log..."
+msgstr "正在读取日志…"
+
+msgid "There is no log file yet."
+msgstr "尚无日志文件。"
+
+msgid "What happens"
+msgstr "会发生什么"
+
+msgid "Never mind"
+msgstr "算了，不用了"
+
+msgid "Test result"
+msgstr "测试结果"
+
+msgid "Go on"
+msgstr "继续"
+
+msgid "Starting..."
+msgstr "正在启动…"
+
+msgid "This log file is still empty."
+msgstr "此日志文件仍为空。"
+
+msgid "The log could not be read right now."
+msgstr "当前无法读取日志。"
+
+msgid "Last read at"
+msgstr "上次读取于"
+
+msgid "The log was copied."
+msgstr "日志已复制。"
+
+msgid "The log could not be copied."
+msgstr "日志复制失败。"
+
+msgid "There is nothing to copy yet."
+msgstr "还没有可复制的内容。"
+
+msgid "Testing sites, this can take twenty seconds..."
+msgstr "正在测试网站，最长需要二十秒…"
+
+msgid "The test could not be finished."
+msgstr "无法完成测试。"
+
+msgid "info"
+msgstr "信息"
+
+msgid "warn"
+msgstr "警告"
+
+msgid "error"
+msgstr "错误"
+
+msgid "ok"
+msgstr "正常"
+
+msgid "Action in progress"
+msgstr "操作进行中"
+
+msgid "The panel is working on it"
+msgstr "面板正在处理"
+
+msgid "Please wait, this can take a few minutes"
+msgstr "请稍候，这可能需要几分钟"
+
+msgid "Back to Actions"
+msgstr "返回任务"
+
+msgid "Go to the dashboard"
+msgstr "前往仪表板"
+
+msgid "The job is finished."
+msgstr "任务已完成。"
+
+msgid "The log is still empty."
+msgstr "日志仍为空。"
+
+msgid "The user list was handed to the services."
+msgstr "用户列表已传送给服务。"
+
+msgid "The user list could not be handed over. Please look at the log."
+msgstr "用户列表推送失败。请查看日志。"
+
+msgid "The WireGuard counters are being read."
+msgstr "WireGuard 计数器正在读取。"
+
+msgid "The WireGuard counters could not be read. Please look at the log."
+msgstr "WireGuard 计数器读取失败。请查看日志。"
+
+msgid "The panel is restarting itself"
+msgstr "面板正在重启自身"
+
+msgid "This job restarts the panel too, so this page loses touch with it for a few seconds. Stay here, it picks up on its own."
+msgstr "此任务也会重启面板，因此页面会与其失联几秒。请留在本页，它会自动恢复。"
+
+msgid "Services"
+msgstr "服务"
+
+msgid "Service"
+msgstr "服务"
+
+msgid "Status before"
+msgstr "之前状态"
+
+msgid "Status now"
+msgstr "当前状态"
+
+msgid "These services did not come up"
+msgstr "以下服务未能启动"
+
+msgid "Run these commands over SSH on the server to see why, then start them again:"
+msgstr "请通过 SSH 在服务器上执行这些命令查看原因，然后再次启动："
+
+msgid "Copy the commands"
+msgstr "复制命令"
+
+msgid "The commands were copied."
+msgstr "命令已复制。"
+
+msgid "Read again"
+msgstr "重新读取"
+
+msgid "The panel is not answering yet"
+msgstr "面板尚未响应"
+
+msgid "The services are coming back one by one. The button below opens again the moment the panel answers."
+msgstr "服务正在逐个恢复。面板响应后下方按钮即可使用。"
+
+msgid "The panel is back."
+msgstr "面板已恢复。"
+
+msgid "The panel is not ready yet. This page opens the button as soon as it answers."
+msgstr "面板尚未就绪。面板响应后此页面会立即启用按钮。"
+
+msgid "Restarting the services one by one..."
+msgstr "正在逐个重启服务…"
+
+msgid "Reading the state of every service..."
+msgstr "正在读取每个服务的状态…"
+
+msgid "Every service is up again."
+msgstr "所有服务都已恢复运行。"
+
+msgid "Some services did not come up."
+msgstr "部分服务未能启动。"
+
+msgid "Some services are still coming up. Give them a few more seconds."
+msgstr "部分服务仍在启动中。请再等待几秒。"
+
+msgid "Up"
+msgstr "运行中"
+
+msgid "Coming up"
+msgstr "启动中"
+
+msgid "Down"
+msgstr "已停止"
+
+msgid "The services are restarting one by one. The panel restarts itself as well, so this page loses touch with it for a few seconds and then picks up on its own."
+msgstr "服务正在逐个重启。面板也会重启自身，因此页面会与其失联几秒，然后自动恢复。"
+
+msgid "The state of every service is being read. The table below fills in as soon as the file lands."
+msgstr "正在读取每个服务的状态。收到响应后下方表格会自动填充。"
+
+msgid "The panel itself restarts too, so it stops answering for a few seconds."
+msgstr "面板自身也会重启，因此会短暂失去响应几秒。"
+
+msgid "The result page waits for the panel and opens the way back on its own."
+msgstr "结果页面会等待面板并自动恢复返回按钮。"
+
+msgid "Reading the fresh state of every service..."
+msgstr "正在读取每个服务的最新状态…"
+
+msgid "The usage counters were read"
+msgstr "用量计数器已读取"
+
+msgid "The usage counters could not be read"
+msgstr "用量计数器读取失败"
+
+msgid "The counters of every user are now up to date."
+msgstr "所有用户的计数器已更新。"
+
+msgid "No new traffic had been spent since the last read, so nothing changed."
+msgstr "自上次读取以来没有新流量，无任何变化。"
+
+msgid "The panel could not finish reading the counters. The message below came back from the panel."
+msgstr "面板未能完成计数器读取。下面是面板返回的消息。"
+
+msgid "Users whose usage moved"
+msgstr "用量有变化的用户"
+
+msgid "Traffic added in this read"
+msgstr "本次读取新增的流量"
+
+msgid "Read at"
+msgstr "读取时间"
+
+msgid "Change the theme"
+msgstr "切换主题"
+
+msgid "Change the language"
+msgstr "切换语言"
+
+msgid "More information"
+msgstr "更多信息"
+
+msgid "Service username"
+msgstr "服务用户名"
+
+msgid "Service volume"
+msgstr "服务容量"
+
+msgid "Used volume"
+msgstr "已用容量"
+
+msgid "Remaining volume"
+msgstr "剩余容量"
+
+msgid "Expires in"
+msgstr "到期时间"
+
+msgid "Usage resets in"
+msgstr "用量重置倒计时"
+
+msgid "Expiry date"
+msgstr "到期日期"
+
+msgid "Last connection"
+msgstr "最后连接"
+
+msgid "Your connection"
+msgstr "您的连接"
+
+msgid "Smart links"
+msgstr "智能链接"
+
+msgid "Copy the main link"
+msgstr "复制主链接"
+
+msgid "Add to the app"
+msgstr "添加到应用"
+
+msgid "Config links"
+msgstr "配置链接"
+
+msgid "Copy every config"
+msgstr "复制所有配置"
+
+msgid "No config is ready for you right now."
+msgstr "当前没有可用的配置。"
+
+msgid "Get the app"
+msgstr "获取应用"
+
+msgid "Keep your links private, they belong to you only."
+msgstr "请保管好自己的链接，仅限本人使用。"
+
+msgid "No connection has been seen yet"
+msgstr "尚无连接记录"
+
+msgid "A few minutes ago"
+msgstr "几分钟前"
+
+msgid "@N@ hours ago"
+msgstr "@N@ 小时前"
+
+msgid "@N@ days ago"
+msgstr "@N@ 天前"
+
+msgid "A long time ago"
+msgstr "很久以前"
+
+msgid "Good night"
+msgstr "晚上好"
+
+msgid "Good morning"
+msgstr "早上好"
+
+msgid "Good afternoon"
+msgstr "中午好"
+
+msgid "Good evening"
+msgstr "下午好"
+
+msgid "Smart link"
+msgstr "智能链接"
+
+msgid "Subscription link (Base64)"
+msgstr "订阅链接（Base64）"
+
+msgid "For V2rayNG, Streisand, V2Box and similar apps"
+msgstr "适用于 V2rayNG、Streisand、V2Box 等应用"
+
+msgid "Full Xray config"
+msgstr "完整 Xray 配置"
+
+msgid "A ready JSON config for Xray based apps"
+msgstr "面向 Xray 应用的现成 JSON 配置"
+
+msgid "Full Sing-box config"
+msgstr "完整 Sing-box 配置"
+
+msgid "A ready JSON config for Sing-box based apps"
+msgstr "面向 Sing-box 应用的现成 JSON 配置"
+
+msgid "Clash Meta"
+msgstr "Clash Meta"
+
+msgid "For Clash Meta, Clash Verge and Stash"
+msgstr "适用于 Clash Meta、Clash Verge 和 Stash"
+
+msgid "Clash"
+msgstr "Clash"
+
+msgid "For the classic Clash apps"
+msgstr "适用于经典 Clash 应用"
+
+msgid "Plain config links"
+msgstr "纯文本配置链接"
+
+msgid "Every config as plain text, one per line"
+msgstr "每个配置以纯文本呈现，每行一个"
+
+msgid "Sing-box over SSH"
+msgstr "基于 SSH 的 Sing-box"
+
+msgid "Only for the SSH tunnel"
+msgstr "仅适用于 SSH 隧道"
+
+msgid "A ready config for WireGuard apps"
+msgstr "面向 WireGuard 应用的现成配置"
+
+msgid "My panel address"
+msgstr "我的面板地址"
+
+msgid "This very page, keep it for yourself"
+msgstr "本页地址，请自行保存"
+
+msgid "Android"
+msgstr "Android"
+
+msgid "Google Play"
+msgstr "Google Play"
+
+msgid "iPhone and iPad"
+msgstr "iPhone 和 iPad"
+
+msgid "App Store"
+msgstr "App Store"
+
+msgid "Desktop app"
+msgstr "桌面应用"
+
+msgid "The smart link was copied"
+msgstr "智能链接已复制"
+
+msgid "Every config link was copied"
+msgstr "所有配置链接已复制"
+
+msgid "Copying did not work, please copy by hand"
+msgstr "复制失败，请手动复制"
+
+msgid "There is nothing to copy"
+msgstr "没有可复制的内容"
+
+msgid "The QR code could not be drawn"
+msgstr "无法生成二维码"
+
+msgid "Volume finished"
+msgstr "流量已用完"
+
+msgid "Not active"
+msgstr "未激活"
+
+msgid "@N@ days"
+msgstr "@N@ 天"
+
+msgid "Guest"
+msgstr "访客"
+
+msgid "Welcome to your own dashboard"
+msgstr "欢迎使用您的个人面板"
+
+msgid "Notice"
+msgstr "通知"
+
+msgid "One address, ready for every app"
+msgstr "一个地址，适配所有应用"
+
+msgid "Your subscription link"
+msgstr "您的订阅链接"
+
+msgid "Your current address"
+msgstr "您当前的地址"
+
+msgid "All links"
+msgstr "所有链接"
+
+msgid "Single configs"
+msgstr "单独配置"
+
+msgid "Copy this column"
+msgstr "复制此列"
+
+msgid "Every link of this column was copied"
+msgstr "此列的所有链接已复制"
+
+msgid "No single config is ready right now. The links above are enough to connect."
+msgstr "当前没有单独配置可用。上方链接已足够连接。"
+
+msgid "No app has been chosen by the panel owner yet."
+msgstr "面板所有者尚未选择应用。"
+
+msgid "Best choice for the Watashi and sing-box apps"
+msgstr "Watashi 和 sing-box 应用的最佳选择"
+
+msgid "Auto CDN"
+msgstr "自动 CDN"
+
+msgid "Your subscription links"
+msgstr "您的订阅链接"
+
+msgid "One link for every app, the panel picks the right configs itself"
+msgstr "一个链接适配所有应用，面板会自动挑选合适的配置"
+
+msgid "Copy link"
+msgstr "复制链接"
+
+msgid "Setup guide"
+msgstr "设置指南"
+
+msgid "YAML config"
+msgstr "YAML 配置"
+
+msgid "JSON config"
+msgstr "JSON 配置"
+
+msgid "Base64 subscription"
+msgstr "Base64 订阅"
+
+msgid "WireGuard config"
+msgstr "WireGuard 配置"
+
+msgid "Install @APP@ with the button below."
+msgstr "点击下方按钮安装 @APP@。"
+
+msgid "Press the copy button of the Auto Connect card, then add that link inside the app as a new subscription."
+msgstr "点击“自动连接”卡片的复制按钮，然后在应用中将该链接添加为新订阅。"
+
+msgid "Refresh the list, pick a server and press connect."
+msgstr "刷新列表，选择服务器，然后点击连接。"
+
+msgid "The client we suggest for @OS@"
+msgstr "我们为 @OS@ 推荐的客户端"
+
+msgid "Download @APP@"
+msgstr "下载 @APP@"
+
+msgid "The Auto Connect link was copied"
+msgstr "自动连接链接已复制"
+
+msgid "The rhythm of your package"
+msgstr "套餐的节奏"
+
+msgid "Daily average"
+msgstr "每日平均"
+
+msgid "Next reset"
+msgstr "下次重置"
+
+msgid "Powered by"
+msgstr "技术支持"
+
+msgid "Support"
+msgstr "支持"
+
+msgid "Scan this code with your app"
+msgstr "用您的应用扫描此二维码"
+
+msgid "Package volume"
+msgstr "套餐容量"
+
+msgid "Service name"
+msgstr "服务名称"
+
+msgid "Used"
+msgstr "已用"
+
+msgid "Already over"
+msgstr "已超出"
+
+msgid "months"
+msgstr "个月"
+
+msgid "years"
+msgstr "年"
+
+msgid "@N@ @U@ left"
+msgstr "剩余 @N@ @U@"
+
+msgid "Copy the image"
+msgstr "复制图片"
+
+msgid "The QR image was copied"
+msgstr "二维码图片已复制"
+
+msgid "Copying the image did not work, please save it by hand"
+msgstr "复制图片失败，请手动保存"
+
+msgid "login.identity.label"
+msgstr "登录名或密钥"
+
+msgid "login.identity.description"
+msgstr "您拥有其中哪一个，请在此输入"
+
+msgid "login.identity.hint"
+msgstr "登录名或密钥"
+
+msgid "login.password.hint"
+msgstr "面板密码"
+
+msgid "login.kind.waiting"
+msgstr "等待中"
+
+msgid "login.kind.username"
+msgstr "登录名"
+
+msgid "login.kind.uuid"
+msgstr "密钥"
+
+msgid "login.password.show"
+msgstr "显示密码"
+
+msgid "login.password.hide"
+msgstr "隐藏密码"
+
+msgid "login.button.busy"
+msgstr "正在登录…"
+
+msgid "login.need.identity"
+msgstr "请输入登录名或密钥。"
+
+msgid "login.need.password"
+msgstr "按名称登录需要密码。"
+
+msgid "login.door.open"
+msgstr "大门已重新开放，请再试一次。"
+
+msgid "login.tool.theme"
+msgstr "切换主题"
+
+msgid "login.tool.language"
+msgstr "切换语言"
+
+msgid "login.gate.sign"
+msgstr "面板入口"
+
+msgid "login.gate.title"
+msgstr "欢迎回来"
+
+msgid "login.gate.lead"
+msgstr "请输入登录名或密钥，以及密码。"
+
+msgid "login.locked.note"
+msgstr "已输错三次，大门将关闭："
+
+msgid "login.locked.flash"
+msgstr "大门已关闭几分钟，请稍后再试。"
+
+msgid "login.wrong.key"
+msgstr "名称、密钥或密码不正确。"
+
+msgid "login.tries.left"
+msgstr "剩余尝试次数：@N@。"
+
+msgid "login.note.text"
+msgstr "携带密钥的旧链接仍可直接进入，此输入框同时支持两种。"
+
+msgid "config.separate_tunnel_configs.label"
+msgstr "独立隧道配置（WireGuard / AmneziaWG）"
+
+msgid "config.separate_tunnel_configs.description"
+msgstr "WireGuard 和 AmneziaWG 配置已从订阅链接中分离，在独立页面以 .conf 文件和二维码形式提供。这样可以保持订阅格式完整，因为没有任何客户端应用能同时建立隧道和代理。"
+
+msgid "config.usage_update_interval.label"
+msgstr "用量更新间隔（秒）"
+
+msgid "config.usage_update_interval.description"
+msgstr "从内核读取用户流量并写入数据库的频率。允许范围为 10 到 600 秒。数值越小显示越及时，但服务器负担更重。"
+
+msgid "config.port_hop_enable.label"
+msgstr "UDP 端口跳跃"
+
+msgid "config.port_hop_enable.description"
+msgstr "客户端不再使用单一固定端口，而是把数据包分散到整个 UDP 端口范围，服务器再将它们全部映射回真正的 hysteria2 端口，因此仅封禁单个端口已无法使配置失效。仅适用于 hysteria2，支持程度因应用而异。"
+
+msgid "config.port_hop_range.label"
+msgstr "端口跳跃范围"
+
+msgid "config.port_hop_range.description"
+msgstr "客户端分散使用的范围，写作 61001-62000。默认范围刻意高于面板分配的所有随机端口（11000-60000），也高于内核临时端口范围（至 60999），因此结构上不可能冲突。如果该范围与此服务器已使用的端口重叠，端口跳跃会保持关闭，而不会被悄悄截断。"
+
+msgid "Back up now"
+msgstr "立即备份"
+
+msgid "Writes a fresh backup of the database and sends it to every admin who connected the Telegram bot. The automatic backup follows the hours you chose in the Telegram settings."
+msgstr "写入新的数据库备份并发送给已连接 Telegram 机器人的每位管理员。自动备份遵循 Telegram 设置中选择的小时间隔。"
+
+msgid "Back up"
+msgstr "创建备份"
+
+msgid "Write a backup now?"
+msgstr "现在创建备份？"
+
+msgid "Nothing on the server changes. A json file is written into the backup folder."
+msgstr "服务器上没有任何变化。会在备份文件夹写入一个 json 文件。"
+
+msgid "A json backup is written."
+msgstr "将写入一个 json 备份。"
+
+msgid "Admins with Telegram receive the file."
+msgstr "使用 Telegram 的管理员会收到文件。"
+
+msgid "Only the newest 48 backup files are kept."
+msgstr "只保留最新的 48 个备份文件。"
+
+msgid "Yes, back up"
+msgstr "是的，备份"
+
+#, python-format
+msgid "The backup was written. %(n)s admin(s) received it on Telegram."
+msgstr "备份已写入。%(n)s 位管理员已在 Telegram 收到。"
+
+#, python-format
+msgid "The backup did not run: %(why)s"
+msgstr "备份未运行：%(why)s"
+
+msgid "The backup could not be written. Please look at the log."
+msgstr "备份写入失败。请查看日志。"
+
+msgid "Send a test notification"
+msgstr "发送测试通知"
+
+msgid "Sends one short Telegram message to every admin who connected the bot, so you can see whether the notifications really work."
+msgstr "向已连接机器人的每位管理员发送一条简短的 Telegram 消息，让您确认通知确实可用。"
+
+msgid "Open the bot and press start first, otherwise Telegram has nobody to send to."
+msgstr "请先打开机器人并点击“启动”，否则 Telegram 没有可发送的对象。"
+
+msgid "Send the test"
+msgstr "发送测试"
+
+msgid "Send a test message now?"
+msgstr "现在发送测试消息？"
+
+msgid "One message is sent. Nothing on the server changes."
+msgstr "只发送一条消息。服务器上没有任何变化。"
+
+msgid "The bot is woken with the saved token."
+msgstr "机器人会用已保存的令牌唤醒。"
+
+msgid "Every admin with Telegram gets one message."
+msgstr "使用 Telegram 的每位管理员都会收到一条消息。"
+
+msgid "Yes, send"
+msgstr "是的，发送"
+
+#, python-format
+msgid "A test message was sent to %(n)s admin(s)."
+msgstr "测试消息已发送给 %(n)s 位管理员。"
+
+#, python-format
+msgid "Nothing was sent: %(why)s"
+msgstr "未发送任何消息：%(why)s"
+
+msgid "The test message could not be sent. Please look at the log."
+msgstr "测试消息发送失败。请查看日志。"
+
+msgid "Success! Please wait around 5 minutes to make sure everything is updated."
+msgstr "成功！请等待约 5 分钟以确保一切更新完毕。"
+
+msgid "This uuid already belongs to another user."
+msgstr "此 UUID 已属于另一个用户。"
+
+msgid "The panel moved to its new address"
+msgstr "面板已迁移到新地址"
+
+msgid "The setup replaced the address you are using. The work on the server keeps going. Open the panel on its new address:"
+msgstr "安装程序替换了您正在使用的地址。服务器上的工作仍在继续。请通过新地址打开面板："
+
+msgid "The new address is answering."
+msgstr "新地址已有响应。"
+
+msgid "Cores"
+msgstr "内核"
+
+msgid "Panel version"
+msgstr "面板版本"
+
+msgid "Update available"
+msgstr "有可用更新"
+
+msgid "Develop channel"
+msgstr "开发通道"
+
+msgid "Beta channel"
+msgstr "测试通道"
+
+msgid "Enforce device limit"
+msgstr "强制设备限制"
+
+msgid "When this is on, the device limit applies to this user even if the global switch is off."
+msgstr "启用后，即使全局开关关闭，此用户也会受设备限制。"
+
+msgid "Tunnel Configs"
+msgstr "隧道配置"
+
+msgid "Copy QR image"
+msgstr "复制二维码图片"
+
+msgid "No tunnel configs are available on this account yet."
+msgstr "此账户还没有可用的隧道配置。"
+
+msgid "To the latest"
+msgstr "升级到最新"
+
+msgid "config.xray_finalmask_fragment.label"
+msgstr "⏯ FinalMask 分片"
+
+msgid "config.xray_finalmask_fragment.description"
+msgstr "在连接本身上对 TLS hello 进行分片，无需中间出站。旧客户端内核会忽略此功能。"
+
+msgid "config.xray_finalmask_maxsplit.label"
+msgstr "✂ FinalMask 最大分片数"
+
+msgid "config.xray_finalmask_maxsplit.description"
+msgstr "最大分片数，例如 3-6。留空或 0 表示不限。"
+
+msgid "Check for new releases"
+msgstr "检查新版本"
+
+msgid "Every change here is checked before it is used: the download is verified against its sha256, the binary is asked for its version, and if the service does not come back up the previous core is put back on its own. The versions marked as tested are the ones this panel was built against."
+msgstr "这里的每次更改在使用前都会经过检查：下载文件通过 sha256 校验，二进制会报告版本号，如果服务未能启动，会自动恢复原来的内核。标记为“已测试”的版本是构建此面板所用的版本。"
+
+msgid "Installed"
+msgstr "已安装"
+
+msgid "Not installed"
+msgstr "未安装"
+
+msgid "Off the tested version"
+msgstr "偏离已测试版本"
+
+msgid "The cores of this panel"
+msgstr "此面板的内核"
+
+msgid "Core"
+msgstr "内核"
+
+msgid "Tested"
+msgstr "已测试"
+
+msgid "Newest release"
+msgstr "最新版本"
+
+msgid "not checked"
+msgstr "未检查"
+
+msgid "no service"
+msgstr "无服务"
+
+msgid "Upgrade"
+msgstr "升级"
+
+msgid "Pick a version"
+msgstr "选择版本"
+
+msgid "Roll back"
+msgstr "回滚"
+
+msgid "No core is registered on this server."
+msgstr "此服务器未注册任何内核。"
+
+msgid "What the core manager said"
+msgstr "内核管理器的返回内容"
+
+msgid "Install a specific version"
+msgstr "安装指定版本"
+
+msgid "The version is downloaded, verified, tried, and only then put in place. A version outside the tested range is your own call."
+msgstr "版本会先下载、校验、试用，然后才安装。测试范围之外的版本由您自行决定。"
+
+msgid "for example 26.7.28"
+msgstr "例如 26.7.28"
+
+msgid "working..."
+msgstr "处理中…"
+
+msgid "done"
+msgstr "完成"
+
+msgid "it did not work"
+msgstr "失败"
+
+msgid "checked just now"
+msgstr "刚刚检查"
+
+msgid "could not be reached"
+msgstr "无法访问"
+
+msgid "The core manager is not installed on this server yet."
+msgstr "此服务器尚未安装内核管理器。"
+
+msgid "The core manager gave an answer this page cannot read."
+msgstr "内核管理器返回了此页面无法读取的响应。"
+
+msgid "The core manager did not answer in time."
+msgstr "内核管理器未及时响应。"
+
+msgid "The core list could not be read. Look at log/system/core_manager.log."
+msgstr "无法读取内核列表。请查看 log/system/core_manager.log。"
+
+msgid "That is not something this page can do."
+msgstr "此页面无法执行该操作。"
+
+msgid "That core name does not look like a core name."
+msgstr "这不是有效的内核名称。"
+
+msgid "That version does not look like a version."
+msgstr "这不是有效的版本号。"
+
+msgid "The core manager refused this change."
+msgstr "内核管理器拒绝了此更改。"
+
+msgid "The vendor could not be reached."
+msgstr "无法连接到供应商。"
+
+msgid "The vendor did not name a version."
+msgstr "供应商未提供版本号。"
+
+msgid "To the latest stable"
+msgstr "升级到最新稳定版"
+
+msgid "Latest test build"
+msgstr "最新测试版"
+
+msgid "Stable"
+msgstr "稳定版"
+
+msgid "Test build"
+msgstr "测试版"
+
+msgid "Installed, version unknown"
+msgstr "已安装，版本未知"
+
+msgid "This core is past the stable line. A test build can carry bugs, so roll it back if anything looks wrong."
+msgstr "此内核已超出稳定版本。测试版可能带有 bug，如发现异常请回滚。"
+
+msgid "The vendor marks almost every release as a test build, so this panel installs the stable line on its own and a test build only ever arrives by hand."
+msgstr "供应商几乎将每个版本都标记为测试版，因此面板会自动安装稳定版本，测试版只能手动安装。"
+
+msgid "That channel is not one this page knows."
+msgstr "此页面不认识该通道。"
+
+msgid "read from the disk"
+msgstr "从磁盘读取"
+
+msgid "Optional, not installed"
+msgstr "可选，未安装"
+
+msgid "Not installed (optional)"
+msgstr "未安装（可选）"
+
+msgid "This core is installed only when the feature that needs it is switched on."
+msgstr "只有启用需要此内核的功能时才会安装。"
+
+msgid "All configs"
+msgstr "所有配置"
+
+msgid "Every config inside your subscription link"
+msgstr "订阅链接中的所有配置"
+
+msgid "Take one of them alone when an app should hold a single config."
+msgstr "当应用只需要单个配置时，可单独取用其中一个。"
+
+msgid "Copy this config"
+msgstr "复制此配置"
+
+msgid "Tunnel files"
+msgstr "隧道文件"
+
+msgid "WireGuard and AmneziaWG are files, not links: no v2ray app can run them beside the other configs."
+msgstr "WireGuard 和 AmneziaWG 是文件而不是链接：没有任何 v2ray 应用能把它们与其他配置一起运行。"
+
+msgid "Download the file"
+msgstr "下载文件"
+
+msgid "Back to your page"
+msgstr "返回您的页面"
+
+msgid "No configs are available on this account yet."
+msgstr "此账户还没有可用的配置。"
+
+msgid "The config file was saved"
+msgstr "配置文件已保存"
+
+msgid "Proxy Stats"
+msgstr "代理统计"
+
+msgid "Live proxy dashboard"
+msgstr "代理实时仪表板"
+
+msgid "Looking for the dashboard"
+msgstr "正在寻找仪表板"
+
+msgid "You are signed in automatically, no username or password is asked"
+msgstr "系统会自动登录，无需输入用户名或密码"
+
+msgid "Back to cores"
+msgstr "返回内核"
+
+msgid "Opening the dashboard"
+msgstr "正在打开仪表板"
+
+msgid "The dashboard did not answer on any of these addresses"
+msgstr "仪表板在以下地址均无响应"
+
+msgid "Open by hand"
+msgstr "手动打开"
+
+msgid "Back to proxies"
+msgstr "返回代理"
+
+msgid "Every config the panel hands out is listed there with its own ping, so a config that never answers usually has a broken setting"
+msgstr "面板分发的每个配置都会连同延迟一起列出，因此从不响应的配置通常意味着某项设置有误"
+
+msgid ""
+" Search\n"
+"            Settings"
+msgstr " 搜索\\n            设置"
+
+msgid "CPU Usage.description"
+msgstr "CPU Usage.description"
+
+msgid "CPU Usage.label"
+msgstr "CPU Usage.label"
+
+msgid "Consumed Data.description"
+msgstr "Consumed Data.description"
+
+msgid "Consumed Data.label"
+msgstr "Consumed Data.label"
+
+msgid "DISK USAGE.description"
+msgstr "DISK USAGE.description"
+
+msgid "DISK USAGE.label"
+msgstr "DISK USAGE.label"
+
+msgid ""
+"Dear {}\n"
+"\n"
+"Your watashi information is\n"
+"UUID: {}\n"
+"Last online date: {}\n"
+"Expire time: {}\n"
+"Usage class: {}\n"
 msgstr ""
+"尊敬的用户 {}\\\n"
+"\\\n"
+"您的 Watashi 信息如下：\\\n"
+"UUID：{}\\\n"
+"最后在线时间：{}\\\n"
+"到期时间：{}\\\n"
+"套餐类别：{}\\\n"
+
+#, python-format
+msgid "Domain (%(domain)s)-> IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
+msgstr "域名 %(domain)s -> IP %(domain_ip)s 与您的 IP %(server_ip)s 不匹配，直连模式要求两者一致"
+
+msgid "From when the user package will be started? Empty for start from first connection"
+msgstr "用户套餐从何时开始计算？留空表示从首次连接开始"
+
+msgid "INCOMING SPEED.description"
+msgstr "INCOMING SPEED.description"
+
+msgid "INCOMING SPEED.label"
+msgstr "INCOMING SPEED.label"
+
+msgid "If monthly is enabled, the usage will be reset after 30 days from this date."
+msgstr "如果启用了按月重置，用量将在此日期 30 天后重置。"
+
+#, python-format
+msgid ""
+"If the application do not open automatically, please click <a class='btn btn-primary copy-link'\n"
+"                    href='%(sub)s'>this universal link</a> to copy and paste it on\n"
+"                your application, or:"
+msgstr "如果应用没有自动打开，请点击 <a class='btn btn-primary copy-link'\\n                    href='%(sub)s'>此通用链接</a> 复制并粘贴到应用中，或者："
+
+#, python-format
+msgid "It seems that you are using default domain (%(domain)s) which is not recommended."
+msgstr "您似乎正在使用默认域名（%(domain)s），不建议这样做。"
+
+msgid "Join our Watashi Telegram channel to get the latest updates on Watashi."
+msgstr "加入我们的 Watashi Telegram 频道，及时了解最新更新。"
+
+msgid "Load average:.description"
+msgstr "Load average:.description"
+
+msgid "Load average:.label"
+msgstr "Load average:.label"
+
+msgid "MEMORY USAGE.description"
+msgstr "MEMORY USAGE.description"
+
+msgid "MEMORY USAGE.label"
+msgstr "MEMORY USAGE.label"
+
+msgid "Memory Usage.description"
+msgstr "Memory Usage.description"
+
+msgid "Memory Usage.label"
+msgstr "Memory Usage.label"
+
+msgid "Network History.description"
+msgstr "Network History.description"
+
+msgid "Network History.label"
+msgstr "Network History.label"
+
+msgid "OUTGOING SPEED.description"
+msgstr "OUTGOING SPEED.description"
+
+msgid "OUTGOING SPEED.label"
+msgstr "OUTGOING SPEED.label"
+
+msgid "PANEL MEMORY.description"
+msgstr "PANEL MEMORY.description"
+
+msgid "PANEL MEMORY.label"
+msgstr "PANEL MEMORY.label"
+
+msgid "PANEL UPTIME.description"
+msgstr "PANEL UPTIME.description"
+
+msgid "PANEL UPTIME.label"
+msgstr "PANEL UPTIME.label"
+
+msgid "Panel Usage.description"
+msgstr "Panel Usage.description"
+
+msgid "Panel Usage.label"
+msgstr "Panel Usage.label"
+
+msgid "Please connect your telegram account to the panel to be informed about latest news."
+msgstr "请将您的 Telegram 账户连接到面板，以便及时了解最新消息。"
+
+msgid "Please understand that parent panel is under test and the plan and the condition of use maybe change at anytime."
+msgstr "请注意，父面板尚处于测试阶段，套餐和使用条款可能随时更改。"
+
+msgid "Real-time performance monitoring.description"
+msgstr "Real-time performance monitoring.description"
+
+msgid "Real-time performance monitoring.label"
+msgstr "Real-time performance monitoring.label"
+
+msgid "SWAP USAGE.description"
+msgstr "SWAP USAGE.description"
+
+msgid "SWAP USAGE.label"
+msgstr "SWAP USAGE.label"
+
+msgid "SYSTEM UPTIME.description"
+msgstr "SYSTEM UPTIME.description"
+
+msgid "SYSTEM UPTIME.label"
+msgstr "SYSTEM UPTIME.label"
+
+msgid "System Overview.description"
+msgstr "System Overview.description"
+
+msgid "System Overview.label"
+msgstr "System Overview.label"
+
+msgid "THREADS.description"
+msgstr "THREADS.description"
+
+msgid "THREADS.label"
+msgstr "THREADS.label"
+
+msgid "Time_D.description"
+msgstr "Time_D.description"
+
+msgid "Time_D.label"
+msgstr "Time_D.label"
+
+msgid "Time_H.description"
+msgstr "Time_H.description"
+
+msgid "Time_H.label"
+msgstr "Time_H.label"
+
+msgid "Time_M.description"
+msgstr "Time_M.description"
+
+msgid "Time_M.label"
+msgstr "Time_M.label"
+
+msgid "Time_S.description"
+msgstr "Time_S.description"
+
+msgid "Time_S.label"
+msgstr "Time_S.label"
+
+msgid "Total Traffic.description"
+msgstr "Total Traffic.description"
+
+msgid "Total Traffic.label"
+msgstr "Total Traffic.label"
+
+msgid "Total Users.description"
+msgstr "Total Users.description"
+
+msgid "Total Users.label"
+msgstr "Total Users.label"
+
+msgid "Users Overview.description"
+msgstr "Users Overview.description"
+
+msgid "Users Overview.label"
+msgstr "Users Overview.label"
+
+msgid "XRAY UPTIME.description"
+msgstr "XRAY UPTIME.description"
+
+msgid "XRAY UPTIME.label"
+msgstr "XRAY UPTIME.label"
+
+#, python-format
+msgid "You can download a json formated of configurations by clicking <a href='%(link)s' class='btn btn-primary'>here</a>"
+msgstr "点击 <a href='%(link)s' class='btn btn-primary'>这里</a> 可下载 json 格式的配置"
+
+#, python-format
+msgid "You have too much users! You can have only %(active)s active users and %(total)s users"
+msgstr "您的用户太多了！最多只能有 %(active)s 个活跃用户，共 %(total)s 个用户"
+
+msgid ""
+"Your watashi instance information \n"
+"Domain: {} \n"
+"Usage limit: {} GB\n"
+"Current usage: {} GB\n"
+"Expires at: {} \n"
+"Remaining days: {} \n"
+"\n"
+"\n"
+" Happy using 🎉 🎉 🎉 \n"
+msgstr ""
+"您的 Watashi 实例信息 \\\n"
+"域名：{} \\\n"
+"流量限额：{} GB\\\n"
+"当前用量：{} GB\\\n"
+"到期时间：{} \\\n"
+"剩余天数：{} \\\n"
+"\\\n"
+"\\\n"
+" 祝您使用愉快 🎉 🎉 🎉 \\\n"
+
+msgid "config.access_log_enable.description"
+msgstr "将用户访问的网站写入访问日志。仅在日志级别不是 Critical 时生效，在繁忙的服务器上会占用一些磁盘和 CPU。"
+
+msgid "config.access_log_enable.label"
+msgstr "📜 启用用户访问日志"
+
+msgid "config.amnezia_native_enable.description"
+msgstr "让 AmneziaWG 作为独立的原生服务运行，而不是仅通过 sing-box。"
+
+msgid "config.amnezia_native_enable.label"
+msgstr "启用原生 AmneziaWG"
+
+msgid "config.anytls.description"
+msgstr "AnyTLS 协议设置"
+
+msgid "config.anytls.label"
+msgstr "AnyTLS 配置"
+
+msgid "config.anytls_enable.description"
+msgstr "AnyTLS 隐藏在普通的 TLS 会话中，不需要自己的传输层。"
+
+msgid "config.anytls_enable.label"
+msgstr "启用 AnyTLS"
+
+msgid "config.anytls_port.description"
+msgstr "AnyTLS 的监听端口。每个域名会按自己的序号偏移。"
+
+msgid "config.anytls_port.label"
+msgstr "AnyTLS 端口"
+
+msgid "config.block_ads_custom.description"
+msgstr "输入要拦截的自定义域名，每行一个。例如：ads.example.com"
+
+msgid "config.block_ads_custom.label"
+msgstr "📝 自定义拦截列表"
+
+msgid "config.block_ads_enable.description"
+msgstr "在代理层拦截广告和跟踪器。注意：YouTube 广告无法拦截，因为它与视频来自同一域名。"
+
+msgid "config.block_ads_enable.label"
+msgstr "🚫 拦截广告和跟踪器"
+
+msgid "config.block_malware_enable.description"
+msgstr "拦截恶意软件、钓鱼和恶意域名，保护用户安全"
+
+msgid "config.block_malware_enable.label"
+msgstr "🛡️ 拦截恶意软件和钓鱼"
+
+msgid "config.block_nsfw_enable.description"
+msgstr "拦截 NSFW 内容，包括赌博、博彩和成人内容"
+
+msgid "config.block_nsfw_enable.label"
+msgstr "🔞 拦截 NSFW（成人 + 赌博）"
+
+msgid "config.block_social_enable.description"
+msgstr "拦截 Facebook、TikTok、Instagram、Twitter 等社交媒体平台"
+
+msgid "config.block_social_enable.label"
+msgstr "📵 拦截社交媒体"
+
+msgid "config.hysteria_obfs_password.description"
+msgstr "Hysteria2 混淆层的 Salamander 密码。留空则回退到面板路径。更改后每个客户端都会获得新的订阅。"
+
+msgid "config.hysteria_obfs_password.label"
+msgstr "🔑 Hysteria OBFS 密码"
+
+msgid "config.mieru_handshake.description"
+msgstr "选择 Mieru 的握手行为。"
+
+msgid "config.mieru_handshake.label"
+msgstr "Mieru 握手"
+
+msgid "config.mieru_multiplexing.description"
+msgstr "选择 Mieru 的多路复用配置。"
+
+msgid "config.mieru_multiplexing.label"
+msgstr "Mieru 多路复用"
+
+msgid "config.mieru_tcp_ports.description"
+msgstr "TCP 端口或端口范围，用逗号分隔。"
+
+msgid "config.mieru_tcp_ports.label"
+msgstr "Mieru TCP 端口"
+
+msgid "config.mieru_udp_ports.description"
+msgstr "UDP 端口或端口范围，用逗号分隔。"
+
+msgid "config.mieru_udp_ports.label"
+msgstr "Mieru UDP 端口"
+
+msgid "config.naive_padding.description"
+msgstr "为 NaiveProxy 流量启用填充。"
+
+msgid "config.naive_padding.label"
+msgstr "NaiveProxy 填充"
+
+msgid "config.shadowtls_password.description"
+msgstr "ShadowTLS 的共享认证密码。"
+
+msgid "config.shadowtls_password.label"
+msgstr "ShadowTLS 密码"
+
+msgid "config.shadowtls_port.description"
+msgstr "ShadowTLS 使用的对外端口。"
+
+msgid "config.shadowtls_port.label"
+msgstr "ShadowTLS 端口"
+
+msgid "config.shadowtls_server_name.description"
+msgstr "ShadowTLS 伪装的 TLS 服务器名称。"
+
+msgid "config.shadowtls_server_name.label"
+msgstr "ShadowTLS 服务器名称"
+
+msgid "config.snell.description"
+msgstr "Snell v6 协议设置"
+
+msgid "config.snell.label"
+msgstr "Snell 配置"
+
+msgid "config.snell_enable.description"
+msgstr "带流量整形的 Snell v6。仅基于 sing-box 的客户端可读。"
+
+msgid "config.snell_enable.label"
+msgstr "启用 Snell"
+
+msgid "config.snell_mode.description"
+msgstr "流量整形模式：default、unshaped 或 unsafe-raw。"
+
+msgid "config.snell_mode.label"
+msgstr "Snell 模式"
+
+msgid "config.snell_port.description"
+msgstr "Snell 的监听端口。每个域名会按自己的序号偏移。"
+
+msgid "config.snell_port.label"
+msgstr "Snell 端口"
+
+msgid "config.snell_psk.description"
+msgstr "服务器密钥。长度必须为 12 到 255 个字符。"
+
+msgid "config.snell_psk.label"
+msgstr "Snell PSK"
+
+msgid "The default proxies could not be brought back: @WHY@"
+msgstr "无法恢复默认代理：@WHY@"
+
+msgid "@N@ proxies were brought back, @M@ could not be written: @WHY@"
+msgstr "已恢复 @N@ 个代理，@M@ 个写入失败：@WHY@"
+
+msgid "managed by the CDN"
+msgstr "由 CDN 管理"
+
+msgid "This name belongs to a CDN, so the CDN keeps its certificate. The panel does not ask an authority for it."
+msgstr "此名称属于 CDN，因此证书由 CDN 保管。面板不会向证书颁发机构申请。"
+
+msgid "The certificate of this domain is kept by the CDN, not by this server."
+msgstr "此域名的证书由 CDN 保管，而不是此服务器。"
+
+#, python-format
+msgid "Your user limit leaves room for only %(left)s more users, so that many were created."
+msgstr "您的用户配额只够再添加 %(left)s 个用户，因此只创建了这么多。"
+
+#, python-format
+msgid "Your traffic quota has room for only %(left)s GB, so a %(need)s GB user does not fit."
+msgstr "您的流量配额只剩 %(left)s GB，无法创建 %(need)s GB 的用户。"
+
+#, python-format
+msgid "Your traffic quota leaves room for only %(left)s more users, so that many were created."
+msgstr "您的流量配额只够再创建 %(left)s 个用户，因此只创建了这么多。"
+
+msgid "Config Health"
+msgstr "配置健康状况"
+
+msgid "Test the configs"
+msgstr "测试配置"
+
+msgid "Healthy"
+msgstr "健康"
+
+msgid "Not answering"
+msgstr "无响应"
+
+msgid "Not testable here"
+msgstr "此处无法测试"
+
+msgid "Average answer"
+msgstr "平均响应"
+
+msgid "Search a config"
+msgstr "搜索配置"
+
+msgid "Both cores"
+msgstr "两个内核"
+
+msgid "no core here"
+msgstr "此处无内核"
+
+msgid "answers"
+msgstr "有响应"
+
+msgid "no answer"
+msgstr "无响应"
+
+msgid "healthy"
+msgstr "健康"
+
+#, python-format
+msgid "testing %(done)s of %(total)s"
+msgstr "正在测试 %(done)s / %(total)s"
+
+#, python-format
+msgid "%(good)s of %(tested)s configs answered"
+msgstr "%(tested)s 个配置中 %(good)s 个有响应"
+
+msgid "A test is already running. Wait for it to finish."
+msgstr "测试已在运行中。请等待其完成。"
+
+msgid "Pick an account first."
+msgstr "请先选择一个账户。"
+
+msgid "No result yet."
+msgstr "尚无结果。"
+
+msgid "Nothing matches this filter."
+msgstr "此筛选条件下没有内容。"
+
+msgid "This page was left open too long. Reload it and try again."
+msgstr "页面打开时间过长。请刷新后重试。"
+
+#, python-format
+msgid "The xray core was not found at %(path)s."
+msgstr "未在 %(path)s 找到 xray 内核。"
+
+#, python-format
+msgid "The sing-box core was not found at %(path)s."
+msgstr "未在 %(path)s 找到 sing-box 内核。"
+
+msgid "Pick an account and press the button. The configs are tested one at a time, so a full run takes a couple of minutes."
+msgstr "选择账户并点击按钮。配置会逐个测试，完整测试需要几分钟。"
+
+msgid "Every config is started on the core that can run it and asked for one page. Green means the config itself is sound, measured from this server; it does not promise the config gets through a filter."
+msgstr "每个配置都会在能运行它的内核上启动并请求一个页面。绿色表示配置本身有效（从此服务器测量）；这不保证它能穿透过滤。"
+
+msgid "Account"
+msgstr "账户"
+
+msgid "finished"
+msgstr "已完成"
+
+msgid "testing {done} of {total}"
+msgstr "正在测试 {done} / {total}"
+
+msgid "{good} of {tested} configs answered"
+msgstr "{tested} 个配置中 {good} 个有响应"
+
+msgid "Start the bot as this admin"
+msgstr "以此管理员身份启动机器人"
+
+msgid "Open in Telegram"
+msgstr "在 Telegram 中打开"
+
+msgid "Open in a browser"
+msgstr "在浏览器中打开"
+
+msgid "Press the button on the device where you use Telegram. The bot links that chat to your admin account, and only then can it answer you."
+msgstr "请在您使用 Telegram 的设备上点击按钮。机器人会将该聊天与您的管理员账户绑定，之后才能回复您。"
+
+msgid "Telegram is told to deliver every message to @DOMAIN@. If the bot stays silent on this server, run watashi-panel-cli tgbot-doctor."
+msgstr "Telegram 已被指示将所有消息发送到 @DOMAIN@。如果机器人在此服务器上没有反应，请运行 watashi-panel-cli tgbot-doctor。"
+
+msgid "The start link was copied."
+msgstr "启动链接已复制。"
+
+msgid "The start link could not be copied."
+msgstr "启动链接复制失败。"
+
+msgid "Network card traffic since boot"
+msgstr "开机以来的网卡流量"
+
+msgid "Received"
+msgstr "接收"
+
+msgid "Sent"
+msgstr "发送"
+
+msgid "This is what the network card itself counted. Every byte a user spends passes it twice, once coming in and once going out, and the server's own updates and backups are counted here too. It being around twice the users' total is normal, not a mistake."
+msgstr "这是网卡本身统计的数据。用户的每个字节都会经过它两次（一次进、一次出），服务器自身的更新和备份也计入其中。数值约为用户总流量的两倍是正常现象，并非错误。"
+
+msgid "testing now"
+msgstr "正在测试"
+
+msgid "the other core answered this one"
+msgstr "此配置由另一个内核响应"
+
+msgid "The job keeps running on the server. This page picks up again by itself the moment the panel answers, there is no need to refresh it."
+msgstr "任务会在服务器上继续运行。面板恢复响应后此页面会自动恢复，无需刷新。"
+
+msgid "The job ended with an error (code {code})."
+msgstr "任务以错误结束（代码 {code}）。"
+
+msgid "The update is running on the server. The panel goes away for a few minutes in the middle of it; this page keeps following the log and says when it is over."
+msgstr "更新正在服务器上运行。期间面板会短暂消失；此页面会持续跟随日志并在结束时告知。"
+
+msgid "A certificate was issued but could not be put in place. The log below says why."
+msgstr "证书已签发，但无法安装。下方日志说明了原因。"
+
+msgid "A domain longer than 64 characters cannot get a certificate."
+msgstr "超过 64 个字符的域名无法获取证书。"
+
+msgid "A new certificate is asked for this domain right now, even if the current one still looks valid. Use it after moving to a new server, restoring a backup or fixing the DNS record."
+msgstr "正在为此域名重新申请证书，即使当前证书仍然有效。适用于迁移到新服务器、恢复备份或修复 DNS 记录之后。"
+
+msgid "Another certificate request for this domain was still running. Try again in a few minutes."
+msgstr "此域名的另一个证书申请仍在进行中。请几分钟后重试。"
+
+msgid "Ask again"
+msgstr "再次申请"
+
+msgid "Ask for a new SSL certificate for this domain now"
+msgstr "立即为此域名申请新的 SSL 证书"
+
+msgid "Asking the certificate authority..."
+msgstr "正在向证书颁发机构申请…"
+
+msgid "Every request counts against the limits of the authority (Let's Encrypt allows five for the same domain in a week), so do not repeat it without a reason."
+msgstr "每次申请都会消耗颁发机构的限额（Let's Encrypt 一个域名一周最多五次），请勿无谓重复。"
+
+msgid "Get SSL"
+msgstr "获取 SSL"
+
+msgid "Get a new certificate"
+msgstr "获取新证书"
+
+msgid "Getting SSL..."
+msgstr "正在获取 SSL…"
+
+msgid "New SSL certificate"
+msgstr "新的 SSL 证书"
+
+msgid "No authority issued a certificate. The domain keeps its previous certificate, or a self-signed one. The log below says why."
+msgstr "没有任何颁发机构签发证书。域名会保留原来的证书或自签名证书。下方日志说明了原因。"
+
+msgid "Not trusted"
+msgstr "不受信任"
+
+msgid "Self-signed"
+msgstr "自签名"
+
+msgid "The certificate request could not be started."
+msgstr "无法开始证书申请。"
+
+msgid "The certificate was read from this server itself."
+msgstr "证书是从本服务器本地读取的。"
+
+msgid "The current certificate is still good, so nothing was asked."
+msgstr "当前证书仍然有效，因此未申请新证书。"
+
+msgid "The last attempt failed a short while ago, so nothing was asked this time."
+msgstr "上次尝试刚失败不久，因此这次未再申请。"
+
+msgid "The last check says this domain does not point at this server. The request fails until the DNS record is fixed."
+msgstr "上次检查显示此域名未指向此服务器。在 DNS 记录修复之前申请都会失败。"
+
+msgid "The last request stopped before it finished."
+msgstr "上次请求中途停止。"
+
+msgid "The last request:"
+msgstr "上次请求："
+
+msgid "The new certificate is in place."
+msgstr "新证书已就位。"
+
+msgid "The new certificate is in place. It lasts @N@ days."
+msgstr "新证书已就位。有效期 @N@ 天。"
+
+msgid "The request ended without saying how. The log below may tell."
+msgstr "请求结束但未说明原因。下方日志可能提供线索。"
+
+msgid "This can take a few minutes. You can close this window, the request goes on."
+msgstr "这可能需要几分钟。可以关闭此窗口，申请会继续进行。"
+
+msgid "This certificate is self-signed, so the clients refuse it."
+msgstr "此证书为自签名，客户端会拒绝它。"
+
+msgid "This domain does not point at this server, so no authority could check it. Point it at this server, wait a few minutes, then ask again."
+msgstr "此域名未指向此服务器，因此没有颁发机构能验证它。请将域名指向此服务器，等待几分钟后再申请。"
+
+msgid "This domain has no DNS record, so no authority could check it."
+msgstr "此域名没有 DNS 记录，因此没有颁发机构能验证它。"
+
+msgid "This is not a name an authority issues certificates for."
+msgstr "这不是证书颁发机构为其签发证书的名称。"
+
+msgid "This name is served by another server or a CDN, so no certificate was asked for."
+msgstr "此名称由其他服务器或 CDN 提供，因此未申请证书。"
+
+msgid "This server does not ask an authority for the certificate of this domain."
+msgstr "此服务器不会为此域名的证书申请颁发机构。"
+
+msgid "This server holds only a self-signed certificate for this domain, and the clients refuse it."
+msgstr "此服务器上此域名只有自签名证书，客户端会拒绝它。"
+
+msgid "config.advanced_mode.label"
+msgstr "高级模式"
+
+msgid "config.advanced_mode.description"
+msgstr "打开 Inbounds 页面和专家设置。"
+
+msgid "config.custom_inbounds_keep.label"
+msgstr "在简单模式下保留手动创建的 inbounds"
+
+msgid "config.custom_inbounds_keep.description"
+msgstr "开启后，高级模式下创建的 inbounds 会在简单模式下继续服务。关闭则暂停它们。"
+
+
+# --- API book: matrix and subscription additions ---
+
+msgid "Parent API"
+msgstr "父面板 API"
+
+msgid "The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers."
+msgstr "矩阵模式中由父面板应答的一半。标为“面板密钥”的行使用子面板的密钥调用；子面板注册后父面板就会记住该密钥。"
+
+msgid "Child API"
+msgstr "子面板 API"
+
+msgid "The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers."
+msgstr "矩阵模式中由子面板应答的一半。标为“面板密钥”的行使用父面板的密钥调用；子面板注册后即持有该密钥。"
+
+msgid "Panel key"
+msgstr "面板密钥"
+
+msgid "Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out."
+msgstr "读取请求的应用并以它理解的格式应答。浏览器得到客户页面，应用得到自己的配置。就是要交给用户的那个链接。"
+
+msgid "The customer page"
+msgstr "客户页面"
+
+msgid "The page a customer opens in a browser to pick an app and copy their links."
+msgstr "客户在浏览器中打开的页面，用于选择应用并复制自己的链接。"
+
+msgid "Text links"
+msgstr "文本链接"
+
+msgid "The same links without base64, one per line."
+msgstr "相同的链接，不带 base64，每行一个。"
+
+msgid "Xray json"
+msgstr "Xray JSON"
+
+msgid "The whole profile as the json an Xray client imports."
+msgstr "整个配置文件，格式为 Xray 客户端可导入的 JSON。"
+
+msgid "Only the proxies"
+msgstr "仅代理"
+
+msgid "Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo."
+msgstr "仅 YAML 的 proxies 部分，适合自己维护配置文件的用户。Mihomo 用 clash/meta/proxies.yml。"
+
+msgid "The whole profile as sing-box json. singbox/ is the same file under a shorter name."
+msgstr "整个配置文件的 sing-box JSON。singbox/ 是同一文件的简短地址。"
+
+msgid "Sing-Box with ssh"
+msgstr "Sing-Box（含 SSH）"
+
+msgid "The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off."
+msgstr "在 sing-box JSON 中加入该账号的 SSH 隧道。若 SSH 服务器已关闭，会返回相应提示。"
+
+msgid "Echo the user agent"
+msgstr "回显 User-Agent"
+
+msgid "Debug: answers with the user agent the panel saw. Handy to check what an app sends."
+msgstr "调试：返回面板看到的 User-Agent。方便检查应用发送的内容。"
+
+msgid "Does this child exist"
+msgstr "该子面板是否存在"
+
+msgid "A child asks with its unique id before it registers; the answer is whether the parent already holds such a child."
+msgstr "子面板在注册前用自己的唯一 ID 询问；回答是父面板是否已存在该子面板。"
+
+msgid "Register a child"
+msgstr "注册子面板"
+
+msgid "The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even."
+msgstr "子面板交出其整个面板：管理员、客户、域名、配置和代理。父面板返回自己的客户和管理员，使双方数据对齐。"
+
+msgid "Sync a child"
+msgstr "同步子面板"
+
+msgid "The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required."
+msgstr "子面板推送其域名、配置和代理；父面板返回完整的客户和管理员列表。三个列表至少需要一个。"
+
+msgid "Push the usage"
+msgstr "推送用量"
+
+msgid "The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds."
+msgstr "子面板上报每个客户的消耗；父面板只累加增量并返回其当前记录的用量。"
+
+msgid "Register with a parent"
+msgstr "向父面板注册"
+
+msgid "Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already."
+msgstr "将本面板设为某父面板的子面板。parent_panel 是父面板地址，apikey 是其所有者的密钥。面板须为独立模式或已是子面板。"
+
+msgid "Sync now"
+msgstr "立即同步"
+
+msgid "Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel."
+msgstr "拉取父面板的全部数据并重写本地数据。父面板可以调用，本面板的所有者也可以。"
+
+msgid "Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive."
+msgstr "在本面板上运行 status 命令并返回 ok。父面板调用它以确认子面板存活。"
+
+msgid "Restarts the services of this panel."
+msgstr "重启本面板的服务。"
+
+msgid "Apply the config"
+msgstr "应用配置"
+
+msgid "Rebuilds the running config from the database, without a full install."
+msgstr "从数据库重建运行中的配置，无需完整安装。"
+
+msgid "Runs the installer again. With full set, it installs everything from the start."
+msgstr "再次运行安装程序。设为 full 时从头安装全部内容。"
+
+msgid "Refresh the usage"
+msgstr "刷新用量"
+
+msgid "Reads the usage off the cores of this panel right now."
+msgstr "立即从本面板的内核读取用量。"
+
+msgid "Auto"
+msgstr "自动"
+
+msgid "Device Limit Enforced"
+msgstr "已启用设备限制"
+
+msgid "No Device Limit"
+msgstr "无设备限制"
+
+msgid "App Distribution"
+msgstr "应用分布"
+
+msgid "Operator Distribution"
+msgstr "运营商分布"
+
+msgid "Unknown app"
+msgstr "未知应用"
+
+msgid "Unknown operator"
+msgstr "未知运营商"
+
+msgid "Turn on the device limit"
+msgstr "开启设备限制"
+
+msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
+msgstr "本页面独立追踪每台设备，即使关闭设备限制也能正常工作。仅在开启限制时生效的功能：拦截超额设备、「应用程序不受支持」锁定以及超限标记。"

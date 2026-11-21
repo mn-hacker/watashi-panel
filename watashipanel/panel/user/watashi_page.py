@@ -168,6 +168,9 @@ def to_jalali(day):
     return year, month, doy
 
 
+WS_LANGS = ('fa', 'en', 'ru', 'zh')  # watashi v12.3.49dev: the user page speaks every language the panel does
+
+
 def day_words(day, lang):
     '''Writes a date the way the reader expects it.'''
     if not day:
@@ -526,13 +529,13 @@ def ws_lang_now(user=None):  # watashi v12.3.44dev: user, whose page this is
         picked = request.args.get('lang', '')
     except Exception:
         picked = ''
-    if picked not in ('fa', 'en'):
+    if picked not in WS_LANGS:
         picked = ''
     try:
         kept = request.cookies.get('watashi_lang', '')
     except Exception:
         kept = ''
-    if kept not in ('fa', 'en'):
+    if kept not in WS_LANGS:
         kept = ''
     lang = picked or kept
     # watashi v12.3.44dev: the user's own language, then the one of the design
@@ -541,7 +544,7 @@ def ws_lang_now(user=None):  # watashi v12.3.44dev: user, whose page this is
             user = g.get('account', None) if g else None
         own = getattr(user, 'lang', None)
         own = str(getattr(own, 'name', None) or own or '')[:2]
-        if own in ('fa', 'en'):
+        if own in WS_LANGS:
             lang = own
         elif user is not None:
             try:
@@ -554,7 +557,7 @@ def ws_lang_now(user=None):  # watashi v12.3.44dev: user, whose page this is
         except Exception:
             lang = 'en'
     lang = str(lang)[:2]
-    if lang not in ('fa', 'en'):
+    if lang not in WS_LANGS:
         lang = 'en'
     return lang, picked
 
@@ -620,7 +623,7 @@ def configs_data(common, configs, tunnels, note=''):
                           'tone': row['tone'], 'icon': row['icon']})
     kinds.sort(key=lambda seen: (-seen['n'], seen['id']))
     first_word, last_word, whole_brand = brand_parts(settings, design)  # watashi v12.3.44dev: the name of the design
-    lang_next = 'en' if lang == 'fa' else 'fa'
+    lang_next = WS_LANGS[(WS_LANGS.index(lang) + 1) % len(WS_LANGS)]
     try:
         here = request.path
     except Exception:
@@ -713,7 +716,7 @@ def page_data(common, lang, tunnels=None):  # watashi v12.2.130ao
     except Exception:
         ends = None
 
-    lang_next = 'en' if lang == 'fa' else 'fa'
+    lang_next = WS_LANGS[(WS_LANGS.index(lang) + 1) % len(WS_LANGS)]
     try:
         here = request.path
     except Exception:

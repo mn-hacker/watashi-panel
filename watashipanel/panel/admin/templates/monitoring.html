@@ -169,6 +169,9 @@
         .device-detail-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .device-detail-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
         .device-detail-item .device-name { font-family: 'JetBrains Mono', 'Consolas', monospace; color: var(--text-main); }
+        /* watashi v12.3.50dev: the app and the carrier of a device, inline under the name */
+        .device-detail-item .device-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+        .device-detail-item .device-meta-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-muted); background: var(--bg-secondary, rgba(148,163,184,.1)); border: 1px solid var(--border-color); border-radius: 999px; padding: 2px 8px; }
         .device-detail-item .first-seen { color: var(--text-muted); font-size: 10px; }
 
         .traffic-stats { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -406,6 +409,17 @@
                 </div>
             </div>
 
+            {% if not stats.limit_enabled %}
+            <!-- watashi v12.3.50dev: the page works without the master switch; the parts that need it say so -->
+            <div class="spike-alert animated-item delay-2" style="border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.08);">
+                <i class="fa-solid fa-circle-info" style="color: var(--primary-orange);"></i>
+                <div>
+                    {{ _('This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the "device not supported" lockout and the over-limit marks.') }}
+                    <a href="{{ hurl_for('admin.SettingAdmin:index') }}" style="color: var(--primary-orange); text-decoration: underline; cursor: pointer;">{{ _('Turn on the device limit') }}</a>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Device Analytics -->
             {% if trend_spike %}
             <div class="spike-alert animated-item delay-2">
@@ -421,6 +435,16 @@
                 <div class="chart-card">
                     <div class="chart-card-head"><h3><i class="fa-solid fa-mobile-screen" style="color: var(--primary-blue);"></i> {{ _('Device OS Distribution') }}</h3></div>
                     <div class="chart-canvas-wrap"><canvas id="osDistChart"></canvas></div>
+                </div>
+            </div>
+            <div class="charts-row animated-item delay-3">
+                <div class="chart-card">
+                    <div class="chart-card-head"><h3><i class="fa-solid fa-window-restore" style="color: var(--primary-green);"></i> {{ _('App Distribution') }}</h3></div>
+                    <div class="chart-canvas-wrap"><canvas id="appDistChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-card-head"><h3><i class="fa-solid fa-tower-cell" style="color: var(--primary-orange);"></i> {{ _('Operator Distribution') }}</h3></div>
+                    <div class="chart-canvas-wrap"><canvas id="opDistChart"></canvas></div>
                 </div>
             </div>
 
@@ -444,6 +468,8 @@
                         <button class="filter-chip active" data-filter="all">{{ _('All') }}</button>
                         <button class="filter-chip" data-filter="online">{{ _('Online') }}</button>
                         <button class="filter-chip" data-filter="over">{{ _('Over Limit') }}</button>
+                        <button class="filter-chip" data-filter="enforced">{{ _('Device Limit Enforced') }}</button>
+                        <button class="filter-chip" data-filter="regular">{{ _('No Device Limit') }}</button>
                     </div>
                 </div>
                 <div class="table-scroll">
@@ -694,7 +720,12 @@ function detailHtml(u, idx){
   var devs=u.devices||[]; var items='';
   if(devs.length>0){
     devs.forEach(function(d){
-      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.os)+' '+esc(d.model)+'</span><span class="first-seen">'+esc(d.last_seen)+'</span></div>'
+      var tags='';
+      if(d.app) tags+='<span class="device-meta-tag"><i class="fa-solid fa-window-restore"></i> '+esc(d.app)+'</span>';
+      if(d.operator) tags+='<span class="device-meta-tag"><i class="fa-solid fa-tower-cell"></i> '+esc(d.operator)+'</span>';
+      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.os)+' '+esc(d.model)+'</span>'
+        +(tags?'<span class="device-meta">'+tags+'</span>':'')
+        +'<span class="first-seen">'+esc(d.last_seen)+'</span></div>'
         +'<button class="device-kick-btn" title="'+escAttr(I18N.removeDevice)+'" onclick="event.stopPropagation();kickDevice(\''+escAttr(u.uuid)+'\',\''+escAttr(d.hwid)+'\',this)"><i class="fa-solid fa-trash-can"></i></button></li>';
     });
   } else { items='<li class="device-detail-item"><span>'+esc(I18N.noDevices)+'</span></li>'; }
@@ -737,7 +768,10 @@ class DeviceTable {
     return this.data.filter(function(u){
       if(f==='online' && !(u.device_count>0)) return false;
       if(f==='over' && !u.over_limit) return false;
-      if(q){ var hay=((u.name||'')+' '+(u.devices||[]).map(function(d){ return d.os+' '+d.model; }).join(' ')).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      // watashi v12.3.50dev: flagged users and the rest of them, side by side
+      if(f==='enforced' && !u.enforced) return false;
+      if(f==='regular' && u.enforced) return false;
+      if(q){ var hay=((u.name||'')+' '+(u.devices||[]).map(function(d){ return d.os+' '+d.model+' '+d.app+' '+d.operator; }).join(' ')).toLowerCase(); if(hay.indexOf(q)<0) return false; }
       return true;
     });
   }
@@ -803,6 +837,8 @@ document.addEventListener('DOMContentLoaded', function(){
 <script>
 (function(){
   var OS_DIST = {{ os_distribution | tojson }};
+  var APP_DIST = {{ app_distribution | tojson }};
+  var OP_DIST = {{ operator_distribution | tojson }};
   var DEVICE_TREND = {{ device_trend | tojson }};
   var TREND_LABEL = {{ _('New devices') | tojson }};
   var BULK_RESET_LABEL = {{ _('Reset all over-limit') | tojson }};
@@ -840,6 +876,24 @@ document.addEventListener('DOMContentLoaded', function(){
         oEl.parentNode.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;">' + (typeof I18N !== 'undefined' && I18N.noDataYet ? I18N.noDataYet : '') + '</div>';
       }
     }
+
+    // watashi v12.3.50dev: the app and the carrier charts, same doughnut, same palette
+    function distChart(elId, data) {
+      var el = document.getElementById(elId);
+      if (!el) { return; }
+      if (data && data.length) {
+        var pal2 = ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#7c3aed', '#14b8a6', '#64748b', '#ef4444', '#8b5cf6', '#0ea5e9'];
+        new Chart(el.getContext('2d'), {
+          type: 'doughnut',
+          data: { labels: data.map(function(d){ return d.label; }), datasets: [ { data: data.map(function(d){ return d.count; }), backgroundColor: pal2, borderWidth: 0, hoverOffset: 6 } ] },
+          options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'bottom', labels: { color: textMuted, boxWidth: 12, padding: 14, usePointStyle: true } } } }
+        });
+      } else {
+        el.parentNode.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;">' + (typeof I18N !== 'undefined' && I18N.noDataYet ? I18N.noDataYet : '') + '</div>';
+      }
+    }
+    distChart('appDistChart', APP_DIST);
+    distChart('opDistChart', OP_DIST);
   }
 
   function initBulk(){

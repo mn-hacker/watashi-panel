@@ -4,7 +4,7 @@ import json
 
 from watashipanel import hutils
 from watashipanel.hutils.proxy.xrayjson import to_xray
-from watashipanel.models import ProxyProto, ProxyTransport, Domain, ConfigEnum
+from watashipanel.models import ProxyProto, ProxyTransport, Domain, DomainType, ConfigEnum
 
 
 def ws_ended_outbound() -> dict:
@@ -27,6 +27,10 @@ def configs_as_json(domains: list[Domain], **kwargs) -> str:
 
     allp = []
     for d in domains:
+        # watashi v12.3.49dev: a sub-link-only domain is a signpost for the
+        # subscription picker, never a host, so it stays out of the dns rules.
+        if d.mode == DomainType.sub_link_only:
+            continue
         base_config['dns']['rules'][0]['domain'].append(d.domain)
     # watashi v12.2.130bi: a finished account used to get the whole profile
     # here, freshly rebuilt on every refresh, because nothing on this path

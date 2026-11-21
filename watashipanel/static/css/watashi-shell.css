@@ -389,7 +389,12 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
         .upgrade-card p { font-size: 10px; color: var(--text-muted); }
 
         /* --- Main Content --- */
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: scroll; position: relative; z-index: 2; }
+        /* watashi v12.3.49dev: `scroll` paints the scrollbar gutter even when
+           the page fits, which on a wheel scroll made the content box breathe
+           (jump left-right) as the bar appeared and vanished. `auto` only
+           shows the bar when there is something to scroll, and the stable
+           gutter keeps the layout from shifting when it does. */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; scrollbar-gutter: stable; position: relative; z-index: 2; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid var(--border-color); background-color: var(--bg-body); transition: background-color 0.5s ease, border-color 0.5s ease; }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .menu-toggle { display: none; font-size: 20px; cursor: pointer; color: var(--text-main); transition: color 0.3s; }
@@ -712,9 +717,16 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
 
         .nav-item-group { display: flex; flex-direction: column; }
 
-        .nav-item-header { display: flex; align-items: center; justify-content: flex-start; padding: 12px 15px; border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; margin: 0 16px; position: relative; z-index: 1; }
+        .nav-item-header { display: flex; align-items: center; justify-content: flex-start; padding: 12px 15px; border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: background 0.3s ease, color 0.3s ease; margin-inline: 16px; position: relative; z-index: 1; } /* watashi v12.3.49dev: margin-inline for RTL; transition narrowed off `all` so width/transform churn from the expand glide cannot animate the row box */
         .sidebar.expanded .nav-item-header { padding: 12px 15px; }
         .nav-item-header:hover { background: var(--bg-card); color: var(--text-main); }
+        /* watashi v12.3.49dev: the collapsed rail centres the icons on the
+           axis that survives the width animation. The old margin hacked the
+           box over by 16px on the physical side, which in RTL pushed the
+           icons off-centre (towards the border) - the "icons sit further
+           back" you saw with the menu closed. margin-inline is direction
+           aware and keeps them dead centre in both. */
+        .nav-item-header { margin-inline: 16px; }
 
         .nav-item-header::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 0; height: 0; border-radius: 50%; background: linear-gradient(90deg, rgb(var(--ws-i)) 0%, rgb(var(--ws-a-500)) 100%); opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1; } /* watashi v12.3.44dev: palette colour */
         .sidebar:not(.expanded) .nav-item-header.active::before { width: 44px; height: 44px; opacity: 1; box-shadow: 0 4px 15px rgb(var(--ws-i) / 0.25); }
@@ -734,12 +746,16 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
         .nav-accordion { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s; display: flex; flex-direction: column; gap: 4px; margin-top: 0; }
         .sidebar.expanded .nav-item-group.open .nav-accordion { max-height: 160px; opacity: 1; margin-top: 4px; margin-bottom: 8px; }
 
-        .nav-item { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s ease; margin: 0 16px; }
+        .nav-item { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease; margin-inline: 16px; } /* watashi v12.3.49dev: margin-inline twins the margins in RTL; `all` narrowed so the expand glide cannot re-trigger the row transition */
         .sidebar.expanded:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) .nav-item { padding: 10px 16px 10px 40px; } .sidebar.expanded:where(:root[dir="rtl"], :root[dir="rtl"] *) .nav-item { padding: 10px 40px 10px 16px; } /* watashi v12.3.44dev: right-to-left twin */
 
         .nav-item i { font-size: 14px; width: 24px; text-align: center; opacity: 0.6; transition: opacity 0.2s; flex-shrink: 0; }
         .nav-item:hover { background: var(--bg-detail); color: var(--text-main); }
-        .sidebar.expanded .nav-item:hover { transform: translateX(4px); }
+        /* watashi v12.3.49dev: the hover slide follows the reading direction -
+           it used to push 4px right in RTL too, against the text flow, which
+           read as the row "lagging behind" its own icon. */
+        .sidebar.expanded:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) .nav-item:hover { transform: translateX(4px); }
+        .sidebar.expanded:where(:root[dir="rtl"], :root[dir="rtl"] *) .nav-item:hover { transform: translateX(-4px); }
         .nav-item:hover i { opacity: 1; color: var(--primary-purple); }
 
         .nav-accordion .nav-item:first-child { margin-top: 4px; }

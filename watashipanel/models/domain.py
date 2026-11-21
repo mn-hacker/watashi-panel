@@ -245,9 +245,14 @@ class Domain(db.Model):
     def get_domains(cls, always_add_ip=False, always_add_all_domains=False) -> List['Domain']:
         from watashipanel import hutils
         domains = []
-        domains = db.session.query(Domain).filter(Domain.mode == DomainType.sub_link_only, Domain.enable != False, Domain.child_id == Child.current().id).all()
+        # watashi v12.3.49dev: a sub-link-only domain is a signpost, never a
+        # host. It only feeds the subscription picker, so it can never be the
+        # answer here - the old "if some exist, use them alone" branch handed
+        # the whole panel (cli export, panel links, tunnels) a domain that is
+        # not allowed to carry a config.
+        domains = db.session.query(Domain).filter(Domain.enable != False, Domain.child_id == Child.current().id, Domain.mode.notin_([DomainType.sub_link_only, DomainType.fake, DomainType.reality, DomainType.special_reality_tcp, DomainType.special_reality_xhttp, DomainType.special_reality_grpc])).all()
         if not len(domains) or always_add_all_domains:
-            domains = db.session.query(Domain).filter(Domain.enable != False, Domain.mode.notin_([DomainType.fake, DomainType.reality,DomainType.special_reality_tcp,DomainType.special_reality_xhttp,DomainType.special_reality_grpc])).all()
+            domains = db.session.query(Domain).filter(Domain.enable != False, Domain.mode.notin_([DomainType.sub_link_only, DomainType.fake, DomainType.reality,DomainType.special_reality_tcp,DomainType.special_reality_xhttp,DomainType.special_reality_grpc])).all()
 
         if len(domains) == 0 and request:
             domains = [Domain(domain=request.host)]  # type: ignore

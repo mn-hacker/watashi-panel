@@ -65,6 +65,10 @@ class UserView(FlaskView):
         #     return 'The Full Xray subscription is disabled'
         c = get_common_data(g.account.uuid, mode="new")
         configs = hutils.proxy.xrayjson.configs_as_json(c['domains'], c['user'], c['expire_days'], c['profile_title'])
+        # an empty json (no proxy and no usage row) falls back to the plain
+        # links, so the auto sub never answers with an empty body.
+        if not configs:
+            return ''
         return add_headers(configs, c, 'application/json')
 
     @route("/singbox/")
@@ -235,9 +239,11 @@ class UserView(FlaskView):
         if g.user_agent['is_singbox'] or re.match('^(HiddifyNext|Dart|SFI|SFA)', ua, re.IGNORECASE):
             return self.full_singbox_imp()
 
-        if re.match('^(Clash-verge|Clash-?Meta|Stash|NekoBox|NekoRay|Pharos|hiddify-desktop)', ua, re.IGNORECASE):
+        # watashi v12.3.50dev: the flags already carry the family words found
+        # anywhere in the agent (mihomo, FlClash, Verge, sing-box core, ...).
+        if g.user_agent['is_clash_meta']:
             return self.clash_config_imp(meta_or_normal="meta")
-        if re.match('^(Clash|Stash)', ua, re.IGNORECASE):
+        if g.user_agent['is_clash']:
             return self.clash_config_imp(meta_or_normal="normal")
 
         if hconfig(ConfigEnum.sub_full_xray_json_enable):

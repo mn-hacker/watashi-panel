@@ -31,9 +31,12 @@ class MonitoringAdmin(FlaskView):
         users = get_all_device_data()
         stats = _build_stats(users)
         os_distribution, device_trend, trend_spike = _build_device_analytics()
+        app_distribution, operator_distribution = _build_more_analytics()
         return render_template('monitoring.html', users=users, stats=stats,
                                os_distribution=os_distribution, device_trend=device_trend,
-                               trend_spike=trend_spike)
+                               trend_spike=trend_spike,
+                               app_distribution=app_distribution,
+                               operator_distribution=operator_distribution)
 
     @route('/api/devices', methods=['GET'])
     def api_devices(self):
@@ -146,9 +149,8 @@ def get_all_device_data():
         active_users = []
 
     for user in active_users:
-        if not hwid_limit.is_enabled_for_user(user):
-            continue
-            
+        # watashi v12.3.50dev: every user that reported a device shows up, not
+        # only the flagged ones; the flag itself becomes a filter chip.
         devices = devices_by_user.get(user.id, [])
         if not devices:
             continue
@@ -166,6 +168,8 @@ def get_all_device_data():
                 'os': os_label or _('Unknown device'),
                 'last_seen': d.last_seen.strftime('%Y-%m-%d %H:%M') if d.last_seen else '',
                 'created_at': d.created_at.strftime('%Y-%m-%d %H:%M') if d.created_at else '',
+                'app': getattr(d, 'app_name', '') or '',
+                'operator': getattr(d, 'operator', '') or '',
             })
 
         users.append({
@@ -176,6 +180,7 @@ def get_all_device_data():
             'limit': limit,
             'device_count': device_count,
             'over_limit': over_limit,
+            'enforced': bool(getattr(user, 'hwid_enforce', False)),
             'devices': device_list,
         })
 
@@ -258,6 +263,42 @@ def _build_device_analytics():
                 if trend_spike is None or x['count'] > trend_spike['count']:
                     trend_spike = {'date': x['date'], 'count': x['count'], 'avg': round(mean, 1)}
     return os_distribution, device_trend, trend_spike
+
+
+def _app_bucket(raw):
+    r = str(raw or '').strip()
+    if not r:
+        return _('Unknown app')
+    return r[:24]
+
+
+def _operator_bucket(raw):
+    r = str(raw or '').strip()
+    if not r:
+        return _('Unknown operator')
+    return r[:24]
+
+
+def _build_more_analytics():
+    """watashi v12.3.50dev: app and carrier distribution across the same
+    devices the OS chart counts, so the admin can find the one app or the one
+    carrier a group of broken reports shares."""
+    app_counts = {}
+    op_counts = {}
+    try:
+        from watashipanel.models.hwid import UserHWID
+        all_devices = UserHWID.query.all()
+    except Exception as e:
+        logger.error(f"Error loading devices for app analytics: {e}")
+        all_devices = []
+    for d in all_devices:
+        a = _app_bucket(getattr(d, 'app_name', ''))
+        app_counts[a] = app_counts.get(a, 0) + 1
+        o = _operator_bucket(getattr(d, 'operator', ''))
+        op_counts[o] = op_counts.get(o, 0) + 1
+    app_distribution = [{'label': k, 'count': v} for k, v in sorted(app_counts.items(), key=lambda kv: -kv[1])]
+    operator_distribution = [{'label': k, 'count': v} for k, v in sorted(op_counts.items(), key=lambda kv: -kv[1])]
+    return app_distribution, operator_distribution
 
 
 def get_user_activity_logs(uuid, user_name):

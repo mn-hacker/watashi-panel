@@ -2372,10 +2372,10 @@ msgid "config.too_advanced.label"
 msgstr "Very Advanced Settings"
 
 msgid "config.torrent_block.description"
-msgstr "Torrent Block Configurations could be set in this section."
+msgstr "Stops downloads and file sharing over torrent traffic on the accounts."
 
 msgid "config.torrent_block.label"
-msgstr "Torrent Block Configuration"
+msgstr "🧲 Torrent Blocking"
 
 msgid "config.trojan_enable.description"
 msgstr "Presents itself as an ordinary HTTPS website. It does well on strict networks and there is no harm in leaving it on."
@@ -6234,6 +6234,10 @@ msgid "Update available"
 msgstr "Update available"
 
 # watashi v12.2.69
+# watashi v12.3.49dev
+msgid "Develop channel"
+msgstr "Develop channel"
+
 msgid "Beta channel"
 msgstr "Beta channel"
 
@@ -7447,3 +7451,146 @@ msgstr "Update the tunnel destination IP on the relay server to point to this se
 # watashi v12.3.49dev: title block for the quick setup wizard page
 msgid "Quick Setup"
 msgstr "Quick Setup"
+
+# --- API book: matrix and subscription additions ---
+
+msgid "Parent API"
+msgstr "Parent API"
+
+msgid "The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers."
+msgstr "The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers."
+
+msgid "Child API"
+msgstr "Child API"
+
+msgid "The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers."
+msgstr "The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers."
+
+msgid "Panel key"
+msgstr "Panel key"
+
+msgid "Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out."
+msgstr "Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out."
+
+msgid "The customer page"
+msgstr "The customer page"
+
+msgid "The page a customer opens in a browser to pick an app and copy their links."
+msgstr "The page a customer opens in a browser to pick an app and copy their links."
+
+msgid "Text links"
+msgstr "Text links"
+
+msgid "The same links without base64, one per line."
+msgstr "The same links without base64, one per line."
+
+msgid "Xray json"
+msgstr "Xray json"
+
+msgid "The whole profile as the json an Xray client imports."
+msgstr "The whole profile as the json an Xray client imports."
+
+msgid "Only the proxies"
+msgstr "Only the proxies"
+
+msgid "Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo."
+msgstr "Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo."
+
+msgid "The whole profile as sing-box json. singbox/ is the same file under a shorter name."
+msgstr "The whole profile as sing-box json. singbox/ is the same file under a shorter name."
+
+msgid "Sing-Box with ssh"
+msgstr "Sing-Box with ssh"
+
+msgid "The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off."
+msgstr "The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off."
+
+msgid "Echo the user agent"
+msgstr "Echo the user agent"
+
+msgid "Debug: answers with the user agent the panel saw. Handy to check what an app sends."
+msgstr "Debug: answers with the user agent the panel saw. Handy to check what an app sends."
+
+msgid "Does this child exist"
+msgstr "Does this child exist"
+
+msgid "A child asks with its unique id before it registers; the answer is whether the parent already holds such a child."
+msgstr "A child asks with its unique id before it registers; the answer is whether the parent already holds such a child."
+
+msgid "Register a child"
+msgstr "Register a child"
+
+msgid "The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even."
+msgstr "The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even."
+
+msgid "Sync a child"
+msgstr "Sync a child"
+
+msgid "The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required."
+msgstr "The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required."
+
+msgid "Push the usage"
+msgstr "Push the usage"
+
+msgid "The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds."
+msgstr "The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds."
+
+msgid "Register with a parent"
+msgstr "Register with a parent"
+
+msgid "Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already."
+msgstr "Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already."
+
+msgid "Sync now"
+msgstr "Sync now"
+
+msgid "Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel."
+msgstr "Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel."
+
+msgid "Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive."
+msgstr "Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive."
+
+msgid "Restarts the services of this panel."
+msgstr "Restarts the services of this panel."
+
+msgid "Apply the config"
+msgstr "Apply the config"
+
+msgid "Rebuilds the running config from the database, without a full install."
+msgstr "Rebuilds the running config from the database, without a full install."
+
+msgid "Runs the installer again. With full set, it installs everything from the start."
+msgstr "Runs the installer again. With full set, it installs everything from the start."
+
+msgid "Refresh the usage"
+msgstr "Refresh the usage"
+
+msgid "Reads the usage off the cores of this panel right now."
+msgstr "Reads the usage off the cores of this panel right now."
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Device Limit Enforced"
+msgstr "Device Limit Enforced"
+
+msgid "No Device Limit"
+msgstr "No Device Limit"
+
+msgid "App Distribution"
+msgstr "App Distribution"
+
+msgid "Operator Distribution"
+msgstr "Operator Distribution"
+
+msgid "Unknown app"
+msgstr "Unknown app"
+
+msgid "Unknown operator"
+msgstr "Unknown operator"
+
+msgid "Turn on the device limit"
+msgstr "Turn on the device limit"
+
+msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
+msgstr "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."

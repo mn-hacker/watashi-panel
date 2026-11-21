@@ -9,6 +9,10 @@ H_HWID = 'x-hwid'
 H_DEVICE_OS = 'x-device-os'
 H_VER_OS = 'x-ver-os'
 H_DEVICE_MODEL = 'x-device-model'
+# watashi v12.3.50dev: the app that reports the id and the carrier of the
+# device, both optional, for the monitoring page only
+H_APP_NAME = 'x-app-name'
+H_OPERATOR = 'x-operator'
 
 R_ACTIVE = 'x-hwid-active'
 R_LIMIT = 'x-hwid-limit'
@@ -75,6 +79,8 @@ def read_headers():
         device_os=(h.get(H_DEVICE_OS) or '').strip(),
         ver_os=(h.get(H_VER_OS) or '').strip(),
         device_model=(h.get(H_DEVICE_MODEL) or '').strip(),
+        app_name=(h.get(H_APP_NAME) or '').strip(),
+        operator=(h.get(H_OPERATOR) or '').strip(),
     )
 
 
@@ -83,27 +89,39 @@ def enforce(user):
     g.hwid_limit = 0
     g.hwid_not_supported = False
     g.hwid_max_reached = False
+    info = read_headers()
+    hwid = info['hwid']
+    # watashi v12.3.50dev: remember the device of every user that reports one,
+    # flagged or not, so the monitoring page can show the OS, the app and the
+    # carrier for all of them. The bookkeeping never blocks anybody; the rest
+    # of the function only runs when a limit really applies.
+    if user is not None and user.id and hwid and not is_local_request():
+        try:
+            hwid_model.upsert_user_hwid(user.id, hwid, device_os=info['device_os'],
+                                        ver_os=info['ver_os'], device_model=info['device_model'],
+                                        app_name=info['app_name'], operator=info['operator'])
+        except Exception:
+            pass
     if user is None or not is_enabled_for_user(user):
         return True
     g.hwid_active = True
     limit = get_effective_limit(user)
     g.hwid_limit = limit
-    info = read_headers()
-    hwid = info['hwid']
     if not hwid:
-        if is_forced():
+        # watashi v12.3.49dev: the forced switch only hardens the users the admin
+        # flagged with "Enforce device limit"; the global limit still counts the
+        # devices of everybody else, but never locks out apps without a HWID.
+        if is_forced() and getattr(user, 'hwid_enforce', False):
             g.hwid_not_supported = True
             return False
         return True
     existing = hwid_model.get_user_hwid_by_value(user.id, hwid)
     if existing is not None:
-        hwid_model.register_user_hwid(user.id, hwid, device_os=info['device_os'], ver_os=info['ver_os'], device_model=info['device_model'], commit=True)
         return True
     if limit and limit > 0:
         if hwid_model.get_user_hwid_count(user.id) >= limit:
             g.hwid_max_reached = True
             return False
-    hwid_model.register_user_hwid(user.id, hwid, device_os=info['device_os'], ver_os=info['ver_os'], device_model=info['device_model'], commit=True)
     return True
 
 

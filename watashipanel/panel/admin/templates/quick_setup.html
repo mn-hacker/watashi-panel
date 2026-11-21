@@ -105,6 +105,10 @@ html[dir="rtl"] .qs-sw input:checked + .qs-sl::before { transform: translateX(-2
 .qs-back { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; padding: 12px 18px; border-radius: 14px; cursor: pointer; color: var(--text-secondary, #94a3b8); background: transparent; border: 1px solid var(--border-color); transition: color .2s ease, border-color .2s ease, background .2s ease; }
 .qs-back:hover { color: rgb(var(--ws-a-400)); border-color: rgb(var(--ws-a-600) / .45); background: rgb(var(--ws-a-600) / .08); }{# watashi v12.3.44dev: palette colour #}
 html[dir="rtl"] .qs-flip { transform: scaleX(-1); }
+/* watashi v12.3.49dev: the forward arrow must flip too - in RTL "next" points
+   left. Only the back arrow had the flip class, so the wizard's two arrows
+   pointed the same way on Persian pages. */
+html[dir="rtl"] .qs-ico { transform: scaleX(-1); }
 
 @media (max-width: 900px) {
     .qs-steps { grid-template-columns: 1fr 1fr; }

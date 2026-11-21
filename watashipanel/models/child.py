@@ -11,6 +11,16 @@ from flask import g, has_app_context
 from watashipanel.database import db, db_execute
 
 
+class classproperty:
+    """A property on the class itself (classmethod+property stopped chaining in Python 3.13)."""
+
+    def __init__(self, fget):
+        self.fget = fget
+
+    def __get__(self, obj, owner):
+        return self.fget(owner)
+
+
 
 class ChildMode(StrEnum):
     virtual = auto()
@@ -81,8 +91,7 @@ class Child(db.Model):  # type: ignore
         #     child = Child.by_id(0)
         return child
 
-    @classmethod
-    @property
+    @classproperty
     def node(cls) -> "Child | None":
         if has_app_context() and hasattr(g, "node"):
             return g.node

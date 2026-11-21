@@ -18,7 +18,7 @@ class RegisterWithParentApi(MethodView):
     # TODO: incomplete (not used)
     @app.input(RegisterWithParentInputSchema, arg_name='data')  # type: ignore
     def post(self, data):
-        logger.info(f"Registering panel with parent called by {data['parent_unique_id']}")
+        logger.info(f"Registering panel with parent called by {data['parent_panel']}")
         if hutils.node.is_parent() or hutils.node.is_child():
             logger.error("The panel is not in standalone mode nor in child")
             abort(400, 'The panel is not in standalone mode nor in child')

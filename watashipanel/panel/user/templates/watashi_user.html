@@ -149,7 +149,7 @@
 				<div class="auto-connect-info">
 					<div class="auto-connect-icon"><i class="fa-solid fa-bolt"></i></div>
 					<div class="auto-connect-text">
-						<h3>Auto Connect</h3>
+						<h3>{{ _('Auto Connect') }}</h3>
 						<p>{{ _('One link for every app, the panel picks the right configs itself') }}</p>
 {% if up_apps %}						<button class="np-url np-mono np-open-apps" type="button" id="np-auto-url" title="{{ _('Open this link inside your app') }}">{{ up_auto }}</button>
 {% else %}						<span class="np-url np-mono" id="np-auto-url">{{ up_auto }}</span>
@@ -161,7 +161,7 @@
 {% endif %}					<!-- watashi: tunnel separation v12.2.59, opened up v12.2.85 -->
 					<a class="ac-tile ac-all" href="./configs" title="{{ _('Every config inside your subscription link') }}"><span>{{ _('All configs') }}</span> <i class="fa-solid fa-list-ul"></i></a>
 					<div class="ac-duo">
-						<button class="ac-tile ac-sq np-qr" type="button" data-link="{{ up_auto }}" data-title="Auto Connect" title="{{_('QR code')}}" aria-label="{{_('QR code')}}"><i class="fa-solid fa-qrcode"></i></button>
+						<button class="ac-tile ac-sq np-qr" type="button" data-link="{{ up_auto }}" data-title="{{ _('Auto Connect') }}" title="{{_('QR code')}}" aria-label="{{_('QR code')}}"><i class="fa-solid fa-qrcode"></i></button>
 						<button class="ac-tile ac-sq np-copy" type="button" data-link="{{ up_auto }}" title="{{_('Copy link')}}" aria-label="{{_('Copy link')}}">
 							<span class="btn-text"><i class="fa-regular fa-copy"></i></span>
 							<span class="btn-check"><i class="fa-solid fa-check"></i></span>
@@ -299,7 +299,7 @@
 	<div class="modal-box">
 		<div class="modal-title">
 			<i class="fa-solid fa-qrcode"></i>
-			<span id="np-veil-t">Auto Connect</span>
+			<span id="np-veil-t">{{ _('Auto Connect') }}</span>
 		</div>
 		<div class="qr-placeholder" id="np-veil-qr"></div>
 		<p class="modal-note">{{ _('Scan this code with your app') }}</p>

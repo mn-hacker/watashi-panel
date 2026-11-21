@@ -13,6 +13,10 @@ class UserHWID(db.Model):
     device_os = db.Column(db.String(64), default='', nullable=False)
     ver_os = db.Column(db.String(64), default='', nullable=False)
     device_model = db.Column(db.String(128), default='', nullable=False)
+    # watashi v12.3.50dev: the app that reported the id (Happ, Hiddify, v2box,
+    # ...) and the carrier the device is on, for the monitoring page
+    app_name = db.Column(db.String(64), default='', nullable=False)
+    operator = db.Column(db.String(64), default='', nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     last_seen = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
 
@@ -31,7 +35,8 @@ def get_user_hwid_by_value(user_id, hwid):
     return UserHWID.query.filter(UserHWID.user_id == user_id, UserHWID.hwid == hwid).first()
 
 
-def register_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='', commit=True):
+def register_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='',
+                       app_name='', operator='', commit=True):
     now = datetime.datetime.now()
     rec = get_user_hwid_by_value(user_id, hwid)
     if rec:
@@ -42,6 +47,10 @@ def register_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='', 
             rec.ver_os = ver_os[:64]
         if device_model:
             rec.device_model = device_model[:128]
+        if app_name:
+            rec.app_name = app_name[:64]
+        if operator:
+            rec.operator = operator[:64]
     else:
         rec = UserHWID(
             user_id=user_id,
@@ -49,6 +58,8 @@ def register_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='', 
             device_os=(device_os or '')[:64],
             ver_os=(ver_os or '')[:64],
             device_model=(device_model or '')[:128],
+            app_name=(app_name or '')[:64],
+            operator=(operator or '')[:64],
             created_at=now,
             last_seen=now,
         )
@@ -73,3 +84,16 @@ def reset_user_hwids(user_id, commit=True):
     if commit:
         db.session.commit()
     return n
+
+
+def upsert_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='',
+                     app_name='', operator='', commit=True):
+    """watashi v12.3.50dev: remember a device even when no limit applies. The
+    row is the same the limit keeps, so the monitoring page sees every app
+    that ever asked, not only the flagged users; it carries no connection
+    state and never blocks anybody."""
+    if not hwid:
+        return None
+    return register_user_hwid(user_id, hwid, device_os=device_os, ver_os=ver_os,
+                              device_model=device_model, app_name=app_name,
+                              operator=operator, commit=commit)

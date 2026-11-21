@@ -25,7 +25,7 @@ from loguru import logger
 # watashi v12.2.129: _v155 adds warp_presets, which the Nodes page and
 # both routing templates read to decide what goes behind a node.
 # watashi v12.3.41dev: _v159 adds the two switches of the advanced mode.
-MAX_DB_VERSION = 159  # watashi v12.2.130an
+MAX_DB_VERSION = 160  # watashi v12.2.130an
 
 def _v150(child_id):
     # watashi v12.2.97: the salamander obfs password was the panel's own
@@ -226,6 +226,22 @@ def _v140(child_id):
         db.session.rollback()  # watashi v12.2.70
         pass
     logger.info("Added the per-admin data limit column")
+
+
+def _v160(child_id):
+    # watashi v12.3.50dev: the monitoring page shows every device, not only the
+    # flagged users', and each device carries the app that reported it and the
+    # carrier the device is on. Two columns on the existing table.
+    add_column(UserHWID.app_name)
+    add_column(UserHWID.operator)
+    try:
+        db_execute(f'UPDATE {UserHWID.__table__.name} SET app_name="" WHERE app_name IS NULL', commit=True)
+        db_execute(f'UPDATE {UserHWID.__table__.name} SET operator="" WHERE operator IS NULL', commit=True)
+    except BaseException as e:
+        db.session.rollback()
+        logger.debug(f'watashi: cannot settle the device app/operator columns: {e}')
+    db.session.commit()
+    logger.info('watashi: devices carry their app and carrier for the monitoring page')
 
 
 def _v159(child_id):

@@ -10,34 +10,38 @@ msgstr ""
 "Language-Team: ru <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Generated-By: Babel 2.16.0\n"
 
-msgid ""
-"[Admin only visible message:] You can change this message from settings"
-msgstr ""
-"[Сообщение, видимое только администратору]: Вы можете изменить это сообщение"
-" в настройках"
+msgid "[Admin only visible message:] You can change this message from settings"
+msgstr "[Сообщение, видимое только администратору]: Вы можете изменить это сообщение в настройках"
 
+#, python-format
 msgid "%(count)s records were successfully deleted."
-msgstr ""
+msgstr "Успешно удалено записей: %(count)s."
 
+#, python-format
 msgid "%(count)s records were successfully disabled."
 msgstr "%(count)s записей были успешно отключены."
 
+#, python-format
 msgid "%(count)s records were successfully enabled."
 msgstr "%(count)s записей были успешно включены."
 
+#, python-format
 msgid "%(count)s records were successfully reset days."
-msgstr ""
+msgstr "Дни успешно сброшены для записей: %(count)s."
 
+#, python-format
 msgid "%(count)s records were successfully reset usage."
-msgstr ""
+msgstr "Трафик успешно сброшен для записей: %(count)s."
 
+#, python-format
 msgid "%(expire_days)s days"
 msgstr "%(expire_days)s дней"
 
+#, python-format
 msgid "%(placeholder)s"
 msgstr "%(placeholder)s"
 
@@ -45,16 +49,17 @@ msgid "0 - Last day"
 msgstr "Последний день"
 
 msgid "0 = use global default; >0 = max devices for this user"
-msgstr ""
+msgstr "0 = общее значение по умолчанию; >0 = максимум устройств для этого пользователя"
 
+#, python-format
 msgid "<a href=\"%(user_link)s\"> %(user)s</a>"
-msgstr ""
+msgstr "<a href=\"%(user_link)s\"> %(user)s</a>"
 
 msgid "Access Denied!"
 msgstr "Доступ запрещен"
 
 msgid "Access log not found. Make sure access logging is enabled in xray config."
-msgstr ""
+msgstr "Журнал доступа не найден. Убедитесь, что журнал доступа включён в конфигурации xray."
 
 msgid "Actions"
 msgstr "Действия"
@@ -78,7 +83,7 @@ msgid "Added by"
 msgstr "Добавлено"
 
 msgid "Admin Links"
-msgstr ""
+msgstr "Ссылки администратора"
 
 msgid "Admins"
 msgstr "Администраторы"
@@ -95,9 +100,11 @@ msgstr "Все пользователи"
 msgid "Apply"
 msgstr "Применить"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\' recursively?"
 msgstr "Вы уверены что хотите рекурсивно удалить \\'%(name)s\\'?"
 
+#, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\'?"
 msgstr "Вы уверены что хотите удалить \\'%(name)s\\'?"
 
@@ -108,7 +115,7 @@ msgid "Are you sure you want to do this action?"
 msgstr "Вы уверены, что хотите выполнить это действие?"
 
 msgid "Auto-refreshing"
-msgstr ""
+msgstr "Автообновление"
 
 msgid "Back"
 msgstr "Назад"
@@ -125,6 +132,7 @@ msgstr "➖ Bridge серверы"
 msgid "Bug"
 msgstr "Баги/Предложения"
 
+#, python-format
 msgid "CPU %(cores)s Cores"
 msgstr "CPU %(cores)s Ядро"
 
@@ -132,7 +140,7 @@ msgid "Can add sub admin"
 msgstr "👥 Может добавлять администраторов"
 
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 msgid "Check again"
 msgstr "Проверить снова"
@@ -186,16 +194,16 @@ msgid "Current Domain"
 msgstr "Текущий Домен"
 
 msgid "Current session traffic"
-msgstr ""
+msgstr "Трафик текущей сессии"
 
 msgid "Currently offline"
-msgstr ""
+msgstr "Сейчас не в сети"
 
 msgid "Currently online"
-msgstr ""
+msgstr "Сейчас в сети"
 
 msgid "Daily usage"
-msgstr ""
+msgstr "Расход за день"
 
 msgid "Delete?"
 msgstr "Удалить?"
@@ -204,25 +212,25 @@ msgid "Develop"
 msgstr "⚠️ Разработка"
 
 msgid "Device Limit"
-msgstr ""
+msgstr "Лимит устройств"
 
 msgid "Device Monitoring"
-msgstr ""
+msgstr "Мониторинг устройств"
 
 msgid "Device limit"
-msgstr ""
+msgstr "Лимит устройств"
 
 msgid "If enabled, this user is exempt from device limit restrictions."
-msgstr ""
+msgstr "Если включено, на этого пользователя не действует лимит устройств."
 
 msgid "Device not found"
-msgstr ""
+msgstr "Устройство не найдено"
 
 msgid "Device removed successfully"
-msgstr ""
+msgstr "Устройство удалено"
 
 msgid "Devices"
-msgstr ""
+msgstr "Устройства"
 
 msgid "Direct"
 msgstr "➖ Прямые proxy"
@@ -231,7 +239,7 @@ msgid "Disable"
 msgstr "Отключить"
 
 msgid "Bypass Device Limit"
-msgstr ""
+msgstr "Обойти лимит устройств"
 
 msgid "Disabled"
 msgstr "Отключено"
@@ -243,12 +251,10 @@ msgid "Domain"
 msgstr "Домен"
 
 msgid "Domain can not be resolved! there is a problem in your domain"
-msgstr ""
-"Не возможно определить IP адрес для домена! В вашем домене возникла "
-"проблема. Пожалуйста, проверьте настройки."
+msgstr "Не возможно определить IP адрес для домена! В вашем домене возникла проблема. Пожалуйста, проверьте настройки."
 
 msgid "Domain cannot be resolved! Please check DNS settings"
-msgstr ""
+msgstr "Не удаётся определить IP домена! Проверьте настройки DNS"
 
 msgid "Domain is not REALITY friendly!"
 msgstr "Домен не подходит для использования с REALITY!"
@@ -313,20 +319,19 @@ msgid "Enable"
 msgstr "❇️ Включить"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Включено"
 
 msgid "Error fetching logs"
-msgstr ""
+msgstr "Ошибка получения журналов"
 
 msgid "Error in auto cdn format"
 msgstr "⚠️ Ошибка в формате Auto CDN"
 
 msgid "Error reading logs"
-msgstr ""
+msgstr "Ошибка чтения журналов"
 
 msgid "Error! auto cdn ip can not be find, please contact admin."
-msgstr ""
-"Ошибка в IP-адресе Auto CDN! Невозможно найти, обратитесь к администратору"
+msgstr "Ошибка в IP-адресе Auto CDN! Невозможно найти, обратитесь к администратору"
 
 msgid "Example Domains"
 msgstr "Тестируйте и предложите домеy"
@@ -347,10 +352,11 @@ msgid "Finished"
 msgstr "Законченный..."
 
 msgid "Forced"
-msgstr ""
+msgstr "Принудительно"
 
+#, python-format
 msgid "Found %(count)s access log entries"
-msgstr ""
+msgstr "Найдено записей в журнале доступа: %(count)s"
 
 msgid "From Last Restart"
 msgstr "С последнего перезапуска"
@@ -386,7 +392,7 @@ msgid "HiddigyN"
 msgstr "Рекомендуется<span class='badge Badge-success'>HiddifyN</span>"
 
 msgid "Home Link"
-msgstr ""
+msgstr "Домашняя ссылка"
 
 msgid "Hover the user to see the reason"
 msgstr "Наведите курсор на пользователя, чтобы увидеть причину"
@@ -431,9 +437,7 @@ msgid "Iran"
 msgstr "🇮🇷 Иран"
 
 msgid "It will override the root admin to the current user"
-msgstr ""
-"Он заменит администратора-владельца файла резервной копии на текущего "
-"администратора."
+msgstr "Он заменит администратора-владельца файла резервной копии на текущего администратора."
 
 msgid "Last Online"
 msgstr "Последнее соединение"
@@ -463,7 +467,7 @@ msgid "More Applications"
 msgstr "Больше приложений"
 
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 msgid "Network"
 msgstr "Сеть"
@@ -472,16 +476,16 @@ msgid "New"
 msgstr "Новый"
 
 msgid "No access logs found for this user yet."
-msgstr ""
+msgstr "Для этого пользователя ещё нет записей в журнале доступа."
 
 msgid "No children!"
 msgstr "Нет дочерних"
 
 msgid "No devices registered yet."
-msgstr ""
+msgstr "Устройства ещё не зарегистрированы."
 
 msgid "Not Secure"
-msgstr ""
+msgstr "Небезопасно"
 
 msgid "Note"
 msgstr "📝 Примечание"
@@ -543,6 +547,7 @@ msgstr "Главная панель"
 msgid "Please Wait"
 msgstr "Пожалуйста, подождите..."
 
+#, python-format
 msgid "Please click on %(install)s to save the user page."
 msgstr "Нажмите %(install)s, чтобы сохранить страницу пользователя"
 
@@ -571,7 +576,7 @@ msgid "Please wait "
 msgstr "Пожалуйста, подождите"
 
 msgid "Port 80 and 443 can not be selected"
-msgstr ""
+msgstr "Порты 80 и 443 выбрать нельзя"
 
 msgid "Port is already used! in"
 msgstr "Порт уже используется в:"
@@ -615,17 +620,18 @@ msgid "REALITY Fallback domain is not compaitble with server names!"
 msgstr "REALITY Fallback Domain несовместим с именами серверов!"
 
 msgid "REALITY Fallback domain is not compatible with server names!"
-msgstr ""
+msgstr "Резервный домен REALITY несовместим с именами серверов!"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 msgid "Registered devices"
-msgstr ""
+msgstr "Зарегистрированные устройства"
 
 msgid "Release"
 msgstr "✅ Релиз"
 
+#, python-format
 msgid "Remaining about %(relative)s, exactly %(days)s days"
 msgstr "Осталось около %(relative)s, ровно %(days)s дней"
 
@@ -633,13 +639,14 @@ msgid "Remote nodes are not supported yet!"
 msgstr "Удаленные узлы пока не поддерживаются!"
 
 msgid "Remove all devices for"
-msgstr ""
+msgstr "Удалить все устройства для"
 
 msgid "Remove this device?"
-msgstr ""
+msgstr "Удалить это устройство?"
 
+#, python-format
 msgid "Removed %(count)s device(s)"
-msgstr ""
+msgstr "Удалено устройств: %(count)s"
 
 msgid "Rename File"
 msgstr "Переименовать файла"
@@ -654,7 +661,7 @@ msgid "Reset Usage Time:"
 msgstr "Время сброса использования трафика:"
 
 msgid "Reset devices"
-msgstr ""
+msgstr "Сбросить устройства"
 
 msgid "Reset every month"
 msgstr "Ежемесячно"
@@ -737,18 +744,21 @@ msgstr "Упрощает процесс использования ссылки 
 msgid "SingBox"
 msgstr "📦 SingBox"
 
+#, python-format
 msgid "Sort by %(name)s"
 msgstr "Сортировать по %(name)s"
 
 msgid "Specifying CDN IP is only valid for CDN mode"
-msgstr ""
+msgstr "Указывать CDN IP можно только в режиме CDN"
 
 msgid "Start Date"
 msgstr "Дата начала"
 
+#, python-format
 msgid "Started %(days)s days ago"
 msgstr "Началось %(days)s дней назад"
 
+#, python-format
 msgid "Started from %(relative)s"
 msgstr "Началось с %(relative)s"
 
@@ -756,7 +766,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "SubLink"
-msgstr ""
+msgstr "Ссылка подписки"
 
 msgid "Submit"
 msgstr "Подтвердить"
@@ -768,7 +778,7 @@ msgid "Telegram Bot"
 msgstr "Telegram-бот"
 
 msgid "Telegram Bot Link"
-msgstr ""
+msgstr "Ссылка на Telegram-бота"
 
 msgid "Temporary Short Link"
 msgstr "⏱️ Временная ссылка"
@@ -795,7 +805,7 @@ msgid "Total Usage"
 msgstr "Общее использование"
 
 msgid "Total devices"
-msgstr ""
+msgstr "Всего устройств"
 
 msgid "Turn of VPN"
 msgstr "Выключить VPN"
@@ -804,7 +814,7 @@ msgid "Unified link for all application."
 msgstr "Единая ссылка для всех приложений"
 
 msgid "Unknown device"
-msgstr ""
+msgstr "Неизвестное устройство"
 
 msgid "Upload File"
 msgstr "Загрузить файл"
@@ -819,13 +829,13 @@ msgid "User is inactive"
 msgstr "Пользователь неактивен"
 
 msgid "User not found"
-msgstr ""
+msgstr "Пользователь не найден"
 
 msgid "Users over limit"
-msgstr ""
+msgstr "Пользователи сверх лимита"
 
 msgid "Users with devices"
-msgstr ""
+msgstr "Пользователи с устройствами"
 
 msgid "V2rayNG"
 msgstr ""
@@ -845,12 +855,14 @@ msgstr "Посмотреть в Telegram"
 msgid "Want to enjoy more with telegram?"
 msgstr "ℹ️ Подключите свой аккаунт к Telegram"
 
+#, python-format
 msgid "Welcome %(user)s"
 msgstr "Добро пожаловать %(user)s"
 
 msgid "Why Going to Premium?"
 msgstr "Зачем переходить на Премиум?"
 
+#, python-format
 msgid "Will Start in %(days)s days"
 msgstr "Начнется через %(days)s дней"
 
@@ -867,9 +879,7 @@ msgid "Yesterday Usage"
 msgstr "Вчера"
 
 msgid "You can restore your configs from previously downloaded configs"
-msgstr ""
-"ℹ️ Вы можете восстановить свои конфигурации из ранее скачанного файла "
-"резервной копии."
+msgstr "ℹ️ Вы можете восстановить свои конфигурации из ранее скачанного файла резервной копии."
 
 msgid "You have used this domain in: "
 msgstr "Вы уже используете этот домен в:"
@@ -917,9 +927,7 @@ msgid "admin.define_mode"
 msgstr "🥇🥈🥉 Режим администратора"
 
 msgid "admin.incomplete_setup_warning"
-msgstr ""
-"Похоже, вы не до конца настроили систему. <a class='btn btn-success' "
-"href='%(quick_setup)s'>Нажмите здесь</a>, чтобы завершить настройку"
+msgstr "Похоже, вы не до конца настроили систему. <a class='btn btn-success' href='%(quick_setup)s'>Нажмите здесь</a>, чтобы завершить настройку"
 
 msgid "admin.menu.api"
 msgstr "API"
@@ -949,9 +957,7 @@ msgid "admin.menu.user"
 msgstr "Пользователи"
 
 msgid "admin.no_user_warning"
-msgstr ""
-"Кажется, вы еще не создали ни одного пользователя. ссылка пользователя по "
-"умолчанию: %(default_link)s"
+msgstr "Кажется, вы еще не создали ни одного пользователя. ссылка пользователя по умолчанию: %(default_link)s"
 
 msgid "admin.proxy.detailed_config"
 msgstr "⚙️ Подробная конфигурация"
@@ -977,14 +983,10 @@ msgstr ""
 "<a href='%(adminlink)s' class='copy-link' style='word-break: Break-all;'>%(adminlink)s</a></p>"
 
 msgid "admin.waiting_for_update"
-msgstr ""
-"⚠️ Подождите около 5 минут, чтобы убедиться, что все обновлено. в течение "
-"этого времени скопируйте и с��храните ссылки для прокси-серверов:"
+msgstr "⚠️ Подождите около 5 минут, чтобы убедиться, что все обновлено. в течение этого времени скопируйте и с��храните ссылки для прокси-серверов:"
 
 msgid "adminuser.force_update_usage"
-msgstr ""
-"ℹ️Информация пользователей обновлеятся каждые 6 минут. Чтобы обновить "
-"сейчас, <a href=\"%(link)s\" class=\"btn btn-info\">Нажмите здесь</a>"
+msgstr "ℹ️Информация пользователей обновлеятся каждые 6 минут. Чтобы обновить сейчас, <a href=\"%(link)s\" class=\"btn btn-info\">Нажмите здесь</a>"
 
 msgid "all"
 msgstr "Все"
@@ -993,16 +995,16 @@ msgid "android"
 msgstr "Android"
 
 msgid "app.clash_verge_rev.description"
-msgstr ""
+msgstr "app.clash_verge_rev.description"
 
 msgid "app.clash_verge_rev.title"
-msgstr ""
+msgstr "app.clash_verge_rev.title"
 
 msgid "app.cmfa.description"
-msgstr ""
+msgstr "app.cmfa.description"
 
 msgid "app.cmfa.title"
-msgstr ""
+msgstr "app.cmfa.title"
 
 msgid "app.foxray.description"
 msgstr "Описание фоксрея"
@@ -1077,7 +1079,7 @@ msgid "app.streisand.title"
 msgstr "Streisand"
 
 msgid "app.v2rayn.title"
-msgstr ""
+msgstr "app.v2rayn.title"
 
 msgid "app.v2rayng.description"
 msgstr "Описание V2RayNG"
@@ -1134,9 +1136,7 @@ msgid "config.Invalid_The_pattern_is_number-number"
 msgstr "⚠️ Конфигурация недействительна! Шаблон — это номер-номер ⚠️"
 
 msgid "config.Invalid_brand_link"
-msgstr ""
-"Некорректная ссылка. Поддерживается следующий формат: (https или "
-"http://example.com)"
+msgstr "Некорректная ссылка. Поддерживается следующий формат: (https или http://example.com)"
 
 msgid "config.Invalid_domain"
 msgstr "Ошибка! Неверный домен. Формат домена: www.google.com."
@@ -1145,9 +1145,7 @@ msgid "config.Invalid_it_should_be_a_number_only"
 msgstr "⚠️ Конфигурация недействительна! Это должно быть только число ⚠️"
 
 msgid "config.Invalid_port"
-msgstr ""
-"Неверный порт. это должно быть целое число, разделенное запятыми, например. "
-"2052,2053"
+msgstr "Неверный порт. это должно быть целое число, разделенное запятыми, например. 2052,2053"
 
 msgid "config.Invalid_proxy_path"
 msgstr "Неверный Proxy Path Это должна быть строка ASCI (a-z A-Z 0-9)."
@@ -1156,8 +1154,7 @@ msgid "config.Invalid_telegram_bot_token"
 msgstr "Неверный токен Telegram bot"
 
 msgid "config.admin.description"
-msgstr ""
-"Раздел предназначен для настройки параметров, связанных с администратором."
+msgstr "Раздел предназначен для настройки параметров, связанных с администратором."
 
 msgid "config.admin.label"
 msgstr "Настройки администратора"
@@ -1169,24 +1166,19 @@ msgid "config.admin_lang.label"
 msgstr "🗺️ Язык панели администратора"
 
 msgid "config.admin_secret.description"
-msgstr ""
-"Admin Secret будет использоваться для доступа к панели администратора."
+msgstr "Admin Secret будет использоваться для доступа к панели администратора."
 
 msgid "config.admin_secret.label"
 msgstr "Admin Secret"
 
 msgid "config.advanced.description"
-msgstr ""
-"В этой части есть некоторые расширенные настройки, которые лучше не менять, "
-"если вы не опытный пользователь.."
+msgstr "В этой части есть некоторые расширенные настройки, которые лучше не менять, если вы не опытный пользователь.."
 
 msgid "config.advanced.label"
 msgstr "Расширенные настройки"
 
 msgid "config.allow_invalid_sni.description"
-msgstr ""
-"Если вы разрешите неверный SNI, вы можете использовать любой домен, а не "
-"исходный домен, для доступа к прокси (не рекомендуется)."
+msgstr "Если вы разрешите неверный SNI, вы можете использовать любой домен, а не исходный домен, для доступа к прокси (не рекомендуется)."
 
 msgid "config.allow_invalid_sni.label"
 msgstr "🆗 Разрешить неверный SNI"
@@ -1270,10 +1262,7 @@ msgid "config.auto_update.label"
 msgstr "🔄 Автоматическое обновление"
 
 msgid "config.block_iran_sites.description"
-msgstr ""
-"Блокируйте иранские сайты, чтобы предотвратить их обнаружение правительством"
-" (Экспериментальный вариант: если возникнет проблема, отключите ее и "
-"сообщите нам.)"
+msgstr "Блокируйте иранские сайты, чтобы предотвратить их обнаружение правительством (Экспериментальный вариант: если возникнет проблема, отключите ее и сообщите нам.)"
 
 msgid "config.block_iran_sites.label"
 msgstr "⛔️ Блокировать внутренние сайты"
@@ -1297,14 +1286,10 @@ msgstr ""
 "Вы также можете разместить здесь свой канал Telegram или Telegram PV"
 
 msgid "config.branding_site.label"
-msgstr ""
-"🆔 Ссылка на поддержку (находится как в названии бренда, так и в разделе "
-"поддержки на странице пользователя)"
+msgstr "🆔 Ссылка на поддержку (находится как в названии бренда, так и в разделе поддержки на странице пользователя)"
 
 msgid "config.branding_title.description"
-msgstr ""
-"Введите индивидуальный заголовок, который будет отображаться на странице "
-"пользователя. (перед приветственным текстом пользователя)"
+msgstr "Введите индивидуальный заголовок, который будет отображаться на странице пользователя. (перед приветственным текстом пользователя)"
 
 msgid "config.branding_title.label"
 msgstr "👁‍🗨 Заголовок страницы пользователя"
@@ -1320,9 +1305,7 @@ msgid "config.cdn_forced_host.label"
 msgstr "🔂 Принудительная настройка для использования следующих IP-адресов"
 
 msgid "config.cloudflare.description"
-msgstr ""
-"Следуйте <a href='https://watashi.cyou' target='_blank'>инструкции</a> и вставьте ключ API "
-"Cloudflare."
+msgstr "Следуйте <a href='https://watashi.cyou' target='_blank'>инструкции</a> и вставьте ключ API Cloudflare."
 
 msgid "config.cloudflare.label"
 msgstr "🔑 API Cloudflare"
@@ -1337,9 +1320,7 @@ msgid "config.core_type.label"
 msgstr "🎛️ Ядро"
 
 msgid "config.country.description"
-msgstr ""
-"Применяются соответствующие настройки для каждой страны в соответствии с "
-"условиями фильтрации этой страны."
+msgstr "Где подключаются ваши пользователи — влияет на правила ядра и значения по умолчанию.Применяются соответствующие настройки для каждой страны в соответствии с условиями фильтрации этой страны."
 
 msgid "config.country.label"
 msgstr "🌍 Страна"
@@ -1373,10 +1354,10 @@ msgid "config.decoy_domain.label"
 msgstr "📺 Сайт-приманка"
 
 msgid "config.default_useragent_string.description"
-msgstr ""
+msgstr "config.default_useragent_string.description"
 
 msgid "config.default_useragent_string.label"
-msgstr ""
+msgstr "User Agent по умолчанию"
 
 msgid "config.dns_server.description"
 msgstr ""
@@ -1388,39 +1369,33 @@ msgid "config.dns_server.label"
 msgstr "🖥 DNS-сервер"
 
 msgid "config.domain_fronting.description"
-msgstr "Это используется для имитации другого веб-сайта вместо вашего в SNI. поэтому GTW не может фильтровать ваш домен\n<a href='https://watashi.cyou'>Руководство</a>. ⚠️CloudFlare не поддерживает фронтирование домена."
+msgstr ""
+"Это используется для имитации другого веб-сайта вместо вашего в SNI. поэтому GTW не может фильтровать ваш домен\n"
+"<a href='https://watashi.cyou'>Руководство</a>. ⚠️CloudFlare не поддерживает фронтирование домена."
 
 msgid "config.domain_fronting.label"
 msgstr "🔒 Включение TLS Domain Fronting"
 
 msgid "config.domain_fronting_domain.description"
-msgstr ""
-"Это используется для имитации другого веб-сайта вместо вашего в SNI. поэтому"
-" GTW не может фильтровать ваш домен"
+msgstr "Это используется для имитации другого веб-сайта вместо вашего в SNI. поэтому GTW не может фильтровать ваш домен"
 
 msgid "config.domain_fronting_domain.label"
 msgstr "ℹ️ Фронтирование домена"
 
 msgid "config.domain_fronting_http_enable.description"
-msgstr ""
-"Включение HTTP Domain Fronting приводит к быстрой блокировке вашего  "
-"основного домена."
+msgstr "Включение HTTP Domain Fronting приводит к быстрой блокировке вашего  основного домена."
 
 msgid "config.domain_fronting_http_enable.label"
 msgstr "Включить фронтирование домена HTTP"
 
 msgid "config.domain_fronting_tls_enable.description"
-msgstr ""
-"В CloudFlare TLS Domain Fronting не поддерживается он будет использовать "
-"порт 443 для подключения к CDN"
+msgstr "В CloudFlare TLS Domain Fronting не поддерживается он будет использовать порт 443 для подключения к CDN"
 
 msgid "config.domain_fronting_tls_enable.label"
 msgstr "🔒 Включить фронтирование домена TLS"
 
 msgid "config.firewall.description"
-msgstr ""
-"Включение Firewall откроет используемые порты (минимум 22,443,80 и SSH) и "
-"закроет все остальные порты."
+msgstr "Включение Firewall откроет используемые порты (минимум 22,443,80 и SSH) и закроет все остальные порты."
 
 msgid "config.firewall.label"
 msgstr "🛡️ Firewall"
@@ -1438,10 +1413,7 @@ msgid "config.general.label"
 msgstr "Общие настройки"
 
 msgid "config.grpc_enable.description"
-msgstr ""
-"gRPC — это современная высокопроизводительная платформа удаленного вызова "
-"процедур (RPC) с открытым исходным кодом. Его можно использовать в "
-"поддерживаемых CDN."
+msgstr "gRPC — это современная высокопроизводительная платформа удаленного вызова процедур (RPC) с открытым исходным кодом. Его можно использовать в поддерживаемых CDN."
 
 msgid "config.grpc_enable.label"
 msgstr "➿ Включить gRPC"
@@ -1465,18 +1437,13 @@ msgid "config.http.label"
 msgstr "конфигурация HTTP"
 
 msgid "config.http_ports.description"
-msgstr ""
-"Целые числа, разделенные запятыми, обозначающие порты, которые будут "
-"использоваться в качестве незашифрованных соединений (в любом случае будет "
-"использоваться порт 80)."
+msgstr "Целые числа, разделенные запятыми, обозначающие порты, которые будут использоваться в качестве незашифрованных соединений (в любом случае будет использоваться порт 80)."
 
 msgid "config.http_ports.label"
 msgstr "🔎 HTTP-порты"
 
 msgid "config.http_proxy_enable.description"
-msgstr ""
-"Ваши пользователи смогут подключаться к системе через незашифрованный HTTP-"
-"порт. (Не рекомендуется)"
+msgstr "Ваши пользователи смогут подключаться к системе через незашифрованный HTTP-порт. (Не рекомендуется)"
 
 msgid "config.http_proxy_enable.label"
 msgstr "☑️ Разрешить соединение по HTTP"
@@ -1490,29 +1457,25 @@ msgid "config.httpupgrade_enable.label"
 msgstr "🆙 Включить Метод HTTP Обновления"
 
 msgid "config.hwid_forced.description"
-msgstr ""
+msgstr "Требовать ID устройства в каждом запросе подписки. Клиенты, которые не передают ID устройства, получают отказ (404)."
 
 msgid "config.hwid_forced.label"
-msgstr ""
+msgstr "🚫 Требовать ID устройства"
 
 msgid "config.hwid_limit_default.description"
-msgstr ""
+msgstr "Максимум устройств на пользователя по умолчанию. 0 — без ограничений. Можно изменить для каждого пользователя."
 
 msgid "config.hwid_limit_default.label"
-msgstr ""
+msgstr "📱 Максимум устройств по умолчанию"
 
 msgid "config.hwid_limit_enable.description"
-msgstr ""
+msgstr "Включить лимит устройств (HWID) для каждого пользователя. Нужны клиенты, передающие ID устройства (например Happ, v2RayTun, V2Box Pro). Для устройств сверх лимита подписка скрыта (404)."
 
 msgid "config.hwid_limit_enable.label"
-msgstr ""
+msgstr "🔒 Включить лимит устройств"
 
 msgid "config.hysteria.description"
-msgstr ""
-"Hysteria — это многофункциональный инструмент прокси и ретрансляции, "
-"оптимизированный для нестабильных соединений с потерями (например, "
-"спутниковые сети, перегруженный общедоступный Wi-Fi, подключение к "
-"зарубежным серверам из Китая)"
+msgstr "Hysteria — это многофункциональный инструмент прокси и ретрансляции, оптимизированный для нестабильных соединений с потерями (например, спутниковые сети, перегруженный общедоступный Wi-Fi, подключение к зарубежным серверам из Китая)"
 
 msgid "config.hysteria.label"
 msgstr "Hysteria"
@@ -1551,8 +1514,7 @@ msgid "config.invalid-pattern-for-warp-sites"
 msgstr "⚠️ Сайт, введенный в Варп, не соответствует указанному шаблону."
 
 msgid "config.invalid_uuid"
-msgstr ""
-"Неверный UUID пользователя. пример: 6098ea35-8cb2-4a08-ba15-2be25bc49cb6"
+msgstr "Неверный UUID пользователя. пример: 6098ea35-8cb2-4a08-ba15-2be25bc49cb6"
 
 msgid "config.is_parent.description"
 msgstr "config.is_parent.description"
@@ -1573,17 +1535,13 @@ msgid "config.kcp_enable.label"
 msgstr "KCP"
 
 msgid "config.kcp_ports.description"
-msgstr ""
-"Целые числа, разделенные запятыми, обозначающие порты, которые будут "
-"использоваться в качестве соединения KCP."
+msgstr "Целые числа, разделенные запятыми, обозначающие порты, которые будут использоваться в качестве соединения KCP."
 
 msgid "config.kcp_ports.label"
 msgstr "Порты KCP"
 
 msgid "config.lang.description"
-msgstr ""
-"Выберите язык пользовательского интерфейса, чтобы персонализировать свой "
-"опыт использования пользовательской зоны."
+msgstr "Выберите язык пользовательского интерфейса, чтобы персонализировать свой опыт использования пользовательской зоны."
 
 msgid "config.lang.label"
 msgstr "🗺️ Язык раздела пользователя"
@@ -1601,9 +1559,7 @@ msgid "config.last_priodic_usage_check.label"
 msgstr "config.last_priodic_usage_check.label"
 
 msgid "config.license.description"
-msgstr ""
-"Для коммерческого использования этого продукта вам необходимо приобрести его"
-" лицензию."
+msgstr "Для коммерческого использования этого продукта вам необходимо приобрести его лицензию."
 
 msgid "config.license.label"
 msgstr "License  Code"
@@ -1664,33 +1620,25 @@ msgid "config.mux_brutal_up_mbps.label"
 msgstr "⬆️  MUX Brutal Исходящая Загрузка (mbps)"
 
 msgid "config.mux_enable.description"
-msgstr ""
-"MUX требует совместимые клиенты. MUX в <a href=\"https://app.hiddify.com\" "
-"target=\"_blank\">Hiddify</a> и Singbox несовместимы с XRay"
+msgstr "MUX требует совместимые клиенты. MUX в <a href=\"https://app.hiddify.com\" target=\"_blank\">Hiddify</a> и Singbox несовместимы с XRay"
 
 msgid "config.mux_enable.label"
 msgstr "Ⓜ️ MUX (⚠️ Несовместимо с некоторыми клиентами)"
 
 msgid "config.mux_max_connections.description"
-msgstr ""
-"Максимальное количество подключений. Конфликтует с максимальным количеством "
-"потоков"
+msgstr "Максимальное количество подключений. Конфликтует с максимальным количеством потоков"
 
 msgid "config.mux_max_connections.label"
 msgstr "⛓ Максимальное количество подключений MUX"
 
 msgid "config.mux_max_streams.description"
-msgstr ""
-"Максимальное количество мультиплексированных потоков в соединении перед "
-"открытием нового соединения"
+msgstr "Максимальное количество мультиплексированных потоков в соединении перед открытием нового соединения"
 
 msgid "config.mux_max_streams.label"
 msgstr "↗️ Максимальное количество потоков MUX"
 
 msgid "config.mux_min_streams.description"
-msgstr ""
-"Минимальное количество мультиплексированных потоков в соединении перед "
-"открытием нового соединения"
+msgstr "Минимальное количество мультиплексированных потоков в соединении перед открытием нового соединения"
 
 msgid "config.mux_min_streams.label"
 msgstr "↘️ Минимальное количество потоков MUX"
@@ -1731,9 +1679,7 @@ msgid "config.naive_port.label"
 msgstr "Порт"
 
 msgid "config.netdata.description"
-msgstr ""
-"Для отображения ресурсов, используется процессор вашего сервера, но нагрузка"
-" не слишком высокая"
+msgstr "Для отображения ресурсов, используется процессор вашего сервера, но нагрузка не слишком высокая"
 
 msgid "config.netdata.label"
 msgstr "Netdata"
@@ -1751,8 +1697,7 @@ msgid "config.only_ipv4.label"
 msgstr "ℹ️ Только IPv4"
 
 msgid "config.package_mode.description"
-msgstr ""
-"Укажите, хотите ли вы релиз версию пакета или версию в стадии разработки."
+msgstr "Укажите, хотите ли вы релиз версию пакета или версию в стадии разработки."
 
 msgid "config.package_mode.label"
 msgstr "🔄 Режим обновления пакетов"
@@ -1776,9 +1721,7 @@ msgid "config.parent_domain.label"
 msgstr "config.parent_domain.label"
 
 msgid "config.parent_panel.description"
-msgstr ""
-"Вы можете подключиться к главной панели, чтобы добавить пользователя в одном"
-" месте, а использование всех серверов будет добавлено автоматически. "
+msgstr "Вы можете подключиться к главной панели, чтобы добавить пользователя в одном месте, а использование всех серверов будет добавлено автоматически. "
 
 msgid "config.parent_panel.label"
 msgstr "Главная панель (мультисервер)"
@@ -1850,16 +1793,13 @@ msgid "config.proxies.label"
 msgstr "Настройки прокси"
 
 msgid "config.proxy_path.description"
-msgstr ""
-"Мы используем секретный путь прокси, чтобы скрыть наши прокси от обнаружения"
+msgstr "Мы используем секретный путь прокси, чтобы скрыть наши прокси от обнаружения"
 
 msgid "config.proxy_path.label"
 msgstr "ℹ️ Секретный путь прокси"
 
 msgid "config.proxy_path_admin.description"
-msgstr ""
-"Мы используем секретный путь прокси, чтобы скрыть наши прокси для "
-"правительств и ботов."
+msgstr "Мы используем секретный путь прокси, чтобы скрыть наши прокси для правительств и ботов."
 
 msgid "config.proxy_path_admin.label"
 msgstr "🔐 Путь прокси для администраторов"
@@ -1889,18 +1829,16 @@ msgid "config.reality_enable.label"
 msgstr "🔴 Reality"
 
 msgid "config.reality_fallback_domain.description"
-msgstr ""
-"При попытке контролирующих органов посетить сайт вытащенный из запроса, он "
-"будет перенаправлен на этот домен."
+msgstr "При попытке контролирующих органов посетить сайт вытащенный из запроса, он будет перенаправлен на этот домен."
 
 msgid "config.reality_fallback_domain.label"
 msgstr "🌍 Резервный домен Reality"
 
 msgid "config.reality_port.description"
-msgstr ""
+msgstr "Порт Reality"
 
 msgid "config.reality_port.label"
-msgstr ""
+msgstr "config.reality_port.label"
 
 msgid "config.reality_private_key.description"
 msgstr "Не меняйте это"
@@ -1945,19 +1883,13 @@ msgid "config.restls1_3_domain.label"
 msgstr "config.restls1_3_domain.label"
 
 msgid "config.shadowsocks.description"
-msgstr ""
-"Shadowsocks - это быстрый прокси-туннель, который помогает вам обходить "
-"фаерволы"
+msgstr "Shadowsocks - это быстрый прокси-туннель, который помогает вам обходить фаерволы"
 
 msgid "config.shadowsocks.label"
 msgstr "Shadowsocks"
 
 msgid "config.shadowsocks2022_enable.description"
-msgstr ""
-"Shadowsocks 2022 - это защищенный протокол прокси для трафика TCP и UDP. "
-"Прокси-трафик неотличим от случайного потока байтов и, следовательно, может "
-"обходить фаерволы и интернет-цензоров, которые полагаются на DPI (глубокий "
-"анализ пакетов)."
+msgstr "Shadowsocks 2022 - это защищенный протокол прокси для трафика TCP и UDP. Прокси-трафик неотличим от случайного потока байтов и, следовательно, может обходить фаерволы и интернет-цензоров, которые полагаются на DPI (глубокий анализ пакетов)."
 
 msgid "config.shadowsocks2022_enable.label"
 msgstr "⭕️ Shadowsocks 2022"
@@ -1984,59 +1916,43 @@ msgid "config.shadowtls.label"
 msgstr "ShadowTLS"
 
 msgid "config.shadowtls_enable.description"
-msgstr ""
-"ShadowTLS — это новый протокол, помогающий скрыть трафик от DPI с помощью "
-"FakeTLS"
+msgstr "ShadowTLS — это новый протокол, помогающий скрыть трафик от DPI с помощью FakeTLS"
 
 msgid "config.shadowtls_enable.label"
 msgstr "☑️ ShadowTLS"
 
 msgid "config.shadowtls_fakedomain.description"
-msgstr ""
-"Пожалуйста, используйте хорошо известный домен в своем центре обработки "
-"данных. Например, если вы находитесь в центре обработки данных Azure, "
-"хороший пример — microsoft-update.com"
+msgstr "Пожалуйста, используйте хорошо известный домен в своем центре обработки данных. Например, если вы находитесь в центре обработки данных Azure, хороший пример — microsoft-update.com"
 
 msgid "config.shadowtls_fakedomain.label"
 msgstr "🌍 Поддельный домен ShadowTLS"
 
 msgid "config.shared_secret.description"
-msgstr ""
-"Некоторые прокси в настоящее время не поддерживают учет, поэтому нам "
-"придется использовать для них секретный ключ"
+msgstr "Некоторые прокси в настоящее время не поддерживают учет, поэтому нам придется использовать для них секретный ключ"
 
 msgid "config.shared_secret.label"
 msgstr "🔐 Общий секретный ключ"
 
 msgid "config.show_usage_in_sublink.description"
-msgstr ""
-"Этот параметр создает поддельную конфигурацию в дополнительной ссылке "
-"пользователя, которая показывает оставшийся объем трафика для пользователя."
+msgstr "Этот параметр создает поддельную конфигурацию в дополнительной ссылке пользователя, которая показывает оставшийся объем трафика для пользователя."
 
 msgid "config.show_usage_in_sublink.label"
 msgstr "👁️‍🗨️ Показать использование в доп.ссылке"
 
 msgid "config.special_port.description"
-msgstr ""
-"Вы можете установить индивидуальный порт для вашего сервера Reality, чтобы "
-"снизить нагрузку на систему. (Разрешить прямое подключение к прокси должно "
-"быть да)"
+msgstr "Вы можете установить индивидуальный порт для вашего сервера Reality, чтобы снизить нагрузку на систему. (Разрешить прямое подключение к прокси должно быть да)"
 
 msgid "config.special_port.label"
 msgstr "↔️ Порт Direct Reality"
 
 msgid "config.speed_test.description"
-msgstr ""
-"Разрешите вашим пользователям выполнять тест скорости. Это помогает им "
-"определить качество связи."
+msgstr "Разрешите вашим пользователям выполнять тест скорости. Это помогает им определить качество связи."
 
 msgid "config.speed_test.label"
 msgstr "🚀 Тест скорости"
 
 msgid "config.ssfaketls.description"
-msgstr ""
-"Shadowsocks FakeTLS — это простой инструмент для запутывания, который "
-"инкапсулирует данные в пакете tls."
+msgstr "Shadowsocks FakeTLS — это простой инструмент для запутывания, который инкапсулирует данные в пакете tls."
 
 msgid "config.ssfaketls.label"
 msgstr "Shadowsocks FakeTLS"
@@ -2048,72 +1964,64 @@ msgid "config.ssfaketls_enable.label"
 msgstr "🆎 Shadowsocks FakeTLS (Простой OBFS)"
 
 msgid "config.ssfaketls_fakedomain.description"
-msgstr ""
-"Пожалуйста, используйте хорошо известный домен в своем центре обработки "
-"данных. например, если вы находитесь в центре обработки данных Azure, "
-"хороший пример — microsoft-update.com"
+msgstr "Пожалуйста, используйте хорошо известный домен в своем центре обработки данных. например, если вы находитесь в центре обработки данных Azure, хороший пример — microsoft-update.com"
 
 msgid "config.ssfaketls_fakedomain.label"
 msgstr "🌍 SS FakeTLS FakeDomain"
 
 msgid "config.ssh.description"
-msgstr ""
-"SSH Proxy, также известный как SSH tunnel или переадресация портов SSH, "
-"представляет собой метод создания безопасного канала связи между двумя "
-"компьютерами в незащищенной сети. У нас есть отдельное приложение, которое "
-"полностью отличается от стандартногно ssh-сервера и не может выполнять "
-"какие-либо команды."
+msgstr "SSH Proxy, также известный как SSH tunnel или переадресация портов SSH, представляет собой метод создания безопасного канала связи между двумя компьютерами в незащищенной сети. У нас есть отдельное приложение, которое полностью отличается от стандартногно ssh-сервера и не может выполнять какие-либо команды."
 
 msgid "config.ssh.label"
 msgstr "SSH Proxy"
 
 msgid "config.ssh_host_dsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_dsa_pk.description"
 
 msgid "config.ssh_host_dsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_dsa_pk.label"
 
 msgid "config.ssh_host_dsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_dsa_pub.description"
 
 msgid "config.ssh_host_dsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_dsa_pub.label"
 
 msgid "config.ssh_host_ecdsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pk.description"
 
 msgid "config.ssh_host_ecdsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pk.label"
 
 msgid "config.ssh_host_ecdsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pub.description"
 
 msgid "config.ssh_host_ecdsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_ecdsa_pub.label"
 
 msgid "config.ssh_host_ed25519_pk.description"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pk.description"
 
 msgid "config.ssh_host_ed25519_pk.label"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pk.label"
 
 msgid "config.ssh_host_ed25519_pub.description"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pub.description"
 
 msgid "config.ssh_host_ed25519_pub.label"
-msgstr ""
+msgstr "config.ssh_host_ed25519_pub.label"
 
 msgid "config.ssh_host_rsa_pk.description"
-msgstr ""
+msgstr "config.ssh_host_rsa_pk.description"
 
 msgid "config.ssh_host_rsa_pk.label"
-msgstr ""
+msgstr "config.ssh_host_rsa_pk.label"
 
 msgid "config.ssh_host_rsa_pub.description"
-msgstr ""
+msgstr "config.ssh_host_rsa_pub.description"
 
 msgid "config.ssh_host_rsa_pub.label"
-msgstr ""
+msgstr "config.ssh_host_rsa_pub.label"
 
 msgid "config.ssh_server_enable.description"
 msgstr "SSH Proxy полностью отличается от оригинального SSH Server"
@@ -2134,27 +2042,19 @@ msgid "config.ssh_server_redis_url.label"
 msgstr "Адрес базы данных пользователей SSH"
 
 msgid "config.ssr.description"
-msgstr ""
-"ShadowsocksR — это форк оригинального проекта Shadowsocks, который считается"
-" превосходным с точки зрения безопасности и стабильности."
+msgstr "ShadowsocksR — это форк оригинального проекта Shadowsocks, который считается превосходным с точки зрения безопасности и стабильности."
 
 msgid "config.ssr.label"
 msgstr "SSR"
 
 msgid "config.ssr_enable.description"
-msgstr ""
-"ShadowsocksR — это форк оригинального проекта Shadowsocks, который считается"
-" превосходным с точки зрения безопасности и стабильности. Не испытано. Не "
-"поддерживает accounting"
+msgstr "ShadowsocksR — это форк оригинального проекта Shadowsocks, который считается превосходным с точки зрения безопасности и стабильности. Не испытано. Не поддерживает accounting"
 
 msgid "config.ssr_enable.label"
 msgstr "SSR"
 
 msgid "config.ssr_fakedomain.description"
-msgstr ""
-"Пожалуйста, используйте хорошо известный домен в своем центре обработки "
-"данных или хостинге. например, если вы находитесь в центре обработки данных "
-"Azure, хороший пример — microsoft-update.com"
+msgstr "Пожалуйста, используйте хорошо известный домен в своем центре обработки данных или хостинге. например, если вы находитесь в центре обработки данных Azure, хороший пример — microsoft-update.com"
 
 msgid "config.ssr_fakedomain.label"
 msgstr "Поддельный домен SSR"
@@ -2190,12 +2090,7 @@ msgid "config.sub_full_singbox_enable.label"
 msgstr "config.sub_full_singbox_enable.label"
 
 msgid "config.sub_full_xray_json_enable.description"
-msgstr ""
-"Полная ссылка XRay предоставляет комплексные возможности настройки "
-"параметров, специфичных для XRay. Сюда входит пользовательская фрагментация "
-"и мультиплексирование (мультиплексирование) в таких приложен��ях, как "
-"v2rayNG, которые поддерживают протоколы XRay для точного управления "
-"настройкой прокси-сервера XRay."
+msgstr "Полная ссылка XRay предоставляет комплексные возможности настройки параметров, специфичных для XRay. Сюда входит пользовательская фрагментация и мультиплексирование (мультиплексирование) в таких приложен��ях, как v2rayNG, которые поддерживают протоколы XRay для точного управления настройкой прокси-сервера XRay."
 
 msgid "config.sub_full_xray_json_enable.label"
 msgstr "⚙️ Ссылка на полную конфигурацию XRay"
@@ -2213,8 +2108,7 @@ msgid "config.tcp_enable.label"
 msgstr "🟠 TCP"
 
 msgid "config.telegram.description"
-msgstr ""
-"Прокси-сервер, разработанный для Telegram для обхода фильтрации Telegram"
+msgstr "Прокси-сервер, разработанный для Telegram для обхода фильтрации Telegram"
 
 msgid "config.telegram.label"
 msgstr "Конфигурации Telegram "
@@ -2228,36 +2122,25 @@ msgid "config.telegram_adtag.label"
 msgstr "📍 Тег Telegram AD"
 
 msgid "config.telegram_bot_token.description"
-msgstr ""
-"Чтобы добавить функцию бота Telegram вам нужно создать бота с @BotFather и "
-"ввести в это поле код API"
+msgstr "Чтобы добавить функцию бота Telegram вам нужно создать бота с @BotFather и ввести в это поле код API"
 
 msgid "config.telegram_bot_token.label"
 msgstr "🔐 Токен Telegram bot"
 
 msgid "config.telegram_enable.description"
-msgstr ""
-"Telegram MTProto используется для инкапсуляции Telegram Proxy в качестве "
-"обычного tls-трафика<br>⚠️<span style=\"color:#d32f2f;\"><strong> Этот "
-"протокол требует прямого домена</strong></span>"
+msgstr "Telegram MTProto используется для инкапсуляции Telegram Proxy в качестве обычного tls-трафика<br>⚠️<span style=\"color:#d32f2f;\"><strong> Этот протокол требует прямого домена</strong></span>"
 
 msgid "config.telegram_enable.label"
 msgstr "✔️ Включить Telegram MTProto"
 
 msgid "config.telegram_fakedomain.description"
-msgstr ""
-"Пожалуйста, используйте хорошо известный домен в своем ДЦ или Хостинге. "
-"Например, если вы находитесь в центре обработки данных Azure, хорошим "
-"примером будет microsoft-update.com"
+msgstr "Пожалуйста, используйте хорошо известный домен в своем ДЦ или Хостинге. Например, если вы находитесь в центре обработки данных Azure, хорошим примером будет microsoft-update.com"
 
 msgid "config.telegram_fakedomain.label"
 msgstr "📺 Поддельный домен Telegram"
 
 msgid "config.telegram_lib.description"
-msgstr ""
-"Вы можете переключаться между различными библиотеками Telegram. Обратите "
-"внимание, что на всех серверах работает только Python, на других могут "
-"возникнуть проблемы. Проверьте прокси после его изменения"
+msgstr "Вы можете переключаться между различными библиотеками Telegram. Обратите внимание, что на всех серверах работает только Python, на других могут возникнуть проблемы. Проверьте прокси после его изменения"
 
 msgid "config.telegram_lib.label"
 msgstr "🔢 Библиотека Telegram Proxy"
@@ -2269,10 +2152,7 @@ msgid "config.tls.label"
 msgstr "Настройки TLS"
 
 msgid "config.tls_fragment_enable.description"
-msgstr ""
-"При некоторых обстоятельствах, это позволяет обойти систему черного списка "
-"SNI. <a href=\"https://watashi.cyou\" "
-"target=\"_blank\">(подробнее)</a>"
+msgstr "При некоторых обстоятельствах, это позволяет обойти систему черного списка SNI. <a href=\"https://watashi.cyou\" target=\"_blank\">(подробнее)</a>"
 
 msgid "config.tls_fragment_enable.label"
 msgstr "⏯ TLS Fragment"
@@ -2296,10 +2176,7 @@ msgid "config.tls_mixed_case.label"
 msgstr "🔠 Включить смешанный случай SNI по протоколу TLS"
 
 msgid "config.tls_padding_enable.description"
-msgstr ""
-"Включает заполнение для фрагментации TLS. <a "
-"href=\"https://watashi.cyou\" "
-"target=\"_blank\">(подробнее)</a>"
+msgstr "Включает заполнение для фрагментации TLS. <a href=\"https://watashi.cyou\" target=\"_blank\">(подробнее)</a>"
 
 msgid "config.tls_padding_enable.label"
 msgstr "♒️ TLS Padding"
@@ -2311,9 +2188,7 @@ msgid "config.tls_padding_length.label"
 msgstr "📏 TLS Padding"
 
 msgid "config.tls_ports.description"
-msgstr ""
-"Целые числа, разделенные запятыми, указывающие порты для использования в "
-"качестве TLS-соединения (в любом случае будет использоваться порт 443)"
+msgstr "Целые числа, разделенные запятыми, указывающие порты для использования в качестве TLS-соединения (в любом случае будет использоваться порт 443)"
 
 msgid "config.tls_ports.label"
 msgstr "🔎 TLS-порты"
@@ -2325,9 +2200,7 @@ msgid "config.tls_trick.label"
 msgstr "TLS Trick"
 
 msgid "config.too_advanced.description"
-msgstr ""
-"Укажите путь для Proxy. Это особенно важно, если вы используете HTTP и "
-"VMess."
+msgstr "Укажите путь для Proxy. Это особенно важно, если вы используете HTTP и VMess."
 
 msgid "config.too_advanced.label"
 msgstr "Очень расширенные настройки"
@@ -2372,15 +2245,13 @@ msgid "config.unique_id.label"
 msgstr "config.unique_id.label"
 
 msgid "config.use_ip_in_config.description"
-msgstr ""
+msgstr "Подставляет в ссылки IP сервера вместо имени домена. Помогает при проблемах с определением IP сервера. Используется случайный IP выбранного домена."
 
 msgid "config.use_ip_in_config.label"
-msgstr ""
+msgstr "Использовать IP в конфигурациях"
 
 msgid "config.utls.description"
-msgstr ""
-"Эта опция будет имитировать разные браузеры, поэтому GFW не сможет "
-"обнаружить ваш браузер"
+msgstr "Эта опция будет имитировать разные браузеры, поэтому GFW не сможет обнаружить ваш браузер"
 
 msgid "config.utls.label"
 msgstr "❇️ uTLS"
@@ -2395,9 +2266,7 @@ msgid "config.validation-error"
 msgstr "В одном из полей ошибка."
 
 msgid "config.validation-success"
-msgstr ""
-"Конфигурации успешно изменены. Нажмите %(link)s, чтобы применить их. Это "
-"может занять 2 минуты"
+msgstr "Конфигурации успешно изменены. Нажмите %(link)s, чтобы применить их. Это может занять 2 минуты"
 
 msgid "config.validation-success-no-reset"
 msgstr "✅ Конфигурации успешно изменены"
@@ -2409,9 +2278,7 @@ msgid "config.vless_enable.label"
 msgstr "⚫️ VLess"
 
 msgid "config.vmess_enable.description"
-msgstr ""
-"Несколько человек сообщили, что VMess позволляет правительствам обнаруживать"
-" систему.  Не рекомендуется"
+msgstr "Несколько человек сообщили, что VMess позволляет правительствам обнаруживать систему.  Не рекомендуется"
 
 msgid "config.vmess_enable.label"
 msgstr "🟣 VMess"
@@ -2456,26 +2323,19 @@ msgid "config.warp_plus_code.label"
 msgstr "🔑 WARP Plus Key"
 
 msgid "config.warp_sites.description"
-msgstr ""
-"Добавление дополнительных сайтов для направления через WARP (только если "
-"Warp включен)"
+msgstr "Добавление дополнительных сайтов для направления через WARP (только если Warp включен)"
 
 msgid "config.warp_sites.label"
 msgstr "🆚 Дополнительные сайты WARP"
 
 msgid "config.wireguard.description"
-msgstr ""
-"WireGuard - это легковесный UDP-протокол, известный своей простотой, "
-"эффективностью и высокой безопасност. Он предлагает простоту, "
-"кроссплатформенность, быструю настройку и прозрачный код."
+msgstr "WireGuard - это легковесный UDP-протокол, известный своей простотой, эффективностью и высокой безопасност. Он предлагает простоту, кроссплатформенность, быструю настройку и прозрачный код."
 
 msgid "config.wireguard.label"
 msgstr "WireGuard"
 
 msgid "config.wireguard_enable.description"
-msgstr ""
-"WireGuard - это UDP-протокол. (⚠️ Работает на <a "
-"href=\"https://app.hiddify.com/\" target=\"_blank\">Hiddify</a>)"
+msgstr "WireGuard - это UDP-протокол. (⚠️ Работает на <a href=\"https://app.hiddify.com/\" target=\"_blank\">Hiddify</a>)"
 
 msgid "config.wireguard_enable.label"
 msgstr "🐉 WireGuard"
@@ -2493,9 +2353,7 @@ msgid "config.wireguard_ipv6.label"
 msgstr "IPv6 в WireGuard"
 
 msgid "config.wireguard_noise_trick.description"
-msgstr ""
-"Noise Trick создает дополнительные мусорные данные для предотвращения "
-"обнаужения и блокировки цензором"
+msgstr "Noise Trick создает дополнительные мусорные данные для предотвращения обнаужения и блокировки цензором"
 
 msgid "config.wireguard_noise_trick.label"
 msgstr "💥 Шумовая уловка WireGuard"
@@ -2519,9 +2377,7 @@ msgid "config.wireguard_public_key.label"
 msgstr "Открытый ключ WireGuard"
 
 msgid "config.ws_enable.description"
-msgstr ""
-"Websocket создает туннель поверх HTTP, который будет полезно использовать в "
-"CDN"
+msgstr "Websocket создает туннель поверх HTTP, который будет полезно использовать в CDN"
 
 msgid "config.ws_enable.label"
 msgstr "🔰 Websocket"
@@ -2559,10 +2415,7 @@ msgid "domain.cdn"
 msgstr "CDN"
 
 msgid "domain.changed_in_domain_warning"
-msgstr ""
-"⚠️ Ваши домены изменились. пожалуйста, не забудьте скопировать ссылки "
-"администратора, иначе вы больше не сможете получить доступ к панели "
-"управления"
+msgstr "⚠️ Ваши домены изменились. пожалуйста, не забудьте скопировать ссылки администратора, иначе вы больше не сможете получить доступ к панели управления"
 
 msgid "domain.description"
 msgstr "Пожалуйста, внимательно и правильно заполните это поле. В противном случае у прокси могут возникнуть проблемы. Посетите <a href='https://watashi.cyou'> Помогите</a> Узнайте, как создать subdomain."
@@ -2594,15 +2447,13 @@ msgid "domain.mode"
 msgstr "Режим"
 
 msgid "domain.reality.asn_issue"
-msgstr ""
-"Выбранный домен для REALITY не находится в том же ASN. Для более "
-"эффективного использования протокола лучше найти Домен в том же ASN"
+msgstr "Выбранный домен для REALITY не находится в том же ASN. Для более эффективного использования протокола лучше найти Домен в том же ASN"
 
 msgid "domain.resolveip.description"
-msgstr ""
+msgstr "Использовать IP вместо имени домена в прокси. Полезно при сильных помехах в DNS."
 
 msgid "domain.resolveip.label"
-msgstr ""
+msgstr "Определять IP"
 
 msgid "domain.show_domains_description"
 msgstr ""
@@ -2614,10 +2465,10 @@ msgid "download"
 msgstr "Direct Download"
 
 msgid "download_domain.description"
-msgstr ""
+msgstr "Только для XHTTP: позволяет, например, скачивать через другой домен, чем загружать. Это затрудняет обнаружение и может улучшить качество."
 
 msgid "download_domain.label"
-msgstr ""
+msgstr "Домен для загрузки"
 
 msgid "fake"
 msgstr "🆎 Поддельный сайт"
@@ -2626,9 +2477,7 @@ msgid "gRPC"
 msgstr "➿ gRPC"
 
 msgid "grpc-proxy.description"
-msgstr ""
-"ℹ️ gRPC — это протокол на основе HTTP 2. Возможно, в вашей ситуации он будет"
-" быстрее!"
+msgstr "ℹ️ gRPC — это протокол на основе HTTP 2. Возможно, в вашей ситуации он будет быстрее!"
 
 msgid "in parent panel"
 msgstr "В центральной панели"
@@ -2682,8 +2531,7 @@ msgid "login.password.label"
 msgstr "Пароль"
 
 msgid "login.secret.description"
-msgstr ""
-"Для получения доступа к этой странице введите свой секретный код (UUID)"
+msgstr "Для получения доступа к этой странице введите свой секретный код (UUID)"
 
 msgid "login.secret.label"
 msgstr "Секретный код (UUID)"
@@ -2698,9 +2546,7 @@ msgid "monthly"
 msgstr "🗓️ Ежемесячно"
 
 msgid "move_to_new_link"
-msgstr ""
-"Страница перемещена по новой ссылке. Пожалуйста, скопируйте и сохраните "
-"новую ссылку."
+msgstr "Страница перемещена по новой ссылке. Пожалуйста, скопируйте и сохраните новую ссылку."
 
 msgid "next"
 msgstr "Следующий"
@@ -2736,9 +2582,7 @@ msgid "open"
 msgstr "Открыть"
 
 msgid "outdated_panel"
-msgstr ""
-"⚠️ Эта версия Watashi Panel устарела. пожалуйста, обновите его из панели "
-"управления администратора."
+msgstr "⚠️ Эта версия Watashi Panel устарела. пожалуйста, обновите его из панели управления администратора."
 
 msgid "package days?"
 msgstr "пакетные дни?"
@@ -2756,17 +2600,13 @@ msgid "previous"
 msgstr "Предыдущий"
 
 msgid "quicksetup.cdn_domain.description"
-msgstr ""
-"Настройка домена CDN не является обязательной. Используйте его только в том "
-"случае, если вы уже настроили CDN."
+msgstr "Необязательно. Домен за CDN, который указывает не на этот сервер.Настройка домена CDN не является обязательной. Используйте его только в том случае, если вы уже настроили CDN."
 
 msgid "quicksetup.cdn_domain.label"
 msgstr "CDN-домен"
 
 msgid "quicksetup.proxy_cat.description"
-msgstr ""
-"Последний шаг: выберите нужные прокси. Пожалуйста, выберите минимум, "
-"насколько это возможно."
+msgstr "Включите только те протоколы, которые планируете выдавать. Отключённые здесь останутся выключенными и на сервере.Последний шаг: выберите нужные прокси. Пожалуйста, выберите минимум, насколько это возможно."
 
 msgid "quicksetup.setlang.success"
 msgstr "Изменение языка прошло успешно."
@@ -2784,11 +2624,7 @@ msgid "see the log in the bellow screen"
 msgstr "📑 Логи отображаются на экране ниже."
 
 msgid "serverssh.password-login.warning"
-msgstr ""
-"Ваш сервер уязвим для злоупотреблений, поскольку в вашем SSH включена "
-"проверка подлинности пароля. Чтобы защитить свой сервер, переключитесь на "
-"механизм аутентификации по ключу и отключите аутентификацию по паролю. <a "
-"href='https://watashi.cyou'>читать далее...</a>"
+msgstr "Ваш сервер уязвим для злоупотреблений, поскольку в вашем SSH включена проверка подлинности пароля. Чтобы защитить свой сервер, переключитесь на механизм аутентификации по ключу и отключите аутентификацию по паролю. <a href='https://watashi.cyou'>читать далее...</a>"
 
 msgid "singbox: ssh"
 msgstr "SingBox: SSH"
@@ -2824,9 +2660,7 @@ msgid "user.current_usage_GB"
 msgstr "Текущее использование (GB)"
 
 msgid "user.define_mode"
-msgstr ""
-"Режим пакета для пользователя - должно ли использование сбрасываться каждый "
-"месяц, неделю и т. д."
+msgstr "Режим пакета для пользователя - должно ли использование сбрасываться каждый месяц, неделю и т. д."
 
 msgid "user.expiry_time"
 msgstr "Срок действия (дней)"
@@ -3010,9 +2844,7 @@ msgid "user.home.link.success-copy"
 msgstr "Ссылка скопирована в буфер обмена"
 
 msgid "user.home.qr-code.description"
-msgstr ""
-"Чтобы скопировать ссылки или поделиться ими, щелкните серое поле <i "
-"class='fa-solid fa-qrcode'></i>, чтобы показать его QR-код."
+msgstr "Чтобы скопировать ссылки или поделиться ими, щелкните серое поле <i class='fa-solid fa-qrcode'></i>, чтобы показать его QR-код."
 
 msgid "user.home.qr-code.display"
 msgstr "Отобразить QR-код"
@@ -3137,16 +2969,13 @@ msgid "user.name"
 msgstr "Имя"
 
 msgid "user.password.description"
-msgstr ""
-"Пароль будет использоваться для дополнительной безопасности. Вы сможете "
-"войти в WatashiManager только после ввода пароля."
+msgstr "Пароль будет использоваться для дополнительной безопасности. Вы сможете войти в WatashiManager только после ввода пароля."
 
 msgid "user.password.title"
 msgstr "Пароль"
 
 msgid "user.password.validation-lenght"
-msgstr ""
-"Для повышения безопасности ваш пароль должен содержать не менее 8 символов."
+msgstr "Для повышения безопасности ваш пароль должен содержать не менее 8 символов."
 
 msgid "user.password.validation-required"
 msgstr "Требуется пароль. Введите пароль, чтобы продолжить."
@@ -3158,10 +2987,7 @@ msgid "user.user_links"
 msgstr "Ссылки пользователей"
 
 msgid "vpn.notallowed"
-msgstr ""
-"Пожалуйста, посетите эту страницу без использования VPN. Вам нужно получить "
-"к ней доступ из страны %(expected_country)s, но в данный момент вы получаете"
-" к ней доступ из %(your_country)s."
+msgstr "Пожалуйста, посетите эту страницу без использования VPN. Вам нужно получить к ней доступ из страны %(expected_country)s, но в данный момент вы получаете к ней доступ из %(your_country)s."
 
 msgid "weekly"
 msgstr "📅 Еженедельно"
@@ -3169,107 +2995,80 @@ msgstr "📅 Еженедельно"
 msgid "worker"
 msgstr "✴️ Cloudflare Worker"
 
-
-
 msgid "System Overview"
 msgstr "Обзор системы"
-
 
 msgid "Real-time performance monitoring"
 msgstr "Мониторинг производительности в реальном времени"
 
-
 msgid "Load average:"
 msgstr "Средняя нагрузка:"
-
 
 msgid "CPU Usage"
 msgstr "Использование CPU"
 
-
 msgid "Memory Usage"
 msgstr "Использование памяти"
-
 
 msgid "Network History"
 msgstr "История сети"
 
-
 msgid "INCOMING SPEED"
 msgstr "СКОРОСТЬ ВХОДЯЩАЯ"
-
 
 msgid "OUTGOING SPEED"
 msgstr "СКОРОСТЬ ИСХОДЯЩАЯ"
 
-
 msgid "MEMORY USAGE"
 msgstr "ИСПОЛЬЗОВАНИЕ ОЗУ"
-
 
 msgid "SWAP USAGE"
 msgstr "ИСПОЛЬЗОВАНИЕ SWAP"
 
-
 msgid "DISK USAGE"
 msgstr "ИСПОЛЬЗОВАНИЕ ДИСКА"
-
 
 msgid "SYSTEM UPTIME"
 msgstr "АПТАЙМ СИСТЕМЫ"
 
-
 msgid "PANEL UPTIME"
 msgstr "АПТАЙМ ПАНЕЛИ"
-
 
 msgid "XRAY UPTIME"
 msgstr "АПТАЙМ XRAY"
 
-
 msgid "Panel Usage"
 msgstr "Использование панели"
-
 
 msgid "THREADS"
 msgstr "ПОТОКИ"
 
-
 msgid "PANEL MEMORY"
 msgstr "ПАМЯТЬ ПАНЕЛИ"
-
 
 msgid "Users Overview"
 msgstr "Обзор пользователей"
 
-
 msgid "Total Users"
 msgstr "Всего пользователей"
-
 
 msgid "Total Traffic"
 msgstr "Отправленный трафик"
 
-
 msgid "Consumed Data"
 msgstr "Общий расход"
-
 
 msgid "Time_D"
 msgstr "Д"
 
-
 msgid "Time_H"
 msgstr "Ч"
-
 
 msgid "Time_M"
 msgstr "М"
 
-
 msgid "Time_S"
 msgstr "С"
-
 
 msgid "Live Chart"
 msgstr "Живой график"
@@ -3277,10 +3076,8 @@ msgstr "Живой график"
 msgid "Live data since the page was opened"
 msgstr "Данные в реальном времени с момента открытия страницы"
 
-
 msgid "Dashboard"
 msgstr "Панель управления"
-
 
 msgid "Monitoring"
 msgstr "Мониторинг"
@@ -3464,64 +3261,3822 @@ msgstr "Данных пока нет"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Check the tunnel service and firewall on the relay server and make sure port 443 (and port 80 for SSL) are forwarded to this server."
-msgstr ""
+msgstr "Проверьте службу туннеля и брандмауэр на ретрансляторе и убедитесь, что порт 443 (и порт 80 для SSL) проброшен на этот сервер."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Nothing answered TLS on port 443"
-msgstr ""
+msgstr "На порту 443 ничто не ответило TLS"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server answers with a different certificate than the one on this server. If you recently moved the panel to a new server, the tunnel on the relay server is still pointing to the old server IP, or the relay server is terminating TLS itself."
-msgstr ""
+msgstr "Порт 443 на ретрансляторе отвечает с другим сертификатом, чем на этом сервере. Если панель недавно переехала на новый сервер, туннель на ретрансляторе всё ещё указывает на старый IP, или ретранслятор сам терминирует TLS."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server forwards traffic to this server as expected."
-msgstr ""
+msgstr "Порт 443 на ретрансляторе пробрасывает трафик на этот сервер, как и ожидается."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server is not responding"
-msgstr ""
+msgstr "Порт 443 на ретрансляторе не отвечает"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server is not responding, and port 80 is not forwarded to this server either. Fix the tunnel on the relay server so ports 443 and 80 reach this server, then ask again."
-msgstr ""
+msgstr "Порт 443 на ретрансляторе не отвечает, и порт 80 тоже не проброшен на этот сервер. Почините туннель на ретрансляторе, чтобы порты 443 и 80 доходили до этого сервера, и запросите снова."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Port 443 on the relay server reaches this server, but validation over port 443 did not succeed and port 80 is not forwarded from the relay server to this server. Forward TCP port 80 from the relay server to this server as well, then ask again."
-msgstr ""
+msgstr "Порт 443 на ретрансляторе доходит до этого сервера, но проверка через порт 443 не удалась, а порт 80 с ретранслятора не проброшен. Пробросьте также TCP-порт 80 с ретранслятора на этот сервер и запросите снова."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate expires soon"
-msgstr ""
+msgstr "SSL-сертификат скоро истечёт"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate has expired"
-msgstr ""
+msgstr "SSL-сертификат истёк"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate is not trusted"
-msgstr ""
+msgstr "SSL-сертификат не доверенный"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The SSL certificate is self-signed"
-msgstr ""
+msgstr "SSL-сертификат самоподписанный"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The relay server is answering on port 443 with another server’s certificate (not forwarding traffic to this server). If you moved the panel to a new server, update the tunnel target IP on the relay server to this server’s IP and forward ports 80 and 443, then ask again."
-msgstr ""
+msgstr "Ретранслятор на порту 443 отвечает с сертификатом другого сервера (не пробрасывает трафик на этот сервер). Если панель переехала на новый сервер, обновите целевой IP туннеля на ретрансляторе на IP этого сервера, пробросьте порты 80 и 443 и запросите снова."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "The relay tunnel does not point to this server"
-msgstr ""
+msgstr "Ретрансляционный туннель не указывает на этот сервер"
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "This domain is set to Relay mode, but its DNS record points to this server itself instead of the relay server."
-msgstr ""
+msgstr "Этот домен в режиме Relay, но его DNS-запись указывает на сам этот сервер вместо ретранслятора."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "This server could not complete a TLS handshake with the relay server on port 443, so the tunnel is down or port 443 is closed on the relay."
-msgstr ""
+msgstr "Этот сервер не смог завершить TLS-рукопожатие с ретранслятором на порту 443 — туннель лежит или порт 443 на ретрансляторе закрыт."
 
 # watashi v12.3.47b: relay tunnel and ssl diagnostics
 msgid "Update the tunnel destination IP on the relay server to point to this server, then check again."
+msgstr "Обновите на ретрансляторе целевой IP туннеля, чтобы он указывал на этот сервер, и проверьте снова."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copied"
+msgstr "Скопировано"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copy"
+msgstr "Копировать"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Copying did not work"
+msgstr "Не удалось скопировать"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Hide"
+msgstr "Скрыть"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Keep this link somewhere safe. It is the only way back into the panel."
+msgstr "Сохраните эту ссылку в надёжном месте. Это единственный путь обратно в панель."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Language"
+msgstr "Язык"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Nothing is written until you press this button."
+msgstr "Ничего не сохраняется, пока вы не нажмёте эту кнопку."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Off"
+msgstr "Выкл"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "On"
+msgstr "Вкл"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Password"
+msgstr "Пароль"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Pick the language of the panel and the country your users dial in from."
+msgstr "Выберите язык панели и страну, из которой подключаются ваши пользоват."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Please wait"
+msgstr "Пожалуйста, подождите"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Protocols"
+msgstr "Протоколы"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Quick Setup"
+msgstr "Быстрая настройка"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Server address"
+msgstr "Адрес сервера"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Show"
+msgstr "Показать"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Step @N@ of @T@"
+msgstr "Шаг @N@ из @T@"
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "The direct domain has to point at this server. A CDN domain is optional and must point somewhere else."
+msgstr "Прямой домен должен указывать на этот сервер. Домен CDN необязателен и должен указывать в другое место."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "The last step installs the services again, so it takes a few minutes. Do not close this page while it works."
+msgstr "На последнем шаге службы устанавливаются заново, это займёт несколько минут. Не закрывайте страницу, пока идёт работа."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "This password guards the whole panel. Eight characters is the floor, longer is better."
+msgstr "Этот пароль защищает всю панель. Минимум восемь символов, лучше — длиннее."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "This wizard runs once. Everything you pick here can be changed later from the panel."
+msgstr "Мастер запускается один раз. Всё выбранное здесь можно изменить позже из панели."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Turn on only the protocols you plan to hand out. Whatever is off here stays off on the server as well."
+msgstr "Включите только те протоколы, которые планируете выдавать. Отключённые здесь останутся выключенными и на сервере."
+
+#. watashi v12.3.49dev quick-setup fill
+msgid "Your admin link"
+msgstr "Ваша ссылка администратора"
+
+msgid "Download Domain"
+msgstr "Домен для загрузки"
+
+msgid "config.adblock.description"
+msgstr "Блокировка рекламы и трекеров на уровне прокси для более удобного просмотра"
+
+msgid "config.adblock.label"
+msgstr "🚫 Блокировка рекламы"
+
+msgid "config.backup_interval.description"
+msgstr "Интервал отправки резервной копии в Telegram-бот (в часах). 0 — отключено."
+
+msgid "config.backup_interval.label"
+msgstr "⏰ Интервал резервного копирования"
+
+msgid "config.block_ads.description"
+msgstr "Блокировка рекламы и онлайн-трекеров"
+
+msgid "config.block_ads.label"
+msgstr "🚫 Блокировать рекламу"
+
+msgid "config.block_adult.description"
+msgstr "Блокировка сайтов для взрослых"
+
+msgid "config.block_adult.label"
+msgstr "🔞 Блокировать контент для взрослых"
+
+msgid "config.block_gambling.description"
+msgstr "Блокировка сайтов азартных игр и ставок"
+
+msgid "config.block_gambling.label"
+msgstr "🎰 Блокировать азартные игры"
+
+msgid "config.block_malware.description"
+msgstr "Блокировка вредоносных и фишинговых доменов"
+
+msgid "config.block_malware.label"
+msgstr "🛡️ Блокировать вредоносное ПО"
+
+msgid "config.block_social.description"
+msgstr "Блокировка доменов соцсетей"
+
+msgid "config.block_social.label"
+msgstr "📵 Блокировать соцсети"
+
+msgid "config.ech_config.description"
+msgstr "Настройка DNS для ECH. Формат: server+dns, например cloudflare-ech.com+https://8.8.8.8/dns-query"
+
+msgid "config.ech_config.label"
+msgstr "🔗 Настройка ECH"
+
+msgid "config.ech_domains.description"
+msgstr "Выберите домены, для которых включить ECH. ECH (Encrypted Client Hello) шифрует SNI в рукопожатии TLS."
+
+msgid "config.ech_domains.label"
+msgstr "Домены ECH"
+
+msgid "config.ech_enable.description"
+msgstr "Шифрует имя домена внутри рукопожатия TLS, поэтому сеть не видит, какой домен запросил пользователь. Очень эффективно, но поддерживается немногими клиентами."
+
+msgid "config.ech_enable.label"
+msgstr "🔐 Включить ECH"
+
+msgid "config.notify_expiry_days.description"
+msgstr "За сколько дней до окончания уведомлять пользователей"
+
+msgid "config.notify_expiry_days.label"
+msgstr "📆 Дни до уведомления об окончании"
+
+msgid "config.notify_expiry_enable.description"
+msgstr "Уведомлять пользователей до окончания подписки"
+
+msgid "config.notify_expiry_enable.label"
+msgstr "📅 Уведомление об окончании"
+
+msgid "config.notify_finished_enable.description"
+msgstr "Уведомлять пользователей, когда подписка закончилась"
+
+msgid "config.notify_finished_enable.label"
+msgstr "🔴 Уведомление о завершении"
+
+msgid "config.notify_usage_enable.description"
+msgstr "Уведомлять, когда пользователь достиг заданного процента расхода"
+
+msgid "config.notify_usage_enable.label"
+msgstr "📊 Уведомление о расходе"
+
+msgid "config.notify_usage_percent.description"
+msgstr "При каком проценте расхода уведомлять пользователей"
+
+msgid "config.notify_usage_percent.label"
+msgstr "📈 Процент для уведомления о расходе"
+
+msgid "config.path_splithttp.description"
+msgstr "Путь XHTTP"
+
+msgid "config.path_splithttp.label"
+msgstr "Путь XHTTP"
+
+msgid "config.splithttp_enable.description"
+msgstr "Тот же путь XHTTP под прежним названием. Распределяет трафик по нескольким HTTP-запросам и выдерживает сети с потерями."
+
+msgid "config.splithttp_enable.label"
+msgstr "Включить XHTTP"
+
+msgid "config.telegram_bot.description"
+msgstr "Настройки Telegram-бота для резервных копий и уведомлений пользователей"
+
+msgid "config.telegram_bot.label"
+msgstr "🤖 Telegram-бот"
+
+msgid "config.telegram_bot_info.description"
+msgstr "Чтобы включить эти функции, сначала задайте токен Telegram-бота в настройках Telegram-прокси."
+
+msgid "config.telegram_bot_info.label"
+msgstr "ℹ️ Важно"
+
+msgid "config.use_glass_theme.description"
+msgstr "Включить современную «стеклянную» тему для панели администратора. Функция экспериментальная."
+
+msgid "config.use_glass_theme.label"
+msgstr "🎨 Стеклянная тема (эксперимент)"
+
+msgid "config.user_limit.description"
+msgstr "Ограничить одновременные подключения на пользователя"
+
+msgid "config.user_limit.label"
+msgstr "👥 Лимиты подключений"
+
+msgid "config.user_limit_block_hours.description"
+msgstr "На сколько часов блокировать IP после превышения лимита."
+
+msgid "config.user_limit_block_hours.label"
+msgstr "Длительность блокировки (часы)"
+
+msgid "config.user_limit_default.description"
+msgstr "Максимум одновременных подключений для новых пользователей по умолчанию. 0 — без ограничений."
+
+msgid "config.user_limit_default.label"
+msgstr "📊 Максимум подключений по умолчанию"
+
+msgid "config.user_limit_enable.description"
+msgstr "Включить ограничение подключений. Лишние подключения будут разорваны."
+
+msgid "config.user_limit_enable.label"
+msgstr "🔒 Включить лимит подключений"
+
+msgid "Check all"
+msgstr "Отметить все"
+
+msgid "Add Domain"
+msgstr "Добавить домен"
+
+msgid "Straight to this server"
+msgstr "Напрямую на этот сервер"
+
+msgid "Through a CDN"
+msgstr "Через CDN"
+
+msgid "Through another machine"
+msgstr "Через другую машину"
+
+msgid "Reality"
+msgstr "Reality"
+
+msgid "Only for the subscription link"
+msgstr "Только для ссылки подписки"
+
+msgid "Made up name"
+msgstr "Выдуманное имя"
+
+msgid "Domains carry your users to this server. Keep at least one domain that points straight here, and one that hides behind a CDN."
+msgstr "Домены приводят пользователей на этот сервер. Держите хотя бы один домен, указывающий прямо сюда, и один за CDN."
+
+msgid "Straight here"
+msgstr "Прямо сюда"
+
+msgid "Behind a CDN"
+msgstr "За CDN"
+
+msgid "Subscription link"
+msgstr "Ссылка подписки"
+
+msgid "Old mode"
+msgstr "Старый режим"
+
+msgid "Not checked yet"
+msgstr "Ещё не проверено"
+
+msgid "Search a domain or a nickname"
+msgstr "Поиск по домену или псевдониму"
+
+msgid "Every mode"
+msgstr "Все режимы"
+
+msgid "No nickname"
+msgstr "Без псевдонима"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "Looked up each time"
+msgstr "Определяется каждый раз"
+
+msgid "Health"
+msgstr "Состояние"
+
+msgid "Offers"
+msgstr "Предлагает"
+
+msgid "Subscription link only"
+msgstr "Только ссылка подписки"
+
+msgid "Itself only"
+msgstr "Только себя"
+
+msgid "Check"
+msgstr "Проверить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "No domain is set on this server yet."
+msgstr "На этом сервере ещё не задан домен."
+
+msgid "The domain itself"
+msgstr "Сам домен"
+
+msgid "Nickname"
+msgstr "Псевдоним"
+
+msgid "Only for your own eyes"
+msgstr "Видно только вам"
+
+msgid "How it reaches this server"
+msgstr "Как он доходит до сервера"
+
+msgid "CDN address"
+msgstr "Адрес CDN"
+
+msgid "Write the addresses apart with a comma."
+msgstr "Разделяйте адреса запятой."
+
+msgid "Look the address up again"
+msgstr "Определить адрес заново"
+
+msgid "Ask the DNS every time"
+msgstr "Спрашивать DNS каждый раз"
+
+msgid "Decoy names"
+msgstr "Подставные имена"
+
+msgid "Write the names apart with a comma. Each one must answer on port 443."
+msgstr "Разделяйте имена запятой. Каждое имя должно отвечать на порту 443."
+
+msgid "This domain only hands out the subscription link, so it never carries traffic itself."
+msgstr "Этот домен только выдаёт ссылку подписки и сам трафик не передаёт."
+
+msgid "What it hands to the users"
+msgstr "Что он выдаёт пользователям"
+
+msgid "Which domains does it offer?"
+msgstr "Какие домены он предлагает?"
+
+msgid "When you pick nothing, the domain only offers itself."
+msgstr "Если ничего не выбрать, домен предлагает только себя."
+
+msgid "Files come from"
+msgstr "Файлы приходят из"
+
+msgid "This domain itself"
+msgstr "Этот домен сам"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Health of the domain"
+msgstr "Состояние домена"
+
+msgid "Delete the domain?"
+msgstr "Удалить домен?"
+
+msgid "Once it is gone, every link that carries this domain stops working."
+msgstr "После удаления все ссылки с этим доменом перестанут работать."
+
+msgid "Edit the domain"
+msgstr "Изменить домен"
+
+msgid "The domain is on your clipboard."
+msgstr "Домен в буфере обмена."
+
+msgid "Your browser did not let me copy it."
+msgstr "Браузер не позволил скопировать."
+
+msgid "Checking"
+msgstr "Проверяется"
+
+msgid "Everything looks right"
+msgstr "Всё в порядке"
+
+msgid "Needs a look"
+msgstr "Нужен взгляд"
+
+msgid "Something is broken"
+msgstr "Что-то сломано"
+
+msgid "The server did not answer the check."
+msgstr "Сервер не ответил на проверку."
+
+msgid "No domain matches what you asked for."
+msgstr "Нет домена, соответствующего запросу."
+
+#, python-format
+msgid "%(n)s domains"
+msgstr "Доменов: %(n)s"
+
+#, python-format
+msgid "%(n)s need a look"
+msgstr "Нужен взгляд: %(n)s"
+
+#, python-format
+msgid "%(n)s are broken"
+msgstr "Сломано: %(n)s"
+
+msgid "Every domain looks right"
+msgstr "Все домены в порядке"
+
+#, python-format
+msgid "%(done)s of %(all)s checked"
+msgstr "Проверено %(done)s из %(all)s"
+
+#, python-format
+msgid "The certificate lasts another %(n)s days"
+msgstr "Сертификат действителен ещё %(n)s дн."
+
+msgid "The certificate has already expired."
+msgstr "Срок действия сертификата уже истёк."
+
+msgid "I could not read a certificate from this domain."
+msgstr "Не удалось прочитать сертификат с этого домена."
+
+msgid "The certificate comes from"
+msgstr "Сертификат выдан"
+
+msgid "The domain answers from"
+msgstr "Домен отвечает с"
+
+msgid "This server answers from"
+msgstr "Этот сервер отвечает с"
+
+msgid "This is the only domain left. Without a domain nobody can reach the panel."
+msgstr "Это последний оставшийся домен. Без домена никто не сможет открыть панель."
+
+#, python-format
+msgid "%(n)s picked"
+msgstr "Выбрано: %(n)s"
+
+msgid "Reading where this domain is used..."
+msgstr "Определяется, где используется этот домен..."
+
+msgid "Direct to this server"
+msgstr "Напрямую на этот сервер"
+
+msgid "Relay and fake"
+msgstr "Ретрансляция и подмена"
+
+msgid "Your users reach this server through these domains. It is safer to keep one direct domain and one CDN domain at the same time."
+msgstr "Пользователи приходят на этот сервер через эти домены. Безопаснее одновременно держать один прямой домен и один домен за CDN."
+
+msgid "All domains"
+msgstr "Все домены"
+
+msgid "Turned off"
+msgstr "Выключен"
+
+msgid "Search a domain or an alias"
+msgstr "Поиск по домену или псевдониму"
+
+msgid "All modes"
+msgstr "Все режимы"
+
+msgid "No alias"
+msgstr "Без псевдонима"
+
+msgid "IP address"
+msgstr "IP-адрес"
+
+msgid "Read from DNS"
+msgstr "Читается из DNS"
+
+msgid "Shown in links"
+msgstr "Показывается в ссылках"
+
+msgid "Only itself"
+msgstr "Только сам домен"
+
+msgid "Use this domain in the links and configs"
+msgstr "Использовать этот домен в ссылках и конфигурациях"
+
+msgid "Domain information"
+msgstr "Сведения о домене"
+
+msgid "Domain mode"
+msgstr "Режим домена"
+
+msgid "Search a mode"
+msgstr "Поиск по режиму"
+
+msgid "old"
+msgstr "старый"
+
+msgid "A short name shown in the client apps"
+msgstr "Короткое имя, которое видят клиентские приложения"
+
+msgid "Connection settings"
+msgstr "Настройки подключения"
+
+msgid "CDN IP addresses"
+msgstr "IP-адреса CDN"
+
+msgid "Separate the IP addresses with a comma."
+msgstr "Разделяйте IP-адреса запятой."
+
+msgid "IP lookup"
+msgstr "Определение IP"
+
+msgid "Read the IP from DNS on every request"
+msgstr "Читать IP из DNS при каждом запросе"
+
+msgid "Reality server names (SNI)"
+msgstr "Имена серверов Reality (SNI)"
+
+msgid "Separate the names with a comma. Every name must answer TLS on port 443."
+msgstr "Разделяйте имена запятой. Каждое имя должно отвечать TLS на порту 443."
+
+msgid "This domain only serves the subscription link and carries no user traffic."
+msgstr "Этот домен только выдаёт ссылку подписки и не несёт пользовательский трафик."
+
+msgid "Subscription settings"
+msgstr "Настройки подписки"
+
+msgid "Domains listed in the subscription of this domain"
+msgstr "Домены, указанные в подписке этого домена"
+
+msgid "If you select nothing, only this domain is listed in its own subscription link."
+msgstr "Если ничего не выбрать, в собственной ссылке подписки будет указан только этот домен."
+
+msgid "Domain used for downloading config files"
+msgstr "Домен для скачивания файлов конфигурации"
+
+msgid "This domain is used in the links again."
+msgstr "Этот домен снова используется в ссылках."
+
+msgid "This domain is kept, but it is left out of every link and config."
+msgstr "Домен сохранён, но исключён из всех ссылок и конфигураций."
+
+msgid "The change could not be saved."
+msgstr "Не удалось сохранить изменение."
+
+msgid "Checked a moment ago"
+msgstr "Проверено только что"
+
+msgid "Checked @N@ minutes ago"
+msgstr "Проверено @N@ мин. назад"
+
+msgid "Checked @N@ hours ago"
+msgstr "Проверено @N@ ч. назад"
+
+msgid "The panel keeps a check for 6 hours. Press check again for a new answer."
+msgstr "Панель хранит результат проверки 6 часа. Нажмите «Проверить» ещё раз для нового ответа."
+
+msgid "No mode matches what you typed."
+msgstr "Нет режима, соответствующего запросу."
+
+msgid "CDN"
+msgstr "CDN"
+
+msgid "CDN with auto clean IP"
+msgstr "CDN с авто-поиском чистого IP"
+
+msgid "Relay"
+msgstr "Ретрансляция"
+
+msgid "Cloudflare Worker"
+msgstr "Cloudflare Worker"
+
+msgid "Reality (old)"
+msgstr "Reality (старый)"
+
+msgid "Reality TCP"
+msgstr "Reality TCP"
+
+msgid "Reality XHTTP"
+msgstr "Reality XHTTP"
+
+msgid "Reality gRPC"
+msgstr "Reality gRPC"
+
+msgid "XTLS Direct (old)"
+msgstr "XTLS Direct (старый)"
+
+msgid "The DNS record of this domain must hold the IP of this server. Use it when the server IP is not blocked."
+msgstr "DNS-запись этого домена должна указывать на IP этого сервера. Используйте, когда IP сервера не заблокирован."
+
+msgid "The domain is proxied by a CDN such as Cloudflare, so its DNS record holds a CDN IP."
+msgstr "Домен проксируется через CDN (например Cloudflare), поэтому его DNS-запись содержит IP CDN."
+
+msgid "Same as CDN, and the panel keeps looking for a clean CDN IP on its own."
+msgstr "То же, что CDN, но панель сама постоянно ищет чистый IP CDN."
+
+msgid "The domain belongs to a relay server that forwards the traffic to this server."
+msgstr "Домен принадлежит ретранслятору, который пересылает трафик на этот сервер."
+
+msgid "The traffic of this domain arrives through a Cloudflare Worker."
+msgstr "Трафик этого домена приходит через Cloudflare Worker."
+
+msgid "A name that exists only inside the configs. It needs no DNS record at all."
+msgstr "Имя, существующее только в конфигурациях. DNS-запись не требуется."
+
+msgid "The old Reality setup. Prefer Reality TCP, XHTTP or gRPC for new domains."
+msgstr "Старая схема Reality. Для новых доменов лучше выбрать Reality TCP, XHTTP или gRPC."
+
+msgid "Reality over TCP. Here the domain is a foreign website used as a cover."
+msgstr "Reality поверх TCP. Домен здесь — внешний сайт, используемый как прикрытие."
+
+msgid "Reality over XHTTP. Here the domain is a foreign website used as a cover."
+msgstr "Reality поверх XHTTP. Домен здесь — внешний сайт, используемый как прикрытие."
+
+msgid "Reality over gRPC. Here the domain is a foreign website used as a cover."
+msgstr "Reality поверх gRPC. Домен здесь — внешний сайт, используемый как прикрытие."
+
+msgid "The old XTLS setup, kept only for old client apps."
+msgstr "Старая схема XTLS, оставленная только для старых клиентских приложений."
+
+msgid "Nothing answered TLS on port 443 for this domain."
+msgstr "Ничего не ответило TLS на порту 443 для этого домена."
+
+msgid "No certificate could be read from this domain."
+msgstr "С этого домена не удалось прочитать сертификат."
+
+msgid "The certificate of this domain has already expired."
+msgstr "Срок действия сертификата этого домена уже истёк."
+
+msgid "The certificate of this domain expires very soon."
+msgstr "Сертификат этого домена истекает очень скоро."
+
+msgid "The certificate of this domain is not trusted by browsers yet."
+msgstr "Сертификат этого домена пока не доверяется браузерам."
+
+msgid "No test needed"
+msgstr "Проверка не требуется"
+
+msgid "A fake name lives only inside the configs, so no DNS record is asked for it."
+msgstr "Подставное имя живёт только в конфигурациях, поэтому DNS-запись для него не нужна."
+
+msgid "A wildcard domain cannot be looked up by itself."
+msgstr "Домен-«звёздочка» сам по себе не может быть определён."
+
+msgid "This domain has no DNS record"
+msgstr "У этого домена нет DNS-записи"
+
+msgid "No address came back for this domain, so nobody can reach it."
+msgstr "Домен не вернул ни одного адреса, поэтому он недоступен."
+
+msgid "Add an A or AAAA record for this domain where your DNS is managed."
+msgstr "Добавьте A- или AAAA-запись для этого домена там, где управляется ваш DNS."
+
+msgid "The cover site points at this server"
+msgstr "Сайт-прикрытие указывает на этот сервер"
+
+msgid "A Reality cover site has to be a foreign website, but this name answers with the IP of this server."
+msgstr "Сайт-прикрытие Reality должен быть внешним сайтом, а это имя отвечает IP этого сервера."
+
+msgid "Use a well known foreign website here, or choose a mode that belongs to your own domain."
+msgstr "Используйте здесь известный внешний сайт или выберите режим для собственного домена."
+
+msgid "The cover site answers normally"
+msgstr "Сайт-прикрытие отвечает нормально"
+
+msgid "The IP of a cover site has nothing to do with this server, so a foreign address is the right answer here."
+msgstr "IP сайта-прикрытия не связан с этим сервером, поэтому внешний адрес здесь — правильный ответ."
+
+msgid "The configs send these cover names:"
+msgstr "Конфигурации используют эти имена прикрытия:"
+
+msgid "The CDN proxy looks switched off"
+msgstr "Похоже, CDN-прокси выключен"
+
+msgid "This domain answers with the IP of this server, so the traffic does not go through the CDN."
+msgstr "Этот домен отвечает IP этого сервера, поэтому трафик не проходит через CDN."
+
+msgid "Switch the proxy on at your CDN, or change the mode to Direct."
+msgstr "Включите проксирование в своей CDN или смените режим на «Прямой»."
+
+msgid "The domain is served through Cloudflare"
+msgstr "Домен обслуживается через Cloudflare"
+
+msgid "The domain is served by another network"
+msgstr "Домен обслуживается другой сетью"
+
+msgid "The address of this domain belongs neither to this server nor to Cloudflare, which is allowed when another CDN sits in front."
+msgstr "Адрес этого домена не принадлежит ни этому серверу, ни Cloudflare — это допустимо, когда впереди другой CDN."
+
+msgid "The relay domain points at this server"
+msgstr "Домен ретрансляции указывает на этот сервер"
+
+msgid "A relay domain has to point at the relay machine, not at this server."
+msgstr "Домен ретрансляции должен указывать на машину-ретранслятор, а не на этот сервер."
+
+msgid "Point this domain at the relay machine, or change the mode to Direct."
+msgstr "Направьте домен на машину-ретранслятор или смените режим на «Прямой»."
+
+msgid "The relay domain answers normally"
+msgstr "Домен ретрансляции отвечает нормально"
+
+msgid "A relay domain is expected to answer with the IP of the relay machine."
+msgstr "Домен ретрансляции должен отвечать IP машины-ретранслятора."
+
+msgid "The domain points at this server"
+msgstr "Домен указывает на этот сервер"
+
+msgid "Cloudflare answers for this domain"
+msgstr "За домен отвечает Cloudflare"
+
+msgid "This mode needs a straight connection, but Cloudflare answers for the domain."
+msgstr "Этому режиму нужно прямое подключение, а за домен отвечает Cloudflare."
+
+msgid "Switch the proxy off at Cloudflare, or change the mode to CDN."
+msgstr "Выключите проксирование в Cloudflare или смените режим на CDN."
+
+msgid "The domain points somewhere else"
+msgstr "Домен указывает в другое место"
+
+msgid "None of the addresses of this domain belong to this server."
+msgstr "Ни один из адресов домена не принадлежит этому серверу."
+
+msgid "Point this domain at the IP of this server."
+msgstr "Направьте домен на IP этого сервера."
+
+msgid "It is the download domain of"
+msgstr "Это домен загрузки для"
+
+msgid "It is offered in the links of"
+msgstr "Предлагается в ссылках"
+
+msgid "It carries the decoy names"
+msgstr "Несёт подставные имена"
+
+msgid "When this is off, the domain stays in the panel but is left out of every link and config."
+msgstr "Когда это выключено, домен остаётся в панели, но не используется ни в одной ссылке или конфигурации."
+
+msgid "You are not allowed to see the domains."
+msgstr "Вам не разрешено смотреть домены."
+
+msgid "This domain is not on this server any more."
+msgstr "Этого домена больше нет на этом сервере."
+
+msgid "You are not allowed to change the domains."
+msgstr "Вам не разрешено менять домены."
+
+msgid "At least one domain has to stay on, otherwise nobody can reach the panel."
+msgstr "Хотя бы один домен должен быть включён, иначе панель будет недоступна."
+
+msgid "Apply the settings so the change reaches the configs."
+msgstr "Примените настройки, чтобы изменение дошло до конфигураций."
+
+msgid "Direct mode"
+msgstr "Прямой режим"
+
+msgid "Fake name"
+msgstr "Подставное имя"
+
+msgid "Show every IP address"
+msgstr "Показать все IP-адреса"
+
+msgid "Certificate"
+msgstr "Сертификат"
+
+msgid "Choose the domain mode"
+msgstr "Выберите режим домена"
+
+msgid "IP addresses of the domain"
+msgstr "IP-адреса домена"
+
+msgid "@N@ days left"
+msgstr "Осталось @N@ дн."
+
+msgid "Expired"
+msgstr "Истёк"
+
+msgid "No certificate"
+msgstr "Нет сертификата"
+
+msgid "This domain is not used anywhere else."
+msgstr "Этот домен больше нигде не используется."
+
+msgid "This mode is kept only for old clients. Pick a newer one when you can."
+msgstr "Этот режим оставлен только для старых клиентов. По возможности выберите более новый."
+
+msgid "Direct mode means you want to use your server directly (for usual use), CDN means that you use your server on behind of a CDN provider."
+msgstr "Прямой режим означает, что вы используете сервер напрямую (обычное использование), CDN — что сервер стоит за провайдером CDN."
+
+msgid "This can be used for giving your users a permanent non blockable links."
+msgstr "Это можно использовать, чтобы дать пользователям постоянные ссылки, которые нельзя заблокировать."
+
+#, python-format
+msgid "This domain is already used in the setting \"%(name)s\". Free it there first."
+msgstr "Этот домен уже используется в настройке «%(name)s». Сначала освободите его там."
+
+#, python-format
+msgid "This domain is already a Reality server name (SNI) of the domain %(domain)s. Pick another domain or free it there first."
+msgstr "Этот домен уже является именем сервера Reality (SNI) домена %(domain)s. Выберите другой домен или освободите его там."
+
+msgid "This domain is already in the panel. A domain can be added only once."
+msgstr "Этот домен уже в панели. Домен можно добавить только один раз."
+
+#, python-format
+msgid "Domain IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
+msgstr "IP домена %(domain_ip)s не совпадает с вашим IP %(server_ip)s, что требуется в прямом режиме"
+
+#, python-format
+msgid "In CDN mode, Domain IP=%(domain_ip)s should be different to your ip=%(server_ip)s"
+msgstr "В режиме CDN IP домена %(domain_ip)s должен отличаться от вашего IP %(server_ip)s"
+
+msgid "The change is saved. Press the button so it reaches the configs."
+msgstr "Изменение сохранено. Нажмите кнопку, чтобы оно дошло до конфигураций."
+
+msgid "Applying..."
+msgstr "Применение..."
+
+msgid "Core Protocols"
+msgstr "Основные протоколы"
+
+msgid "Transport Layers"
+msgstr "Транспортные уровни"
+
+msgid "Extra Protocols"
+msgstr "Дополнительные протоколы"
+
+msgid "Panel Features"
+msgstr "Функции панели"
+
+msgid "Other Switches"
+msgstr "Прочие переключатели"
+
+msgid "Global Proxy Status"
+msgstr "Общий статус прокси"
+
+msgid "Everything below answers only while this stays on."
+msgstr "Всё нижеперечисленное работает, только пока это включено."
+
+msgid "Enable All"
+msgstr "Включить все"
+
+msgid "Disable All"
+msgstr "Выключить все"
+
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+msgid "Search a protocol or a proxy"
+msgstr "Поиск по протоколу или прокси"
+
+msgid "Nothing here matches what you typed."
+msgstr "Здесь ничего не соответствует запросу."
+
+msgid "Only on"
+msgstr "Только включённые"
+
+msgid "Only off"
+msgstr "Только выключенные"
+
+msgid "@DONE@ of @ALL@ on"
+msgstr "Включено @DONE@ из @ALL@"
+
+msgid "@N@ on"
+msgstr "Включено: @N@"
+
+msgid "Nothing has changed yet."
+msgstr "Пока ничего не изменено."
+
+msgid "Saving..."
+msgstr "Сохранение..."
+
+msgid "@N@ changes are waiting"
+msgstr "Ожидают сохранения: @N@"
+
+msgid "A proxy that is off is left out of every subscription link."
+msgstr "Выключенный прокси не попадает ни в одну ссылку подписки."
+
+msgid "Layer"
+msgstr "Уровень"
+
+msgid "Transport"
+msgstr "Транспорт"
+
+msgid "Collapse all"
+msgstr "Свернуть все"
+
+msgid "Expand all"
+msgstr "Развернуть все"
+
+msgid "This switch is not on this server."
+msgstr "Этого переключателя нет на этом сервере."
+
+msgid "This proxy is not on this server any more."
+msgstr "Этого прокси больше нет на этом сервере."
+
+msgid "You are not allowed to change the proxies."
+msgstr "Вам не разрешено менять прокси."
+
+msgid "Nothing was left to save."
+msgstr "Сохранять было нечего."
+
+msgid "Proxies of this group"
+msgstr "Прокси этой группы"
+
+msgid "Reading..."
+msgstr "Чтение..."
+
+msgid "Edit this proxy"
+msgstr "Изменить этот прокси"
+
+msgid "The name your users see"
+msgstr "Имя, которое видят ваши пользоват"
+
+msgid "This name is what shows up beside the config inside the user app."
+msgstr "Это имя показывается рядом с конфигурацией в приложении пользователя."
+
+msgid "Security layer"
+msgstr "Слой безопасности"
+
+msgid "The protocol, the transport and the family of a proxy are fixed. Only the parts below can be changed."
+msgstr "Протокол, транспорт и семейство прокси фиксированы. Изменить можно только то, что ниже."
+
+msgid "Advanced parameters"
+msgstr "Расширенные параметры"
+
+msgid "Leave this alone unless you know what each key does."
+msgstr "Не трогайте это, если не знаете, что делает каждый ключ."
+
+msgid "This has to be sound JSON."
+msgstr "Здесь должен быть корректный JSON."
+
+msgid "Turned on for the users"
+msgstr "Включён для пользователей"
+
+msgid "The proxy was saved."
+msgstr "Прокси сохранён."
+
+msgid "The proxy could not be saved."
+msgstr "Прокси не удалось сохранить."
+
+msgid "This proxy was not found any more. Refresh the page."
+msgstr "Этого прокси больше нет. Обновите страницу."
+
+msgid "A name cannot be left empty."
+msgstr "Имя не может быть пустым."
+
+msgid "Bring back the default proxies"
+msgstr "Вернуть прокси по умолчанию"
+
+msgid "This puts back every proxy the panel ships with, for the ones that were deleted or renamed. What you turned on or off stays as it is."
+msgstr "Это вернёт каждый прокси, который поставляется с панелью — для удалённых или переименованных. Включённое и выключенное останется как есть."
+
+msgid "Nothing was missing. Every default proxy is already here."
+msgstr "Ничего не было потеряно. Все прокси по умолчанию уже на месте."
+
+msgid "@N@ proxies were brought back."
+msgstr "Возвращено прокси: @N@"
+
+msgid "Bring back"
+msgstr "Вернуть"
+
+msgid "Reading the proxy..."
+msgstr "Чтение прокси..."
+
+msgid "Family"
+msgstr "Семейство"
+
+msgid "Protocol"
+msgstr "Протокол"
+
+msgid "Every proxy at once"
+msgstr "Все прокси сразу"
+
+msgid "One press turns every proxy below on. The next press turns every one of them off."
+msgstr "Одно нажатие включает все прокси ниже. Следующее нажатие выключает их все."
+
+msgid "Protocols on"
+msgstr "Включено протоколов"
+
+msgid "Proxies on"
+msgstr "Включено прокси"
+
+msgid "Not saved yet"
+msgstr "Ещё не сохранено"
+
+msgid "Turn every proxy on or off"
+msgstr "Включить или выключить все прокси"
+
+msgid "Turn on every protocol"
+msgstr "Включить все протоколы"
+
+msgid "Turn off every protocol"
+msgstr "Выключить все протоколы"
+
+msgid "Every proxy is on now."
+msgstr "Теперь включены все прокси."
+
+msgid "Every proxy is off now."
+msgstr "Теперь выключены все прокси."
+
+msgid "The proxies that leave the server straight stand on one side, the ones that travel through a CDN on the other."
+msgstr "Прокси, выходящие с сервера напрямую, стоят с одной стороны, проходящие через CDN — с другой."
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "The full tunnel page is on the way"
+msgstr "Полная страница туннелей на подходе"
+
+msgid "What you see here is an early build. The complete tunnel manager, with more kinds of tunnel and finer settings, arrives in the next releases of the panel."
+msgstr "То, что вы видите, — ранняя версия. Полный менеджер туннелей с новыми видами туннелей и более тонкими настройками появится в следующих выпусках панели."
+
+msgid "Rathole tunnels already work on this page."
+msgstr "Туннели Rathole уже работают на этой странице."
+
+msgid "New tunnel"
+msgstr "Новый туннель"
+
+msgid "Nothing can be built before the Rathole core sits on this server."
+msgstr "Пока ядро Rathole не установлено на этом сервере, ничего построить нельзя."
+
+msgid "Running"
+msgstr "Работает"
+
+msgid "Stopped"
+msgstr "Остановлен"
+
+msgid "Iran side"
+msgstr "Сторона Ирана"
+
+msgid "Kharej side"
+msgstr "Сторона Хареджа"
+
+msgid "Iran side (server)"
+msgstr "Сторона Ирана (сервер)"
+
+msgid "Kharej side (client)"
+msgstr "Сторона Хареджа (клиент)"
+
+msgid "The core is not installed yet"
+msgstr "Ядро ещё не установлено"
+
+msgid "Install the core"
+msgstr "Установить ядро"
+
+msgid "Remove the core"
+msgstr "Удалить ядро"
+
+msgid "How a tunnel is set up"
+msgstr "Как устроен туннель"
+
+msgid "Run this on the Iran server first:"
+msgstr "Сначала выполните это на иранском сервере:"
+
+msgid "Then build the Kharej side here on this panel."
+msgstr "Затем соберите сторону Хареджа здесь, в этой панели."
+
+msgid "Starts on boot"
+msgstr "Запускается при загрузке"
+
+msgid "Does not start on boot"
+msgstr "Не запускается при загрузке"
+
+msgid "Turn the tunnel on or off"
+msgstr "Включить или выключить туннель"
+
+msgid "Show the token"
+msgstr "Показать токен"
+
+msgid "Copy the token"
+msgstr "Скопировать токен"
+
+msgid "Delete this tunnel"
+msgstr "Удалить этот туннель"
+
+msgid "No tunnel has been built yet."
+msgstr "Туннелей пока не построено."
+
+msgid "Build the first one with the green button at the top of the page."
+msgstr "Создайте первый зелёной кнопкой вверху страницы."
+
+msgid "Turn every tunnel on"
+msgstr "Включить все туннели"
+
+msgid "Turn every tunnel off"
+msgstr "Выключить все туннели"
+
+msgid "Keep it the same on both sides."
+msgstr "С обеих сторон должно быть одинаково."
+
+msgid "Send small packets without waiting."
+msgstr "Отправлять маленькие пакеты без ожидания."
+
+msgid "Keep the line warm so it does not fall asleep."
+msgstr "Держать канал «тёплым», чтобы он не заснул."
+
+msgid "Listen on IPv6 as well."
+msgstr "Слушать также на IPv6."
+
+msgid "The tunnel starts by itself once it is saved."
+msgstr "Туннель запустится сам сразу после сохранения."
+
+msgid "Build the tunnel"
+msgstr "Построить туннель"
+
+msgid "Token"
+msgstr "Токен"
+
+msgid "Total Tunnels"
+msgstr "Всего туннелей"
+
+msgid "It was copied."
+msgstr "Скопировано."
+
+msgid "It could not be copied. Copy it by hand."
+msgstr "Не удалось скопировать, скопируйте вручную."
+
+msgid "The panel did not answer."
+msgstr "Панель не ответила."
+
+msgid "This address is not open on this panel."
+msgstr "Этот адрес не открыт на этой панели."
+
+msgid "Something did not go through."
+msgstr "Что-то не прошло."
+
+msgid "It is done."
+msgstr "Готово."
+
+msgid "Working..."
+msgstr "Работаю..."
+
+msgid "Yes, go ahead"
+msgstr "Да, продолжай"
+
+msgid "Build the Iran side"
+msgstr "Построить сторону Ирана"
+
+msgid "Build the Kharej side"
+msgstr "Построить сторону Хареджа"
+
+msgid "Saving means the tunnel is built again, so it goes quiet for a moment."
+msgstr "Сохранение означает пересборку туннеля, поэтому он на минуту замолчит."
+
+msgid "The address of the Iran server has to be filled in."
+msgstr "Нужно указать адрес иранского сервера."
+
+msgid "The tunnel port has to be filled in."
+msgstr "Нужно указать порт туннеля."
+
+msgid "A port has to be a number between 1024 and 65535."
+msgstr "Порт должен быть числом от 1024 до 65535."
+
+msgid "The ports to forward have to be filled in."
+msgstr "Нужно указать порты для проброса."
+
+msgid "The tunnel is on now."
+msgstr "Туннель включён."
+
+msgid "The tunnel is off now."
+msgstr "Туннель выключен."
+
+msgid "Restart this tunnel?"
+msgstr "Перезапустить этот туннель?"
+
+msgid "The tunnel goes down for a breath and comes back."
+msgstr "Туннель ненадолго замолчит и вернётся."
+
+msgid "Yes, restart it"
+msgstr "Да, перезапусти"
+
+msgid "Delete this tunnel?"
+msgstr "Удалить этот туннель?"
+
+msgid "The tunnel and its service are removed for good."
+msgstr "Туннель и его служба удаляются навсегда."
+
+msgid "Yes, delete it"
+msgstr "Да, удалить"
+
+msgid "The log of @ID@"
+msgstr "Журнал @ID@"
+
+msgid "The log is empty."
+msgstr "Журнал пуст."
+
+msgid "Remove the Rathole core?"
+msgstr "Удалить ядро Rathole?"
+
+msgid "Yes, remove the core"
+msgstr "Да, удалить ядро"
+
+msgid "Turn every tunnel on?"
+msgstr "Включить все туннели?"
+
+msgid "Turn every tunnel off?"
+msgstr "Выключить все туннели?"
+
+msgid "Every tunnel on this server starts, and comes up again after a reboot."
+msgstr "Все туннели этого сервера запустятся и снова поднимутся после перезагрузки."
+
+msgid "Every tunnel on this server stops, and stays down after a reboot."
+msgstr "Все туннели этого сервера остановятся и останутся выключенными после перезагрузки."
+
+msgid "Yes, turn them on"
+msgstr "Да, включи их"
+
+msgid "Yes, turn them off"
+msgstr "Да, выключи их"
+
+msgid "This tunnel was not found any more. Refresh the page."
+msgstr "Этого туннеля больше нет. Обновите страницу."
+
+msgid "Download Backup"
+msgstr "Скачать резервную копию"
+
+msgid "Keep a backup before you change anything big"
+msgstr "Держите резервную копию перед любыми большими изменениями"
+
+msgid "A backup file holds every setting, user, admin, and domain of this panel. With it, the whole panel can be brought back on this server or on a fresh one."
+msgstr "Файл резервной копии содержит все настройки, пользователей, администраторов и домены этой панели. С ним панель можно восстановить на этом сервере или на новом."
+
+msgid "Backup & Restore"
+msgstr "Резервное копирование и восстановление"
+
+msgid "Everything on this panel is written into one json file that you keep somewhere safe."
+msgstr "Всё, что есть в этой панели, записывается в один json-файл, который вы храните в надёжном месте."
+
+msgid "Last backup taken from this browser"
+msgstr "Последняя копия из этого браузера"
+
+msgid "Never"
+msgstr "Никогда"
+
+msgid "The file carries the keys of every user, so keep it as private as a password."
+msgstr "В файле лежат ключи всех пользователей, поэтому храните его как пароль — втайне."
+
+msgid "Restore from Backup"
+msgstr "Восстановить из копии"
+
+msgid "Hand the panel a file you saved before, and choose what should come back from it."
+msgstr "Дайте панели файл, который вы сохранили раньше, и выберите, что из него вернуть."
+
+msgid "Drop your backup file here"
+msgstr "Перетащите файл копии сюда"
+
+msgid "or click to browse, json files only"
+msgstr "или нажмите, чтобы выбрать; только json-файлы"
+
+msgid "Take this file away"
+msgstr "Убрать этот файл"
+
+msgid "Bring back the settings"
+msgstr "Вернуть настройки"
+
+msgid "Every switch and value of the panel."
+msgstr "Все переключатели и значения панели."
+
+msgid "Bring back the users"
+msgstr "Вернуть пользователей"
+
+msgid "Users with their keys and their usage."
+msgstr "Пользователи с их ключами и расходом."
+
+msgid "Bring back the domains"
+msgstr "Вернуть домены"
+
+msgid "Domains with the mode each one had."
+msgstr "Домены с их прежними режимами."
+
+msgid "DANGEROUS"
+msgstr "ОПАСНО"
+
+msgid "Replace the main admin"
+msgstr "Заменить главного администратора"
+
+msgid "The main admin of the file takes the place of the one signed in now."
+msgstr "Главный администратор из файла займёт место того, кто вошёл сейчас."
+
+msgid "Restore now"
+msgstr "Восстановить сейчас"
+
+msgid "At the end of a restore the panel installs itself again, so it goes quiet for a few minutes and you may have to sign in once more."
+msgstr "В конце восстановления панель устанавливает себя заново, поэтому она на несколько минут замолчит, и, возможно, придётся войти ещё раз."
+
+msgid "Restore from this file?"
+msgstr "Восстановить из этого файла?"
+
+msgid "What is on the panel now is written over by what is in the file. This cannot be undone."
+msgstr "То, что сейчас на панели, будет перезаписано содержимым файла. Это нельзя отменить."
+
+msgid "Yes, restore it"
+msgstr "Да, восстанови"
+
+msgid "The backup is being restored"
+msgstr "Выполняется восстановление"
+
+msgid "The panel is working on the file. Please keep this page open until it is finished."
+msgstr "Панель работает с файлом. Держите эту страницу открытой до окончания."
+
+msgid "Starting"
+msgstr "Запуск"
+
+msgid "Waiting for the first lines..."
+msgstr "Ждём первых строк..."
+
+msgid "Open the whole log"
+msgstr "Открыть весь журнал"
+
+msgid "Open the panel again"
+msgstr "Снова открыть панель"
+
+msgid "The file was read. It looks like a panel backup."
+msgstr "Файл прочитан. Похоже на резервную копию панели."
+
+msgid "Only a json file can be restored."
+msgstr "Восстановить можно только json-файл."
+
+msgid "This file is too big to be a panel backup."
+msgstr "Этот файл слишком велик для копии панели."
+
+msgid "The file could not be read."
+msgstr "Файл не удалось прочитать."
+
+msgid "This file is not a sound json file."
+msgstr "Это не корректный json-файл."
+
+msgid "This file does not look like a panel backup."
+msgstr "Файл не похож на резервную копию панели."
+
+msgid "The download has started."
+msgstr "Загрузка началась."
+
+msgid "Choose a backup file first."
+msgstr "Сначала выберите файл копии."
+
+msgid "Pick at least one thing to bring back."
+msgstr "Выберите хотя бы одну вещь для восстановления."
+
+msgid "comes back"
+msgstr "возвращается"
+
+msgid "stays as it is"
+msgstr "остаётся как есть"
+
+msgid "The restore is finished."
+msgstr "Восстановление завершено."
+
+msgid "The restore did not finish"
+msgstr "Восстановление не завершилось"
+
+msgid "Something went wrong in the middle. Open the whole log to see the last lines."
+msgstr "Посередине что-то пошло не так. Откройте весь журнал, чтобы увидеть последние строки."
+
+msgid "The restore is finished"
+msgstr "Восстановление завершено"
+
+msgid "The panel was installed again with the restored data. Open the panel and sign in."
+msgstr "Панель установлена заново с восстановленными данными. Откройте панель и войдите."
+
+msgid "The panel is busy installing, so it does not answer for a while."
+msgstr "Панель занята установкой и временно не отвечает."
+
+msgid "No file was given."
+msgstr "Файл не передан."
+
+msgid "Nothing was picked to bring back."
+msgstr "Ничего не выбрано для восстановления."
+
+msgid "The restore could not be started."
+msgstr "Не удалось запустить восстановление."
+
+msgid "The restore has started."
+msgstr "Восстановление запущено."
+
+msgid "Panel settings"
+msgstr "Настройки панели"
+
+msgid "Everything the panel runs on lives here. Pick a section on the side, change what you need, then press Save changes at the bottom. Nothing is written until you save."
+msgstr "Здесь живёт всё, на чём работает панель. Выберите раздел сбоку, измените нужное и нажмите «Сохранить изменения» внизу. Ничего не записывается, пока вы не сохраните."
+
+msgid "Search in settings"
+msgstr "Поиск в настройках"
+
+msgid "Sections"
+msgstr "Разделы"
+
+msgid "Back to sections"
+msgstr "Назад к разделам"
+
+msgid "Filled in for you"
+msgstr "Заполнено за вас"
+
+msgid "Needs a full reinstall"
+msgstr "Требует полной переустановки"
+
+msgid "Needs Apply Changes"
+msgstr "Требует «Применить изменения»"
+
+msgid "We filled this in for you"
+msgstr "Мы заполнили это за вас"
+
+msgid "Settings marked with a badge only take effect after you apply the changes on the server."
+msgstr "Настройки с пометкой вступают в силу только после применения изменений на сервере."
+
+msgid "No domain has been added yet."
+msgstr "Домен ещё не добавлен."
+
+msgid "Build a new one"
+msgstr "Создать новый"
+
+msgid "Pick a free port"
+msgstr "Выберите свободный порт"
+
+msgid "Nothing matched your search"
+msgstr "Ничего не найдено"
+
+msgid "Try a shorter word, or the English name of the setting."
+msgstr "Попробуйте более короткое слово или английское название настройки."
+
+msgid "Nothing is written on the server until you save."
+msgstr "На сервер ничего не записывается, пока вы не сохраните."
+
+msgid "Undo my changes"
+msgstr "Отменить мои изменения"
+
+msgid "Save changes"
+msgstr "Сохранить изменения"
+
+msgid "Other settings"
+msgstr "Другие настройки"
+
+msgid "Basics"
+msgstr "Основы"
+
+msgid "Network and transport"
+msgstr "Сеть и транспорт"
+
+msgid "Safety and filtering"
+msgstr "Безопасность и фильтрация"
+
+msgid "General"
+msgstr "Общее"
+
+msgid "Admin area"
+msgstr "Зона администратора"
+
+msgid "Your brand"
+msgstr "Ваш бренд"
+
+msgid "Limits for users"
+msgstr "Лимиты для пользователей"
+
+msgid "Which proxies are on"
+msgstr "Какие прокси включены"
+
+msgid "Shadowsocks FakeTLS"
+msgstr "Shadowsocks FakeTLS"
+
+msgid "ShadowTLS"
+msgstr "ShadowTLS"
+
+msgid "TUIC"
+msgstr "TUIC"
+
+msgid "Hysteria"
+msgstr "Hysteria"
+
+msgid "Mieru"
+msgstr "Mieru"
+
+msgid "NaiveProxy"
+msgstr "NaiveProxy"
+
+msgid "AmneziaWG"
+msgstr "AmneziaWG"
+
+msgid "WireGuard"
+msgstr "WireGuard"
+
+msgid "ShadowsocksR"
+msgstr "ShadowsocksR"
+
+msgid "KCP"
+msgstr "KCP"
+
+msgid "RestTLS"
+msgstr "RestTLS"
+
+msgid "TLS tricks"
+msgstr "TLS-хитрости"
+
+msgid "Multiplexing"
+msgstr "Мультиплексирование"
+
+msgid "Telegram proxy"
+msgstr "Telegram-прокси"
+
+msgid "Telegram bot"
+msgstr "Telegram-бот"
+
+msgid "Blocking and filtering"
+msgstr "Блокировка и фильтрация"
+
+msgid "Cloudflare Warp"
+msgstr "Cloudflare Warp"
+
+msgid "Domain fronting"
+msgstr "Подмена домена"
+
+msgid "For experts only"
+msgstr "Только для экспертов"
+
+msgid "Language, country and the settings the whole panel is built on."
+msgstr "Язык, страна и настройки, на которых стоит вся панель."
+
+msgid "How the admin area behaves."
+msgstr "Как ведёт себя зона администратора."
+
+msgid "The name, the link and the free text your users see."
+msgstr "Имя, ссылка и свободный текст, которые видят ваши пользоват."
+
+msgid "How much traffic and how many days a new user gets, and what happens when the limit is reached."
+msgstr "Сколько трафика и дней получает новый пользователь и что происходит при достижении лимита."
+
+msgid "Turn each proxy type on or off and set the paths they use."
+msgstr "Включайте или выключайте каждый тип прокси и задавайте их пути."
+
+msgid "Certificates and the secure layer between the client and the server."
+msgstr "Сертификаты и защищённый слой между клиентом и сервером."
+
+msgid "Plain connections without a certificate."
+msgstr "Незащищённые соединения без сертификата."
+
+msgid "Small tricks that break the traffic into pieces so filtering tools have a harder time."
+msgstr "Небольшие приёмы, дробящие трафик на части, чтобы средствам фильтрации было труднее."
+
+msgid "Carry several connections inside one, which makes things faster on a busy line."
+msgstr "Переносит несколько соединений внутри одного, что ускоряет работу на загруженной линии."
+
+msgid "Reality keys and the fake sites the traffic hides behind."
+msgstr "Ключи Reality и сайты-прикрытия, за которыми прячется трафик."
+
+msgid "The Telegram proxy that runs on this server."
+msgstr "Telegram-прокси, который работает на этом сервере."
+
+msgid "The bot your users can talk to."
+msgstr "Бот, с которым могут говорить ваши пользоват."
+
+msgid "Block ads, adult sites, torrent traffic and local addresses."
+msgstr "Блокировать рекламу, сайты для взрослых, торрент-трафик и локальные адреса."
+
+msgid "Send some or all of the outgoing traffic through Cloudflare Warp."
+msgstr "Направить часть или весь исходящий трафик через Cloudflare Warp."
+
+msgid "Show one domain to the outside world while talking to another."
+msgstr "Показывать наружу один домен, а говорить с другим."
+
+msgid "Changing these without knowing what they do can break the panel."
+msgstr "Изменение этого вслепую может сломать панель."
+
+msgid "Your page was open for too long. Please try again."
+msgstr "Ваша страница была открыта слишком долго. Попробуйте ещё раз."
+
+msgid "@F@ must be a plain domain like example.com, or left empty."
+msgstr "@F@ должен быть простым доменом вроде example.com или пустым."
+
+msgid "@F@ must be a UUID. Press the dice button to build a fresh one."
+msgstr "@F@ должен быть UUID. Нажмите кнопку с кубиком, чтобы получить свежий."
+
+msgid "@F@ may only hold English letters and digits, with no slash or space."
+msgstr "@F@ может содержать только английские буквы и цифры, без слэша и пробела."
+
+msgid "@F@ must be a port number, or several of them split by a comma."
+msgstr "@F@ должен быть номером порта или несколькими, разделёнными запятой."
+
+msgid "@F@ only takes digits."
+msgstr "@F@ принимает только цифры."
+
+msgid "@F@ must be two numbers with a dash between them, for example 10-20."
+msgstr "@F@ должен быть двумя числами через дефис, например 10-20."
+
+msgid "Ports 80 and 443 belong to the panel itself, so no other service can take them. Please pick a different port."
+msgstr "Порты 80 и 443 принадлежат самой панели, другие службы не могут их занять. Выберите другой порт."
+
+msgid "Port @P@ is already given to @F@. Please pick a different port."
+msgstr "Порт @P@ уже отдан «@F@». Выберите другой порт."
+
+msgid "The admin path, the user path and the shared path must all be different from each other."
+msgstr "Путь администратора, путь пользователя и общий путь должны отличаться друг от друга."
+
+msgid "Everything else was saved. These settings kept their old value because what was typed is not valid: @LIST@"
+msgstr "Всё остальное сохранено. Эти настройки сохранили старое значение, так как введённое некорректно: @LIST@"
+
+msgid "Could not copy. Please select the text and copy it by hand."
+msgstr "Не удалось скопировать. Выделите текст и скопируйте вручную."
+
+msgid "This box is empty, there is nothing to copy."
+msgstr "Это поле пусто, копировать нечего."
+
+msgid "A fresh value was built for you. Do not forget to save."
+msgstr "Свежее значение построено. Не забудьте сохранить."
+
+msgid "1 setting was changed and is waiting to be saved"
+msgstr "1 настройка изменена и ждёт сохранения"
+
+msgid "@N@ settings were changed and are waiting to be saved"
+msgstr "Изменено настроек: @N@, ожидают сохранения"
+
+msgid "Your changes were rolled back."
+msgstr "Ваши изменения отменены."
+
+msgid "1 setting matches your search"
+msgstr "1 настройка соответствует поиску"
+
+msgid "@N@ settings match your search"
+msgstr "Настроек по запросу: @N@"
+
+msgid "Panel entrance links"
+msgstr "Ссылки входа в панель"
+
+msgid "The web address you open the panel with, and the one your users open."
+msgstr "Адрес, по которому открываете панель вы, и тот, что открывают ваши пользоват."
+
+msgid "Address of each protocol"
+msgstr "Адрес каждого протокола"
+
+msgid "The piece of address each protocol is served on. Change these only if a link stopped working."
+msgstr "Часть адреса, на которой обслуживается каждый протокол. Меняйте, только если ссылка перестала работать."
+
+msgid "Ports the server listens on"
+msgstr "Порты, которые слушает сервер"
+
+msgid "Which ports the server answers on."
+msgstr "На каких портах сервер отвечает."
+
+msgid "DNS and Cloudflare"
+msgstr "DNS и Cloudflare"
+
+msgid "Where domain names are looked up, and the key that lets the panel manage your Cloudflare records."
+msgstr "Где ищутся имена доменов, и ключ, с которым панель управляет вашими записями Cloudflare."
+
+msgid "Server protection"
+msgstr "Защита сервера"
+
+msgid "Keeps the server quiet for anyone who is not one of your users."
+msgstr "Держит сервер тихим для всех, кто не ваш пользователь."
+
+msgid "Bot notifications"
+msgstr "Уведомления бота"
+
+msgid "What the Telegram bot tells your users, and when."
+msgstr "О чём и когда Telegram-бот сообщает вашим пользователям."
+
+msgid "Parent panel"
+msgstr "Родительская панель"
+
+msgid "Only needed when this server is run by another panel."
+msgstr "Нужно, только если этим сервером управляет другая панель."
+
+msgid "Parent"
+msgstr "Родитель"
+
+msgid "Child"
+msgstr "Потомок"
+
+msgid "Standalone"
+msgstr "Автономный"
+
+msgid "Server up for"
+msgstr "Сервер работает"
+
+msgid "Panel up for"
+msgstr "Панель работает"
+
+msgid "Proxy core up for"
+msgstr "Ядро прокси работает"
+
+msgid "Open connections"
+msgstr "Открытые соединения"
+
+msgid "Addresses connected now"
+msgstr "Адресов подключено сейчас"
+
+msgid "Free disk space"
+msgstr "Свободное место на диске"
+
+msgid "Apply saved settings"
+msgstr "Применить сохранённые настройки"
+
+msgid "Writes everything you saved into the running services. Run this after you change a setting, a domain or a proxy."
+msgstr "Записывает всё сохранённое в работающие службы. Запускайте после изменения настройки, домена или прокси."
+
+msgid "Safe"
+msgstr "Безопасно"
+
+msgid "Apply now"
+msgstr "Применить сейчас"
+
+msgid "Apply the saved settings now?"
+msgstr "Применить сохранённые настройки сейчас?"
+
+msgid "The panel rebuilds the service files and loads them again."
+msgstr "Панель пересобирает файлы служб и загружает их заново."
+
+msgid "Saved settings are written to every service."
+msgstr "Сохранённые настройки записываются во все службы."
+
+msgid "Services are reloaded one after another."
+msgstr "Службы перезагружаются по очереди."
+
+msgid "Connected people may drop for a few seconds."
+msgstr "Подключённые могут оборваться на несколько секунд."
+
+msgid "Yes, apply"
+msgstr "Да, примени"
+
+msgid "Restart the services"
+msgstr "Перезапустить службы"
+
+msgid "Stops and starts the proxy services again without touching any setting. A good first move when something stopped answering."
+msgstr "Останавливает и снова запускает службы прокси, не трогая настройки. Первое действие, когда что-то перестало отвечать."
+
+msgid "Restart"
+msgstr "Перезапустить"
+
+msgid "Restart the services now?"
+msgstr "Перезапустить службы сейчас?"
+
+msgid "Nothing is reinstalled and no setting is changed."
+msgstr "Ничего не переустанавливается и ни одна настройка не меняется."
+
+msgid "Every proxy service stops and starts again."
+msgstr "Каждая служба прокси останавливается и запускается заново."
+
+msgid "Connected people drop once and come back on their own."
+msgstr "Подключённые обрываются один раз и возвращаются сами."
+
+msgid "It usually takes less than a minute."
+msgstr "Обычно занимает меньше минуты."
+
+msgid "Yes, restart"
+msgstr "Да, перезапусти"
+
+msgid "Push the user list"
+msgstr "Передать список пользователей"
+
+msgid "Hands the current list of users to the running services. Use it when a new user cannot connect yet but the settings are already fine."
+msgstr "Передаёт текущий список пользователей работающим службам. Используйте, когда новый пользователь не может подключиться, хотя настройки в порядке."
+
+msgid "Push users"
+msgstr "Передать пользователей"
+
+msgid "Push the user list to the services?"
+msgstr "Передать список пользователей службам?"
+
+msgid "Only the user list is sent. Settings and services stay as they are."
+msgstr "Передаётся только список пользователей. Настройки и службы остаются как есть."
+
+msgid "Every service learns about the current users."
+msgstr "Каждая служба узнаёт о текущих пользователях."
+
+msgid "Nobody is disconnected."
+msgstr "Никто не отключается."
+
+msgid "Yes, push"
+msgstr "Да, передай"
+
+msgid "Read the usage counters"
+msgstr "Считать счётчики расхода"
+
+msgid "Collects how much traffic each user has spent since the last read, and saves it in the panel."
+msgstr "Собирает, сколько трафика израсходовал каждый пользователь с прошлого чтения, и сохраняет в панель."
+
+msgid "Read now"
+msgstr "Читать сейчас"
+
+msgid "Read the usage counters now?"
+msgstr "Считать счётчики расхода сейчас?"
+
+msgid "The panel asks every service how much each user spent and stores the answer."
+msgstr "Панель спрашивает каждую службу, сколько израсходовал каждый пользователь, и сохраняет ответ."
+
+msgid "User usage numbers are brought up to date."
+msgstr "Данные расхода пользователей обновляются."
+
+msgid "Nothing is restarted."
+msgstr "Ничего не перезапускается."
+
+msgid "Yes, read"
+msgstr "Да, прочти"
+
+msgid "Read WireGuard usage"
+msgstr "Считать расход WireGuard"
+
+msgid "Collects the traffic WireGuard users have spent. This one is only needed while WireGuard is switched on."
+msgstr "Собирает трафик пользователей WireGuard. Нужно, только когда WireGuard включён."
+
+msgid "Read the WireGuard usage now?"
+msgstr "Считать расход WireGuard сейчас?"
+
+msgid "Only the WireGuard counters are read."
+msgstr "Читаются только счётчики WireGuard."
+
+msgid "WireGuard usage numbers are brought up to date."
+msgstr "Данные расхода WireGuard обновляются."
+
+msgid "Check every service"
+msgstr "Проверить все службы"
+
+msgid "Asks the server which services are alive and prints the answer on the log screen."
+msgstr "Спрашивает сервер, какие службы живы, и печатает ответ на экран журнала."
+
+msgid "Run the check"
+msgstr "Запустить проверку"
+
+msgid "Check every service now?"
+msgstr "Проверить все службы сейчас?"
+
+msgid "This only looks. Nothing on the server is changed."
+msgstr "Это только смотрит. Ничего на сервере не меняется."
+
+msgid "The state of every service is written to the log screen."
+msgstr "Состояние всех служб выводится на экран журнала."
+
+msgid "Yes, check"
+msgstr "Да, проверь"
+
+msgid "Open the log reader"
+msgstr "Открыть просмотр журналов"
+
+msgid "The log reader sits at the bottom of this page. Pick any log file and watch it fill in live."
+msgstr "Просмотр журналов находится внизу этой страницы. Выберите любой файл журнала и смотрите, как он наполняется вживую."
+
+msgid "Go to the logs"
+msgstr "К журналам"
+
+msgid "Update the panel"
+msgstr "Обновить панель"
+
+msgid "Fetches the newest panel release and installs it. Your settings, users and domains are kept."
+msgstr "Скачивает новейший выпуск панели и устанавливает его. Настройки, пользователи и домены сохраняются."
+
+msgid "Takes a while"
+msgstr "Занимает время"
+
+msgid "Give it around five minutes and do not close the page."
+msgstr "Подождите около пяти минут и не закрывайте страницу."
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Update the panel now?"
+msgstr "Обновить панель сейчас?"
+
+msgid "The newest release is downloaded and installed on top of this one."
+msgstr "Новейший выпуск скачивается и устанавливается поверх текущего."
+
+msgid "Settings, users and domains are kept."
+msgstr "Настройки, пользователи и домены сохраняются."
+
+msgid "The panel and the services restart during the work."
+msgstr "Панель и службы перезапускаются по ходу работы."
+
+msgid "The page may look frozen for a few minutes."
+msgstr "Страница может на несколько минут «застыть»."
+
+msgid "Yes, update"
+msgstr "Да, обнови"
+
+msgid "Reinstall everything"
+msgstr "Переустановить всё"
+
+msgid "Installs the panel and all services again from scratch. Only reach for this when nothing else helped."
+msgstr "Ставит панель и все службы заново с нуля. Только когда больше ничего не помогло."
+
+msgid "Heavy"
+msgstr "Тяжело"
+
+msgid "Download a backup first, from the Backup page."
+msgstr "Сначала скачайте копию на странице «Резервные копии»."
+
+msgid "Reinstall"
+msgstr "Переустановить"
+
+msgid "Reinstall the whole panel?"
+msgstr "Переустановить всю панель?"
+
+msgid "Every service is set up again from the beginning. This is the longest and heaviest job on this page."
+msgstr "Каждая служба настраивается заново с самого начала. Это самая долгая и тяжёлая работа на этой странице."
+
+msgid "All services are installed again."
+msgstr "Все службы ставятся заново."
+
+msgid "Everyone is disconnected until the work ends."
+msgstr "Все отключены до конца работы."
+
+msgid "It can take several minutes."
+msgstr "Может занять несколько минут."
+
+msgid "Make sure you have a backup before you start."
+msgstr "Убедитесь, что копия у вас есть, прежде чем начать."
+
+msgid "Yes, reinstall"
+msgstr "Да, переустанови"
+
+msgid "New Reality keys"
+msgstr "Новые ключи Reality"
+
+msgid "Makes a fresh Reality key pair. Use it when you think the old keys became known."
+msgstr "Создаёт свежую пару ключей Reality. Используйте, когда считаете, что старые стали известны."
+
+msgid "Users must resubscribe"
+msgstr "Пользователям нужна переподписка"
+
+msgid "Everyone connected through Reality needs a new link afterwards."
+msgstr "Все, кто подключён через Reality, после этого получат новую ссылку."
+
+msgid "Make new keys"
+msgstr "Создать новые ключи"
+
+msgid "Make a new Reality key pair?"
+msgstr "Создать новую пару ключей Reality?"
+
+msgid "The panel writes a new private and public key and asks you to apply the settings afterwards."
+msgstr "Панель записывает новые закрытый и открытый ключи и просит вас после этого применить настройки."
+
+msgid "A new Reality key pair is stored."
+msgstr "Новая пара ключей Reality сохранена."
+
+msgid "Every Reality link that is already handed out stops working."
+msgstr "Все уже выданные Reality-ссылки перестанут работать."
+
+msgid "You are taken to Settings to apply the change."
+msgstr "Вы перейдёте в настройки, чтобы применить изменение."
+
+msgid "Yes, make new keys"
+msgstr "Да, создай новые"
+
+msgid "Find a Reality friendly site"
+msgstr "Найти сайт, дружелюбный к Reality"
+
+msgid "Tries a list of well known sites and shows which of them your server can borrow as a Reality front."
+msgstr "Перебирает список известных сайтов и показывает, какой из них ваш сервер может взять как прикрытие Reality."
+
+msgid "Only looks"
+msgstr "Только смотрит"
+
+msgid "The test takes up to twenty seconds."
+msgstr "Тест занимает до двадцати секунд."
+
+msgid "Start the test"
+msgstr "Запустить тест"
+
+msgid "Test sites for Reality now?"
+msgstr "Проверить сайты для Reality сейчас?"
+
+msgid "Nothing on the server is changed. The result is shown right here on this page."
+msgstr "На сервере ничего не меняется. Результат показывается прямо на этой странице."
+
+msgid "A handful of sites are pinged from this server."
+msgstr "Несколько сайтов пингуются с этого сервера."
+
+msgid "The best answers are listed with their ping."
+msgstr "Лучшие ответы перечислены со своей задержкой."
+
+msgid "Yes, test"
+msgstr "Да, протестируй"
+
+msgid "Everyday jobs"
+msgstr "Повседневные задачи"
+
+msgid "The short, safe jobs you reach for most often."
+msgstr "Короткие безопасные задачи, к которым вы прибегаете чаще всего."
+
+msgid "Look and listen"
+msgstr "Посмотреть и послушать"
+
+msgid "Ways to see what the server is doing right now."
+msgstr "Способы увидеть, что сервер делает прямо сейчас."
+
+msgid "Update and install"
+msgstr "Обновление и установка"
+
+msgid "Longer jobs that rebuild the panel. Read the warning before you start one."
+msgstr "Долгие задачи, пересобирающие панель. Прочтите предупреждение перед запуском."
+
+msgid "Keys and probing"
+msgstr "Ключи и проверка"
+
+msgid "Reality keys and the site test that goes with them."
+msgstr "Ключи Reality и сопутствующий тест сайтов."
+
+msgid "Every job the server can run for you, in one place. Each card says what it does before it does it."
+msgstr "Все задачи, которые сервер может выполнить за вас, в одном месте. Каждая карточка объясняет, что делает, прежде чем сделать."
+
+msgid "Panel"
+msgstr "Панель"
+
+msgid "A newer release is out:"
+msgstr "Доступен более новый выпуск:"
+
+msgid "The panel is up to date"
+msgstr "Панель обновлена"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "How the server is doing"
+msgstr "Как себя чувствует сервер"
+
+msgid "Log reader"
+msgstr "Просмотр журналов"
+
+msgid "Pick a file and watch it fill in. The newest lines are at the bottom."
+msgstr "Выберите файл и смотрите, как он наполняется. Свежие строки — внизу."
+
+msgid "Live log"
+msgstr "Живой журнал"
+
+msgid "Follow"
+msgstr "Следить"
+
+msgid "Lines shown:"
+msgstr "Показано строк:"
+
+msgid "Reading the log..."
+msgstr "Чтение журнала..."
+
+msgid "There is no log file yet."
+msgstr "Файла журнала ещё нет."
+
+msgid "What happens"
+msgstr "Что произойдёт"
+
+msgid "Never mind"
+msgstr "Ладно, неважно"
+
+msgid "Test result"
+msgstr "Результат теста"
+
+msgid "Go on"
+msgstr "Продолжить"
+
+msgid "Starting..."
+msgstr "Запуск..."
+
+msgid "This log file is still empty."
+msgstr "Этот файл журнала пока пуст."
+
+msgid "The log could not be read right now."
+msgstr "Журнал сейчас не читается."
+
+msgid "Last read at"
+msgstr "Последнее чтение"
+
+msgid "The log was copied."
+msgstr "Журнал скопирован."
+
+msgid "The log could not be copied."
+msgstr "Журнал не удалось скопировать."
+
+msgid "There is nothing to copy yet."
+msgstr "Копировать пока нечего."
+
+msgid "Testing sites, this can take twenty seconds..."
+msgstr "Проверяем сайты, это займёт до двадцати секунд..."
+
+msgid "The test could not be finished."
+msgstr "Тест не удалось завершить."
+
+msgid "info"
+msgstr "сведения"
+
+msgid "warn"
+msgstr "предупреждение"
+
+msgid "error"
+msgstr "ошибка"
+
+msgid "ok"
+msgstr "норма"
+
+msgid "Action in progress"
+msgstr "Действие выполняется"
+
+msgid "The panel is working on it"
+msgstr "Панель работает над этим"
+
+msgid "Please wait, this can take a few minutes"
+msgstr "Подождите, это может занять несколько минут"
+
+msgid "Back to Actions"
+msgstr "Назад к задачам"
+
+msgid "Go to the dashboard"
+msgstr "К дашборду"
+
+msgid "The job is finished."
+msgstr "Задача завершена."
+
+msgid "The log is still empty."
+msgstr "Журнал всё ещё пуст."
+
+msgid "The user list was handed to the services."
+msgstr "Список пользователей передан службам."
+
+msgid "The user list could not be handed over. Please look at the log."
+msgstr "Список пользователей передать не удалось. Посмотрите журнал."
+
+msgid "The WireGuard counters are being read."
+msgstr "Счётчики WireGuard читаются."
+
+msgid "The WireGuard counters could not be read. Please look at the log."
+msgstr "Счётчики WireGuard не удалось прочитать. Посмотрите журнал."
+
+msgid "The panel is restarting itself"
+msgstr "Панель перезапускает себя"
+
+msgid "This job restarts the panel too, so this page loses touch with it for a few seconds. Stay here, it picks up on its own."
+msgstr "Эта задача перезапускает и саму панель, поэтому страница на несколько секунд теряет с ней связь. Оставайтесь здесь, она подхватит сама."
+
+msgid "Services"
+msgstr "Службы"
+
+msgid "Service"
+msgstr "Служба"
+
+msgid "Status before"
+msgstr "Состояние до"
+
+msgid "Status now"
+msgstr "Состояние сейчас"
+
+msgid "These services did not come up"
+msgstr "Эти службы не поднялись"
+
+msgid "Run these commands over SSH on the server to see why, then start them again:"
+msgstr "Выполните эти команды по SSH на сервере, чтобы понять почему, и запустите их снова:"
+
+msgid "Copy the commands"
+msgstr "Скопировать команды"
+
+msgid "The commands were copied."
+msgstr "Команды скопированы."
+
+msgid "Read again"
+msgstr "Читать заново"
+
+msgid "The panel is not answering yet"
+msgstr "Панель ещё не отвечает"
+
+msgid "The services are coming back one by one. The button below opens again the moment the panel answers."
+msgstr "Службы возвращаются одна за другой. Кнопка ниже откроется, как только панель ответит."
+
+msgid "The panel is back."
+msgstr "Панель вернулась."
+
+msgid "The panel is not ready yet. This page opens the button as soon as it answers."
+msgstr "Панель ещё не готова. Эта страница откроет кнопку, как только она ответит."
+
+msgid "Restarting the services one by one..."
+msgstr "Перезапускаем службы по очереди..."
+
+msgid "Reading the state of every service..."
+msgstr "Читаем состояние каждой службы..."
+
+msgid "Every service is up again."
+msgstr "Каждая служба снова работает."
+
+msgid "Some services did not come up."
+msgstr "Некоторые службы не поднялись."
+
+msgid "Some services are still coming up. Give them a few more seconds."
+msgstr "Некоторые службы ещё поднимаются. Дайте им ещё несколько секунд."
+
+msgid "Up"
+msgstr "Работает"
+
+msgid "Coming up"
+msgstr "Поднимается"
+
+msgid "Down"
+msgstr "Недоступна"
+
+msgid "The services are restarting one by one. The panel restarts itself as well, so this page loses touch with it for a few seconds and then picks up on its own."
+msgstr "Службы перезапускаются по очереди. Панель тоже перезапускает себя, поэтому страница на несколько секунд теряет с ней связь, а затем подхватывает сама."
+
+msgid "The state of every service is being read. The table below fills in as soon as the file lands."
+msgstr "Считывается состояние каждой службы. Таблица ниже заполнится, как только придёт ответ."
+
+msgid "The panel itself restarts too, so it stops answering for a few seconds."
+msgstr "Сама панель тоже перезапускается, поэтому на несколько секунд перестаёт отвечать."
+
+msgid "The result page waits for the panel and opens the way back on its own."
+msgstr "Страница результата ждёт панель и сама открывает путь назад."
+
+msgid "Reading the fresh state of every service..."
+msgstr "Читаем свежее состояние каждой службы..."
+
+msgid "The usage counters were read"
+msgstr "Счётчики расхода прочитаны"
+
+msgid "The usage counters could not be read"
+msgstr "Счётчики расхода не удалось прочитать"
+
+msgid "The counters of every user are now up to date."
+msgstr "Счётчики каждого пользователя обновлены."
+
+msgid "No new traffic had been spent since the last read, so nothing changed."
+msgstr "С прошлого чтения нового трафика не было, ничего не изменилось."
+
+msgid "The panel could not finish reading the counters. The message below came back from the panel."
+msgstr "Панель не смогла завершить чтение счётчиков. Ниже сообщение от панели."
+
+msgid "Users whose usage moved"
+msgstr "Пользователи, чей расход изменился"
+
+msgid "Traffic added in this read"
+msgstr "Трафик, добавленный за это чтение"
+
+msgid "Read at"
+msgstr "Прочитано в"
+
+msgid "Change the theme"
+msgstr "Сменить тему"
+
+msgid "Change the language"
+msgstr "Сменить язык"
+
+msgid "More information"
+msgstr "Больше информации"
+
+msgid "Service username"
+msgstr "Имя пользователя службы"
+
+msgid "Service volume"
+msgstr "Объём службы"
+
+msgid "Used volume"
+msgstr "Использованный объём"
+
+msgid "Remaining volume"
+msgstr "Оставшийся объём"
+
+msgid "Expires in"
+msgstr "Истекает через"
+
+msgid "Usage resets in"
+msgstr "Сброс расхода через"
+
+msgid "Expiry date"
+msgstr "Дата окончания"
+
+msgid "Last connection"
+msgstr "Последнее подключение"
+
+msgid "Your connection"
+msgstr "Ваше подключение"
+
+msgid "Smart links"
+msgstr "Умные ссылки"
+
+msgid "Copy the main link"
+msgstr "Скопировать главную ссылку"
+
+msgid "Add to the app"
+msgstr "Добавить в приложение"
+
+msgid "Config links"
+msgstr "Ссылки конфигураций"
+
+msgid "Copy every config"
+msgstr "Скопировать каждую конфигурацию"
+
+msgid "No config is ready for you right now."
+msgstr "Сейчас для вас нет готовой конфигурации."
+
+msgid "Get the app"
+msgstr "Получить приложение"
+
+msgid "Keep your links private, they belong to you only."
+msgstr "Держите свои ссылки при себе — они принадлежат только вам."
+
+msgid "No connection has been seen yet"
+msgstr "Подключений пока не видно"
+
+msgid "A few minutes ago"
+msgstr "Несколько минут назад"
+
+msgid "@N@ hours ago"
+msgstr "@N@ ч. назад"
+
+msgid "@N@ days ago"
+msgstr "@N@ дн. назад"
+
+msgid "A long time ago"
+msgstr "Давно"
+
+msgid "Good night"
+msgstr "Доброй ночи"
+
+msgid "Good morning"
+msgstr "Доброе утро"
+
+msgid "Good afternoon"
+msgstr "Добрый день"
+
+msgid "Good evening"
+msgstr "Добрый вечер"
+
+msgid "Smart link"
+msgstr "Умная ссылка"
+
+msgid "Subscription link (Base64)"
+msgstr "Ссылка подписки (Base64)"
+
+msgid "For V2rayNG, Streisand, V2Box and similar apps"
+msgstr "Для V2rayNG, Streisand, V2Box и похожих приложений"
+
+msgid "Full Xray config"
+msgstr "Полная конфигурация Xray"
+
+msgid "A ready JSON config for Xray based apps"
+msgstr "Готовая JSON-конфигурация для приложений на Xray"
+
+msgid "Full Sing-box config"
+msgstr "Полная конфигурация Sing-box"
+
+msgid "A ready JSON config for Sing-box based apps"
+msgstr "Готовая JSON-конфигурация для приложений на Sing-box"
+
+msgid "Clash Meta"
+msgstr "Clash Meta"
+
+msgid "For Clash Meta, Clash Verge and Stash"
+msgstr "Для Clash Meta, Clash Verge и Stash"
+
+msgid "Clash"
+msgstr "Clash"
+
+msgid "For the classic Clash apps"
+msgstr "Для классических приложений Clash"
+
+msgid "Plain config links"
+msgstr "Простые ссылки конфигураций"
+
+msgid "Every config as plain text, one per line"
+msgstr "Каждая конфигурация простым текстом, по одной в строке"
+
+msgid "Sing-box over SSH"
+msgstr "Sing-box поверх SSH"
+
+msgid "Only for the SSH tunnel"
+msgstr "Только для SSH-туннеля"
+
+msgid "A ready config for WireGuard apps"
+msgstr "Готовая конфигурация для приложений WireGuard"
+
+msgid "My panel address"
+msgstr "Адрес моей панели"
+
+msgid "This very page, keep it for yourself"
+msgstr "Эта самая страница, оставьте её себе"
+
+msgid "Android"
+msgstr "Android"
+
+msgid "Google Play"
+msgstr "Google Play"
+
+msgid "iPhone and iPad"
+msgstr "iPhone и iPad"
+
+msgid "App Store"
+msgstr "App Store"
+
+msgid "Desktop app"
+msgstr "Приложение для компьютера"
+
+msgid "The smart link was copied"
+msgstr "Умная ссылка скопирована"
+
+msgid "Every config link was copied"
+msgstr "Скопированы все ссылки конфигураций"
+
+msgid "Copying did not work, please copy by hand"
+msgstr "Скопировать не вышло, пожалуйста, скопируйте вручную"
+
+msgid "There is nothing to copy"
+msgstr "Копировать нечего"
+
+msgid "The QR code could not be drawn"
+msgstr "QR-код не удалось нарисовать"
+
+msgid "Volume finished"
+msgstr "Объём исчерпан"
+
+msgid "Not active"
+msgstr "Не активен"
+
+msgid "@N@ days"
+msgstr "@N@ дн."
+
+msgid "Guest"
+msgstr "Гость"
+
+msgid "Welcome to your own dashboard"
+msgstr "Добро пожаловать в свой дашборд"
+
+msgid "Notice"
+msgstr "Уведомление"
+
+msgid "One address, ready for every app"
+msgstr "Один адрес, готовый для любого приложения"
+
+msgid "Your subscription link"
+msgstr "Ваша ссылка подписки"
+
+msgid "Your current address"
+msgstr "Ваш текущий адрес"
+
+msgid "All links"
+msgstr "Все ссылки"
+
+msgid "Single configs"
+msgstr "Одиночные конфигурации"
+
+msgid "Copy this column"
+msgstr "Скопировать этот столбец"
+
+msgid "Every link of this column was copied"
+msgstr "Скопированы все ссылки этого столбца"
+
+msgid "No single config is ready right now. The links above are enough to connect."
+msgstr "Одиночной конфигурации сейчас нет. Верхних ссылок достаточно для подключения."
+
+msgid "No app has been chosen by the panel owner yet."
+msgstr "Владелец панели ещё не выбрал приложения."
+
+msgid "Best choice for the Watashi and sing-box apps"
+msgstr "Лучший выбор для приложений Watashi и sing-box"
+
+msgid "Auto CDN"
+msgstr "Авто CDN"
+
+msgid "Your subscription links"
+msgstr "Ваши ссылки подписки"
+
+msgid "One link for every app, the panel picks the right configs itself"
+msgstr "Одна ссылка для любого приложения, панель сама подбирает правильные конфигурации"
+
+msgid "Copy link"
+msgstr "Скопировать ссылку"
+
+msgid "Setup guide"
+msgstr "Руководство по настройке"
+
+msgid "YAML config"
+msgstr "YAML-конфигурация"
+
+msgid "JSON config"
+msgstr "JSON-конфигурация"
+
+msgid "Base64 subscription"
+msgstr "Подписка Base64"
+
+msgid "WireGuard config"
+msgstr "Конфигурация WireGuard"
+
+msgid "Install @APP@ with the button below."
+msgstr "Установите @APP@ кнопкой ниже."
+
+msgid "Press the copy button of the Auto Connect card, then add that link inside the app as a new subscription."
+msgstr "Нажмите кнопку копирования карточки «Авто-подключение», затем добавьте ссылку в приложение как новую подписку."
+
+msgid "Refresh the list, pick a server and press connect."
+msgstr "Обновите список, выберите сервер и нажмите подключиться."
+
+msgid "The client we suggest for @OS@"
+msgstr "Клиент, который мы советуем для @OS@"
+
+msgid "Download @APP@"
+msgstr "Скачать @APP@"
+
+msgid "The Auto Connect link was copied"
+msgstr "Ссылка авто-подключения скопирована"
+
+msgid "The rhythm of your package"
+msgstr "Ритм вашего пакета"
+
+msgid "Daily average"
+msgstr "В среднем за день"
+
+msgid "Next reset"
+msgstr "Следующий сброс"
+
+msgid "Powered by"
+msgstr "Работает на"
+
+msgid "Support"
+msgstr "Поддержка"
+
+msgid "Scan this code with your app"
+msgstr "Сканируйте этот код своим приложением"
+
+msgid "Package volume"
+msgstr "Объём пакета"
+
+msgid "Service name"
+msgstr "Имя службы"
+
+msgid "Used"
+msgstr "Использовано"
+
+msgid "Already over"
+msgstr "Уже сверх"
+
+msgid "months"
+msgstr "месяцев"
+
+msgid "years"
+msgstr "лет"
+
+msgid "@N@ @U@ left"
+msgstr "Осталось @N@ @U@"
+
+msgid "Copy the image"
+msgstr "Скопировать изображение"
+
+msgid "The QR image was copied"
+msgstr "QR-изображение скопировано"
+
+msgid "Copying the image did not work, please save it by hand"
+msgstr "Не удалось скопировать изображение, сохраните его вручную"
+
+msgid "login.identity.label"
+msgstr "Имя входа или секретный ключ"
+
+msgid "login.identity.description"
+msgstr "Что из этого у вас есть, введите сюда"
+
+msgid "login.identity.hint"
+msgstr "имя входа или секретный ключ"
+
+msgid "login.password.hint"
+msgstr "пароль вашей панели"
+
+msgid "login.kind.waiting"
+msgstr "ожидание"
+
+msgid "login.kind.username"
+msgstr "имя входа"
+
+msgid "login.kind.uuid"
+msgstr "секретный ключ"
+
+msgid "login.password.show"
+msgstr "Показать пароль"
+
+msgid "login.password.hide"
+msgstr "Скрыть пароль"
+
+msgid "login.button.busy"
+msgstr "Входим…"
+
+msgid "login.need.identity"
+msgstr "Введите имя входа или секретный ключ."
+
+msgid "login.need.password"
+msgstr "Пароль нужен для входа по имени."
+
+msgid "login.door.open"
+msgstr "Дверь снова открыта, попробуйте ещё раз."
+
+msgid "login.tool.theme"
+msgstr "Сменить тему"
+
+msgid "login.tool.language"
+msgstr "Сменить язык"
+
+msgid "login.gate.sign"
+msgstr "Вход в панель"
+
+msgid "login.gate.title"
+msgstr "С возвращением"
+
+msgid "login.gate.lead"
+msgstr "Введите имя входа или секретный ключ вместе с паролем."
+
+msgid "login.locked.note"
+msgstr "Три неверных ключа посчитаны, дверь закрыта на:"
+
+msgid "login.locked.flash"
+msgstr "Дверь закрыта на несколько минут, попробуйте позже."
+
+msgid "login.wrong.key"
+msgstr "Имя, ключ или пароль неверны."
+
+msgid "login.tries.left"
+msgstr "Осталось попыток: @N@."
+
+msgid "login.note.text"
+msgstr "Старая ссылка с секретным ключом всё ещё заходит напрямую, это поле знает оба ключа."
+
+msgid "config.separate_tunnel_configs.label"
+msgstr "Отдельные конфигурации туннелей (WireGuard / AmneziaWG)"
+
+msgid "config.separate_tunnel_configs.description"
+msgstr "Конфигурации WireGuard и AmneziaWG выведены из ссылки подписки и выдаются на отдельной странице как файлы .conf и QR-коды. Так формат подписки остаётся целым: ни одно клиентское приложение не умеет поднимать туннель и прокси одновременно."
+
+msgid "config.usage_update_interval.label"
+msgstr "Интервал обновления расхода (секунды)"
+
+msgid "config.usage_update_interval.description"
+msgstr "Как часто трафик пользователей читается из ядер и записывается в базу. Допустимый диапазон — от 10 до 600 секунд. Меньшее число показывает расход быстрее, но сильнее нагружает сервер."
+
+msgid "config.port_hop_enable.label"
+msgstr "Перескок UDP-портов"
+
+msgid "config.port_hop_enable.description"
+msgstr "Вместо одного фиксированного порта клиент разбрасывает пакеты по целому диапазону UDP-портов, а сервер сворачивает каждый обратно на настоящий порт hysteria2, поэтому блокировки одного порта больше не хватает, чтобы убить конфигурацию. Применимо только к hysteria2, поддержка зависит от приложения."
+
+msgid "config.port_hop_range.label"
+msgstr "Диапазон перескока портов"
+
+msgid "config.port_hop_range.description"
+msgstr "Диапазон, по которому разбрасывает клиент, записывается как 61001-62000. По умолчанию он намеренно выше всех случайных портов панели (11000-60000) и выше эфемерного диапазона ядра (заканчивается на 60999), поэтому коллизия невозможна по построению. Если диапазон пересекается с портом, на котором этот сервер уже отвечает, перескок отключается, а не урезается молча."
+
+msgid "Back up now"
+msgstr "Создать копию сейчас"
+
+msgid "Writes a fresh backup of the database and sends it to every admin who connected the Telegram bot. The automatic backup follows the hours you chose in the Telegram settings."
+msgstr "Записывает свежую копию базы данных и отправляет каждому администратору, подключившему Telegram-бота. Автоматическая копия следует часам, выбранным в настройках Telegram."
+
+msgid "Back up"
+msgstr "Создать копию"
+
+msgid "Write a backup now?"
+msgstr "Создать копию сейчас?"
+
+msgid "Nothing on the server changes. A json file is written into the backup folder."
+msgstr "На сервере ничего не меняется. Json-файл записывается в папку копий."
+
+msgid "A json backup is written."
+msgstr "Json-копия записывается."
+
+msgid "Admins with Telegram receive the file."
+msgstr "Администраторы с Telegram получат файл."
+
+msgid "Only the newest 48 backup files are kept."
+msgstr "Хранятся только 48 новейших файлов копий."
+
+msgid "Yes, back up"
+msgstr "Да, создай"
+
+#, python-format
+msgid "The backup was written. %(n)s admin(s) received it on Telegram."
+msgstr "Копия записана. Получили её в Telegram: %(n)s админ."
+
+#, python-format
+msgid "The backup did not run: %(why)s"
+msgstr "Копия не создана: %(why)s"
+
+msgid "The backup could not be written. Please look at the log."
+msgstr "Копию записать не удалось. Посмотрите журнал."
+
+msgid "Send a test notification"
+msgstr "Отправить тестовое уведомление"
+
+msgid "Sends one short Telegram message to every admin who connected the bot, so you can see whether the notifications really work."
+msgstr "Отправляет одно короткое Telegram-сообщение каждому администратору, подключившему бота, чтобы вы увидели, работает ли уведомление на самом деле."
+
+msgid "Open the bot and press start first, otherwise Telegram has nobody to send to."
+msgstr "Сначала откройте бота и нажмите «Старт», иначе Telegram некому отправлять."
+
+msgid "Send the test"
+msgstr "Отправить тест"
+
+msgid "Send a test message now?"
+msgstr "Отправить тестовое сообщение сейчас?"
+
+msgid "One message is sent. Nothing on the server changes."
+msgstr "Отправляется одно сообщение. На сервере ничего не меняется."
+
+msgid "The bot is woken with the saved token."
+msgstr "Бот будится сохранённым токеном."
+
+msgid "Every admin with Telegram gets one message."
+msgstr "Каждый администратор с Telegram получит одно сообщение."
+
+msgid "Yes, send"
+msgstr "Да, отправь"
+
+#, python-format
+msgid "A test message was sent to %(n)s admin(s)."
+msgstr "Тестовое сообщение отправлено: %(n)s админ."
+
+#, python-format
+msgid "Nothing was sent: %(why)s"
+msgstr "Ничего не отправлено: %(why)s"
+
+msgid "The test message could not be sent. Please look at the log."
+msgstr "Тестовое сообщение не удалось отправить. Посмотрите журнал."
+
+msgid "Success! Please wait around 5 minutes to make sure everything is updated."
+msgstr "Готово! Подождите около 5 минут, чтобы всё точно обновилось."
+
+msgid "This uuid already belongs to another user."
+msgstr "Этот uuid уже принадлежит другому пользователю."
+
+msgid "The panel moved to its new address"
+msgstr "Панель переехала на новый адрес"
+
+msgid "The setup replaced the address you are using. The work on the server keeps going. Open the panel on its new address:"
+msgstr "Настройка заменила адрес, которым вы пользуетесь. Работа на сервере продолжается. Откройте панель по новому адресу:"
+
+msgid "The new address is answering."
+msgstr "Новый адрес отвечает."
+
+msgid "Cores"
+msgstr "Ядра"
+
+msgid "Panel version"
+msgstr "Версия панели"
+
+msgid "Update available"
+msgstr "Доступно обновление"
+
+msgid "Develop channel"
+msgstr "Канал разработки"
+
+msgid "Beta channel"
+msgstr "Бета-канал"
+
+msgid "Enforce device limit"
+msgstr "Принудительный лимит устройств"
+
+msgid "When this is on, the device limit applies to this user even if the global switch is off."
+msgstr "Когда включено, лимит устройств действует на этого пользователя, даже если общий выключатель выключен."
+
+msgid "Tunnel Configs"
+msgstr "Конфигурации туннелей"
+
+msgid "Copy QR image"
+msgstr "Скопировать QR-изображение"
+
+msgid "No tunnel configs are available on this account yet."
+msgstr "Конфигураций туннелей на этом аккаунте пока нет."
+
+msgid "To the latest"
+msgstr "До новейшей"
+
+msgid "config.xray_finalmask_fragment.label"
+msgstr "⏯ Фрагмент FinalMask"
+
+msgid "config.xray_finalmask_fragment.description"
+msgstr "Дробит TLS-hello на самом соединении, без промежуточного outbound. Старые ядра клиентов игнорируют это."
+
+msgid "config.xray_finalmask_maxsplit.label"
+msgstr "✂ FinalMask Max Split"
+
+msgid "config.xray_finalmask_maxsplit.description"
+msgstr "Наибольшее число частей, например 3-6. Пусто или 0 — без ограничения."
+
+msgid "Check for new releases"
+msgstr "Проверять новые выпуски"
+
+msgid "Every change here is checked before it is used: the download is verified against its sha256, the binary is asked for its version, and if the service does not come back up the previous core is put back on its own. The versions marked as tested are the ones this panel was built against."
+msgstr "Каждое изменение здесь проверяется перед применением: загрузка сверяется по sha256, у бинарника спрашивают его версию, и если служба не поднимается, прежнее ядро возвращается само. Версии с пометкой «проверено» — те, с которыми собиралась эта панель."
+
+msgid "Installed"
+msgstr "Установлен"
+
+msgid "Not installed"
+msgstr "Не установлен"
+
+msgid "Off the tested version"
+msgstr "Вне проверенной версии"
+
+msgid "The cores of this panel"
+msgstr "Ядра этой панели"
+
+msgid "Core"
+msgstr "Ядро"
+
+msgid "Tested"
+msgstr "Проверено"
+
+msgid "Newest release"
+msgstr "Новейший выпуск"
+
+msgid "not checked"
+msgstr "не проверено"
+
+msgid "no service"
+msgstr "нет службы"
+
+msgid "Upgrade"
+msgstr "Обновить"
+
+msgid "Pick a version"
+msgstr "Выберите версию"
+
+msgid "Roll back"
+msgstr "Откатить"
+
+msgid "No core is registered on this server."
+msgstr "На этом сервере не зарегистрировано ни одного ядра."
+
+msgid "What the core manager said"
+msgstr "Что сказал менеджер ядер"
+
+msgid "Install a specific version"
+msgstr "Установить конкретную версию"
+
+msgid "The version is downloaded, verified, tried, and only then put in place. A version outside the tested range is your own call."
+msgstr "Версия скачивается, проверяется, испытывается и только затем устанавливается. Версия вне проверенного диапазона — ваше решение."
+
+msgid "for example 26.7.28"
+msgstr "например 26.7.28"
+
+msgid "working..."
+msgstr "работаю..."
+
+msgid "done"
+msgstr "готово"
+
+msgid "it did not work"
+msgstr "не получилось"
+
+msgid "checked just now"
+msgstr "проверено только что"
+
+msgid "could not be reached"
+msgstr "недоступен"
+
+msgid "The core manager is not installed on this server yet."
+msgstr "Менеджер ядер на этом сервере ещё не установлен."
+
+msgid "The core manager gave an answer this page cannot read."
+msgstr "Менеджер ядер дал ответ, который эта страница не может прочитать."
+
+msgid "The core manager did not answer in time."
+msgstr "Менеджер ядер не ответил вовремя."
+
+msgid "The core list could not be read. Look at log/system/core_manager.log."
+msgstr "Список ядер не удалось прочитать. Смотрите log/system/core_manager.log."
+
+msgid "That is not something this page can do."
+msgstr "Этого эта страница делать не умеет."
+
+msgid "That core name does not look like a core name."
+msgstr "Имя ядра не похоже на имя ядра."
+
+msgid "That version does not look like a version."
+msgstr "Версия не похожа на версию."
+
+msgid "The core manager refused this change."
+msgstr "Менеджер ядер отклонил это изменение."
+
+msgid "The vendor could not be reached."
+msgstr "Разработчик не ответил."
+
+msgid "The vendor did not name a version."
+msgstr "Разработчик не назвал версию."
+
+msgid "To the latest stable"
+msgstr "До новейшей стабильной"
+
+msgid "Latest test build"
+msgstr "Новейшая тестовая сборка"
+
+msgid "Stable"
+msgstr "Стабильная"
+
+msgid "Test build"
+msgstr "Тестовая сборка"
+
+msgid "Installed, version unknown"
+msgstr "Установлен, версия неизвестна"
+
+msgid "This core is past the stable line. A test build can carry bugs, so roll it back if anything looks wrong."
+msgstr "Это ядро зашло дальше стабильной линии. Тестовая сборка может содержать ошибки, при любых странностях откатывайте."
+
+msgid "The vendor marks almost every release as a test build, so this panel installs the stable line on its own and a test build only ever arrives by hand."
+msgstr "Разработчик почти каждый выпуск помечает как тестовый, поэтому панель сама ставит стабильную линию, а тестовая попадает только по вашей руке."
+
+msgid "That channel is not one this page knows."
+msgstr "Такой канал этой странице неизвестен."
+
+msgid "read from the disk"
+msgstr "прочитано с диска"
+
+msgid "Optional, not installed"
+msgstr "Необязателен, не установлен"
+
+msgid "Not installed (optional)"
+msgstr "Не установлен (необязателен)"
+
+msgid "This core is installed only when the feature that needs it is switched on."
+msgstr "Это ядро ставится, только когда включена функция, которая его требует."
+
+msgid "All configs"
+msgstr "Все конфигурации"
+
+msgid "Every config inside your subscription link"
+msgstr "Каждая конфигурация внутри вашей ссылки подписки"
+
+msgid "Take one of them alone when an app should hold a single config."
+msgstr "Возьмите одну из них отдельно, когда приложению нужен один конфиг."
+
+msgid "Copy this config"
+msgstr "Скопировать эту конфигурацию"
+
+msgid "Tunnel files"
+msgstr "Файлы туннелей"
+
+msgid "WireGuard and AmneziaWG are files, not links: no v2ray app can run them beside the other configs."
+msgstr "WireGuard и AmneziaWG — это файлы, а не ссылки: ни одно v2ray-приложение не может запустить их рядом с остальными конфигурациями."
+
+msgid "Download the file"
+msgstr "Скачать файл"
+
+msgid "Back to your page"
+msgstr "Назад на вашу страницу"
+
+msgid "No configs are available on this account yet."
+msgstr "Конфигураций на этом аккаунте пока нет."
+
+msgid "The config file was saved"
+msgstr "Файл конфигурации сохранён"
+
+msgid "Proxy Stats"
+msgstr "Статистика прокси"
+
+msgid "Live proxy dashboard"
+msgstr "Живой дашборд прокси"
+
+msgid "Looking for the dashboard"
+msgstr "Ищем дашборд"
+
+msgid "You are signed in automatically, no username or password is asked"
+msgstr "Вы входите автоматически, имя пользователя и пароль не спрашиваются"
+
+msgid "Back to cores"
+msgstr "Назад к ядрам"
+
+msgid "Opening the dashboard"
+msgstr "Открываем дашборд"
+
+msgid "The dashboard did not answer on any of these addresses"
+msgstr "Дашборд не ответил ни на одном из этих адресов"
+
+msgid "Open by hand"
+msgstr "Открыть вручную"
+
+msgid "Back to proxies"
+msgstr "Назад к прокси"
+
+msgid "Every config the panel hands out is listed there with its own ping, so a config that never answers usually has a broken setting"
+msgstr "Каждая конфигурация, которую выдаёт панель, перечислена там со своей задержкой, поэтому конфигурация, которая никогда не отвечает, обычно означает сломанную настройку"
+
+msgid ""
+" Search\n"
+"            Settings"
+msgstr " Поиск\\n            Настройки"
+
+msgid "CPU Usage.description"
+msgstr "CPU Usage.description"
+
+msgid "CPU Usage.label"
+msgstr "CPU Usage.label"
+
+msgid "Consumed Data.description"
+msgstr "Consumed Data.description"
+
+msgid "Consumed Data.label"
+msgstr "Consumed Data.label"
+
+msgid "DISK USAGE.description"
+msgstr "DISK USAGE.description"
+
+msgid "DISK USAGE.label"
+msgstr "DISK USAGE.label"
+
+msgid ""
+"Dear {}\n"
+"\n"
+"Your watashi information is\n"
+"UUID: {}\n"
+"Last online date: {}\n"
+"Expire time: {}\n"
+"Usage class: {}\n"
 msgstr ""
+"Уважаемый {}\\\n"
+"\\\n"
+"Ваша информация Watashi:\\\n"
+"UUID: {}\\\n"
+"Последняя активность: {}\\\n"
+"Истекает: {}\\\n"
+"Тарифный класс: {}\\\n"
+
+#, python-format
+msgid "Domain (%(domain)s)-> IP=%(domain_ip)s is not matched with your ip=%(server_ip)s which is required in direct mode"
+msgstr "Домен %(domain)s -> IP %(domain_ip)s не совпадает с вашим IP %(server_ip)s, что требуется в прямом режиме"
+
+msgid "From when the user package will be started? Empty for start from first connection"
+msgstr "С какого момента начнётся пакет пользователя? Пусто — с первого подключения"
+
+msgid "INCOMING SPEED.description"
+msgstr "INCOMING SPEED.description"
+
+msgid "INCOMING SPEED.label"
+msgstr "INCOMING SPEED.label"
+
+msgid "If monthly is enabled, the usage will be reset after 30 days from this date."
+msgstr "Если включено ежемесячное списание, расход будет сброшен через 30 дней после этой даты."
+
+#, python-format
+msgid ""
+"If the application do not open automatically, please click <a class='btn btn-primary copy-link'\n"
+"                    href='%(sub)s'>this universal link</a> to copy and paste it on\n"
+"                your application, or:"
+msgstr "Если приложение не открылось автоматически, нажмите <a class='btn btn-primary copy-link'\\n                    href='%(sub)s'>эту универсальную ссылку</a>, чтобы скопировать её и вставить в приложение, или:"
+
+#, python-format
+msgid "It seems that you are using default domain (%(domain)s) which is not recommended."
+msgstr "Похоже, вы используете домен по умолчанию (%(domain)s) — это не рекомендуется."
+
+msgid "Join our Watashi Telegram channel to get the latest updates on Watashi."
+msgstr "Присоединяйтесь к нашему Telegram-каналу Watashi, чтобы узнавать о последних обновлениях."
+
+msgid "Load average:.description"
+msgstr "Load average:.description"
+
+msgid "Load average:.label"
+msgstr "Load average:.label"
+
+msgid "MEMORY USAGE.description"
+msgstr "MEMORY USAGE.description"
+
+msgid "MEMORY USAGE.label"
+msgstr "MEMORY USAGE.label"
+
+msgid "Memory Usage.description"
+msgstr "Memory Usage.description"
+
+msgid "Memory Usage.label"
+msgstr "Memory Usage.label"
+
+msgid "Network History.description"
+msgstr "Network History.description"
+
+msgid "Network History.label"
+msgstr "Network History.label"
+
+msgid "OUTGOING SPEED.description"
+msgstr "OUTGOING SPEED.description"
+
+msgid "OUTGOING SPEED.label"
+msgstr "OUTGOING SPEED.label"
+
+msgid "PANEL MEMORY.description"
+msgstr "PANEL MEMORY.description"
+
+msgid "PANEL MEMORY.label"
+msgstr "PANEL MEMORY.label"
+
+msgid "PANEL UPTIME.description"
+msgstr "PANEL UPTIME.description"
+
+msgid "PANEL UPTIME.label"
+msgstr "PANEL UPTIME.label"
+
+msgid "Panel Usage.description"
+msgstr "Panel Usage.description"
+
+msgid "Panel Usage.label"
+msgstr "Panel Usage.label"
+
+msgid "Please connect your telegram account to the panel to be informed about latest news."
+msgstr "Пожалуйста, подключите свой Telegram-аккаунт к панели, чтобы узнавать о последних новостях."
+
+msgid "Please understand that parent panel is under test and the plan and the condition of use maybe change at anytime."
+msgstr "Пожалуйста, имейте в виду, что родительская панель находится в стадии тестирования, и план с условиями использования могут измениться в любой момент."
+
+msgid "Real-time performance monitoring.description"
+msgstr "Real-time performance monitoring.description"
+
+msgid "Real-time performance monitoring.label"
+msgstr "Real-time performance monitoring.label"
+
+msgid "SWAP USAGE.description"
+msgstr "SWAP USAGE.description"
+
+msgid "SWAP USAGE.label"
+msgstr "SWAP USAGE.label"
+
+msgid "SYSTEM UPTIME.description"
+msgstr "SYSTEM UPTIME.description"
+
+msgid "SYSTEM UPTIME.label"
+msgstr "SYSTEM UPTIME.label"
+
+msgid "System Overview.description"
+msgstr "System Overview.description"
+
+msgid "System Overview.label"
+msgstr "System Overview.label"
+
+msgid "THREADS.description"
+msgstr "THREADS.description"
+
+msgid "THREADS.label"
+msgstr "THREADS.label"
+
+msgid "Time_D.description"
+msgstr "Time_D.description"
+
+msgid "Time_D.label"
+msgstr "Time_D.label"
+
+msgid "Time_H.description"
+msgstr "Time_H.description"
+
+msgid "Time_H.label"
+msgstr "Time_H.label"
+
+msgid "Time_M.description"
+msgstr "Time_M.description"
+
+msgid "Time_M.label"
+msgstr "Time_M.label"
+
+msgid "Time_S.description"
+msgstr "Time_S.description"
+
+msgid "Time_S.label"
+msgstr "Time_S.label"
+
+msgid "Total Traffic.description"
+msgstr "Total Traffic.description"
+
+msgid "Total Traffic.label"
+msgstr "Total Traffic.label"
+
+msgid "Total Users.description"
+msgstr "Total Users.description"
+
+msgid "Total Users.label"
+msgstr "Total Users.label"
+
+msgid "Users Overview.description"
+msgstr "Users Overview.description"
+
+msgid "Users Overview.label"
+msgstr "Users Overview.label"
+
+msgid "XRAY UPTIME.description"
+msgstr "XRAY UPTIME.description"
+
+msgid "XRAY UPTIME.label"
+msgstr "XRAY UPTIME.label"
+
+#, python-format
+msgid "You can download a json formated of configurations by clicking <a href='%(link)s' class='btn btn-primary'>here</a>"
+msgstr "Скачать конфигурации в формате json можно, нажав <a href='%(link)s' class='btn btn-primary'>здесь</a>"
+
+#, python-format
+msgid "You have too much users! You can have only %(active)s active users and %(total)s users"
+msgstr "У вас слишком много пользователей! Можно иметь только %(active)s активных и %(total)s пользователей всего"
+
+msgid ""
+"Your watashi instance information \n"
+"Domain: {} \n"
+"Usage limit: {} GB\n"
+"Current usage: {} GB\n"
+"Expires at: {} \n"
+"Remaining days: {} \n"
+"\n"
+"\n"
+" Happy using 🎉 🎉 🎉 \n"
+msgstr ""
+"Сведения о вашем экземпляре Watashi \\\n"
+"Домен: {} \\\n"
+"Лимит трафика: {} ГБ\\\n"
+"Использовано: {} ГБ\\\n"
+"Истекает: {} \\\n"
+"Осталось дней: {} \\\n"
+"\\\n"
+"\\\n"
+" Приятного использования 🎉 🎉 🎉 \\\n"
+
+msgid "config.access_log_enable.description"
+msgstr "Записывает сайты, которые открывают пользователи, в журнал доступа. Работает только при уровне журнала не выше Critical и тратит немного диска и процессора на нагруженном сервере."
+
+msgid "config.access_log_enable.label"
+msgstr "📜 Включить журналы доступа пользователей"
+
+msgid "config.amnezia_native_enable.description"
+msgstr "Запускает AmneziaWG как собственную нативную службу, а не только через sing-box."
+
+msgid "config.amnezia_native_enable.label"
+msgstr "Включить нативный AmneziaWG"
+
+msgid "config.anytls.description"
+msgstr "Настройки протокола AnyTLS"
+
+msgid "config.anytls.label"
+msgstr "Конфигурация AnyTLS"
+
+msgid "config.anytls_enable.description"
+msgstr "AnyTLS прячется внутри обычной TLS-сессии и не требует собственного транспорта."
+
+msgid "config.anytls_enable.label"
+msgstr "Включить AnyTLS"
+
+msgid "config.anytls_port.description"
+msgstr "Порт, который слушает AnyTLS. Каждый домен сдвигает его на свой номер."
+
+msgid "config.anytls_port.label"
+msgstr "Порт AnyTLS"
+
+msgid "config.block_ads_custom.description"
+msgstr "Введите свои домены для блокировки, по одному в строке. Пример: ads.example.com"
+
+msgid "config.block_ads_custom.label"
+msgstr "📝 Свой список блокировки"
+
+msgid "config.block_ads_enable.description"
+msgstr "Блокировка рекламы и трекеров на уровне прокси. Внимание: рекламу YouTube заблокировать нельзя — она идёт с того же домена, что и видео."
+
+msgid "config.block_ads_enable.label"
+msgstr "🚫 Блокировать рекламу и трекеры"
+
+msgid "config.block_malware_enable.description"
+msgstr "Блокировка вредоносных, фишинговых и злонамеренных доменов для защиты пользователей"
+
+msgid "config.block_malware_enable.label"
+msgstr "🛡️ Блокировать вредоносное ПО и фишинг"
+
+msgid "config.block_nsfw_enable.description"
+msgstr "Блокировка контента 18+, включая азартные игры, ставки и сайты для взрослых"
+
+msgid "config.block_nsfw_enable.label"
+msgstr "🔞 Блокировать NSFW (18+ и азартные игры)"
+
+msgid "config.block_social_enable.description"
+msgstr "Блокировка соцсетей — Facebook, TikTok, Instagram, Twitter и т.д."
+
+msgid "config.block_social_enable.label"
+msgstr "📵 Блокировать соцсети"
+
+msgid "config.hysteria_obfs_password.description"
+msgstr "Пароль Salamander для слоя обфускации Hysteria2. Оставьте пустым — вернётся путь панели. После смены каждый клиент получает новую подписку."
+
+msgid "config.hysteria_obfs_password.label"
+msgstr "🔑 Пароль Hysteria OBFS"
+
+msgid "config.mieru_handshake.description"
+msgstr "Выберите поведение рукопожатия Mieru."
+
+msgid "config.mieru_handshake.label"
+msgstr "Рукопожатие Mieru"
+
+msgid "config.mieru_multiplexing.description"
+msgstr "Выберите профиль мультиплексирования Mieru."
+
+msgid "config.mieru_multiplexing.label"
+msgstr "Мультиплексирование Mieru"
+
+msgid "config.mieru_tcp_ports.description"
+msgstr "TCP-порты или диапазоны через запятую."
+
+msgid "config.mieru_tcp_ports.label"
+msgstr "TCP-порты Mieru"
+
+msgid "config.mieru_udp_ports.description"
+msgstr "UDP-порты или диапазоны через запятую."
+
+msgid "config.mieru_udp_ports.label"
+msgstr "UDP-порты Mieru"
+
+msgid "config.naive_padding.description"
+msgstr "Включить padding для трафика NaiveProxy."
+
+msgid "config.naive_padding.label"
+msgstr "NaiveProxy padding"
+
+msgid "config.shadowtls_password.description"
+msgstr "Общий пароль аутентификации для ShadowTLS."
+
+msgid "config.shadowtls_password.label"
+msgstr "Пароль ShadowTLS"
+
+msgid "config.shadowtls_port.description"
+msgstr "Публичный порт, используемый ShadowTLS."
+
+msgid "config.shadowtls_port.label"
+msgstr "Порт ShadowTLS"
+
+msgid "config.shadowtls_server_name.description"
+msgstr "Имя TLS-сервера, которое подделывает ShadowTLS."
+
+msgid "config.shadowtls_server_name.label"
+msgstr "Имя сервера ShadowTLS"
+
+msgid "config.snell.description"
+msgstr "Настройки протокола Snell v6"
+
+msgid "config.snell.label"
+msgstr "Конфигурация Snell"
+
+msgid "config.snell_enable.description"
+msgstr "Snell v6 с формированием трафика. Читают его только клиенты на sing-box."
+
+msgid "config.snell_enable.label"
+msgstr "Включить Snell"
+
+msgid "config.snell_mode.description"
+msgstr "Режим формирования трафика: default, unshaped или unsafe-raw."
+
+msgid "config.snell_mode.label"
+msgstr "Режим Snell"
+
+msgid "config.snell_port.description"
+msgstr "Порт, который слушает Snell. Каждый домен сдвигает его на свой номер."
+
+msgid "config.snell_port.label"
+msgstr "Порт Snell"
+
+msgid "config.snell_psk.description"
+msgstr "Ключ сервера. Должен быть от 12 до 255 символов."
+
+msgid "config.snell_psk.label"
+msgstr "PSK Snell"
+
+msgid "The default proxies could not be brought back: @WHY@"
+msgstr "Прокси по умолчанию вернуть не удалось: @WHY@"
+
+msgid "@N@ proxies were brought back, @M@ could not be written: @WHY@"
+msgstr "Возвращено прокси: @N@, записать не удалось: @M@ — @WHY@"
+
+msgid "managed by the CDN"
+msgstr "под управлением CDN"
+
+msgid "This name belongs to a CDN, so the CDN keeps its certificate. The panel does not ask an authority for it."
+msgstr "Это имя принадлежит CDN, поэтому сертификат хранит CDN. Панель не запрашивает его у центра сертификации."
+
+msgid "The certificate of this domain is kept by the CDN, not by this server."
+msgstr "Сертификат этого домена хранится на CDN, а не на этом сервере."
+
+#, python-format
+msgid "Your user limit leaves room for only %(left)s more users, so that many were created."
+msgstr "Ваш лимит пользователей оставляет место только для %(left)s новых, поэтому столько и создано."
+
+#, python-format
+msgid "Your traffic quota has room for only %(left)s GB, so a %(need)s GB user does not fit."
+msgstr "В вашей квоте трафика осталось только %(left)s ГБ, поэтому пользователь на %(need)s ГБ не помещается."
+
+#, python-format
+msgid "Your traffic quota leaves room for only %(left)s more users, so that many were created."
+msgstr "Ваша квота трафика оставляет место только для %(left)s новых, поэтому столько и создано."
+
+msgid "Config Health"
+msgstr "Состояние конфигураций"
+
+msgid "Test the configs"
+msgstr "Проверить конфигурации"
+
+msgid "Healthy"
+msgstr "Здоров"
+
+msgid "Not answering"
+msgstr "Не отвечает"
+
+msgid "Not testable here"
+msgstr "Здесь не проверить"
+
+msgid "Average answer"
+msgstr "Средний ответ"
+
+msgid "Search a config"
+msgstr "Поиск по конфигурации"
+
+msgid "Both cores"
+msgstr "Оба ядра"
+
+msgid "no core here"
+msgstr "здесь нет ядра"
+
+msgid "answers"
+msgstr "отвечает"
+
+msgid "no answer"
+msgstr "нет ответа"
+
+msgid "healthy"
+msgstr "здоров"
+
+#, python-format
+msgid "testing %(done)s of %(total)s"
+msgstr "проверка %(done)s из %(total)s"
+
+#, python-format
+msgid "%(good)s of %(tested)s configs answered"
+msgstr "Ответили конфигураций: %(good)s из %(tested)s"
+
+msgid "A test is already running. Wait for it to finish."
+msgstr "Проверка уже идёт. Дождитесь окончания."
+
+msgid "Pick an account first."
+msgstr "Сначала выберите аккаунт."
+
+msgid "No result yet."
+msgstr "Результата пока нет."
+
+msgid "Nothing matches this filter."
+msgstr "Этому фильтру ничего не соответствует."
+
+msgid "This page was left open too long. Reload it and try again."
+msgstr "Страница была открыта слишком долго. Обновите её и попробуйте снова."
+
+#, python-format
+msgid "The xray core was not found at %(path)s."
+msgstr "Ядро xray не найдено по пути %(path)s."
+
+#, python-format
+msgid "The sing-box core was not found at %(path)s."
+msgstr "Ядро sing-box не найдено по пути %(path)s."
+
+msgid "Pick an account and press the button. The configs are tested one at a time, so a full run takes a couple of minutes."
+msgstr "Выберите аккаунт и нажмите кнопку. Конфигурации проверяются по одной, полный проход занимает пару минут."
+
+msgid "Every config is started on the core that can run it and asked for one page. Green means the config itself is sound, measured from this server; it does not promise the config gets through a filter."
+msgstr "Каждая конфигурация запускается на ядре, которое умеет её исполнить, и запрашивает одну страницу. Зелёный означает, что сама конфигурация исправна, — измерено с этого сервера; это не обещает, что она пройдёт через фильтр."
+
+msgid "Account"
+msgstr "Аккаунт"
+
+msgid "finished"
+msgstr "завершено"
+
+msgid "testing {done} of {total}"
+msgstr "проверка {done} из {total}"
+
+msgid "{good} of {tested} configs answered"
+msgstr "{good} из {tested} конфигураций ответили"
+
+msgid "Start the bot as this admin"
+msgstr "Запустить бота от этого администратора"
+
+msgid "Open in Telegram"
+msgstr "Открыть в Telegram"
+
+msgid "Open in a browser"
+msgstr "Открыть в браузере"
+
+msgid "Press the button on the device where you use Telegram. The bot links that chat to your admin account, and only then can it answer you."
+msgstr "Нажмите кнопку на том устройстве, где вы пользуетесь Telegram. Бот привяжет этот чат к вашему аккаунту администратора, и только после этого сможет отвечать вам."
+
+msgid "Telegram is told to deliver every message to @DOMAIN@. If the bot stays silent on this server, run watashi-panel-cli tgbot-doctor."
+msgstr "Telegram получили указание доставлять каждое сообщение на @DOMAIN@. Если бот молчит на этом сервере, запустите watashi-panel-cli tgbot-doctor."
+
+msgid "The start link was copied."
+msgstr "Ссылка запуска скопирована."
+
+msgid "The start link could not be copied."
+msgstr "Ссылку запуска скопировать не удалось."
+
+msgid "Network card traffic since boot"
+msgstr "Трафик сетевой карты с момента загрузки"
+
+msgid "Received"
+msgstr "Получено"
+
+msgid "Sent"
+msgstr "Отправлено"
+
+msgid "This is what the network card itself counted. Every byte a user spends passes it twice, once coming in and once going out, and the server's own updates and backups are counted here too. It being around twice the users' total is normal, not a mistake."
+msgstr "Это то, что насчитала сама сетевая карта. Каждый байт пользователя проходит её дважды — входящий и исходящий, — и собственные обновления и копии сервера тоже считаются. Значение около двойного суммарного трафика пользователей — это нормально, а не ошибка."
+
+msgid "testing now"
+msgstr "проверяется сейчас"
+
+msgid "the other core answered this one"
+msgstr "это ядро ответило другим"
+
+msgid "The job keeps running on the server. This page picks up again by itself the moment the panel answers, there is no need to refresh it."
+msgstr "Задача продолжает работать на сервере. Страница сама подхватится, как только панель ответит, — обновлять не нужно."
+
+msgid "The job ended with an error (code {code})."
+msgstr "Задача завершилась ошибкой (код {code})."
+
+msgid "The update is running on the server. The panel goes away for a few minutes in the middle of it; this page keeps following the log and says when it is over."
+msgstr "Обновление выполняется на сервере. Панель посреди работы ненадолго исчезает; эта страница следит за журналом и сообщит об окончании."
+
+msgid "A certificate was issued but could not be put in place. The log below says why."
+msgstr "Сертификат был выдан, но его не удалось установить. Журнал ниже говорит почему."
+
+msgid "A domain longer than 64 characters cannot get a certificate."
+msgstr "Домен длиннее 64 символов не может получить сертификат."
+
+msgid "A new certificate is asked for this domain right now, even if the current one still looks valid. Use it after moving to a new server, restoring a backup or fixing the DNS record."
+msgstr "Новый сертификат запрашивается для этого домена прямо сейчас, даже если текущий ещё выглядит действительным. Используйте после переезда на новый сервер, восстановления копии или починки DNS-записи."
+
+msgid "Another certificate request for this domain was still running. Try again in a few minutes."
+msgstr "Для этого домена другой запрос сертификата ещё выполнялся. Попробуйте через несколько минут."
+
+msgid "Ask again"
+msgstr "Запросить снова"
+
+msgid "Ask for a new SSL certificate for this domain now"
+msgstr "Запросить новый SSL-сертификат для этого домена сейчас"
+
+msgid "Asking the certificate authority..."
+msgstr "Спрашиваем центр сертификации..."
+
+msgid "Every request counts against the limits of the authority (Let's Encrypt allows five for the same domain in a week), so do not repeat it without a reason."
+msgstr "Каждый запрос расходует лимиты центра (Let's Encrypt позволяет пять для одного домена в неделю), поэтому без причины не повторяйте."
+
+msgid "Get SSL"
+msgstr "Получить SSL"
+
+msgid "Get a new certificate"
+msgstr "Получить новый сертификат"
+
+msgid "Getting SSL..."
+msgstr "Получаем SSL..."
+
+msgid "New SSL certificate"
+msgstr "Новый SSL-сертификат"
+
+msgid "No authority issued a certificate. The domain keeps its previous certificate, or a self-signed one. The log below says why."
+msgstr "Ни один центр не выдал сертификат. Домен сохраняет прежний сертификат или самоподписанный. Журнал ниже говорит почему."
+
+msgid "Not trusted"
+msgstr "Не доверенный"
+
+msgid "Self-signed"
+msgstr "Самоподписанный"
+
+msgid "The certificate request could not be started."
+msgstr "Запрос сертификата не удалось запустить."
+
+msgid "The certificate was read from this server itself."
+msgstr "Сертификат прочитан с самого этого сервера."
+
+msgid "The current certificate is still good, so nothing was asked."
+msgstr "Текущий сертификат ещё действителен, поэтому ничего не запрашивалось."
+
+msgid "The last attempt failed a short while ago, so nothing was asked this time."
+msgstr "Последняя попытка недавно неудачной, поэтому на этот раз ничего не запрашивалось."
+
+msgid "The last check says this domain does not point at this server. The request fails until the DNS record is fixed."
+msgstr "Последняя проверка говорит, что домен не указывает на этот сервер. Запрос будет падать, пока не починена DNS-запись."
+
+msgid "The last request stopped before it finished."
+msgstr "Последний запрос остановился, не дойдя до конца."
+
+msgid "The last request:"
+msgstr "Последний запрос:"
+
+msgid "The new certificate is in place."
+msgstr "Новый сертификат установлен."
+
+msgid "The new certificate is in place. It lasts @N@ days."
+msgstr "Новый сертификат установлен. Действует @N@ дн."
+
+msgid "The request ended without saying how. The log below may tell."
+msgstr "Запрос завершился, не сказав чем. Журнал ниже может подсказать."
+
+msgid "This can take a few minutes. You can close this window, the request goes on."
+msgstr "Это может занять несколько минут. Окно можно закрыть, запрос продолжится."
+
+msgid "This certificate is self-signed, so the clients refuse it."
+msgstr "Этот сертификат самоподписанный, поэтому клиенты его отвергают."
+
+msgid "This domain does not point at this server, so no authority could check it. Point it at this server, wait a few minutes, then ask again."
+msgstr "Этот домен не указывает на этот сервер, поэтому ни один центр не смог его проверить. Направьте домен сюда, подождите несколько минут и запросите снова."
+
+msgid "This domain has no DNS record, so no authority could check it."
+msgstr "У этого домена нет DNS-записи, поэтому ни один центр не смог его проверить."
+
+msgid "This is not a name an authority issues certificates for."
+msgstr "Такое имя — не для сертификатов от центра."
+
+msgid "This name is served by another server or a CDN, so no certificate was asked for."
+msgstr "Это имя обслуживается другим сервером или CDN, поэтому сертификат не запрашивался."
+
+msgid "This server does not ask an authority for the certificate of this domain."
+msgstr "Этот сервер не запрашивает у центра сертификат этого домена."
+
+msgid "This server holds only a self-signed certificate for this domain, and the clients refuse it."
+msgstr "На этом сервере для этого домена есть только самоподписанный сертификат, и клиенты его отвергают."
+
+msgid "config.advanced_mode.label"
+msgstr "Расширенный режим"
+
+msgid "config.advanced_mode.description"
+msgstr "Открывает страницу Inbounds и экспертные настройки."
+
+msgid "config.custom_inbounds_keep.label"
+msgstr "Держать собранные вручную inbounds в простом режиме"
+
+msgid "config.custom_inbounds_keep.description"
+msgstr "Включено: inbounds, созданные в расширенном режиме, продолжают работать в простом. Выключено — приостанавливает их."
+
+
+# --- API book: matrix and subscription additions ---
+
+msgid "Parent API"
+msgstr "API родительской панели"
+
+msgid "The half of the matrix mode the parent panel answers. A row for the panel key is called with the key of the child, which the parent knows once the child registers."
+msgstr "Половина матричного режима, на которую отвечает родительская панель. Строки «Ключ панели» вызываются с ключом дочерней панели; родитель узнаёт этот ключ после регистрации дочки."
+
+msgid "Child API"
+msgstr "API дочерней панели"
+
+msgid "The half of the matrix mode the child panel answers. A row for the panel key is called with the key of the parent, which the child holds once it registers."
+msgstr "Половина матричного режима, на которую отвечает дочерняя панель. Строки «Ключ панели» вызываются с ключом родительской панели, который дочка получает после регистрации."
+
+msgid "Panel key"
+msgstr "Ключ панели"
+
+msgid "Reads the app asking and answers in the format that app understands. A browser gets the customer page, an app its config. The one link to hand out."
+msgstr "Читает приложение-клиент и отвечает в его формате. Браузер получает страницу клиента, приложение — свой конфиг. Та самая ссылка, которую нужно выдавать."
+
+msgid "The customer page"
+msgstr "Страница клиента"
+
+msgid "The page a customer opens in a browser to pick an app and copy their links."
+msgstr "Страница, которую клиент открывает в браузере, чтобы выбрать приложение и скопировать свои ссылки."
+
+msgid "Text links"
+msgstr "Текстовые ссылки"
+
+msgid "The same links without base64, one per line."
+msgstr "Те же ссылки без base64, по одной в строке."
+
+msgid "Xray json"
+msgstr "Xray JSON"
+
+msgid "The whole profile as the json an Xray client imports."
+msgstr "Весь профиль в формате JSON, который импортирует клиент Xray."
+
+msgid "Only the proxies"
+msgstr "Только прокси"
+
+msgid "Just the proxies block, for a profile of their own. clash/meta/proxies.yml for Mihomo."
+msgstr "Только блок proxies — для тех, кто ведёт свой профиль. Для Mihomo — clash/meta/proxies.yml."
+
+msgid "The whole profile as sing-box json. singbox/ is the same file under a shorter name."
+msgstr "Весь профиль в sing-box json. Тот же файл под более коротким именем — singbox/."
+
+msgid "Sing-Box with ssh"
+msgstr "Sing-Box с ssh"
+
+msgid "The sing-box json with the ssh tunnels of the account added. Answers that the ssh server is disabled when it is off."
+msgstr "sing-box json с добавленными ssh-туннелями аккаунта. Если ssh-сервер выключен, вернёт сообщение об этом."
+
+msgid "Echo the user agent"
+msgstr "Эхо User-Agent"
+
+msgid "Debug: answers with the user agent the panel saw. Handy to check what an app sends."
+msgstr "Отладка: возвращает User-Agent, который увидела панель. Удобно проверять, что шлёт приложение."
+
+msgid "Does this child exist"
+msgstr "Существует ли эта дочка"
+
+msgid "A child asks with its unique id before it registers; the answer is whether the parent already holds such a child."
+msgstr "Дочка перед регистрацией спрашивает со своим уникальным id; в ответе — знает ли родитель такую дочку."
+
+msgid "Register a child"
+msgstr "Регистрация дочки"
+
+msgid "The child hands over its whole panel: admins, customers, domains, configs and proxies. The parent answers with its own customers and admins, so both sides start even."
+msgstr "Дочка отдаёт всю свою панель: админов, клиентов, домены, конфиги и прокси. Родитель в ответ присылает своих клиентов и админов, чтобы обе стороны стартовали с равными данными."
+
+msgid "Sync a child"
+msgstr "Синхронизация дочки"
+
+msgid "The child pushes the domains, configs and proxies it holds; the parent answers with the full list of customers and admins. At least one of the three lists is required."
+msgstr "Дочка присылает свои домены, конфиги и прокси; родитель отвечает полным списком клиентов и админов. Нужен хотя бы один из трёх списков."
+
+msgid "Push the usage"
+msgstr "Отправка трафика"
+
+msgid "The child reports what every customer has spent; the parent adds only the increase and answers with the usage it now holds."
+msgstr "Дочка сообщает, сколько потратил каждый клиент; родитель прибавляет только прирост и отвечает текущим объёмом трафика."
+
+msgid "Register with a parent"
+msgstr "Регистрация у родителя"
+
+msgid "Makes this panel a child of a parent. parent_panel is the address of the parent, apikey the key of an owner there. The panel must be standalone or a child already."
+msgstr "Делает эту панель дочкой родителя. parent_panel — адрес родителя, apikey — ключ его владельца. Панель должна быть автономной или уже дочкой."
+
+msgid "Sync now"
+msgstr "Синхронизировать сейчас"
+
+msgid "Pulls everything the parent holds and rewrites the local data with it. The parent may call it, and so may an owner of this panel."
+msgstr "Забирает всё, что держит родитель, и переписывает локальные данные. Может вызвать родитель, а также владелец этой панели."
+
+msgid "Runs the status command on this panel and answers ok. The parent calls it to see whether the child is alive."
+msgstr "Выполняет команду status на этой панели и отвечает ok. Родитель вызывает, чтобы убедиться, что дочка жива."
+
+msgid "Restarts the services of this panel."
+msgstr "Перезапускает службы этой панели."
+
+msgid "Apply the config"
+msgstr "Применить конфиг"
+
+msgid "Rebuilds the running config from the database, without a full install."
+msgstr "Пересобирает работающий конфиг из базы данных, без полной установки."
+
+msgid "Runs the installer again. With full set, it installs everything from the start."
+msgstr "Снова запускает установщик. С full устанавливает всё с нуля."
+
+msgid "Refresh the usage"
+msgstr "Обновить трафик"
+
+msgid "Reads the usage off the cores of this panel right now."
+msgstr "Считывает трафик с ядер этой панели прямо сейчас."
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Device Limit Enforced"
+msgstr "Включено ограничение устройств"
+
+msgid "No Device Limit"
+msgstr "Без ограничения устройств"
+
+msgid "App Distribution"
+msgstr "Распределение приложений"
+
+msgid "Operator Distribution"
+msgstr "Распределение операторов"
+
+msgid "Unknown app"
+msgstr "Неизвестное приложение"
+
+msgid "Unknown operator"
+msgstr "Неизвестный оператор"
+
+msgid "Turn on the device limit"
+msgstr "Включить ограничение устройств"
+
+msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
+msgstr "Эта страница отслеживает каждое устройство сама по себе и работает даже при выключенном ограничении устройств. Работают только при включённом ограничении: блокировка лишних устройств, блокировка «приложение не поддерживается» и отметки о превышении лимита."

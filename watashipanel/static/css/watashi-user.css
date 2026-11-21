@@ -806,6 +806,29 @@ html[dir="rtl"] .footer-brand .alive-icon { order: 3; }
    overlay could replace it) was removed with its engine; native
    scrollbars are back, thin and themed. */
 
+/* watashi v12.3.49dev: match the panel's scrollbar ("only when needed").
+   The panel gets this from watashi-ui.css + watashi-ui.js via data-sb; the
+   user page loads neither, so the same native bar is painted here without a
+   script: thin, themed, and the thumb is invisible until the page scrolls or
+   the pointer reaches the edge. */
+:root {
+	--ws-sb-thumb: rgba(148, 163, 184, 0.42);
+	--ws-sb-thumb-hot: rgb(var(--ws-a-400, 139 92 246) / 0.78);
+}
+html[data-theme="light"] {
+	--ws-sb-thumb: rgba(71, 85, 105, 0.36);
+	--ws-sb-thumb-hot: rgb(var(--ws-a-600, 109 40 217) / 0.62);
+}
+html, html * { scrollbar-width: thin; }
+html { scrollbar-color: var(--ws-sb-thumb) transparent; }
+html.ws-scrolled, html.ws-scrolled * { scrollbar-color: var(--ws-sb-thumb) transparent; }
+@supports not (scrollbar-color: auto) {
+	::-webkit-scrollbar { width: 10px; height: 10px; }
+	::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+	::-webkit-scrollbar-thumb { background: var(--ws-sb-thumb); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+	::-webkit-scrollbar-thumb:hover { background: var(--ws-sb-thumb-hot); background-clip: padding-box; }
+}
+
 /* --- watashi v12.3.49dev: the old custom cursor (dot + ring + a permanent
    requestAnimationFrame loop) and the overlay scrollbar engine below lived only
    here and in old admin pages; the refreshed admin pages already use the native

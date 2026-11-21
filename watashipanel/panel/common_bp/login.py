@@ -234,7 +234,9 @@ def ws_entrance_data(form, picked_lang=None, waiting=0):
 
 def ws_picked_lang():
     pick = (request.args.get('lang') or request.cookies.get('watashi_lang') or '').strip()
-    return pick if pick in ('fa', 'en') else ''
+    # watashi v12.3.49dev: ru and zh joined the spoken languages; the picker
+    # used to drop them and fall back to en, so those two rendered English.
+    return pick if pick in ('fa', 'en', 'ru', 'zh') else ''
 
 
 def ws_render_entrance(form, status=200, retry_after=0, waiting=0):
@@ -252,7 +254,7 @@ def ws_render_entrance(form, status=200, retry_after=0, waiting=0):
         # watashi v12.2.52: a well behaved client waits instead of hammering
         answer.headers['Retry-After'] = str(int(retry_after))
     asked = request.args.get('lang')
-    if asked in ('fa', 'en'):
+    if asked in ('fa', 'en', 'ru', 'zh'):
         answer.set_cookie('watashi_lang', asked, max_age=60 * 60 * 24 * 365, samesite='Lax', httponly=False)
     return answer
 
