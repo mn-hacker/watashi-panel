@@ -7064,3 +7064,9 @@ msgstr "开启设备限制"
 
 msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
 msgstr "本页面独立追踪每台设备，即使关闭设备限制也能正常工作。仅在开启限制时生效的功能：拦截超额设备、「应用程序不受支持」锁定以及超限标记。"
+
+msgid "Last online"
+msgstr "最后在线"
+
+msgid "Last seen"
+msgstr "最后出现"

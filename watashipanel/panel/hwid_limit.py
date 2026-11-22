@@ -61,6 +61,47 @@ UA_APP_PATTERNS = [
     ('curl', re.compile(r'curl/([\d.]+)', re.I)),
 ]
 
+# watashi v12.3.55dev: apps that only exist on one platform and send no OS hint
+# at all (v2rayNG and the like) still get a correct OS label on the monitoring
+# page. Multi-platform apps (Hiddify, Karing, Oblivion, FairVPN, Nekoray) stay
+# out of the map on purpose: guessing would be wrong half of the time.
+APP_PLATFORM_FALLBACK = {
+    'v2rayNG': 'Android',
+    'v2RayTun': 'Android',
+    'NekoBox': 'Android',
+    'NekoBox2': 'Android',
+    'Clash Meta for Android': 'Android',
+    'Clash for Android': 'Android',
+    'Material Xray': 'Android',
+    'mins': 'Android',
+    'INCY': 'Android',
+    'v2rayN': 'Windows',
+    'v2Box': 'iOS',
+    'Streisand': 'iOS',
+    'Shadowrocket': 'iOS',
+    'Stash': 'iOS',
+    'Loon': 'iOS',
+    'sing-box (SFA)': 'Android',
+    'sing-box (SFI)': 'iOS',
+    'sing-box (SFM)': 'macOS',
+    'sing-box (SFT)': 'Windows',
+}
+
+
+def platform_for_app(app_name: str) -> str:
+    """The platform an app always runs on, or '' when it is multi-platform.
+
+    Stored app names carry the version ("v2rayNG 2.3.15"), so both the bare
+    name and the name with a trailing version match.
+    """
+    a = str(app_name or '').strip()
+    if not a:
+        return ''
+    for name, platform in APP_PLATFORM_FALLBACK.items():
+        if a == name or a.startswith(name + ' '):
+            return platform
+    return ''
+
 # The carrier of the device, resolved from the ASN of the IP that fetched the
 # subscription. Iranian mobile and data networks get a proper name; every
 # other network in the world falls back on its ASN organisation (GeoLite2)
@@ -259,12 +300,17 @@ def read_headers():
     # most others) are still recognised from their User-Agent, so the
     # monitoring page can name the app, the OS and the carrier.
     app_name = (h.get(H_APP_NAME) or '').strip()
+    bare_app = app_name
     if not app_name:
-        app_name, app_ver = app_from_user_agent(ua)
-        if app_name and app_ver:
-            app_name = f'{app_name} {app_ver}'
+        bare_app, app_ver = app_from_user_agent(ua)
+        if bare_app and app_ver:
+            app_name = f'{bare_app} {app_ver}'
 
     device_os = (h.get(H_DEVICE_OS) or '').strip() or ua_device_os(ua)
+    # watashi v12.3.55dev: v2rayNG and other single-platform apps never say
+    # which OS they run on; the app name alone settles it.
+    if not device_os:
+        device_os = platform_for_app(bare_app)
     ver_os = (h.get(H_VER_OS) or '').strip() or ua_os_version(ua)
     device_model = (h.get(H_DEVICE_MODEL) or '').strip() or ua_device_model(ua)
     operator = (h.get(H_OPERATOR) or '').strip() or operator_from_ip()

@@ -12140,3 +12140,9 @@ msgstr "مصرف را همین حالا از هسته‌های این پنل م�
 
 msgid "Auto"
 msgstr "خودکار"
+
+msgid "Last online"
+msgstr "آخرین بار آنلاین"
+
+msgid "Last seen"
+msgstr "آخرین اتصال"

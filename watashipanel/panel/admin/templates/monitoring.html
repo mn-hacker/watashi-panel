@@ -546,7 +546,9 @@ var I18N = {
   status: {{ _('Status')|tojson }},
   loading: {{ _('Loading...')|tojson }},
   noLogs: {{ _('No logs found')|tojson }},
-  noDataYet: {{ _('No data yet')|tojson }}
+  noDataYet: {{ _('No data yet')|tojson }},
+  lastOnline: {{ _('Last online')|tojson }},
+  lastSeen: {{ _('Last seen')|tojson }}
 };
 var KICK_CONFIRM = {{ _('Remove this device?')|tojson }};
 var RESET_CONFIRM = {{ _('Reset all devices for this user?')|tojson }};
@@ -696,9 +698,11 @@ function rowHtml(u, idx){
   var limit=u.limit? u.limit : '\u221e';
   var initial=esc((String(u.name||'?')).charAt(0).toUpperCase());
   var grad=over? '#ef4444, #dc2626' : 'rgb(var(--ws-a-600)), rgb(var(--ws-i))'; // watashi v12.3.44dev: the avatar wears the palette
-  var online=count>0; var devs=u.devices||[];
+  // watashi v12.3.55dev: online now comes from user.last_online (the users
+  // page system), not from "the user has at least one device".
+  var online=!!u.online; var devs=u.devices||[];
   var preview;
-  if(devs.length>0){ preview='<span class="device-tag">'+esc(devs[0].os)+' - '+esc(devs[0].model)+'</span>';
+  if(devs.length>0){ preview='<span class="device-tag">'+esc(devs[0].name)+'</span>';
     if(devs.length>1){ preview+='<span class="device-more">+'+(devs.length-1)+' '+esc(I18N.more)+'</span>'; }
   } else { preview='<span class="device-tag">'+esc(I18N.noDevices)+'</span>'; }
   var overCell=over? '<span class="status-badge badge-red">\ud83d\udd34 '+esc(I18N.overLimit)+'</span>' : '<span style="color: var(--primary-green); font-size: 12px;">\u2014</span>';
@@ -708,7 +712,7 @@ function rowHtml(u, idx){
     + '<td><i class="fa-solid fa-chevron-down expand-icon"></i></td>'
     + '<td data-label="'+escAttr(I18N.user)+'"><div class="user-cell"><div class="user-avatar-sm" style="background: linear-gradient(135deg, '+grad+');">'+initial+'</div>'
     +   '<div><div style="font-weight:600;">'+esc(u.name)+'</div><div style="font-size:10px;color:var(--text-muted);">'+esc(u.is_active?I18N.active:I18N.inactive)+'</div></div></div></td>'
-    + '<td data-label="'+escAttr(I18N.status)+'"><div class="status-cell"><div class="status-dot '+(online?'green':'gray')+'"></div> '+esc(online?I18N.online:I18N.offline)+'</div></td>'
+    + '<td data-label="'+escAttr(I18N.status)+'"><div class="status-cell"'+(u.last_online?' title="'+escAttr(I18N.lastOnline+': '+u.last_online)+'"':'')+'><div class="status-dot '+(online?'green':'gray')+'"></div> '+esc(online?I18N.online:I18N.offline)+'</div></td>'
     + '<td data-label="'+escAttr(I18N.deviceUsage)+'"><div class="conn-count"><span style="font-weight:600;'+(over?'color:var(--primary-red);':'')+'">'+count+' / '+esc(limit)+'</span>'
     +   '<div class="conn-bar"><div class="conn-bar-fill" style="width:'+pct(count,u.limit)+'%;background:'+(over?'var(--primary-red)':'var(--primary-green)')+';"></div></div></div></td>'
     + '<td data-label="'+escAttr(I18N.devices)+'"><div class="device-list-preview">'+preview+'</div></td>'
@@ -723,9 +727,12 @@ function detailHtml(u, idx){
       var tags='';
       if(d.app) tags+='<span class="device-meta-tag"><i class="fa-solid fa-window-restore"></i> '+esc(d.app)+'</span>';
       if(d.operator) tags+='<span class="device-meta-tag"><i class="fa-solid fa-tower-cell"></i> '+esc(d.operator)+'</span>';
-      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.os)+' '+esc(d.model)+'</span>'
+      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.name)
+        // watashi v12.3.55dev: a per-device online dot from the device's own
+        // last-seen within the same 120s window.
+        +'<span class="status-dot '+(d.online?'green':'gray')+'" style="vertical-align:middle;margin-inline-start:6px;"></span></span>'
         +(tags?'<span class="device-meta">'+tags+'</span>':'')
-        +'<span class="first-seen">'+esc(d.last_seen)+'</span></div>'
+        +'<span class="first-seen"'+(d.last_seen?' title="'+escAttr(I18N.lastSeen+': '+d.last_seen)+'"':'')+'>'+esc(d.last_seen)+'</span></div>'
         +'<button class="device-kick-btn" title="'+escAttr(I18N.removeDevice)+'" onclick="event.stopPropagation();kickDevice(\''+escAttr(u.uuid)+'\',\''+escAttr(d.hwid)+'\',this)"><i class="fa-solid fa-trash-can"></i></button></li>';
     });
   } else { items='<li class="device-detail-item"><span>'+esc(I18N.noDevices)+'</span></li>'; }
@@ -766,12 +773,12 @@ class DeviceTable {
   filtered(){
     var f=this.filter, q=this.search;
     return this.data.filter(function(u){
-      if(f==='online' && !(u.device_count>0)) return false;
+      if(f==='online' && !u.online) return false;
       if(f==='over' && !u.over_limit) return false;
       // watashi v12.3.50dev: flagged users and the rest of them, side by side
       if(f==='enforced' && !u.enforced) return false;
       if(f==='regular' && u.enforced) return false;
-      if(q){ var hay=((u.name||'')+' '+(u.devices||[]).map(function(d){ return d.os+' '+d.model+' '+d.app+' '+d.operator; }).join(' ')).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      if(q){ var hay=((u.name||'')+' '+(u.devices||[]).map(function(d){ return d.name+' '+d.os+' '+d.model+' '+d.app+' '+d.operator; }).join(' ')).toLowerCase(); if(hay.indexOf(q)<0) return false; }
       return true;
     });
   }

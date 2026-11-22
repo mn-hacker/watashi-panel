@@ -8,6 +8,8 @@ a user's devices. Replaces the old IP-based connection monitoring, which was
 unreliable under Iran's CG-NAT.
 """
 
+import datetime
+
 from flask import render_template, request, jsonify
 from flask_classful import FlaskView, route
 from flask_babel import gettext as _
@@ -19,6 +21,22 @@ from watashipanel.auth import login_required
 from watashipanel.models import User, Role
 from watashipanel.models import get_user_hwids, get_user_hwid_count, delete_user_hwid, reset_user_hwids
 from watashipanel.panel import hwid_limit
+
+# watashi v12.3.55dev: the same online window as the users page
+# (WS_ONLINE_WINDOW in AccountAdmin.py). The pages drive it from
+# user.last_online, which the usage sync updates from the live xray counters.
+ONLINE_WINDOW = 120  # seconds
+
+
+def _clean_unknown(value):
+    """Drop empty values and the 'unknown device' junk some old releases stored."""
+    v = str(value or '').strip()
+    if not v:
+        return ''
+    low = v.lower()
+    if 'unknown' in low or 'ناشناس' in v or 'شناخته' in v:
+        return ''
+    return v
 
 
 class MonitoringAdmin(FlaskView):
@@ -159,19 +177,42 @@ def get_all_device_data():
         device_count = len(devices)
         over_limit = bool(limit and limit > 0 and device_count > limit)
 
+        now = datetime.datetime.now()
         device_list = []
         for d in devices:
-            os_label = f"{d.device_os} {d.ver_os}".strip()
+            os_name = _clean_unknown(d.device_os)
+            ver_os = _clean_unknown(d.ver_os)
+            model = _clean_unknown(d.device_model)
+            os_label = f"{os_name} {ver_os}".strip()
+            if not os_label:
+                # watashi v12.3.55dev: v2rayNG and other single-platform apps
+                # never report an OS; the app name settles it, even for the
+                # rows recorded before the fallback existed.
+                os_label = hwid_limit.platform_for_app(getattr(d, 'app_name', ''))
+            try:
+                seen_sec = max(0.0, (now - d.last_seen).total_seconds()) if d.last_seen else None
+            except (TypeError, ValueError):
+                seen_sec = None
             device_list.append({
                 'hwid': d.hwid,
-                'model': d.device_model or _('Unknown device'),
-                'os': os_label or _('Unknown device'),
+                # watashi v12.3.55dev: an OS-only fallback must also fill the
+                # model slot, otherwise the UI shows "Android" as name and
+                # "دستگاه ناشناس" as model for the same row.
+                'model': model or os_label or _('Unknown device'),
+                'os': os_label or model or _('Unknown device'),
+                'name': ' '.join(p for p in (os_label, model) if p) or os_label or model or _('Unknown device'),
+                'online': bool(seen_sec is not None and seen_sec <= ONLINE_WINDOW),
                 'last_seen': d.last_seen.strftime('%Y-%m-%d %H:%M') if d.last_seen else '',
                 'created_at': d.created_at.strftime('%Y-%m-%d %H:%M') if d.created_at else '',
                 'app': getattr(d, 'app_name', '') or '',
                 'operator': getattr(d, 'operator', '') or '',
             })
 
+        stamp = getattr(user, 'last_online', None)
+        try:
+            online_sec = max(0.0, (now - stamp).total_seconds()) if stamp is not None and stamp.year > 1 else None
+        except (TypeError, ValueError):
+            online_sec = None
         users.append({
             'uuid': user.uuid,
             'name': user.name,
@@ -181,6 +222,11 @@ def get_all_device_data():
             'device_count': device_count,
             'over_limit': over_limit,
             'enforced': bool(getattr(user, 'hwid_enforce', False)),
+            # watashi v12.3.55dev: the same online status the users page shows
+            # (user.last_online within the same 120s window), not "any device
+            # was ever seen".
+            'online': bool(online_sec is not None and online_sec <= ONLINE_WINDOW),
+            'last_online': stamp.strftime('%Y-%m-%d %H:%M') if online_sec is not None else '',
             'devices': device_list,
         })
 

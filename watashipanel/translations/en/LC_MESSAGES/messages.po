@@ -7597,3 +7597,9 @@ msgstr "Turn on the device limit"
 
 msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
 msgstr "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
+
+msgid "Last online"
+msgstr "Last online"
+
+msgid "Last seen"
+msgstr "Last seen"

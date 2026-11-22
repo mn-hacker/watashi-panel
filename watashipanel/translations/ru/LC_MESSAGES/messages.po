@@ -7083,3 +7083,9 @@ msgstr "Включить ограничение устройств"
 
 msgid "This page tracks every device on its own, even with the device limit off. The parts below only work while the limit is on: blocking extra devices, the \"device not supported\" lockout and the over-limit marks."
 msgstr "Эта страница отслеживает каждое устройство сама по себе и работает даже при выключенном ограничении устройств. Работают только при включённом ограничении: блокировка лишних устройств, блокировка «приложение не поддерживается» и отметки о превышении лимита."
+
+msgid "Last online"
+msgstr "Последний онлайн"
+
+msgid "Last seen"
+msgstr "Последний раз замечен"
