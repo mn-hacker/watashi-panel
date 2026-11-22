@@ -205,18 +205,20 @@
         .traffic-item span { font-size: 13px; font-weight: 500; }
         .traffic-item .traffic-label { font-size: 11px; color: var(--text-muted); }
 
-        /* watashi v12.3.65dev: the 7-day daily usage as a set of rounded
-           columns with a soft two-tone gradient, a hover value bubble and a
-           baseline rail — calm like the donuts above, not a jagged scribble */
+        /* watashi v12.3.67dev: the 7-day daily usage as an analytic-style
+           area chart — smooth line, soft fill, gridlines, peak marker */
         .usage-wave-wrap { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
         .usage-wave-host { width: 100%; position: relative; }
-        .usage-wave { width: 100%; height: 96px; display: block; }
-        .usage-wave .wave-col-bg { fill: rgba(148,163,184,.07); }
-        .usage-wave .wave-col { fill: url(#usageColGrad); transition: fill .15s ease; }
-        .usage-wave .wave-col.hot { fill: url(#usageColGradHot); }
-        .usage-wave .wave-cap { fill: rgba(255,255,255,.55); }
+        .usage-wave { width: 100%; height: 110px; display: block; }
+        .usage-wave .grid-line { stroke: rgba(148,163,184,.12); stroke-width: 1; stroke-dasharray: 3 4; }
+        .usage-wave .area-fill { opacity: .28; }
+        .usage-wave .line-path { fill: none; stroke: var(--primary-purple); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 2px 6px rgba(139,92,246,.45)); }
+        .usage-wave .point-dot { fill: var(--bg-detail, #141a2a); stroke: var(--primary-purple); stroke-width: 2; transition: r .12s ease; }
+        .usage-wave .point-dot.hot { fill: var(--primary-purple); }
+        .usage-wave .point-dot:hover { r: 5; }
         .usage-wave-days { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 2px; }
         .usage-wave-days span { font-size: 8px; color: var(--text-muted); text-align: center; flex: 1; letter-spacing: .3px; }
+        .usage-wave-days span.peak { color: var(--primary-purple); font-weight: 700; }
         .usage-bubble { position: absolute; pointer-events: none; background: var(--bg-detail, #141a2a); border: 1px solid var(--border-color, #2d3748); color: var(--text-main, #fff); font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; white-space: nowrap; opacity: 0; transform: translate(-50%, -8px); transition: opacity .12s ease; z-index: 5; }
 
         .dest-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -680,48 +682,62 @@ function fillDetail(idx, logs){
     var arr=daily.slice().reverse();
     if(!arr.length){ uEl.innerHTML=''; if(uDays) uDays.innerHTML='<span>'+esc(I18N.noDataYet)+'</span>'; }
     else {
-      // watashi v12.3.65dev: rounded columns over a baseline rail — the calm
-      // counterpart of the donuts above. The peak day lights up hotter, every
-      // column carries its value in a hover bubble, and the growBar keyframe
-      // lifts them out of the baseline when the row opens.
+      // watashi v12.3.67dev: analytic-style area chart — smooth bezier line,
+      // soft gradient fill under it, dashed gridlines, hollow dots with a
+      // filled peak, and the peak date highlighted on the axis.
       var max=1; arr.forEach(function(e){ var v=(e.details&&e.details.usage)||0; if(v>max) max=v; });
-      var W=300, H=96, BASE=8, TOP=14, n=arr.length;
-      var slot=W/n, colW=Math.min(26, slot*0.52);
+      var W=300, H=110, PADX=14, TOP=18, BASE=12, n=arr.length;
       var host=uEl.closest('.usage-wave-host')||uEl;
-      var peak=-1, peakV=0;
-      arr.forEach(function(e,i){ var v=(e.details&&e.details.usage)||0; if(v>peakV){ peakV=v; peak=i; } });
-      var cols='', caps='';
-      arr.forEach(function(e,i){
+      var pts=arr.map(function(e,i){
         var v=(e.details&&e.details.usage)||0;
-        var h=Math.max(3, (v/max)*(H-BASE-TOP));
-        var x=slot*i+(slot-colW)/2, y=H-BASE-h;
-        var d=String((e.details&&e.details.date)||e.time||'').slice(5);
-        cols+='<rect class="wave-col'+(i===peak?' hot':'')+'" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+colW.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="'+(colW/2).toFixed(1)+'" style="transform-origin:50% 100%;animation:growBar .7s cubic-bezier(.4,0,.2,1) '+(i*0.05)+'s both;">'
-          + '<title>'+escAttr(fmtBytes(v))+' — '+esc(d)+'</title></rect>';
-        caps+='<rect class="wave-cap" x="'+(x+colW*0.2).toFixed(1)+'" y="'+(y+3).toFixed(1)+'" width="'+(colW*0.6).toFixed(1)+'" height="1.5" rx="0.75"/>';
+        return {
+          x: n===1 ? W/2 : PADX + i*(W-2*PADX)/(n-1),
+          y: H-BASE-(v/max)*(H-BASE-TOP),
+          v: v, d: String((e.details&&e.details.date)||e.time||'').slice(5)
+        };
       });
-      host.innerHTML='<svg class="usage-wave" viewBox="0 0 300 96" preserveAspectRatio="none" aria-hidden="true">'
-        + '<defs><linearGradient id="usageColGrad" x1="0" y1="0" x2="0" y2="1">'
-        + '<stop offset="0%" stop-color="var(--primary-purple)" stop-opacity="0.85"/>'
-        + '<stop offset="100%" stop-color="var(--primary-purple)" stop-opacity="0.18"/>'
-        + '</linearGradient><linearGradient id="usageColGradHot" x1="0" y1="0" x2="0" y2="1">'
-        + '<stop offset="0%" stop-color="#a78bfa" stop-opacity="1"/>'
-        + '<stop offset="100%" stop-color="var(--primary-purple)" stop-opacity="0.3"/>'
+      var peak=0; pts.forEach(function(p,i){ if(p.v>pts[peak].v) peak=i; });
+      // smooth path: cubic beziers with horizontal control points
+      var line='M '+pts[0].x.toFixed(1)+' '+pts[0].y.toFixed(1);
+      for(var i=0;i<pts.length-1;i++){
+        var p=pts[i], q=pts[i+1], dx=(q.x-p.x)/2;
+        line+=' C '+(p.x+dx).toFixed(1)+' '+p.y.toFixed(1)+' '+(q.x-dx).toFixed(1)+' '+q.y.toFixed(1)+' '+q.x.toFixed(1)+' '+q.y.toFixed(1);
+      }
+      var area=line+' L '+pts[pts.length-1].x.toFixed(1)+' '+(H-BASE)+' L '+pts[0].x.toFixed(1)+' '+(H-BASE)+' Z';
+      // gridlines at 1/2 and 85% of the value range, plus the baseline
+      var g1=H-BASE-(H-BASE-TOP)*0.5, g2=H-BASE-(H-BASE-TOP)*0.85;
+      var grid='<line class="grid-line" x1="'+PADX+'" y1="'+g1.toFixed(1)+'" x2="'+(W-PADX)+'" y2="'+g1.toFixed(1)+'"/>'
+        + '<line class="grid-line" x1="'+PADX+'" y1="'+g2.toFixed(1)+'" x2="'+(W-PADX)+'" y2="'+g2.toFixed(1)+'"/>'
+        + '<line x1="'+PADX+'" y1="'+(H-BASE)+'" x2="'+(W-PADX)+'" y2="'+(H-BASE)+'" stroke="rgba(148,163,184,.25)" stroke-width="1"/>';
+      var dots=pts.map(function(p,i){
+        return '<circle class="point-dot'+(i===peak?' hot':'')+'" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="3.5">'
+          + '<title>'+escAttr(fmtBytes(p.v))+' — '+esc(p.d)+'</title></circle>';
+      }).join('');
+      host.innerHTML='<svg class="usage-wave" viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true">'
+        + '<defs><linearGradient id="usageAreaGrad-'+idx+'" x1="0" y1="0" x2="0" y2="1">'
+        + '<stop offset="0%" stop-color="var(--primary-purple)" stop-opacity="0.7"/>'
+        + '<stop offset="70%" stop-color="var(--primary-purple)" stop-opacity="0.08"/>'
+        + '<stop offset="100%" stop-color="var(--primary-purple)" stop-opacity="0"/>'
         + '</linearGradient></defs>'
-        + '<line x1="0" y1="'+(H-BASE+2)+'" x2="'+W+'" y2="'+(H-BASE+2)+'" stroke="rgba(148,163,184,.18)" stroke-width="1"/>'
-        + cols + caps + '</svg>'
+        + grid
+        + '<path class="area-fill" fill="url(#usageAreaGrad-'+idx+')" d="'+area+'"/>'
+        + '<path class="line-path" d="'+line+'"/>'
+        + dots + '</svg>'
         + '<div class="usage-bubble"></div>';
-      if(uDays){ var dl=''; arr.forEach(function(e){ var d=String((e.details&&e.details.date)||e.time||'').slice(5); dl+='<span>'+esc(d)+'</span>'; }); uDays.innerHTML=dl; }
-      // hover bubble: the value follows the pointer across the columns
+      if(uDays){
+        var dl='';
+        pts.forEach(function(p,i){ dl+='<span'+(i===peak?' class="peak"':'')+'>'+esc(p.d)+'</span>'; });
+        uDays.innerHTML=dl;
+      }
+      // hover bubble follows the pointer across the chart
       var svg=host.querySelector('.usage-wave'), bubble=host.querySelector('.usage-bubble');
       if(svg&&bubble){
         svg.addEventListener('mousemove', function(ev){
           var r=svg.getBoundingClientRect(), rel=(ev.clientX-r.left)/r.width;
-          var i=Math.max(0, Math.min(n-1, Math.floor(rel*n)));
-          var v=(arr[i].details&&arr[i].details.usage)||0;
-          var d=String((arr[i].details&&arr[i].details.date)||arr[i].time||'').slice(5);
-          bubble.textContent=fmtBytes(v)+' · '+d;
-          bubble.style.left=(Math.min(85, Math.max(15, (slot*i+slot/2)/W*100)))+'%';
+          var i=Math.max(0, Math.min(n-1, Math.round(rel*(n-1))));
+          var p=pts[i];
+          bubble.textContent=fmtBytes(p.v)+' · '+p.d;
+          bubble.style.left=Math.min(80, Math.max(20, p.x/W*100))+'%';
           bubble.style.top='0px'; bubble.style.opacity='1';
         });
         svg.addEventListener('mouseleave', function(){ bubble.style.opacity='0'; });
