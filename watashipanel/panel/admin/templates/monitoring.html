@@ -163,6 +163,10 @@
         .detail-panel td { padding: 0 !important; }
         
         .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+        /* watashi v12.3.55dev: the two-column layout for the slimmed modal */
+        .detail-grid.detail-grid-2 { grid-template-columns: 1.4fr 1fr; align-items: start; }
+        .detail-grid.detail-grid-2 .detail-section h4 { justify-content: flex-start; }
+        .detail-grid.detail-grid-2 .device-detail-list { align-items: stretch; }
         .detail-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .detail-section h4 i { font-size: 10px; }
 
@@ -545,6 +549,7 @@ var I18N = {
   dailyUsage: {{ _('Daily Usage (7d)')|tojson }},
   status: {{ _('Status')|tojson }},
   loading: {{ _('Loading...')|tojson }},
+  totalUsage: {{ _('Total usage')|tojson }},
   noLogs: {{ _('No logs found')|tojson }},
   noDataYet: {{ _('No data yet')|tojson }},
   lastOnline: {{ _('Last online')|tojson }},
@@ -621,32 +626,24 @@ function loadDetail(idx, uuid){
     .catch(function(){ fillDetail(idx,[]); });
 }
 function fillDetail(idx, logs){
-  var traffic=null, status=null, dests=[], daily=[];
+  var total=null, status=null, daily=[];
   logs.forEach(function(e){
-    if(e.type==='traffic') traffic=e;
+    if(e.type==='total_usage') total=e;
     else if(e.type==='status'){ if(!status) status=e; }
-    else if(e.type==='access') dests.push(e);
     else if(e.type==='daily_usage') daily.push(e);
   });
-  var tEl=document.getElementById('traffic-'+idx);
+  // watashi v12.3.55dev: the two dead columns ("session traffic",
+  // "recent destinations") are gone from the modal; the total-usage cell and
+  // the user status are filled from the live payload instead.
+  var tEl=document.getElementById('usage-total-'+idx);
   if(tEl){
-    var bytes=(traffic&&traffic.details&&traffic.details.bytes!=null)?traffic.details.bytes:null;
+    var bytes=(total&&total.details&&total.details.usage!=null)?total.details.usage:null;
     var online=!!(status&&status.details&&status.details.online);
-    tEl.innerHTML='<div class="traffic-item"><i class="fa-solid fa-arrow-right-arrow-left" style="color:var(--primary-purple);"></i><div><span>'+(bytes!=null?esc(fmtBytes(bytes)):'\u2014')+'</span><div class="traffic-label">'+esc(I18N.sessionTraffic)+'</div></div></div>'
-      + '<div class="traffic-item"><i class="fa-solid fa-signal" style="color:'+(online?'var(--primary-green)':'var(--text-muted)')+';"></i><div><span>'+esc(online?I18N.online:I18N.offline)+'</span><div class="traffic-label">'+esc(I18N.status)+'</div></div></div>';
+    tEl.innerHTML='<div class="traffic-item"><i class="fa-solid fa-signal" style="color:'+(online?'var(--primary-green)':'var(--text-muted)')+';"></i><div><span>'+esc(online?I18N.online:I18N.offline)+'</span><div class="traffic-label">'+esc(I18N.status)+'</div></div></div>'
+      + '<div class="traffic-item"><i class="fa-solid fa-database" style="color:var(--primary-purple);"></i><div><span>'+(bytes!=null?esc(fmtBytes(bytes)):'\u2014')+'</span><div class="traffic-label">'+esc(I18N.totalUsage)+'</div></div></div>';
   }
   var dEl=document.getElementById('dest-'+idx);
-  if(dEl){
-    var seen={}, rows='', cnt=0;
-    for(var i=0;i<dests.length && cnt<8;i++){
-      var dd=dests[i].details||{};
-      var dom=dd.destination||dests[i].message||'';
-      dom=String(dom).replace(/^(tcp|udp):/,'').replace(/^[^A-Za-z0-9]+/,'').split(':')[0];
-      if(!dom||seen[dom]) continue; seen[dom]=1; cnt++;
-      rows+='<li class="dest-item"><i class="fa-solid fa-circle" style="font-size:5px;color:var(--primary-green);"></i> <span class="dest-domain">'+esc(dom)+'</span></li>';
-    }
-    dEl.innerHTML=rows||'<li class="dest-item detail-loading">'+esc(I18N.noDataYet)+'</li>';
-  }
+  if(dEl){ dEl.closest('.detail-section').style.display='none'; }
   var uEl=document.getElementById('usage-'+idx), uDays=document.getElementById('usageDays-'+idx);
   if(uEl){
     var arr=daily.slice().reverse();
@@ -732,16 +729,20 @@ function detailHtml(u, idx){
         // last-seen within the same 120s window.
         +'<span class="status-dot '+(d.online?'green':'gray')+'" style="vertical-align:middle;margin-inline-start:6px;"></span></span>'
         +(tags?'<span class="device-meta">'+tags+'</span>':'')
-        +'<span class="first-seen"'+(d.last_seen?' title="'+escAttr(I18N.lastSeen+': '+d.last_seen)+'"':'')+'>'+esc(d.last_seen)+'</span></div>'
+        +'<span class="first-seen"'+(d.last_seen?' title="'+escAttr(I18N.lastSeen+': '+d.last_seen)+'"':'')+'>'+(d.online?esc(I18N.online):esc(d.last_seen))+'</span></div>'
         +'<button class="device-kick-btn" title="'+escAttr(I18N.removeDevice)+'" onclick="event.stopPropagation();kickDevice(\''+escAttr(u.uuid)+'\',\''+escAttr(d.hwid)+'\',this)"><i class="fa-solid fa-trash-can"></i></button></li>';
     });
   } else { items='<li class="device-detail-item"><span>'+esc(I18N.noDevices)+'</span></li>'; }
+  // watashi v12.3.55dev: two dead columns are gone. "Session traffic" and
+  // "Recent destinations" never received data (the old daily query died on a
+  // missing column), so the modal now shows the two live sections only, with
+  // the user's real total usage from the same row the users page reads.
+  var totalUsage=u.total_usage||0;
   var load='<div class="detail-loading">'+esc(I18N.loading)+'</div>';
-  return '<tr class="detail-panel" id="detail-'+idx+'"><td colspan="7"><div class="detail-wrapper"><div class="detail-inner"><div class="detail-grid">'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-network-wired"></i> '+esc(I18N.connectedDevices)+'</h4><ul class="device-detail-list">'+items+'</ul></div>'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-arrow-right-arrow-left"></i> '+esc(I18N.sessionTraffic)+'</h4><div class="traffic-stats" id="traffic-'+idx+'">'+load+'</div></div>'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-globe"></i> '+esc(I18N.recentDest)+'</h4><ul class="dest-list" id="dest-'+idx+'"><li class="dest-item detail-loading">'+esc(I18N.loading)+'</li></ul></div>'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.dailyUsage)+'</h4><div class="mini-chart-wrapper"><div class="mini-chart" id="usage-'+idx+'"></div><div class="mini-chart-days" id="usageDays-'+idx+'"><span>'+esc(I18N.loading)+'</span></div></div></div>'
+  return '<tr class="detail-panel" id="detail-'+idx+'"><td colspan="7"><div class="detail-wrapper"><div class="detail-inner"><div class="detail-grid detail-grid-2">'
+    + '<div class="detail-section"><h4><i class="fa-solid fa-network-wired"></i> '+esc(I18N.connectedDevices)+' — '+devs.length+'</h4><ul class="device-detail-list" id="devices-'+idx+'">'+items+'</ul></div>'
+    + '<div class="detail-section"><h4><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.totalUsage)+'</h4><div class="traffic-stats" id="usage-total-'+idx+'">'+(totalUsage?esc(fmtBytes(totalUsage)):load)+'</div>'
+    + '<div class="mini-chart-wrapper" style="margin-top:12px;"><div class="mini-chart" id="usage-'+idx+'"></div><div class="mini-chart-days" id="usageDays-'+idx+'"><span>'+esc(I18N.loading)+'</span></div></div></div>'
     + '</div></div></div></td></tr>';
 }
 

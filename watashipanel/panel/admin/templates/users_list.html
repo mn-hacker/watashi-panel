@@ -839,7 +839,7 @@
                     </thead>
                     <tbody id="tableBody">
                             {% for row in data %}
-                            <tr class="user-row" data-row="{{ loop.index }}" data-status="{{ 'banned' if not row.enable else ('active' if row.is_active else 'expired') }}" onclick="toggleDetails(this)">
+                            <tr class="user-row" data-row="{{ loop.index }}" data-uuid="{{ row.uuid }}" data-status="{{ 'banned' if not row.enable else ('active' if row.is_active else 'expired') }}" onclick="toggleDetails(this)">
                                 <td style="text-align: center; width: 40px; padding-right: 0;">
                                     <label class="custom-checkbox" onclick="event.stopPropagation()">
                                         <input type="checkbox" name="rowid" value="{{ get_pk_value(row) }}" class="user-checkbox action-checkbox" onchange="updateBulkCounter()">
@@ -1154,6 +1154,8 @@
         // ===== Inline note editing with auto-save =====
         (function noteAutoSave() {
             var SAVE_URL = {{ get_url('.save_note') | tojson }};
+            /* watashi v12.3.55dev: the monitoring heartbeat endpoint */
+            var ONLINE_URL = {{ hurl_for('admin.MonitoringAdmin:api_online_status') | tojson }};
             var DEBOUNCE = 700;
             var timers = new WeakMap();
 
@@ -1325,7 +1327,37 @@
 
             refresh();
             seenWire();
-            setInterval(function () { refresh(); seenWire(); }, 30000);
+            /* watashi v12.3.55dev: fetch fresh last_online stamps from the
+               monitoring heartbeat so a user who connects while the admin is
+               sitting on this page flips to "Online now" without a reload.
+               The old timer only re-humanized the stamp the page was
+               rendered with, so ten open minutes meant a ten-minute-old lie. */
+            function pullOnline() {
+                var stamps = document.querySelectorAll('.row-seen-ts[data-lastseen]');
+                if (!stamps.length) return;
+                var uuidByStamp = new Map();
+                stamps.forEach(function (el) {
+                    var row = el.closest('tr');
+                    if (!row) return;
+                    var uuid = row.getAttribute('data-uuid') || '';
+                    if (uuid) uuidByStamp.set(uuid, el);
+                });
+                if (!uuidByStamp.size) return;
+                fetch(ONLINE_URL + '?uuids=' + encodeURIComponent(Array.from(uuidByStamp.keys()).join(',')), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                    .then(function (r) { return r.json(); })
+                    .then(function (res) {
+                        if (!res || !res.success || !res.users) return;
+                        uuidByStamp.forEach(function (el, uuid) {
+                            var u = res.users[uuid];
+                            if (!u) return;
+                            if (u.seconds != null) el.setAttribute('data-lastseen', Math.floor(Date.now() / 1000) - u.seconds);
+                        });
+                        refresh();
+                    })
+                    .catch(function () { });
+            }
+
+            setInterval(function () { refresh(); seenWire(); pullOnline(); }, 30000);
         })();
 
         // Smooth Expandable Rows Logic

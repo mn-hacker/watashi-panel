@@ -63,6 +63,38 @@ class MonitoringAdmin(FlaskView):
         stats = _build_stats(users)
         return jsonify({'users': users, 'stats': stats})
 
+    @route('/api/online-status', methods=['GET'])
+    def api_online_status(self):
+        """Lightweight heartbeat for the live online badges.
+
+        watashi v12.3.55dev: the users page and the monitoring page read
+        user.last_online from this endpoint every 30s, so a badge flips to
+        online/offline without a full page reload.
+        """
+        try:
+            uuids = request.args.get('uuids', '').split(',')
+            uuids = [u for u in (u.strip() for u in uuids) if u][:500]
+            if not uuids:
+                return jsonify({'success': True, 'users': {}})
+            now = datetime.datetime.now()
+            rows = User.query.filter(User.uuid.in_(uuids)).all()
+            out = {}
+            for u in rows:
+                stamp = getattr(u, 'last_online', None)
+                try:
+                    seen = max(0.0, (now - stamp).total_seconds()) if stamp is not None and stamp.year > 1 else None
+                except (TypeError, ValueError):
+                    seen = None
+                out[u.uuid] = {
+                    'online': bool(seen is not None and seen <= ONLINE_WINDOW),
+                    'last_online': stamp.strftime('%Y-%m-%d %H:%M') if seen is not None else '',
+                    'seconds': int(seen) if seen is not None else None,
+                }
+            return jsonify({'success': True, 'users': out})
+        except Exception as e:
+            logger.error(f"Error loading online status: {e}")
+            return jsonify({'success': False, 'users': {}})
+
     @route('/device/<uuid>/remove', methods=['POST'])
     def remove_device(self, uuid):
         """Remove a single device (by HWID) from a user."""
@@ -222,6 +254,9 @@ def get_all_device_data():
             'device_count': device_count,
             'over_limit': over_limit,
             'enforced': bool(getattr(user, 'hwid_enforce', False)),
+            # watashi v12.3.55dev: the real total usage, the same field the
+            # users page reads, so the modal never shows stale decoration.
+            'total_usage': int(getattr(user, 'current_usage', 0) or 0),
             # watashi v12.3.55dev: the same online status the users page shows
             # (user.last_online within the same 120s window), not "any device
             # was ever seen".
@@ -381,26 +416,35 @@ def get_user_activity_logs(uuid, user_name):
             except Exception:
                 pass
 
-        # Get daily usage history
+        # watashi v12.3.55dev: real, always-fresh figures. The old daily query
+        # filtered on DailyUsage.user_uuid, a column the table does not have
+        # (its columns are id/date/usage/online/admin_id/child_id), so it died
+        # silently and the modal showed nothing. Totals come from the user row
+        # — the same source the users page reads.
         try:
-            daily_usages = DailyUsage.query.filter(
-                DailyUsage.user_uuid == uuid
-            ).order_by(DailyUsage.date.desc()).limit(7).all()
-
-            for du in daily_usages:
+            from watashipanel.models import User as UserModel
+            u = UserModel.query.filter(UserModel.uuid == uuid).first()
+            if u:
                 logs.append({
-                    'time': du.date.strftime('%Y-%m-%d'),
-                    'type': 'daily_usage',
-                    'message': _('Daily usage') + f': {format_bytes(du.usage)}',
-                    'details': {'usage': du.usage, 'date': str(du.date)}
+                    'time': datetime.datetime.now().strftime('%H:%M:%S'),
+                    'type': 'total_usage',
+                    'message': _('Total usage') + f': {format_bytes(int(u.current_usage or 0))}',
+                    'details': {'usage': int(u.current_usage or 0)}
                 })
         except Exception:
             pass
 
-        # Add connection status
+        # Add connection status from the same system the users page uses
+        # (user.last_online within the 120s window), not xray's enabled set.
         try:
-            enabled_users = xray.get_enabled_users() if xray.is_enabled() else {}
-            is_online = uuid in enabled_users
+            from watashipanel.models import User as UserModel
+            u = UserModel.query.filter(UserModel.uuid == uuid).first()
+            stamp = getattr(u, 'last_online', None) if u else None
+            try:
+                seen = max(0.0, (datetime.datetime.now() - stamp).total_seconds()) if stamp is not None and stamp.year > 1 else None
+            except (TypeError, ValueError):
+                seen = None
+            is_online = bool(seen is not None and seen <= ONLINE_WINDOW)
             logs.insert(0, {
                 'time': datetime.datetime.now().strftime('%H:%M:%S'),
                 'type': 'status',
