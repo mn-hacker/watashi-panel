@@ -35,6 +35,33 @@ def get_user_hwid_by_value(user_id, hwid):
     return UserHWID.query.filter(UserHWID.user_id == user_id, UserHWID.hwid == hwid).first()
 
 
+class UserUsageDay(db.Model):
+    """watashi v12.3.64dev: per-user daily usage snapshot, one row per user per
+    day. DailyUsage is admin-wide and has no user column, so the monitoring
+    modal's 7-day wave needs its own table. The usage collector upserts
+    today's row (usage_total = the user's cumulative current_usage at that
+    moment); the modal turns consecutive totals into per-day deltas."""
+    __tablename__ = 'user_usage_day'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False, index=True)
+    day = db.Column(db.Date, nullable=False, index=True)
+    usage_total = db.Column(db.BigInteger, default=0, nullable=False)
+
+    __table_args__ = (db.UniqueConstraint('user_id', 'day', name='uq_user_usage_day'),)
+
+
+def snapshot_user_usage(user_id, usage_total, day=None):
+    """Upsert today's cumulative-usage snapshot for one user (idempotent)."""
+    import datetime as _dt
+    d = day or _dt.date.today()
+    row = UserUsageDay.query.filter(UserUsageDay.user_id == user_id, UserUsageDay.day == d).first()
+    if row:
+        if usage_total > row.usage_total:
+            row.usage_total = int(usage_total)
+    else:
+        db.session.add(UserUsageDay(user_id=user_id, day=d, usage_total=int(usage_total)))
+
+
 def register_user_hwid(user_id, hwid, device_os='', ver_os='', device_model='',
                        app_name='', operator='', commit=True):
     now = datetime.datetime.now()

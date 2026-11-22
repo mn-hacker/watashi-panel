@@ -163,26 +163,28 @@
         .detail-panel td { padding: 0 !important; }
         
         .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
-        /* watashi v12.3.55dev: the two-column layout for the slimmed modal */
-        .detail-grid.detail-grid-2 { grid-template-columns: 1.4fr 1fr; align-items: start; }
-        .detail-grid.detail-grid-2 .detail-section h4 { justify-content: flex-start; }
-        .detail-grid.detail-grid-2 .device-detail-list { align-items: stretch; }
-        /* watashi v12.3.63dev: a header strip on top of the expanded row —
-           the user status (dot + label) sits up there next to the total
-           usage, so "status on top, value below" is finally true. */
-        .detail-head-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 10px 14px; margin-bottom: 14px; background: var(--bg-detail, rgba(148,163,184,.06)); border: 1px solid var(--border-color); border-radius: 10px; }
-        .detail-head-strip .status-cell { justify-content: flex-start; }
-        .detail-head-strip .head-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
-        .detail-head-strip .head-item b { color: var(--text-main); font-weight: 600; }
-        .detail-head-strip .head-sep { width: 1px; height: 18px; background: var(--border-color); }
-        .detail-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .detail-section h4 i { font-size: 10px; }
-
-        .device-detail-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .device-detail-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-        .device-detail-item .device-name { font-family: 'JetBrains Mono', 'Consolas', monospace; color: var(--text-main); }
+        /* watashi v12.3.63dev: the expanded row now mirrors the users-page
+           modal: titled cards with real frames, each card header carrying a
+           bottom divider line like .modal-header there, and equal columns
+           that fill the row — no more centered floating list beside a
+           right-hugged usage card with dead space between them. */
+        /* watashi v12.3.64dev: three cards in one row — devices, status and
+           total usage, and the 7-day wave chart — the modal row stays short
+           and grows only when the device list really needs the room. */
+        .detail-grid.detail-grid-3 { grid-template-columns: 1.5fr 0.9fr 1.2fr; align-items: stretch; }
+        .detail-grid.detail-grid-3 .detail-section h4 { justify-content: flex-start; }
+        .detail-grid.detail-grid-3 .device-detail-list { align-items: stretch; }
+        /* the card: same anatomy as the users-page modal — frame + header
+           strip divided by a border line, body below */
+        .detail-section { background: var(--bg-detail, rgba(148,163,184,.04)); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+        .detail-section > h4 { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: transparent; font-size: 12px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .detail-section > h4 i { color: var(--primary-color, #8b5cf6); font-size: 11px; }
+        .detail-section .section-body { padding: 10px 14px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .device-detail-list { list-style: none; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+        .device-detail-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; padding: 8px 10px; background: var(--bg-secondary, rgba(148,163,184,.05)); border: 1px solid var(--border-color); border-radius: 10px; }
+        .device-detail-item .device-name { font-family: 'JetBrains Mono', 'Consolas', monospace; color: var(--text-main); font-size: 12px; }
         /* watashi v12.3.50dev: the app and the carrier of a device, inline under the name */
-        .device-detail-item .device-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+        .device-detail-item .device-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 5px; }
         .device-detail-item .device-meta-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-muted); background: var(--bg-secondary, rgba(148,163,184,.1)); border: 1px solid var(--border-color); border-radius: 999px; padding: 2px 8px; }
         /* watashi v12.3.63dev: per-device online chip — green/gray dot inside
            a pill, so with two devices on one subscription it is clear which
@@ -190,7 +192,10 @@
         .device-detail-item .device-online { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; border-radius: 999px; padding: 2px 9px; }
         .device-detail-item .device-online.on { color: var(--primary-green); background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.35); }
         .device-detail-item .device-online.off { color: var(--text-muted); background: rgba(148,163,184,.08); border: 1px solid var(--border-color); }
-        .device-detail-item .first-seen { color: var(--text-muted); font-size: 10px; }
+        .device-detail-item .first-seen { display: block; color: var(--text-muted); font-size: 10px; margin-top: 5px; }
+        .device-kick-btn { align-self: flex-start; }
+        /* the status/usage card: one stat under the other, label over value */
+        .detail-section .traffic-stats { font-size: 22px; font-weight: 700; color: var(--text-main); }
 
         .traffic-stats { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .traffic-item { display: flex; align-items: center; gap: 10px; }
@@ -200,18 +205,26 @@
         .traffic-item span { font-size: 13px; font-weight: 500; }
         .traffic-item .traffic-label { font-size: 11px; color: var(--text-muted); }
 
+        /* watashi v12.3.65dev: the 7-day daily usage as a set of rounded
+           columns with a soft two-tone gradient, a hover value bubble and a
+           baseline rail — calm like the donuts above, not a jagged scribble */
+        .usage-wave-wrap { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
+        .usage-wave-host { width: 100%; position: relative; }
+        .usage-wave { width: 100%; height: 96px; display: block; }
+        .usage-wave .wave-col-bg { fill: rgba(148,163,184,.07); }
+        .usage-wave .wave-col { fill: url(#usageColGrad); transition: fill .15s ease; }
+        .usage-wave .wave-col.hot { fill: url(#usageColGradHot); }
+        .usage-wave .wave-cap { fill: rgba(255,255,255,.55); }
+        .usage-wave-days { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 2px; }
+        .usage-wave-days span { font-size: 8px; color: var(--text-muted); text-align: center; flex: 1; letter-spacing: .3px; }
+        .usage-bubble { position: absolute; pointer-events: none; background: var(--bg-detail, #141a2a); border: 1px solid var(--border-color, #2d3748); color: var(--text-main, #fff); font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; white-space: nowrap; opacity: 0; transform: translate(-50%, -8px); transition: opacity .12s ease; z-index: 5; }
+
         .dest-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 6px; }
         .dest-item { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
         .dest-item .dest-domain { color: var(--text-main); font-family: 'JetBrains Mono', 'Consolas', monospace; font-size: 11px; }
 
         /* Mini bar chart */
         .mini-chart { display: flex; align-items: flex-end; gap: 4px; height: 50px; padding-top: 5px; }
-        .mini-bar { width: 100%; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--primary-purple), rgb(var(--ws-a-600) / 0.3)); min-width: 12px; transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); position: relative; transform-origin: bottom; animation: growBar 1s ease forwards; }{# watashi v12.3.44dev: palette colour #}
-        .mini-bar-label { font-size: 8px; color: var(--text-muted); text-align: center; margin-top: 4px; }
-        .mini-chart-wrapper { display: flex; flex-direction: column; align-items: center; }
-        .mini-chart-days { display: flex; gap: 4px; justify-content: space-between; }
-        .mini-chart-days span { font-size: 8px; color: var(--text-muted); text-align: center; min-width: 12px; flex: 1; }
-
 
         /* --- Modal --- */
         .modal-overlay {
@@ -245,12 +258,16 @@
         @media (max-width: 1200px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .detail-grid { grid-template-columns: 1fr 1fr; }
+            .detail-grid.detail-grid-3 { grid-template-columns: 1fr 1fr; }
+            .detail-grid.detail-grid-3 .detail-section:first-child { grid-column: 1 / -1; }
         }
         @media (max-width: 768px) {
             .header { padding: 15px 20px; }
             .page-body { padding: 15px; }
             .stats-grid { grid-template-columns: 1fr; }
             .detail-grid { grid-template-columns: 1fr; }
+            .detail-grid.detail-grid-3 { grid-template-columns: 1fr; }
+            .detail-grid.detail-grid-3 .detail-section:first-child { grid-column: auto; }
             .live-header { flex-direction: column; align-items: flex-start; }
             .user-profile { font-size: 0; }
             .header-actions { width: 100%; }
@@ -311,7 +328,7 @@
         .detail-wrapper { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.35s ease-in-out, opacity 0.35s ease-in-out; }
         .detail-wrapper.open { grid-template-rows: 1fr; opacity: 1; }
         .detail-inner { overflow: hidden; }
-        .detail-inner > .detail-grid { padding: 20px 24px; }
+        .detail-inner > .detail-grid { padding: 14px 24px; }
 
     
         .status-badge.badge-green{background:rgba(16,185,129,.12);color:var(--primary-green);border:1px solid rgba(16,185,129,.25);}
@@ -663,10 +680,52 @@ function fillDetail(idx, logs){
     var arr=daily.slice().reverse();
     if(!arr.length){ uEl.innerHTML=''; if(uDays) uDays.innerHTML='<span>'+esc(I18N.noDataYet)+'</span>'; }
     else {
+      // watashi v12.3.65dev: rounded columns over a baseline rail — the calm
+      // counterpart of the donuts above. The peak day lights up hotter, every
+      // column carries its value in a hover bubble, and the growBar keyframe
+      // lifts them out of the baseline when the row opens.
       var max=1; arr.forEach(function(e){ var v=(e.details&&e.details.usage)||0; if(v>max) max=v; });
-      var bars='', days='';
-      arr.forEach(function(e){ var v=(e.details&&e.details.usage)||0; var h=Math.max(4,Math.round(v/max*50)); bars+='<div class="mini-bar" style="height:'+h+'px;" title="'+escAttr(fmtBytes(v))+'"></div>'; var dt=String((e.details&&e.details.date)||e.time||'').slice(5); days+='<span>'+esc(dt)+'</span>'; });
-      uEl.innerHTML=bars; if(uDays) uDays.innerHTML=days;
+      var W=300, H=96, BASE=8, TOP=14, n=arr.length;
+      var slot=W/n, colW=Math.min(26, slot*0.52);
+      var host=uEl.closest('.usage-wave-host')||uEl;
+      var peak=-1, peakV=0;
+      arr.forEach(function(e,i){ var v=(e.details&&e.details.usage)||0; if(v>peakV){ peakV=v; peak=i; } });
+      var cols='', caps='';
+      arr.forEach(function(e,i){
+        var v=(e.details&&e.details.usage)||0;
+        var h=Math.max(3, (v/max)*(H-BASE-TOP));
+        var x=slot*i+(slot-colW)/2, y=H-BASE-h;
+        var d=String((e.details&&e.details.date)||e.time||'').slice(5);
+        cols+='<rect class="wave-col'+(i===peak?' hot':'')+'" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+colW.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="'+(colW/2).toFixed(1)+'" style="transform-origin:50% 100%;animation:growBar .7s cubic-bezier(.4,0,.2,1) '+(i*0.05)+'s both;">'
+          + '<title>'+escAttr(fmtBytes(v))+' — '+esc(d)+'</title></rect>';
+        caps+='<rect class="wave-cap" x="'+(x+colW*0.2).toFixed(1)+'" y="'+(y+3).toFixed(1)+'" width="'+(colW*0.6).toFixed(1)+'" height="1.5" rx="0.75"/>';
+      });
+      host.innerHTML='<svg class="usage-wave" viewBox="0 0 300 96" preserveAspectRatio="none" aria-hidden="true">'
+        + '<defs><linearGradient id="usageColGrad" x1="0" y1="0" x2="0" y2="1">'
+        + '<stop offset="0%" stop-color="var(--primary-purple)" stop-opacity="0.85"/>'
+        + '<stop offset="100%" stop-color="var(--primary-purple)" stop-opacity="0.18"/>'
+        + '</linearGradient><linearGradient id="usageColGradHot" x1="0" y1="0" x2="0" y2="1">'
+        + '<stop offset="0%" stop-color="#a78bfa" stop-opacity="1"/>'
+        + '<stop offset="100%" stop-color="var(--primary-purple)" stop-opacity="0.3"/>'
+        + '</linearGradient></defs>'
+        + '<line x1="0" y1="'+(H-BASE+2)+'" x2="'+W+'" y2="'+(H-BASE+2)+'" stroke="rgba(148,163,184,.18)" stroke-width="1"/>'
+        + cols + caps + '</svg>'
+        + '<div class="usage-bubble"></div>';
+      if(uDays){ var dl=''; arr.forEach(function(e){ var d=String((e.details&&e.details.date)||e.time||'').slice(5); dl+='<span>'+esc(d)+'</span>'; }); uDays.innerHTML=dl; }
+      // hover bubble: the value follows the pointer across the columns
+      var svg=host.querySelector('.usage-wave'), bubble=host.querySelector('.usage-bubble');
+      if(svg&&bubble){
+        svg.addEventListener('mousemove', function(ev){
+          var r=svg.getBoundingClientRect(), rel=(ev.clientX-r.left)/r.width;
+          var i=Math.max(0, Math.min(n-1, Math.floor(rel*n)));
+          var v=(arr[i].details&&arr[i].details.usage)||0;
+          var d=String((arr[i].details&&arr[i].details.date)||arr[i].time||'').slice(5);
+          bubble.textContent=fmtBytes(v)+' · '+d;
+          bubble.style.left=(Math.min(85, Math.max(15, (slot*i+slot/2)/W*100)))+'%';
+          bubble.style.top='0px'; bubble.style.opacity='1';
+        });
+        svg.addEventListener('mouseleave', function(){ bubble.style.opacity='0'; });
+      }
     }
   }
 }
@@ -753,25 +812,23 @@ function detailHtml(u, idx){
   // "Recent destinations" never received data (the old daily query died on a
   // missing column), so the modal now shows the two live sections only, with
   // the user's real total usage from the same row the users page reads.
-  // watashi v12.3.63dev: the status and the total usage move up into a header
-  // strip above the two cards — status on top with its value under it, no
-  // orphan block glued to the bottom edge. Loading text keeps its own
-  // placeholder inside the chart card instead of hugging the panel floor.
+  // watashi v12.3.64dev: the header strip is gone (it was the red-framed row
+  // the user circled) — status and total usage live in their own card, and
+  // the 7-day daily usage gets a third card with a smooth wave chart. Three
+  // cards in one row keep the modal short like the users-page one; the row
+  // only grows when the device list really needs the room.
   var totalUsage=u.total_usage||0;
   var load='<div class="detail-loading">'+esc(I18N.loading)+'</div>';
-  var head='<div class="detail-head-strip">'
-    + '<div class="status-cell"'+(u.last_online?' title="'+escAttr(I18N.lastOnline+': '+u.last_online)+'"':'')+'><div class="status-dot '+(u.online?'green':'gray')+'"></div> '+esc(u.online?I18N.online:I18N.offline)+'</div>'
-    + '<div class="head-sep"></div>'
-    + '<div class="head-item"><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.totalUsage)+': <b>'+(totalUsage?esc(fmtBytes(totalUsage)):'—')+'</b></div>'
-    + '<div class="head-sep"></div>'
-    + '<div class="head-item"><i class="fa-solid fa-mobile-screen"></i> '+esc(I18N.connectedDevices)+': <b>'+devs.length+'</b></div>'
-    + '</div>';
+  // watashi v12.3.65dev: the idle placeholder — a flat rail with the same
+  // column rhythm, so the card keeps its height while the data is loading
+  var wave='<svg class="usage-wave" viewBox="0 0 300 96" preserveAspectRatio="none" aria-hidden="true">'
+    + '<line x1="0" y1="90" x2="300" y2="90" stroke="rgba(148,163,184,.18)" stroke-width="1"/></svg>'
+    + '<div class="usage-wave-days" id="usageDays-'+idx+'"><span>'+esc(I18N.loading)+'</span></div>';
   return '<tr class="detail-panel" id="detail-'+idx+'"><td colspan="7"><div class="detail-wrapper"><div class="detail-inner">'
-    + head
-    + '<div class="detail-grid detail-grid-2">'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-network-wired"></i> '+esc(I18N.connectedDevices)+' — '+devs.length+'</h4><ul class="device-detail-list" id="devices-'+idx+'">'+items+'</ul></div>'
-    + '<div class="detail-section"><h4><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.totalUsage)+'</h4><div class="traffic-stats" id="usage-total-'+idx+'">'+(totalUsage?esc(fmtBytes(totalUsage)):load)+'</div>'
-    + '<div class="mini-chart-wrapper" style="margin-top:12px;"><div class="mini-chart" id="usage-'+idx+'"></div><div class="mini-chart-days" id="usageDays-'+idx+'"><span>'+esc(I18N.loading)+'</span></div></div></div>'
+    + '<div class="detail-grid detail-grid-3">'
+    + '<div class="detail-section"><h4><i class="fa-solid fa-network-wired"></i> '+esc(I18N.connectedDevices)+' — '+devs.length+'</h4><div class="section-body"><ul class="device-detail-list" id="devices-'+idx+'">'+items+'</ul></div></div>'
+    + '<div class="detail-section"><h4><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.status)+' / '+esc(I18N.totalUsage)+'</h4><div class="section-body"><div class="traffic-stats" id="usage-total-'+idx+'">'+(totalUsage?esc(fmtBytes(totalUsage)):load)+'</div></div></div>'
+    + '<div class="detail-section"><h4><i class="fa-solid fa-chart-line"></i> '+esc(I18N.dailyUsage)+'</h4><div class="section-body"><div class="usage-wave-wrap"><div id="usage-'+idx+'" class="usage-wave-host">'+wave+'</div></div></div></div>'
     + '</div></div></div></td></tr>';
 }
 

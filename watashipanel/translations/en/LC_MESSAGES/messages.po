@@ -7765,3 +7765,22 @@ msgstr "Unknown outbound tags: "
 
 msgid "The core refused this outbound"
 msgstr "The core refused this outbound"
+
+msgid "Build it field by field, the way x-ui and Marzban do it. Saving applies only this core once, for about a second."
+msgstr ""
+
+msgid "Test it with the real core before saving"
+msgstr ""
+
+msgid "The exit a routing rule hands its traffic to. The outbound sends nothing by itself; a rule reaches it by tag."
+msgstr ""
+
+msgid "The live test asks the exit for its real IP and country"
+msgstr ""
+
+msgid "A hand built rule decides which connection takes which exit. The cores match from the top down, so order matters."
+msgstr ""
+
+msgid "First match wins — keep the narrow rules on top"
+msgstr ""
+

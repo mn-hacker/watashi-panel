@@ -7248,3 +7248,22 @@ msgstr "Неизвестные теги: "
 
 msgid "The core refused this outbound"
 msgstr "Ядро отклонило этот исходящий"
+
+msgid "Build it field by field, the way x-ui and Marzban do it. Saving applies only this core once, for about a second."
+msgstr "Собирайте по полям, как в x-ui и Marzban. Сохранение перезапускает только это ядро один раз, примерно на секунду."
+
+msgid "Test it with the real core before saving"
+msgstr "Проверьте на реальном ядре до сохранения"
+
+msgid "The exit a routing rule hands its traffic to. The outbound sends nothing by itself; a rule reaches it by tag."
+msgstr "Выход, которому правило маршрутизации отдаёт трафик. Сам исходящий ничего не отправляет; правило находит его по метке."
+
+msgid "The live test asks the exit for its real IP and country"
+msgstr "Живой тест спрашивает у выхода его реальный IP и страну"
+
+msgid "A hand built rule decides which connection takes which exit. The cores match from the top down, so order matters."
+msgstr "Созданное вручную правило решает, какое соединение пойдёт в какой выход. Ядра сопоставляют сверху вниз, поэтому порядок важен."
+
+msgid "First match wins — keep the narrow rules on top"
+msgstr "Первое совпадение побеждает — держите узкие правила сверху"
+

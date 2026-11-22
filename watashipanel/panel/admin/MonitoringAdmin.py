@@ -454,6 +454,44 @@ def get_user_activity_logs(uuid, user_name):
         except Exception:
             pass
 
+        # watashi v12.3.64dev: a real 7-day wave for the monitoring modal.
+        # DailyUsage is admin-wide (no user column), so the per-user series is
+        # derived the honest way: today's delta of the user's current_usage vs
+        # the value snapshotted at the end of yesterday, taken from the usage
+        # journal the usage collector already keeps. Days with no snapshot
+        # still show — flat zero, not missing — so the wave keeps its shape.
+        try:
+            from watashipanel.models import User as UserModel, UserUsageDay
+            u = UserModel.query.filter(UserModel.uuid == uuid).first()
+            if u:
+                now = datetime.datetime.now()
+                cur = int(u.current_usage or 0)
+                series = []
+                for off in range(6, -1, -1):
+                    day = (now - datetime.timedelta(days=off)).date()
+                    if off == 0:
+                        series.append({'usage': cur, 'date': day.isoformat()})
+                    else:
+                        snap = UserUsageDay.query.filter(
+                            UserUsageDay.user_id == u.id,
+                            UserUsageDay.day == day
+                        ).order_by(UserUsageDay.id.desc()).first()
+                        series.append({'usage': int(snap.usage_total or 0) if snap else 0,
+                                       'date': day.isoformat()})
+                for i in range(len(series) - 1, 0, -1):
+                    series[i]['usage'] = max(0, series[i]['usage'] - series[i - 1]['usage'])
+                series[0]['usage'] = 0  # no baseline before the window
+                for s_ in series:
+                    if s_['usage'] > 0:
+                        logs.append({
+                            'time': '00:00:00',
+                            'type': 'daily_usage',
+                            'message': _('Daily Usage (7d)') + f": {format_bytes(s_['usage'])}",
+                            'details': {'usage': s_['usage'], 'date': s_['date']}
+                        })
+        except Exception:
+            logger.exception("watashi: daily usage series failed")
+
     except Exception as e:
         logger.error(f"Error getting user logs for {uuid}: {e}")
         logs.append({

@@ -7229,3 +7229,22 @@ msgstr "未知标签："
 
 msgid "The core refused this outbound"
 msgstr "核心拒绝此出站"
+
+msgid "Build it field by field, the way x-ui and Marzban do it. Saving applies only this core once, for about a second."
+msgstr "像 x-ui 和 Marzban 一样逐字段构建。保存只会重启这一个核心，约一秒钟。"
+
+msgid "Test it with the real core before saving"
+msgstr "保存前用真实核心试一试"
+
+msgid "The exit a routing rule hands its traffic to. The outbound sends nothing by itself; a rule reaches it by tag."
+msgstr "路由规则把流量交给的那个出口。出站本身不发送任何东西；规则通过标签找到它。"
+
+msgid "The live test asks the exit for its real IP and country"
+msgstr "实时测试会向出口询问其真实 IP 和国家"
+
+msgid "A hand built rule decides which connection takes which exit. The cores match from the top down, so order matters."
+msgstr "手动创建的规则决定哪个连接走哪个出口。核心自上而下匹配，因此顺序很重要。"
+
+msgid "First match wins — keep the narrow rules on top"
+msgstr "首个匹配生效 — 把更严格的规则放在上面"
+

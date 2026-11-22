@@ -10891,7 +10891,7 @@ msgstr "مقصد"
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
 msgid "Server names"
-msgstr "Server names"
+msgstr "نام‌های دامنه (SNI)"
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
 msgid "A real site with TLS 1.3 and HTTP/2. Whoever knocks without a key gets that site. Server names are separated by commas, and clients use the first one."
@@ -10975,7 +10975,7 @@ msgstr "خاموش باشد، در هیچ اشتراکی نمی‌آید. ولی
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
 msgid "Sniffing"
-msgstr "Sniffing"
+msgstr "استشمام (Sniffing)"
 
 # watashi v12.3.41dev: the advanced mode and the Inbounds page
 msgid "Lets the routing see which site a connection is for. The blocking and WARP rules need it."
@@ -12359,3 +12359,22 @@ msgstr "UUID / گذرواژه"
 
 msgid "What it matches"
 msgstr "با چه چیزی تطبیق می‌کند"
+
+msgid "Build it field by field, the way x-ui and Marzban do it. Saving applies only this core once, for about a second."
+msgstr "فیلد به فیلد بسازش، همان‌طور که x-ui و مرزبان می‌سازند. ذخیره کردن فقط همین هسته را یک بار، حدود یک ثانیه، ری‌استارت می‌کند."
+
+msgid "Test it with the real core before saving"
+msgstr "قبل از ذخیره، با هستهٔ واقعی امتحانش کن"
+
+msgid "The exit a routing rule hands its traffic to. The outbound sends nothing by itself; a rule reaches it by tag."
+msgstr "خروجی‌ای که قانون مسیریابی ترافیکش را به آن می‌سپارد. اوتباند خودش چیزی نمی‌فرستد؛ قانون از راه برچسب به آن می‌رسد."
+
+msgid "The live test asks the exit for its real IP and country"
+msgstr "تست زنده از خروجی، IP و کشور واقعی‌اش را می‌پرسد"
+
+msgid "A hand built rule decides which connection takes which exit. The cores match from the top down, so order matters."
+msgstr "قانون دستی تصمیم می‌گیرد کدام اتصال به کدام خروجی برود. هسته‌ها از بالا به پایین تطبیق می‌دهند، پس ترتیب مهم است."
+
+msgid "First match wins — keep the narrow rules on top"
+msgstr "اولین تطبیق برنده است — قوانین محدودتر را بالا نگه دار"
+

@@ -2038,6 +2038,14 @@ def _ws_init_db():
         ws_ensure_custom_outbound_table()
         # watashi v12.3.56dev: same story for the hand built routing rules.
         ws_ensure_routing_rule_table()
+        # watashi v12.3.64dev: the per-user daily usage snapshots the monitoring
+        # modal's 7-day wave reads — same story as the three tables above.
+        try:
+            from watashipanel.models.hwid import UserUsageDay
+            UserUsageDay.__table__.create(db.engine, checkfirst=True)
+        except Exception as problem:
+            db.session.rollback()
+            logger.warning(f"watashi: the user_usage_day table could not be checked ({problem})")
     else:
         logger.info("watashi: an empty database, the tables are created first")
     # set_hconfig(ConfigEnum.db_version, 71)

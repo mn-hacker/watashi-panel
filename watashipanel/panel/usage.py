@@ -255,6 +255,15 @@ def add_users_usage_new(usages: list[dict], child_id, sync=False, on_usage_commi
 
         daily_usage.get(user.added_by, daily_usage[1]).usage += usage_map[user.uuid]['usage']
 
+        # watashi v12.3.64dev: the per-user snapshot the monitoring modal's
+        # 7-day wave reads. Cheap upsert of the running total; consecutive
+        # totals become per-day deltas in the modal.
+        try:
+            from watashipanel.models.hwid import snapshot_user_usage
+            snapshot_user_usage(user.id, int(user.current_usage or 0))
+        except Exception:
+            logger.exception("watashi: user usage snapshot failed")
+
     db.session.commit()
 
     if len(users) != len(usage_map):

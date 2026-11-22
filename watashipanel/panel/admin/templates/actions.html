@@ -196,13 +196,13 @@
             <p>{{ ac_text.lead }}</p>
         </div>
         <div class="ac-chips">
-            <span class="ac-chip"><i class="fa-solid fa-code-branch"></i> {{ ac_text.panel_version }} <b>{{ ac_state.version }}</b></span>
+            <span class="ac-chip"><i class="fa-solid fa-code-branch"></i> <b>{{ ac_state.version }}</b> {{ ac_text.panel_version }}</span>
             {% if ac_state.fresh_ready %}
-            <span class="ac-chip ac-chip-new"><i class="fa-solid fa-cloud-arrow-down"></i> {{ ac_text.newer_out }} <b>{{ ac_state.newest }}</b></span>
+            <span class="ac-chip ac-chip-new"><i class="fa-solid fa-cloud-arrow-down"></i> <b>{{ ac_state.newest }}</b> {{ ac_text.newer_out }}</span>
             {% else %}
             <span class="ac-chip ac-chip-ok"><i class="fa-solid fa-circle-check"></i> {{ ac_text.up_to_date }}</span>
             {% endif %}
-            <span class="ac-chip ac-chip-warn"><i class="fa-solid fa-diagram-project"></i> {{ ac_text.panel_role }} <b>{{ ac_state.role }}</b></span>
+            <span class="ac-chip ac-chip-warn"><i class="fa-solid fa-diagram-project"></i> <b>{{ ac_state.role }}</b> {{ ac_text.panel_role }}</span>
         </div>
     </div>
 
@@ -265,7 +265,7 @@
                 <input type="hidden" name="csrf_token" value="{{ ac_csrf }}">
             </form>
             {% endif %}
-            <button type="button" class="ac-btn ac-btn-{{ job.btn_kind }}" onclick="acAsk('{{ job.key }}')" {% if not job.url %}disabled{% endif %}}
+            <button type="button" class="ac-btn ac-btn-{{ job.btn_kind }}" onclick="acAsk('{{ job.key }}')" {% if not job.url %}disabled{% endif %}>
                 <i class="fa-solid {{ job.btn_icon }}"></i>
                 <span>{{ job.btn }}</span>
             </button>
