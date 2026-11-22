@@ -1063,6 +1063,9 @@ class UserAdmin(AdminLTEModelView):
             except Exception:
                 continue
             mode = getattr(d.mode, 'name', str(d.mode or ''))
+            # watashi v12.3.71dev: the address the admin is on can carry a port
+            # (sub.example.com:4433) while the stored domain does not - match
+            # both so the Current badge lands on one row only
             entry = {
                 'label': (d.alias or name),
                 'domain': name,
@@ -1072,7 +1075,7 @@ class UserAdmin(AdminLTEModelView):
                 'kind': 'cdn' if mode in ('cdn', 'auto_cdn_ip', 'relay', 'worker') else 'direct',
                 'tone': ws_mode_tone(mode),
                 'badge': str(ws_mode_label(mode)),
-                'current': name == host,
+                'current': name == host or name == host.partition(':')[0],
             }
             if entry['current']:
                 current = entry
@@ -1097,6 +1100,13 @@ class UserAdmin(AdminLTEModelView):
                 current = None
 
         head = [current] if current else []
+        # watashi v12.3.71dev: the row the admin is on already heads the list -
+        # the same domain picked up by the mode loops above must not repeat
+        # below it (entering the panel through a sub link showed it twice)
+        head_domains = {e['domain'] for e in head}
+        sub_only = [e for e in sub_only if e['domain'] not in head_domains]
+        direct = [e for e in direct if e['domain'] not in head_domains]
+        cdn = [e for e in cdn if e['domain'] not in head_domains]
         if sub_only:
             # sub-link domains are defined: the list is current + them, done
             return head + sub_only

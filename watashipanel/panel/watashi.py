@@ -470,8 +470,19 @@ def all_configs_for_cli():
     configs['panel_links'].append(get_account_panel_link(owner, server_ip, is_https=False))
     configs['panel_links'].append(get_account_panel_link(owner, server_ip))
     
+    # watashi v12.3.71dev: the same rule as the share list (ws_user_links) -
+    # once the admin defines sub-link-only domains, the panel links printed
+    # here are exactly those, no direct or CDN extras; with none defined,
+    # every usable domain shows up like before.
     domains = Domain.get_domains(include_sub_link_only=True)
+    sub_only = [d for d in domains if getattr(d.mode, 'name', str(d.mode)) == 'sub_link_only']
+    if sub_only:
+        domains = sub_only
+    seen_links = set()
     for d in domains:
+        if d.domain in seen_links:
+            continue
+        seen_links.add(d.domain)
         configs['panel_links'].append(get_account_panel_link(owner, d.domain))
 
     # watashi v12.3.41dev: the hand built inbounds of the advanced mode, ready
