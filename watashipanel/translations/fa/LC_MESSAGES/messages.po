@@ -12290,3 +12290,72 @@ msgstr "برچسب‌های ناشناس: "
 
 msgid "The core refused this outbound"
 msgstr "هسته این خروجی را نپذیرفت"
+
+msgid "Config check"
+msgstr "بررسی کانفیگ"
+
+msgid "Edit outbound"
+msgstr "ویرایش خروجی"
+
+msgid "For example: Iran direct, AI detour"
+msgstr "مثلاً: ایران مستقیم، دور زدن هوش مصنوعی"
+
+msgid "For example: my exit behind node two"
+msgstr "مثلاً: خروجی من پشت نود دو"
+
+msgid "Left empty, one is coined for you"
+msgstr "خالی بگذارید، یکی برایتان ساخته می‌شود"
+
+msgid "Move down"
+msgstr "انتقال به پایین"
+
+msgid "Move up"
+msgstr "انتقال به بالا"
+
+msgid "New outbound"
+msgstr "خروجی جدید"
+
+msgid "No hand built outbound yet. The panel works fine without one; build the first when a routing rule needs its own exit."
+msgstr "هنوز هیچ خروجی دستی‌ای نیست. پنل بدون آن هم درست کار می‌کند؛ وقتی قانونی روتینگ خروجی مخصوص خودش خواست، اولین را بسازید."
+
+msgid "No hand built rule yet. The cores route the traffic fine without one; write the first when a connection needs its own exit."
+msgstr "هنوز هیچ قانون دستی‌ای نیست. هسته‌ها بدون آن هم ترافیک را درست می‌برند؛ وقتی اتصالی خروج مخصوص خودش را خواست، اولین را بنویسید."
+
+msgid "No. A rule is one more line in the same routing section the core already reads, and the tests in the header ask the real binary to check it before anything reaches the server."
+msgstr "نه. هر قانون فقط یک خط به همان بخش روتینگی اضافه می‌کند که هسته از قبل می‌خواند، و تست‌های بالای صفحه قبل از رسیدن هر چیزی به سرور از خود باینری واقعی می‌خواهند که بررسی‌اش کند."
+
+msgid "No. An outbound is one more entry in the same core the panel already runs, and the live test below asks the exit for its real IP and country through the tunnel itself."
+msgstr "نه. هر خروجی فقط یک مدخل به همان هسته‌ای اضافه می‌کند که پنل از قبل اجرا می‌کند، و تست زندهٔ پایین هم آی‌پی و کشور واقعی خروج را از دل همان تونل می‌پرسد."
+
+msgid "Not tested yet"
+msgstr "هنوز تست نشده"
+
+msgid "One per line. Prefixes like geosite: and domain: are welcome."
+msgstr "هر خط یک مورد. پیشوندهایی مثل geosite: و domain: هم پذیرفته می‌شوند."
+
+msgid "Rule"
+msgstr "قانون"
+
+msgid "SNI"
+msgstr "SNI"
+
+msgid "Security and transport"
+msgstr "امنیت و ترنسپورت"
+
+msgid "The core is asking the exit for its IP…"
+msgstr "هسته دارد از خروج، آی‌پی‌اش را می‌پرسد…"
+
+msgid "The core is checking the config…"
+msgstr "هسته دارد کانفیگ را بررسی می‌کند…"
+
+msgid "The core is checking the routing…"
+msgstr "هسته دارد روتینگ را بررسی می‌کند…"
+
+msgid "Tried in order when this outbound fails its live test."
+msgstr "وقتی این خروجی در تست زنده رد شد، به ترتیب این‌ها امتحان می‌شوند."
+
+msgid "UUID / password"
+msgstr "UUID / گذرواژه"
+
+msgid "What it matches"
+msgstr "با چه چیزی تطبیق می‌کند"

@@ -80,7 +80,7 @@
             <div class="ob-msg good" id="obPassed"></div>
 
             <div class="ob-sec">
-                <div class="ob-sec-title"><i class="fa-solid fa-sliders"></i> {{ _('Basics') }}</div>
+                <div class="ob-sec-title"><span class="ob-sec-ic"><i class="fa-solid fa-sliders"></i></span> {{ _('Basics') }}</div>
                 <input type="hidden" id="fId">
                 <div class="ob-field">
                     <label for="fRemark">{{ _('Name') }}</label>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="ob-sec">
-                <div class="ob-sec-title"><i class="fa-solid fa-lock"></i> {{ _('Security and transport') }}</div>
+                <div class="ob-sec-title"><span class="ob-sec-ic"><i class="fa-solid fa-lock"></i></span> {{ _('Security and transport') }}</div>
                 <div class="ob-field">
                     <label>{{ _('Security') }}</label>
                     <div class="ob-seg" id="segSecurity">
@@ -231,20 +231,24 @@
     .ob-empty.show { display: block; }
     .ob-empty-icon { font-size: 32px; color: var(--ob-violet); margin-bottom: 10px; display: block; }
 
-    .ob-sec { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 13px 13px; margin-top: 12px; }
-    .ob-sec:first-of-type { margin-top: 0; }
-    .ob-sec-title { font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-    .ob-sec-title i { color: var(--ob-violet); }
-    .ob-field { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
+    .ob-card:hover { border-color: rgb(var(--ws-a-600) / .35); }
+    .ob-sec { border-top: 1px solid var(--border-color); padding: 15px 2px 6px; margin-top: 8px; }
+    .ob-sec:first-of-type { border-top: 0; margin-top: 0; padding-top: 2px; }
+    .ob-sec-title { display: flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+    .ob-sec-ic { width: 27px; height: 27px; border-radius: 9px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+        background: rgb(var(--ws-a-600) / .12); color: rgb(var(--ws-a-400)); font-size: 12px; }
+    .ob-field { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; min-width: 0; }
     .ob-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
+    .ob-field .form-input { background: var(--bg-body); border-radius: 10px; min-height: 38px; }
+    .ob-field .form-input:focus { border-color: rgb(var(--ws-a-600)); box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / .12); outline: 0; }
     .ob-hint { font-size: 11px; color: var(--text-muted); line-height: 1.85; }
     .ob-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
     @media (max-width: 640px) { .ob-row { grid-template-columns: 1fr; } }
-    .ob-seg { display: flex; flex-wrap: wrap; gap: 8px; }
-    .ob-seg button { padding: 7px 13px; border-radius: 9px; border: 1px solid var(--border-color); background: var(--bg-body);
-        color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: border-color .2s, background .2s; }
-    .ob-seg button:hover:not(:disabled) { border-color: var(--ob-blue); }
-    .ob-seg button.on { border-color: var(--ob-blue); background: rgba(59, 130, 246, 0.14); color: #60a5fa; }
+    .ob-seg { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ob-seg button { padding: 7px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-body);
+        color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+    .ob-seg button:hover:not(:disabled) { border-color: rgb(var(--ws-a-600) / .6); color: rgb(var(--ws-a-400)); }
+    .ob-seg button.on { border-color: rgb(var(--ws-a-600)); background: rgb(var(--ws-a-600) / .14); color: rgb(var(--ws-a-400)); }
     .ob-proto-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .ob-proto-group + .ob-proto-group { margin-top: 8px; }
     .ob-core-label { font-size: 10.5px; font-weight: 700; color: var(--text-muted); min-width: 56px; direction: ltr; text-align: start; }

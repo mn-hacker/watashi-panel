@@ -82,7 +82,7 @@
             <div class="rt-msg bad" id="rtErrors"></div>
 
             <div class="rt-sec">
-                <div class="rt-sec-title"><i class="fa-solid fa-sliders"></i> {{ _('Basics') }}</div>
+                <div class="rt-sec-title"><span class="rt-sec-ic"><i class="fa-solid fa-sliders"></i></span> {{ _('Basics') }}</div>
                 <input type="hidden" id="fId">
                 <div class="rt-field">
                     <label for="fRemark">{{ _('Name') }}</label>
@@ -103,7 +103,7 @@
             </div>
 
             <div class="rt-sec">
-                <div class="rt-sec-title"><i class="fa-solid fa-filter"></i> {{ _('What it matches') }}</div>
+                <div class="rt-sec-title"><span class="rt-sec-ic"><i class="fa-solid fa-filter"></i></span> {{ _('What it matches') }}</div>
                 <div class="rt-field">
                     <label for="fDomains">{{ _('Domains') }}</label>
                     <textarea class="form-input" dir="ltr" id="fDomains" rows="3" placeholder="geosite:google&#10;domain:openai.com&#10;example.com"></textarea>
@@ -206,12 +206,16 @@
     .rt-empty.show { display: block; }
     .rt-empty-icon { font-size: 32px; color: var(--rt-violet); margin-bottom: 10px; display: block; }
 
-    .rt-sec { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 13px 13px; margin-top: 12px; }
-    .rt-sec:first-of-type { margin-top: 0; }
-    .rt-sec-title { font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-    .rt-sec-title i { color: var(--rt-violet); }
-    .rt-field { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
+    .rt-card:hover { border-color: rgb(var(--ws-a-600) / .35); }
+    .rt-sec { border-top: 1px solid var(--border-color); padding: 15px 2px 6px; margin-top: 8px; }
+    .rt-sec:first-of-type { border-top: 0; margin-top: 0; padding-top: 2px; }
+    .rt-sec-title { display: flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+    .rt-sec-ic { width: 27px; height: 27px; border-radius: 9px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+        background: rgb(var(--ws-a-600) / .12); color: rgb(var(--ws-a-400)); font-size: 12px; }
+    .rt-field { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; min-width: 0; }
     .rt-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
+    .rt-field .form-input { background: var(--bg-body); border-radius: 10px; min-height: 38px; }
+    .rt-field .form-input:focus { border-color: rgb(var(--ws-a-600)); box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / .12); outline: 0; }
     .rt-hint { font-size: 11px; color: var(--text-muted); line-height: 1.85; }
     .rt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
     @media (max-width: 640px) { .rt-row { grid-template-columns: 1fr; } }

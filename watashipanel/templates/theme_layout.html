@@ -99,7 +99,7 @@
     
     {% set _overview = ['dashboard', 'monitoring', 'usage'] %}
     {% set _access = ['users', 'admins', 'account'] %}
-    {% set _network = ['domains', 'proxies', 'config_health', 'tunnel', 'nodes', 'inbounds'] %}{# watashi v12.2.88: whether the configs answer is a network question. v12.2.129.1: nodes are exits, so they answer it too #}{# watashi v12.3.41dev: and so do the hand built inbounds #}
+    {% set _network = ['domains', 'proxies', 'config_health', 'tunnel', 'nodes', 'inbounds', 'outbounds', 'routing'] %}{# watashi v12.2.88: whether the configs answer is a network question. v12.2.129.1: nodes are exits, so they answer it too #}{# watashi v12.3.41dev: and so do the hand built inbounds #}{# watashi v12.3.59dev: and so do the hand built outbounds and routing rules, so their menu group opens by itself like the others #}
     {% set _wm = ws_panel_mode() if ws_can('settings') else {} %}{# watashi v12.3.41dev: the simple or the advanced mode, read once for the menu and the header #}
     {% set _system = ['settings', 'actions', 'backup', 'cores', 'api', 'personalize', 'userpage'] %}{# watashi v12.3.43dev: personalize #}{# watashi v12.3.44dev: userpage #}{# watashi v12.2.130aq #}{# watashi v12.2.68, widened v12.2.86, narrowed again v12.2.88 #}
     {% set _ap = active_page|default('dashboard') %}
