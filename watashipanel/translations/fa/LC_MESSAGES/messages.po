@@ -12146,3 +12146,147 @@ msgstr "آخرین بار آنلاین"
 
 msgid "Last seen"
 msgstr "آخرین اتصال"
+
+msgid "Outbounds"
+msgstr "اوتباندها"
+
+msgid "New Outbound"
+msgstr "اوتباند جدید"
+
+msgid "Edit Outbound"
+msgstr "ویرایش اوتباند"
+
+msgid "Delete this outbound?"
+msgstr "این اوتباند حذف شود؟"
+
+msgid "The core accepts this outbound"
+msgstr "هسته این اوتباند را می‌پذیرد"
+
+msgid "Outbound not found"
+msgstr "اوتباند پیدا نشد"
+
+msgid "outbound.address.required"
+msgstr "آدرس سرور لازم است"
+
+msgid "outbound.port.range"
+msgstr "پورت باید بین ۱ تا ۶۵۵۳۵ باشد"
+
+msgid "outbound.tag.required"
+msgstr "برچسب (tag) لازم است"
+
+msgid "outbound.tag.taken"
+msgstr "این برچسب قبلاً گرفته شده است"
+
+msgid "outbound.tag.reserved"
+msgstr "این برچسب رزرو است"
+
+msgid "outbound.protocol.xray_only"
+msgstr "هستهٔ xray این پروتکل را سرو نمی‌کند (sing-box-only)"
+
+msgid "outbound.network.bad"
+msgstr "شبکه نامعتبر است"
+
+msgid "outbound.security.bad"
+msgstr "لایهٔ امنیتی نامعتبر است"
+
+msgid "xray does not accept this outbound:"
+msgstr "xray این اوتباند را نمی‌پذیرد:"
+
+msgid "sing-box does not accept this outbound:"
+msgstr "sing-box این اوتباند را نمی‌پذیرد:"
+
+msgid "Total usage"
+msgstr "مصرف کل"
+
+msgid "Connected devices"
+msgstr "دستگاه‌های متصل"
+
+msgid "Allow insecure TLS"
+msgstr "اجازهٔ TLS ناامن"
+
+msgid "Deleted"
+msgstr "حذف شد"
+
+msgid "Encryption method"
+msgstr "روش رمزنگاری"
+
+msgid "Remark"
+msgstr "نام ( remark )"
+
+msgid "Tag"
+msgstr "برچسب ( tag )"
+
+msgid "The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules."
+msgstr "خروجی‌های دستیِ حالت پیشرفته. خروجی خودش ترافیکی ارسال نمی‌کند؛ ترافیک از طریق قوانین روتینگ به آن می‌رسد."
+
+msgid "New Rule"
+msgstr "قانون جدید"
+
+msgid "Edit Rule"
+msgstr "ویرایش قانون"
+
+msgid "Delete this rule?"
+msgstr "این قانون حذف شود؟"
+
+msgid "Rule not found"
+msgstr "قانون پیدا نشد"
+
+msgid "Match"
+msgstr "شرایط تطبیق"
+
+msgid "Target"
+msgstr "مقصد"
+
+msgid "Ports"
+msgstr "پورت‌ها"
+
+msgid "Inbound tags"
+msgstr "برچسب اینباندها"
+
+msgid "rule.target.required"
+msgstr "مقصد لازم است"
+
+msgid "rule.core.bad"
+msgstr "هستهٔ نامعتبر"
+
+msgid "rule.network.bad"
+msgstr "شبکه نامعتبر"
+
+msgid "rule.protocol.bad"
+msgstr "پروتکل نامعتبر"
+
+msgid "rule.protocol.xray_only"
+msgstr "این پروتکل فقط برای xray است"
+
+msgid "rule.ports.bad"
+msgstr "شکل پورت‌ها این نیست: 443 یا 8000-9000"
+
+msgid "rule.domain.bad"
+msgstr "یکی از دامنه‌ها شکل درستی ندارد"
+
+msgid "rule.ip.bad"
+msgstr "یکی از آی‌پی‌ها شکل درستی ندارد"
+
+msgid "rule.match.required"
+msgstr "حداقل یکی از شرایط تطبیق لازم است"
+
+msgid "The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped."
+msgstr "قوانین روتینگ دستیِ حالت پیشرفته. قوانین از بالا به پایین اجرا می‌شوند: اولین قانونی که با اتصال تطبیق کند ترافیک را به مقصدش می‌فرستد و بقیه نادیده گرفته می‌شوند."
+
+msgid "Live connect test"
+msgstr "تست اتصال زنده"
+
+msgid "Fallbacks"
+msgstr "جایگزین‌ها"
+
+msgid "Fallbacks placeholder"
+msgstr "tag1, tag2 — اگر این خروجی جواب نداد به ترتیب این‌ها امتحان می‌شوند"
+
+msgid "The outbound did not answer"
+msgstr "خروجی جواب نداد"
+
+msgid "Unknown outbound tags: "
+msgstr "برچسب‌های ناشناس: "
+
+msgid "The core refused this outbound"
+msgstr "هسته این خروجی را نپذیرفت"

@@ -7089,3 +7089,162 @@ msgstr "Последний онлайн"
 
 msgid "Last seen"
 msgstr "Последний раз замечен"
+
+msgid "Outbounds"
+msgstr "Исходящие"
+
+msgid "New Outbound"
+msgstr "Новое исходящее"
+
+msgid "Edit Outbound"
+msgstr "Изменить исходящее"
+
+msgid "Delete this outbound?"
+msgstr "Удалить это исходящее?"
+
+msgid "The core accepts this outbound"
+msgstr "Ядро принимает это исходящее"
+
+msgid "Outbound not found"
+msgstr "Исходящее не найдено"
+
+msgid "outbound.address.required"
+msgstr "Требуется адрес сервера"
+
+msgid "outbound.port.range"
+msgstr "Порт должен быть от 1 до 65535"
+
+msgid "outbound.tag.required"
+msgstr "Требуется тег (tag)"
+
+msgid "outbound.tag.taken"
+msgstr "Этот тег уже занят"
+
+msgid "outbound.tag.reserved"
+msgstr "Этот тег зарезервирован"
+
+msgid "outbound.protocol.xray_only"
+msgstr "Ядро xray не обслуживает этот протокол (только sing-box)"
+
+msgid "outbound.network.bad"
+msgstr "Недопустимая сеть"
+
+msgid "outbound.security.bad"
+msgstr "Недопустимый уровень безопасности"
+
+msgid "xray does not accept this outbound:"
+msgstr "xray не принимает это исходящее:"
+
+msgid "sing-box does not accept this outbound:"
+msgstr "sing-box не принимает это исходящее:"
+
+msgid "Total usage"
+msgstr "Общий расход"
+
+msgid "Connected devices"
+msgstr "Подключённые устройства"
+
+msgid "Allow insecure TLS"
+msgstr "Разрешить небезопасный TLS"
+
+msgid "Deleted"
+msgstr "Удалено"
+
+msgid "Encryption method"
+msgstr "Метод шифрования"
+
+msgid "Remark"
+msgstr "Примечание"
+
+msgid "Tag"
+msgstr "Тег"
+
+msgid "The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules."
+msgstr "Ручные исходящие продвинутого режима. Исходящий сам ничего не отправляет; трафик доходит до него через правила маршрутизации."
+
+msgid "Routing"
+msgstr "Маршрутизация"
+
+msgid "New Rule"
+msgstr "Новое правило"
+
+msgid "Edit Rule"
+msgstr "Изменить правило"
+
+msgid "Delete this rule?"
+msgstr "Удалить это правило?"
+
+msgid "Rule not found"
+msgstr "Правило не найдено"
+
+msgid "Match"
+msgstr "Соответствие"
+
+msgid "Target"
+msgstr "Цель"
+
+msgid "Ports"
+msgstr "Порты"
+
+msgid "Inbound tags"
+msgstr "Теги входящих"
+
+msgid "Everything"
+msgstr "Всё"
+
+msgid "None"
+msgstr "Нет"
+
+msgid "rule.target.required"
+msgstr "требуется цель"
+
+msgid "rule.core.bad"
+msgstr "недопустимое ядро"
+
+msgid "rule.network.bad"
+msgstr "недопустимая сеть"
+
+msgid "rule.protocol.bad"
+msgstr "недопустимый протокол"
+
+msgid "rule.protocol.xray_only"
+msgstr "этот протокол только для xray"
+
+msgid "rule.ports.bad"
+msgstr "порты не в виде 443 или 8000-9000"
+
+msgid "rule.domain.bad"
+msgstr "один из доменов неверен"
+
+msgid "rule.ip.bad"
+msgstr "один из IP неверен"
+
+msgid "rule.match.required"
+msgstr "требуется хотя бы одно условие"
+
+msgid "The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped."
+msgstr "Ручные правила маршрутизации продвинутого режима. Правила выполняются сверху вниз: первое совпавшее правило отправляет соединение к своей цели, остальные пропускаются."
+
+msgid "Connect"
+msgstr "Подключение"
+
+msgid "Failed"
+msgstr "Неудача"
+
+msgid "Live connect test"
+msgstr "Живая проверка соединения"
+
+msgid "Fallbacks"
+msgstr "Резервы"
+
+msgid "Fallbacks placeholder"
+msgstr "tag1, tag2 — пробуются по порядку при сбое"
+
+msgid "The outbound did not answer"
+msgstr "Исходящий не ответил"
+
+msgid "Unknown outbound tags: "
+msgstr "Неизвестные теги: "
+
+msgid "The core refused this outbound"
+msgstr "Ядро отклонило этот исходящий"

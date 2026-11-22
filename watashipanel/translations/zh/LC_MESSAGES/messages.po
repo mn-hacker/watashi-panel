@@ -7070,3 +7070,162 @@ msgstr "最后在线"
 
 msgid "Last seen"
 msgstr "最后出现"
+
+msgid "Outbounds"
+msgstr "出站"
+
+msgid "New Outbound"
+msgstr "新建出站"
+
+msgid "Edit Outbound"
+msgstr "编辑出站"
+
+msgid "Delete this outbound?"
+msgstr "删除此出站？"
+
+msgid "The core accepts this outbound"
+msgstr "核心接受此出站"
+
+msgid "Outbound not found"
+msgstr "未找到出站"
+
+msgid "outbound.address.required"
+msgstr "需要服务器地址"
+
+msgid "outbound.port.range"
+msgstr "端口须在 1 至 65535 之间"
+
+msgid "outbound.tag.required"
+msgstr "需要标签 (tag)"
+
+msgid "outbound.tag.taken"
+msgstr "该标签已被占用"
+
+msgid "outbound.tag.reserved"
+msgstr "该标签为保留标签"
+
+msgid "outbound.protocol.xray_only"
+msgstr "xray 内核不支持此协议（仅 sing-box）"
+
+msgid "outbound.network.bad"
+msgstr "传输层无效"
+
+msgid "outbound.security.bad"
+msgstr "安全层无效"
+
+msgid "xray does not accept this outbound:"
+msgstr "xray 不接受此出站:"
+
+msgid "sing-box does not accept this outbound:"
+msgstr "sing-box 不接受此出站:"
+
+msgid "Total usage"
+msgstr "总用量"
+
+msgid "Connected devices"
+msgstr "已连接设备"
+
+msgid "Allow insecure TLS"
+msgstr "允许不安全 TLS"
+
+msgid "Deleted"
+msgstr "已删除"
+
+msgid "Encryption method"
+msgstr "加密方法"
+
+msgid "Remark"
+msgstr "备注"
+
+msgid "Tag"
+msgstr "标签"
+
+msgid "The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules."
+msgstr "高级模式的手动出站。出站本身不发送任何流量；流量通过路由规则到达它。"
+
+msgid "Routing"
+msgstr "路由"
+
+msgid "New Rule"
+msgstr "新建规则"
+
+msgid "Edit Rule"
+msgstr "编辑规则"
+
+msgid "Delete this rule?"
+msgstr "删除此规则？"
+
+msgid "Rule not found"
+msgstr "未找到规则"
+
+msgid "Match"
+msgstr "匹配"
+
+msgid "Target"
+msgstr "目标"
+
+msgid "Ports"
+msgstr "端口"
+
+msgid "Inbound tags"
+msgstr "入站标签"
+
+msgid "Everything"
+msgstr "全部"
+
+msgid "None"
+msgstr "无"
+
+msgid "rule.target.required"
+msgstr "需要目标"
+
+msgid "rule.core.bad"
+msgstr "核心无效"
+
+msgid "rule.network.bad"
+msgstr "网络无效"
+
+msgid "rule.protocol.bad"
+msgstr "协议无效"
+
+msgid "rule.protocol.xray_only"
+msgstr "此协议仅 xray 支持"
+
+msgid "rule.ports.bad"
+msgstr "端口格式应为 443 或 8000-9000"
+
+msgid "rule.domain.bad"
+msgstr "某个域名格式不正确"
+
+msgid "rule.ip.bad"
+msgstr "某个 IP 格式不正确"
+
+msgid "rule.match.required"
+msgstr "至少需要一个匹配条件"
+
+msgid "The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped."
+msgstr "高级模式的手动路由规则。规则自上而下执行：第一条匹配连接的规则将流量发送到其目标，其余规则被跳过。"
+
+msgid "Connect"
+msgstr "连接"
+
+msgid "Failed"
+msgstr "失败"
+
+msgid "Live connect test"
+msgstr "实时连接测试"
+
+msgid "Fallbacks"
+msgstr "备用"
+
+msgid "Fallbacks placeholder"
+msgstr "tag1, tag2 — 失败时按顺序尝试"
+
+msgid "The outbound did not answer"
+msgstr "出站无响应"
+
+msgid "Unknown outbound tags: "
+msgstr "未知标签："
+
+msgid "The core refused this outbound"
+msgstr "核心拒绝此出站"

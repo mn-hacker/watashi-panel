@@ -74,6 +74,12 @@ def init_app(app):
     # watashi v12.3.41dev: the Inbounds page of the advanced mode
     from .InboundAdmin import InboundAdmin
     InboundAdmin.register(admin_bp, route_base="/inbounds")
+    # watashi v12.3.55dev: the Outbounds page, the Inbounds page's sibling
+    from .OutboundAdmin import OutboundAdmin
+    OutboundAdmin.register(admin_bp, route_base="/outbounds")
+    # watashi v12.3.56dev: the Routing page, the Outbounds page's sibling
+    from .RoutingAdmin import RoutingAdmin
+    RoutingAdmin.register(admin_bp, route_base="/routing")
     # watashi v12.2.130ch: the live proxy dashboard is gone. It was a yacd
     # build served by the CLI service of the old name, it only ever understood some of the
     # configs, and the config health page below answers the same question

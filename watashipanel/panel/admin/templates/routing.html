@@ -1,0 +1,201 @@
+{% extends 'theme_layout.html' %}
+{% set active_page = 'routing' %}
+{% block title %}{{ _('Routing') }}{% endblock %}
+
+{% block body %}
+<div class="page-card">
+  <div class="page-head">
+    <h1><i class="fa-solid fa-route"></i> {{ _('Routing') }}</h1>
+    <p class="page-desc">{{ _('The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped.') }}</p>
+  </div>
+
+  <div class="row-btns">
+    <button type="button" class="btn btn-primary" id="btnNew"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
+    <span class="spacer"></span>
+    <button type="button" class="btn btn-secondary" id="btnTestX"><i class="fa-solid fa-vial"></i> xray</button>
+    <button type="button" class="btn btn-secondary" id="btnTestS"><i class="fa-solid fa-vial"></i> sing-box</button>
+    <span id="testResult"></span>
+  </div>
+
+  <table class="table" id="ruleTable">
+    <thead><tr>
+      <th>#</th>
+      <th>{{ _('Name') }}</th>
+      <th>{{ _('Match') }}</th>
+      <th>{{ _('Target') }}</th>
+      <th>{{ _('Core') }}</th>
+      <th>{{ _('Status') }}</th>
+      <th>{{ _('Actions') }}</th>
+    </tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr data-id="{{ r.id }}">
+        <td>{{ r.order }}</td>
+        <td class="cell-tag">{{ r.remark }}</td>
+        <td class="cell-addr">
+          {% if r.domains %}<span class="badge bg-info">D: {{ r.domains | join(', ') | truncate(40) }}</span>{% endif %}
+          {% if r.ips %}<span class="badge bg-info">IP: {{ r.ips | join(', ') | truncate(30) }}</span>{% endif %}
+          {% if r.ports %}<span class="badge bg-secondary">:{{ r.ports }}</span>{% endif %}
+          {% if r.protocol %}<span class="badge bg-secondary">{{ r.protocol }}</span>{% endif %}
+          {% if r.network != 'both' %}<span class="badge bg-secondary">{{ r.network }}</span>{% endif %}
+          {% if not r.domains and not r.ips and not r.ports and not r.protocol %}<span class="badge bg-warning">{{ _('Everything') }}</span>{% endif %}
+        </td>
+        <td><span class="badge bg-primary">{{ r.target }}</span></td>
+        <td>{{ r.core }}</td>
+        <td>{% if r.enable %}<span class="badge bg-success">{{ _('Enabled') }}</span>{% else %}<span class="badge bg-secondary">{{ _('Disabled') }}</span>{% endif %}</td>
+        <td class="cell-actions">
+          <button class="btn btn-sm btn-secondary" onclick="moveRow({{ r.id }}, 'up')"><i class="fa-solid fa-arrow-up"></i></button>
+          <button class="btn btn-sm btn-secondary" onclick="moveRow({{ r.id }}, 'down')"><i class="fa-solid fa-arrow-down"></i></button>
+          <button class="btn btn-sm btn-primary" onclick="editRow({{ r.id }})"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn btn-sm btn-secondary" onclick="toggleRow({{ r.id }})"><i class="fa-solid fa-power-off"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="deleteRow({{ r.id }})"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" id="editOverlay">
+  <div class="modal-card">
+    <h3 id="modalTitle">{{ _('New Rule') }}</h3>
+    <input type="hidden" id="fId">
+    <label>{{ _('Name') }} <input id="fRemark" maxlength="128"></label>
+    <label>{{ _('Target') }}
+      <select id="fTarget">
+        {% for t in targets %}<option value="{{ t.value }}">{{ t.label }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>{{ _('Core') }}
+      <select id="fCore">
+        {% for c in cores %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>{{ _('Domains') }} <textarea id="fDomains" rows="3" placeholder="geosite:google&#10;domain:openai.com&#10;example.com"></textarea></label>
+    <label>{{ _('IPs') }} <textarea id="fIps" rows="3" placeholder="geoip:ir&#10;1.2.3.0/24"></textarea></label>
+    <label>{{ _('Ports') }} <input id="fPorts" placeholder="443 or 8000-9000"></label>
+    <label>{{ _('Protocol') }}
+      <select id="fProtocol">
+        {% for p in protocols %}<option value="{{ p }}">{{ p or _('None') }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>{{ _('Network') }}
+      <select id="fNetwork">
+        {% for n in networks %}<option value="{{ n }}">{{ n }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>{{ _('Inbound tags') }} <textarea id="fInbounds" rows="2" placeholder="custom-in-myin"></textarea></label>
+    <div class="modal-btns">
+      <button class="btn btn-primary" id="btnSave">{{ _('Save') }}</button>
+      <button class="btn btn-secondary" id="btnClose">{{ _('Close') }}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 60; }
+.modal-overlay.show { display: flex; }
+.modal-card { background: var(--panel-bg, #16181d); color: var(--text, #eee); padding: 24px; border-radius: 12px; width: min(560px, 94vw); max-height: 88vh; overflow: auto; }
+.modal-card label { display: block; margin-bottom: 10px; }
+.modal-card input:not([type=checkbox]), .modal-card select, .modal-card textarea { width: 100%; margin-top: 4px; }
+.modal-btns { display: flex; gap: 8px; margin-top: 14px; }
+.row-btns { display: flex; align-items: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
+.spacer { flex: 1; }
+.page-desc { color: var(--text-muted, #999); font-size: .92em; }
+.cell-actions { white-space: nowrap; }
+.cell-actions .btn { margin: 1px; }
+</style>
+
+<script>
+const I18N = {
+  saved: {{ _('Saved') | tojson }},
+  deleted: {{ _('Deleted') | tojson }},
+  failed: {{ _('Request failed') | tojson }},
+  newRule: {{ _('New Rule') | tojson }},
+  editRule: {{ _('Edit Rule') | tojson }},
+  sure: {{ _('Delete this rule?') | tojson }},
+};
+const API = location.pathname;
+const ROWS = {{ rows | tojson }};
+
+function obOverlay(show) { document.getElementById('editOverlay').classList.toggle('show', show); }
+
+async function post(path, body) {
+  const res = await fetch(API + path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                       body: JSON.stringify(body || {})});
+  return res.json();
+}
+
+function say(ok, text) {
+  const el = document.getElementById('testResult');
+  el.textContent = text || '';
+  el.style.color = ok ? 'var(--ok, #4cc38a)' : 'var(--danger, #ff6b6b)';
+}
+
+function findRow(id) { return ROWS.find(r => r.id === id); }
+
+window.editRow = (id) => {
+  const r = findRow(id);
+  document.getElementById('modalTitle').textContent = I18N.editRule;
+  document.getElementById('fId').value = r.id;
+  document.getElementById('fRemark').value = r.remark || '';
+  document.getElementById('fTarget').value = r.target;
+  document.getElementById('fCore').value = r.core;
+  document.getElementById('fDomains').value = (r.domains || []).join('\n');
+  document.getElementById('fIps').value = (r.ips || []).join('\n');
+  document.getElementById('fPorts').value = r.ports || '';
+  document.getElementById('fProtocol').value = r.protocol || '';
+  document.getElementById('fNetwork').value = r.network || 'both';
+  document.getElementById('fInbounds').value = (r.inbound_tags || []).join('\n');
+  obOverlay(true);
+};
+
+window.moveRow = async (id, way) => { await post('move', {id, way}); location.reload(); };
+window.toggleRow = async (id) => { await post('toggle', {id}); location.reload(); };
+window.deleteRow = async (id) => {
+  if (!confirm(I18N.sure)) return;
+  await post('delete', {id});
+  location.reload();
+};
+
+document.getElementById('btnNew').onclick = () => {
+  document.getElementById('modalTitle').textContent = I18N.newRule;
+  for (const el of document.querySelectorAll('.modal-card input, .modal-card select, .modal-card textarea')) {
+    if (el.type === 'checkbox') { el.checked = false; continue; }
+    el.value = el.tagName === 'SELECT' ? el.options[0].value : '';
+  }
+  document.getElementById('fId').value = '';
+  obOverlay(true);
+};
+
+document.getElementById('btnClose').onclick = () => obOverlay(false);
+
+document.getElementById('btnSave').onclick = async () => {
+  const body = {
+    id: document.getElementById('fId').value || null,
+    remark: document.getElementById('fRemark').value.trim(),
+    target: document.getElementById('fTarget').value,
+    core: document.getElementById('fCore').value,
+    domains: document.getElementById('fDomains').value.split('\n').map(s => s.trim()).filter(Boolean),
+    ips: document.getElementById('fIps').value.split('\n').map(s => s.trim()).filter(Boolean),
+    ports: document.getElementById('fPorts').value.trim(),
+    protocol: document.getElementById('fProtocol').value,
+    network: document.getElementById('fNetwork').value,
+    inbound_tags: document.getElementById('fInbounds').value.split('\n').map(s => s.trim()).filter(Boolean),
+  };
+  const res = await post('save', body);
+  say(res.success, res.success ? I18N.saved : (res.message || I18N.failed));
+  if (res.success) setTimeout(() => location.reload(), 400);
+};
+
+async function testCore(core) {
+  say(true, '...');
+  const res = await post('test', {core});
+  say(res.success, res.message || (res.success ? 'ok' : I18N.failed));
+}
+document.getElementById('btnTestX').onclick = () => testCore('xray');
+document.getElementById('btnTestS').onclick = () => testCore('singbox');
+
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') obOverlay(false); });
+</script>
+{% endblock %}

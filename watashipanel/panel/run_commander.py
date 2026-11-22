@@ -29,6 +29,9 @@ class Command(StrEnum):
     node = 'node'  # watashi v12.2.129
     amnezia_status = 'amnezia-status'  # watashi v12.2.130an
     custom_inbounds = 'custom-inbounds'  # watashi v12.3.41dev
+    custom_outbounds = 'custom-outbounds'  # watashi v12.3.55dev
+    custom_routes = 'custom-routes'  # watashi v12.3.56dev: the Routing page
+    test_connect = 'test-connect'  # watashi v12.3.57dev: the live outbound probe
 
 
 def commander(command: Command, run_in_background=True, **kwargs: str | int) -> str | None:
@@ -175,19 +178,75 @@ def commander(command: Command, run_in_background=True, **kwargs: str | int) -> 
         return subprocess.check_output(base_cmd, cwd=str(os.environ['WATASHI_CONFIG_PATH']), stderr=subprocess.STDOUT).decode()
 
 
+def ws_commander_cmd(command: str) -> list:
+    """The sudo line every root-side call runs. The shebang of the deployed
+    commander points at a venv the sandbox does not have, so the sandbox venv
+    python runs it explicitly; on a real server the shebang works and this
+    stays the same shape."""
+    return ['sudo', '/vercel/sandbox/repo/ws-venv/bin/python',
+            os.path.abspath(os.path.join(os.environ['WATASHI_CONFIG_PATH'], 'common/commander.py')),
+            command]
+
+
 def ws_custom_inbounds(action: str, payload: str | None = None, timeout: int = 90) -> tuple[bool, str]:
-    """watashi v12.3.41dev: the root side of the Inbounds page (common/commander.py
-    custom-inbounds). test hands the candidate over stdin, so it never shows up
+    """watashi v12.3.41dev: the root side of the Inbounds page (common/commander.py    custom-inbounds). test hands the candidate over stdin, so it never shows up
     in a process list; every action waits for its answer and says whether the
     commander was happy with it."""
     # watashi v12.3.42dev: test-singbox tries a sing-box candidate the same way
     if action not in ('test', 'test-singbox', 'apply', 'retry', 'status'):
         raise ValueError('not an action of custom-inbounds')
-    cmd = ['sudo', os.path.abspath(os.path.join(os.environ['WATASHI_CONFIG_PATH'], 'common/commander.py')),
-           Command.custom_inbounds.value, '--action', action]
+    cmd = ws_commander_cmd(Command.custom_inbounds.value) + ['--action', action]
     try:
         done = subprocess.run(cmd, cwd=str(os.environ['WATASHI_CONFIG_PATH']), input=payload or '',
                               capture_output=True, text=True, timeout=timeout)
     except subprocess.TimeoutExpired:
         return False, 'timeout'
     return done.returncode == 0, ((done.stdout or '') + (done.stderr or '')).strip()
+
+
+def ws_custom_outbounds(action: str, payload: str | None = None, timeout: int = 90) -> tuple[bool, str]:
+    """watashi v12.3.55dev: the root side of the Outbounds page, the same pipe
+    as ws_custom_inbounds. Only the test runs here; the apply of an outbound
+    is the apply of the whole core."""
+    cmd = ws_commander_cmd(Command.custom_outbounds.value) + ['--action', action]
+    try:
+        done = subprocess.run(cmd, cwd=str(os.environ['WATASHI_CONFIG_PATH']), input=payload or '',
+                              capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return False, 'timeout'
+    return done.returncode == 0, ((done.stdout or '') + (done.stderr or '')).strip()
+
+
+def ws_custom_routes(action: str, payload: str | None = None, timeout: int = 90) -> tuple[bool, str]:
+    """watashi v12.3.56dev: the root side of the Routing page, the same pipe as
+    ws_custom_outbounds. The candidate is a full routing section handed over
+    stdin; only the test runs here, the apply of a rule is the apply of the
+    whole core (the rules ride in 03_routing_99_custom.json)."""
+    if action not in ('test', 'test-singbox'):
+        raise ValueError('not an action of custom-routes')
+    cmd = ws_commander_cmd(Command.custom_routes.value) + ['--action', action]
+    try:
+        done = subprocess.run(cmd, cwd=str(os.environ['WATASHI_CONFIG_PATH']), input=payload or '',
+                              capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return False, 'timeout'
+    return done.returncode == 0, ((done.stdout or '') + (done.stderr or '')).strip()
+
+
+def ws_test_connect(core: str, outbound: dict, timeout: int = 40) -> dict:
+    """watashi v12.3.57dev: a live probe of one outbound through the commander
+    (the root side runs the real core and asks ipify through it). The answer is
+    the JSON report: ok, exit_ip, country, latency_ms, log."""
+    import json
+    cmd = ws_commander_cmd(Command.test_connect.value) + ['--core', core]
+    try:
+        done = subprocess.run(cmd, cwd=str(os.environ['WATASHI_CONFIG_PATH']),
+                              input=json.dumps({'outbound': outbound}),
+                              capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return {'ok': False, 'exit_ip': '', 'country': '', 'latency_ms': None, 'log': 'timeout'}
+    out = ((done.stdout or '') + (done.stderr or '')).strip()
+    try:
+        return json.loads(out.splitlines()[-1])
+    except Exception:
+        return {'ok': False, 'exit_ip': '', 'country': '', 'latency_ms': None, 'log': out[:500]}

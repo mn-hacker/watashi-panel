@@ -14,5 +14,8 @@ from .admin_perms import (WS_ALL_CAPS, WS_CAP_GROUPS, WS_PAGE_CAPS, WS_ACTION_CA
                           ws_write_perms, ws_endpoint_allowed, ws_mode_name)
 from .usage import DailyUsage
 from .custom_inbound import CustomInbound  # watashi v12.3.41dev: the hand built inbounds of the advanced mode
+from .custom_outbound import CustomOutbound  # watashi v12.3.55dev: the hand built outbounds of the advanced mode
+from .routing_rule import RoutingRule  # watashi v12.3.56dev: the hand built routing rules (the Routing page)
+
 from .base_account import BaseAccount
 # from .report import Report, ReportDetail

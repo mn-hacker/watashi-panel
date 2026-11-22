@@ -7603,3 +7603,165 @@ msgstr "Last online"
 
 msgid "Last seen"
 msgstr "Last seen"
+
+msgid "Outbounds"
+msgstr ""
+
+msgid "New Outbound"
+msgstr ""
+
+msgid "Edit Outbound"
+msgstr ""
+
+msgid "Delete this outbound?"
+msgstr ""
+
+msgid "The core accepts this outbound"
+msgstr ""
+
+msgid "Outbound not found"
+msgstr ""
+
+msgid "outbound.address.required"
+msgstr ""
+
+msgid "outbound.port.range"
+msgstr ""
+
+msgid "outbound.tag.required"
+msgstr ""
+
+msgid "outbound.tag.taken"
+msgstr ""
+
+msgid "outbound.tag.reserved"
+msgstr ""
+
+msgid "outbound.protocol.xray_only"
+msgstr ""
+
+msgid "outbound.network.bad"
+msgstr ""
+
+msgid "outbound.security.bad"
+msgstr ""
+
+msgid "xray does not accept this outbound:"
+msgstr ""
+
+msgid "sing-box does not accept this outbound:"
+msgstr ""
+
+msgid "Total usage"
+msgstr ""
+
+msgid "Connected devices"
+msgstr ""
+
+msgid "Allow insecure TLS"
+msgstr "Allow insecure TLS"
+
+msgid "Deleted"
+msgstr "Deleted"
+
+msgid "Encryption method"
+msgstr "Encryption method"
+
+msgid "Remark"
+msgstr "Remark"
+
+msgid "Tag"
+msgstr "Tag"
+
+msgid "The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules."
+msgstr "The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules."
+
+msgid "Routing"
+msgstr "Routing"
+
+msgid "New Rule"
+msgstr "New Rule"
+
+msgid "Edit Rule"
+msgstr "Edit Rule"
+
+msgid "Delete this rule?"
+msgstr "Delete this rule?"
+
+msgid "Rule not found"
+msgstr "Rule not found"
+
+msgid "Match"
+msgstr "Match"
+
+msgid "Target"
+msgstr "Target"
+
+msgid "Domains"
+msgstr "Domains"
+
+msgid "Ports"
+msgstr "Ports"
+
+msgid "Inbound tags"
+msgstr "Inbound tags"
+
+msgid "Everything"
+msgstr "Everything"
+
+msgid "None"
+msgstr "None"
+
+msgid "rule.target.required"
+msgstr "the target is required"
+
+msgid "rule.core.bad"
+msgstr "the core is not a valid choice"
+
+msgid "rule.network.bad"
+msgstr "the network is not a valid choice"
+
+msgid "rule.protocol.bad"
+msgstr "the protocol is not a valid choice"
+
+msgid "rule.protocol.xray_only"
+msgstr "this protocol is xray only"
+
+msgid "rule.ports.bad"
+msgstr "the ports do not look like 443 or 8000-9000"
+
+msgid "rule.domain.bad"
+msgstr "one of the domains does not look right"
+
+msgid "rule.ip.bad"
+msgstr "one of the IPs does not look right"
+
+msgid "rule.match.required"
+msgstr "at least one match field is required"
+
+msgid "The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped."
+msgstr "The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped."
+
+msgid "Connect"
+msgstr "Connect"
+
+msgid "Failed"
+msgstr "Failed"
+
+msgid "Live connect test"
+msgstr "Live connect test"
+
+msgid "Fallbacks"
+msgstr "Fallbacks"
+
+msgid "Fallbacks placeholder"
+msgstr "tag1, tag2 — tried in order when this outbound fails"
+
+msgid "The outbound did not answer"
+msgstr "The outbound did not answer"
+
+msgid "Unknown outbound tags: "
+msgstr "Unknown outbound tags: "
+
+msgid "The core refused this outbound"
+msgstr "The core refused this outbound"

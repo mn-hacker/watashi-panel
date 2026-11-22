@@ -163,6 +163,10 @@
                 {% if ws_can('settings') %}<a href="{{ hurl_for('admin.NodesAdmin:index') }}" class="nav-item {% if _ap == 'nodes' %}active{% endif %}"><i class="fa-solid fa-circle-nodes"></i> <span class="nav-text">{{ _('Nodes') }}</span></a>{% endif %}
                 {# watashi v12.3.41dev: the Inbounds door opens with the advanced mode, and stays while hand built inbounds exist, so the ones kept serving in the simple mode are never out of reach #}
                 {% if _wm and (_wm.advanced or _wm.custom) %}<a href="{{ hurl_for('admin.InboundAdmin:index') }}" class="nav-item {% if _ap == 'inbounds' %}active{% endif %}"><i class="fa-solid fa-plug-circle-bolt"></i> <span class="nav-text">{{ _('Inbounds') }}</span></a>{% endif %}
+                {# watashi v12.3.55dev: the Outbounds door, the Inbounds page's sibling #}
+                {% if _wm and (_wm.advanced or _wm.custom) %}<a href="{{ hurl_for('admin.OutboundAdmin:index') }}" class="nav-item {% if _ap == 'outbounds' %}active{% endif %}"><i class="fa-solid fa-paper-plane"></i> <span class="nav-text">{{ _('Outbounds') }}</span></a>{% endif %}
+                {# watashi v12.3.56dev: the Routing door, the Outbounds page's sibling #}
+                {% if _wm and (_wm.advanced or _wm.custom) %}<a href="{{ hurl_for('admin.RoutingAdmin:index') }}" class="nav-item {% if _ap == 'routing' %}active{% endif %}"><i class="fa-solid fa-route"></i> <span class="nav-text">{{ _('Routing') }}</span></a>{% endif %}
             </div>
         </div>
         {% endif %}
@@ -208,7 +212,7 @@
         <header class="header">
             <div class="header-left">
                 <i class="fa-solid fa-bars menu-toggle" id="menuToggle"></i>
-                <div class="header-title">{% set _pt = {'dashboard': _('Dashboard'), 'monitoring': _('Monitoring'), 'usage': _('Usage'), 'users': _('Users'), 'admins': _('Admins'), 'account': _('My Account'), 'domains': _('Domains'), 'proxies': _('Proxies'), 'tunnel': _('Tunnel'), 'settings': _('Settings'), 'actions': _('Actions'), 'backup': _('Backup'), 'cores': _('Cores'), 'config_health': _('Config Health'), 'nodes': _('Nodes'), 'inbounds': _('Inbounds'), 'api': _('API'), 'personalize': _('Personalization'), 'userpage': _('User page')} %}{# watashi v12.3.41dev: inbounds #}{# watashi v12.3.44dev: userpage #}{# watashi v12.3.43dev: personalize #}{{ _pt.get(active_page|default(''), _('Dashboard')) }}</div>
+                <div class="header-title">{% set _pt = {'dashboard': _('Dashboard'), 'monitoring': _('Monitoring'), 'usage': _('Usage'), 'users': _('Users'), 'admins': _('Admins'), 'account': _('My Account'), 'domains': _('Domains'), 'proxies': _('Proxies'), 'tunnel': _('Tunnel'), 'settings': _('Settings'), 'actions': _('Actions'), 'backup': _('Backup'), 'cores': _('Cores'), 'config_health': _('Config Health'), 'nodes': _('Nodes'), 'inbounds': _('Inbounds'), 'outbounds': _('Outbounds'), 'routing': _('Routing'), 'api': _('API'), 'personalize': _('Personalization'), 'userpage': _('User page')} %}{# watashi v12.3.41dev: inbounds #}{# watashi v12.3.44dev: userpage #}{# watashi v12.3.43dev: personalize #}{{ _pt.get(active_page|default(''), _('Dashboard')) }}</div>
             </div>
             <div class="header-right">
                 <div class="header-btn-group">

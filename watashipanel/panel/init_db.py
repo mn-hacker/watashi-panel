@@ -1950,6 +1950,41 @@ def ws_ensure_custom_inbound_table():
         logger.warning(f"watashi: the custom_inbound table could not be checked ({problem})")
 
 
+def ws_ensure_custom_outbound_table():
+    """watashi v12.3.55dev: the hand built outboards, same helper as above."""
+    try:
+        from watashipanel.models.custom_outbound import CustomOutbound
+        CustomOutbound.__table__.create(db.engine, checkfirst=True)
+        # watashi v12.3.57dev: the probe and fallback columns of phase 3 — the
+        # table of an older build gets them one ALTER per missing column.
+        from sqlalchemy import inspect, text
+        inspector = inspect(db.engine)
+        present = {c['name'] for c in inspector.get_columns('custom_outbound')}
+        with db.engine.connect() as connection:
+            for column, kind in (('probe_ip', 'VARCHAR(64) NOT NULL DEFAULT ""'),
+                                 ('probe_country', 'VARCHAR(8) NOT NULL DEFAULT ""'),
+                                 ('probe_latency', 'INTEGER NOT NULL DEFAULT 0'),
+                                 ('probe_at', 'DATETIME NULL'),
+                                 ('probe_ok', 'TINYINT(1) NOT NULL DEFAULT 0'),
+                                 ('fallbacks', 'TEXT NULL')):
+                if column not in present:
+                    connection.execute(text(f'ALTER TABLE custom_outbound ADD COLUMN {column} {kind}'))
+            connection.commit()
+    except Exception as problem:
+        db.session.rollback()
+        logger.warning(f"watashi: the custom_outbound table could not be checked ({problem})")
+
+
+def ws_ensure_routing_rule_table():
+    """watashi v12.3.56dev: the hand built routing rules, same helper as above."""
+    try:
+        from watashipanel.models.routing_rule import RoutingRule
+        RoutingRule.__table__.create(db.engine, checkfirst=True)
+    except Exception as problem:
+        db.session.rollback()
+        logger.warning(f"watashi: the routing_rule table could not be checked ({problem})")
+
+
 def _ws_schema_present():
     """watashi v12.2.130h: whether there is anything to repair yet.
 
@@ -1997,6 +2032,12 @@ def _ws_init_db():
         # create_all() below only while an upgrade is due; a database restored
         # from a file that already says 159 would never get it otherwise.
         ws_ensure_custom_inbound_table()
+        # watashi v12.3.55dev: same story for the hand built outbounds — a
+        # database restored from a file that already says the newest version
+        # would never get the table from create_all().
+        ws_ensure_custom_outbound_table()
+        # watashi v12.3.56dev: same story for the hand built routing rules.
+        ws_ensure_routing_rule_table()
     else:
         logger.info("watashi: an empty database, the tables are created first")
     # set_hconfig(ConfigEnum.db_version, 71)

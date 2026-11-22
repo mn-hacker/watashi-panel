@@ -210,6 +210,10 @@ def dump_db_to_dict():
     # a child_unique_id only because replace_backup_child_unique_id, here and
     # in every older panel, asks every row of every section for one.
     body["custom_inbounds"] = [dict(r.to_dict(), child_unique_id='self') for r in CustomInbound.all_rows()]
+    # watashi v12.3.55dev: and the hand built outbounds travel the same way.
+    body["custom_outbounds"] = [dict(r.to_dict(), child_unique_id='self') for r in CustomOutbound.all_rows()]
+    # watashi v12.3.56dev: and the hand built routing rules, same contract.
+    body["routing_rules"] = [dict(r.to_dict(), child_unique_id='self') for r in RoutingRule.all_rows()]
     # watashi v12.2.130as: a list holding one row, not a bare object, so the
     # section loop of an older panel finds the shape it expects. The reader in
     # ws_backup_guard takes either shape.
@@ -319,6 +323,13 @@ def set_db_from_json(json_data, override_child_unique_id=True, set_users=True, s
     # hand built inbounds; an older one leaves them as they are.
     if set_settings and isinstance(json_data.get('custom_inbounds'), list):
         CustomInbound.bulk_register(json_data['custom_inbounds'], commit=False)
+    # watashi v12.3.55dev: and only a backup that carries the outbounds
+    # replaces them; an older backup leaves them as they are.
+    if set_settings and isinstance(json_data.get('custom_outbounds'), list):
+        CustomOutbound.bulk_register(json_data['custom_outbounds'], commit=False)
+    # watashi v12.3.56dev: and the routing rules, same contract as the rest.
+    if set_settings and isinstance(json_data.get('routing_rules'), list):
+        RoutingRule.bulk_register(json_data['routing_rules'])
 
     ids_without_parent = get_ids_without_parent({u.id: u.to_dict() for u in AdminUser.query.all()})
     owner = AdminUser.get_super_admin()
@@ -473,5 +484,35 @@ def all_configs_for_cli():
         configs['custom_inbounds'] = []
         configs['custom_inbounds_rev'] = ''
         configs['custom_inbounds_rev_singbox'] = ''  # watashi v12.3.42dev
+
+    # watashi v12.3.55dev: the hand built outbounds, the same shape and the
+    # same safety. A problem here must never cost the rest of the configuration.
+    try:
+        from watashipanel.hutils.proxy import custom_outbound
+        configs['custom_outbounds'] = [
+            dict(r.to_dict(), core=r.core) for r in CustomOutbound.all_rows()
+        ]
+        configs['custom_outbounds_rev'] = custom_outbound.ws_rev(configs['custom_outbounds'], 'xray')
+        configs['custom_outbounds_rev_singbox'] = custom_outbound.ws_rev(configs['custom_outbounds'], 'singbox')
+    except Exception as problem:
+        print('watashi: the hand built outbounds could not be exported', problem)
+        configs['custom_outbounds'] = []
+        configs['custom_outbounds_rev'] = ''
+        configs['custom_outbounds_rev_singbox'] = ''
+
+    # watashi v12.3.56dev: the hand built routing rules, the same safety: the
+    # xray rows, the sing-box rows and a rev for each, so the templates and the
+    # Routing page know whether an apply is needed.
+    try:
+        from watashipanel.hutils.proxy import routing_rule
+        rows = routing_rule.ws_export_rows()
+        configs['routing_rules'] = rows
+        configs['routing_rules_rev'] = routing_rule.ws_rev(rows, 'xray')
+        configs['routing_rules_rev_singbox'] = routing_rule.ws_rev(rows, 'singbox')
+    except Exception as problem:
+        print('watashi: the routing rules could not be exported', problem)
+        configs['routing_rules'] = []
+        configs['routing_rules_rev'] = ''
+        configs['routing_rules_rev_singbox'] = ''
 
     return configs
