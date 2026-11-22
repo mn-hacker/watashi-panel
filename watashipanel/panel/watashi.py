@@ -470,7 +470,7 @@ def all_configs_for_cli():
     configs['panel_links'].append(get_account_panel_link(owner, server_ip, is_https=False))
     configs['panel_links'].append(get_account_panel_link(owner, server_ip))
     
-    domains = Domain.get_domains()
+    domains = Domain.get_domains(include_sub_link_only=True)
     for d in domains:
         configs['panel_links'].append(get_account_panel_link(owner, d.domain))
 

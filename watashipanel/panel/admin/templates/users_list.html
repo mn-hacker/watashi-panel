@@ -1255,6 +1255,12 @@
         // relative label is correct no matter which timezone the browser is in.
         (function lastSeenLabels() {
             var ONLINE_WINDOW = 120; // seconds - matches the panel's own Online badge
+            /* watashi v12.3.62dev: the heartbeat used to reach for ONLINE_URL
+               from the noteAutoSave IIFE above - a different closure, so the
+               very first pull threw ReferenceError and every later tick died
+               with it: labels froze at their render-time value and only a
+               manual reload refreshed them. The URL now lives in this scope. */
+            var ONLINE_URL = {{ hurl_for('admin.MonitoringAdmin:api_online_status') | tojson }};
 
             function humanize(sec) {
                 if (sec < 60) return {{ _('a few seconds ago')|tojson }};
@@ -1331,26 +1337,47 @@
                monitoring heartbeat so a user who connects while the admin is
                sitting on this page flips to "Online now" without a reload.
                The old timer only re-humanized the stamp the page was
-               rendered with, so ten open minutes meant a ten-minute-old lie. */
+               rendered with, so ten open minutes meant a ten-minute-old lie.
+               watashi v12.3.62dev: the pull works on the .row-seen chips and
+               finds the uuid on the nearest [data-uuid] host, so a chip the
+               server rendered as "Never" is pulled too (a user who connects
+               while this page is open) and any host element works, not just
+               a <tr>. A silent fetch failure used to leave every label
+               frozen at its render-time value until a manual reload. */
+            function chipHost(chip) {
+                var host = chip.closest('[data-uuid]');
+                return host ? (host.getAttribute('data-uuid') || '') : '';
+            }
+
             function pullOnline() {
-                var stamps = document.querySelectorAll('.row-seen-ts[data-lastseen]');
-                if (!stamps.length) return;
-                var uuidByStamp = new Map();
-                stamps.forEach(function (el) {
-                    var row = el.closest('tr');
-                    if (!row) return;
-                    var uuid = row.getAttribute('data-uuid') || '';
-                    if (uuid) uuidByStamp.set(uuid, el);
+                var chips = document.querySelectorAll('.row-seen');
+                if (!chips.length) return;
+                var chipByUuid = new Map();
+                chips.forEach(function (chip) {
+                    var uuid = chipHost(chip);
+                    if (uuid && !chipByUuid.has(uuid)) chipByUuid.set(uuid, chip);
                 });
-                if (!uuidByStamp.size) return;
-                fetch(ONLINE_URL + '?uuids=' + encodeURIComponent(Array.from(uuidByStamp.keys()).join(',')), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                if (!chipByUuid.size) return;
+                fetch(ONLINE_URL + '?uuids=' + encodeURIComponent(Array.from(chipByUuid.keys()).join(',')), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
                     .then(function (r) { return r.json(); })
                     .then(function (res) {
                         if (!res || !res.success || !res.users) return;
-                        uuidByStamp.forEach(function (el, uuid) {
+                        var nowSec = Math.floor(Date.now() / 1000);
+                        chipByUuid.forEach(function (chip, uuid) {
                             var u = res.users[uuid];
-                            if (!u) return;
-                            if (u.seconds != null) el.setAttribute('data-lastseen', Math.floor(Date.now() / 1000) - u.seconds);
+                            if (!u || u.seconds == null) return;
+                            /* a "Never" chip has no stamp span yet: give it the
+                               same anatomy the server renders for known stamps */
+                            if (chip.classList.contains('is-never')) {
+                                chip.classList.remove('is-never');
+                                chip.title = {{ _('Last Connection')|tojson }};
+                                var tsEl = document.createElement('span');
+                                tsEl.className = 'row-seen-ts';
+                                chip.insertBefore(tsEl, chip.firstChild.nextSibling || null);
+                            }
+                            var tsEl = chip.querySelector('.row-seen-ts');
+                            if (!tsEl) return;
+                            tsEl.setAttribute('data-lastseen', nowSec - u.seconds);
                         });
                         refresh();
                     })
@@ -1358,6 +1385,9 @@
             }
 
             setInterval(function () { refresh(); seenWire(); pullOnline(); }, 30000);
+            /* the timer is registered before the first pull can ever throw,
+               so one bad tick cannot kill the heartbeat for the session */
+            try { pullOnline(); } catch (e) { }
         })();
 
         // Smooth Expandable Rows Logic

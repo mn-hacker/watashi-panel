@@ -116,10 +116,10 @@
     .ib-empty .btn { margin-top: 12px; }
 
     /* the editor */
-    .ib-sec { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 13px 13px; margin-top: 12px; }
-    .ib-sec:first-of-type { margin-top: 0; }
-    .ib-sec-title { font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-    .ib-sec-title i { color: var(--ib-violet); }
+    .ib-sec { padding: 2px 2px 6px; margin-top: 14px; border-top: 1px solid var(--border-color); }
+    .ib-sec:first-of-type { margin-top: 0; border-top: 0; padding-top: 2px; }
+    .ib-sec-title { font-size: 11px; font-weight: 700; color: rgb(var(--ws-a-400)); letter-spacing: .4px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .ib-sec-title::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
     .ib-field { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
     .ib-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
     .ib-hint { font-size: 11px; color: var(--text-muted); line-height: 1.85; }
@@ -201,11 +201,16 @@
 </div>
 
 <div class="modal-overlay" id="ibEditModal">
-    <div class="modal-box" style="max-width: 780px;">
-        <div class="modal-header">
-            <div class="modal-title"><i class="fa-solid fa-plug-circle-bolt" style="color: var(--primary-purple, rgb(var(--ws-a-600)));"></i> <span id="ibEditTitle"></span></div>{# watashi v12.3.44dev: palette colour #}
+    <div class="modal-box" style="max-width: 880px; padding: 0; overflow: hidden;">
+        <div class="modal-split">
+        <aside class="modal-rail">
             <button type="button" class="modal-close" onclick="ibHide('ibEditModal')"><i class="fa-solid fa-xmark"></i></button>
-        </div>
+            <span class="modal-rail-icon"><i class="fa-solid fa-plug-circle-bolt"></i></span>
+            <h3 class="modal-rail-title" id="ibEditTitle"></h3>
+            <p class="modal-rail-text">{{ _('Build it field by field, the way x-ui and Marzban do it. Saving applies only this core once, for about a second.') }}</p>
+            <span class="modal-rail-foot"><i class="fa-solid fa-vial"></i> {{ _('Test it with the real core before saving') }}</span>
+        </aside>
+        <div class="modal-main">
         <div class="modal-body" style="overflow-x: hidden;">
             <div class="ib-msg bad" id="ibErrors"></div>
             <div class="ib-msg good" id="ibPassed"></div>
@@ -506,6 +511,8 @@
             <button type="button" class="btn btn-primary" onclick="ibHide('ibEditModal')">{{ _('Cancel') }}</button>
             <button type="button" class="btn btn-primary" id="ibTestBtn" onclick="ibTest()"><i class="fa-solid fa-vial"></i> {{ _('Test') }}</button>
             <button type="button" class="btn btn-green" id="ibSaveBtn" onclick="ibSave()"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save') }}</button>
+        </div>
+        </div>
         </div>
     </div>
 </div>

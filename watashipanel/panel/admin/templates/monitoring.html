@@ -167,6 +167,14 @@
         .detail-grid.detail-grid-2 { grid-template-columns: 1.4fr 1fr; align-items: start; }
         .detail-grid.detail-grid-2 .detail-section h4 { justify-content: flex-start; }
         .detail-grid.detail-grid-2 .device-detail-list { align-items: stretch; }
+        /* watashi v12.3.63dev: a header strip on top of the expanded row —
+           the user status (dot + label) sits up there next to the total
+           usage, so "status on top, value below" is finally true. */
+        .detail-head-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 10px 14px; margin-bottom: 14px; background: var(--bg-detail, rgba(148,163,184,.06)); border: 1px solid var(--border-color); border-radius: 10px; }
+        .detail-head-strip .status-cell { justify-content: flex-start; }
+        .detail-head-strip .head-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+        .detail-head-strip .head-item b { color: var(--text-main); font-weight: 600; }
+        .detail-head-strip .head-sep { width: 1px; height: 18px; background: var(--border-color); }
         .detail-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .detail-section h4 i { font-size: 10px; }
 
@@ -176,6 +184,12 @@
         /* watashi v12.3.50dev: the app and the carrier of a device, inline under the name */
         .device-detail-item .device-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
         .device-detail-item .device-meta-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-muted); background: var(--bg-secondary, rgba(148,163,184,.1)); border: 1px solid var(--border-color); border-radius: 999px; padding: 2px 8px; }
+        /* watashi v12.3.63dev: per-device online chip — green/gray dot inside
+           a pill, so with two devices on one subscription it is clear which
+           one is live and which one is gone. */
+        .device-detail-item .device-online { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; border-radius: 999px; padding: 2px 9px; }
+        .device-detail-item .device-online.on { color: var(--primary-green); background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.35); }
+        .device-detail-item .device-online.off { color: var(--text-muted); background: rgba(148,163,184,.08); border: 1px solid var(--border-color); }
         .device-detail-item .first-seen { color: var(--text-muted); font-size: 10px; }
 
         .traffic-stats { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -724,12 +738,14 @@ function detailHtml(u, idx){
       var tags='';
       if(d.app) tags+='<span class="device-meta-tag"><i class="fa-solid fa-window-restore"></i> '+esc(d.app)+'</span>';
       if(d.operator) tags+='<span class="device-meta-tag"><i class="fa-solid fa-tower-cell"></i> '+esc(d.operator)+'</span>';
-      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.name)
-        // watashi v12.3.55dev: a per-device online dot from the device's own
-        // last-seen within the same 120s window.
-        +'<span class="status-dot '+(d.online?'green':'gray')+'" style="vertical-align:middle;margin-inline-start:6px;"></span></span>'
-        +(tags?'<span class="device-meta">'+tags+'</span>':'')
-        +'<span class="first-seen"'+(d.last_seen?' title="'+escAttr(I18N.lastSeen+': '+d.last_seen)+'"':'')+'>'+(d.online?esc(I18N.online):esc(d.last_seen))+'</span></div>'
+      // watashi v12.3.63dev: the per-device status is a real pill chip (dot +
+      // label) instead of a bare floating dot, and the last-seen stamp sits
+      // on its own line under the tags — the chip answers "which device is
+      // live" at a glance when one subscription carries two devices.
+      var chip='<span class="device-online '+(d.online?'on':'off')+'"><span class="status-dot '+(d.online?'green':'gray')+'"></span> '+esc(d.online?I18N.online:I18N.offline)+'</span>';
+      items+='<li class="device-detail-item"><div class="device-detail-info"><span class="device-name">\ud83d\udcbb '+esc(d.name)+'</span>'
+        +'<span class="device-meta">'+chip+tags+'</span>'
+        +'<span class="first-seen"'+(d.last_seen?' title="'+escAttr(I18N.lastSeen+': '+d.last_seen)+'"':'')+'>'+(d.online?'':esc(d.last_seen))+'</span></div>'
         +'<button class="device-kick-btn" title="'+escAttr(I18N.removeDevice)+'" onclick="event.stopPropagation();kickDevice(\''+escAttr(u.uuid)+'\',\''+escAttr(d.hwid)+'\',this)"><i class="fa-solid fa-trash-can"></i></button></li>';
     });
   } else { items='<li class="device-detail-item"><span>'+esc(I18N.noDevices)+'</span></li>'; }
@@ -737,9 +753,22 @@ function detailHtml(u, idx){
   // "Recent destinations" never received data (the old daily query died on a
   // missing column), so the modal now shows the two live sections only, with
   // the user's real total usage from the same row the users page reads.
+  // watashi v12.3.63dev: the status and the total usage move up into a header
+  // strip above the two cards — status on top with its value under it, no
+  // orphan block glued to the bottom edge. Loading text keeps its own
+  // placeholder inside the chart card instead of hugging the panel floor.
   var totalUsage=u.total_usage||0;
   var load='<div class="detail-loading">'+esc(I18N.loading)+'</div>';
-  return '<tr class="detail-panel" id="detail-'+idx+'"><td colspan="7"><div class="detail-wrapper"><div class="detail-inner"><div class="detail-grid detail-grid-2">'
+  var head='<div class="detail-head-strip">'
+    + '<div class="status-cell"'+(u.last_online?' title="'+escAttr(I18N.lastOnline+': '+u.last_online)+'"':'')+'><div class="status-dot '+(u.online?'green':'gray')+'"></div> '+esc(u.online?I18N.online:I18N.offline)+'</div>'
+    + '<div class="head-sep"></div>'
+    + '<div class="head-item"><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.totalUsage)+': <b>'+(totalUsage?esc(fmtBytes(totalUsage)):'—')+'</b></div>'
+    + '<div class="head-sep"></div>'
+    + '<div class="head-item"><i class="fa-solid fa-mobile-screen"></i> '+esc(I18N.connectedDevices)+': <b>'+devs.length+'</b></div>'
+    + '</div>';
+  return '<tr class="detail-panel" id="detail-'+idx+'"><td colspan="7"><div class="detail-wrapper"><div class="detail-inner">'
+    + head
+    + '<div class="detail-grid detail-grid-2">'
     + '<div class="detail-section"><h4><i class="fa-solid fa-network-wired"></i> '+esc(I18N.connectedDevices)+' — '+devs.length+'</h4><ul class="device-detail-list" id="devices-'+idx+'">'+items+'</ul></div>'
     + '<div class="detail-section"><h4><i class="fa-solid fa-chart-bar"></i> '+esc(I18N.totalUsage)+'</h4><div class="traffic-stats" id="usage-total-'+idx+'">'+(totalUsage?esc(fmtBytes(totalUsage)):load)+'</div>'
     + '<div class="mini-chart-wrapper" style="margin-top:12px;"><div class="mini-chart" id="usage-'+idx+'"></div><div class="mini-chart-days" id="usageDays-'+idx+'"><span>'+esc(I18N.loading)+'</span></div></div></div>'

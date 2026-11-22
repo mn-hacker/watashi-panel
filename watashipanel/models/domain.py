@@ -242,7 +242,7 @@ class Domain(db.Model):
         return domains[0].domain
 
     @classmethod
-    def get_domains(cls, always_add_ip=False, always_add_all_domains=False) -> List['Domain']:
+    def get_domains(cls, always_add_ip=False, always_add_all_domains=False, include_sub_link_only=False) -> List['Domain']:
         from watashipanel import hutils
         domains = []
         # watashi v12.3.49dev: a sub-link-only domain is a signpost, never a
@@ -253,6 +253,19 @@ class Domain(db.Model):
         domains = db.session.query(Domain).filter(Domain.enable != False, Domain.child_id == Child.current().id, Domain.mode.notin_([DomainType.sub_link_only, DomainType.fake, DomainType.reality, DomainType.special_reality_tcp, DomainType.special_reality_xhttp, DomainType.special_reality_grpc])).all()
         if not len(domains) or always_add_all_domains:
             domains = db.session.query(Domain).filter(Domain.enable != False, Domain.mode.notin_([DomainType.sub_link_only, DomainType.fake, DomainType.reality,DomainType.special_reality_tcp,DomainType.special_reality_xhttp,DomainType.special_reality_grpc])).all()
+
+        # watashi v12.3.63dev: a caller that builds LINKS (the panel links of
+        # current.json, the user-page share links, the admin column, the cli
+        # export) does want the sub-link-only domains - hiding them here is
+        # what made every update since 49 report "my sub links turned into
+        # cdn domains". Those callers pass include_sub_link_only=True and get
+        # the sub-link-only domains first, exactly like the pre-49 order.
+        # Config builders keep the default: no sub-link-only domain can
+        # become a config, that guard from 49 stays intact.
+        if include_sub_link_only:
+            sub_only = db.session.query(Domain).filter(Domain.enable != False, Domain.child_id == Child.current().id, Domain.mode == DomainType.sub_link_only).all()
+            if sub_only:
+                domains = sub_only + domains
 
         if len(domains) == 0 and request:
             domains = [Domain(domain=request.host)]  # type: ignore

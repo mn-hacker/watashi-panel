@@ -462,7 +462,9 @@ class UserAdmin(AdminLTEModelView):
         <i class='fa-solid fa-arrow-up-right-from-square'></i>
         {_("Current Domain")} </a>"""
 
-        domains = [d for d in Domain.get_domains() if d.domain != request.host]
+        # watashi v12.3.63dev: share links, so sub-link-only domains belong
+        # here too (get_domains hides them since 49)
+        domains = [d for d in Domain.get_domains(include_sub_link_only=True) if d.domain != request.host]
         return Markup(link + " ".join([watashi.get_html_user_link(model, d) for d in domains]))
 
     # def _usage_formatter(view, context, model, name):
@@ -1027,7 +1029,9 @@ class UserAdmin(AdminLTEModelView):
         domains = getattr(g, '_ws_link_domains', None)
         if domains is None:
             try:
-                domains = Domain.get_domains()
+                # watashi v12.3.63dev: these are share links, so a sub-link-only
+                # domain belongs here - get_domains hides it by default since 49
+                domains = Domain.get_domains(include_sub_link_only=True)
             except Exception:
                 domains = []
             g._ws_link_domains = domains

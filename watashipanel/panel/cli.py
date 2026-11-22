@@ -299,7 +299,9 @@ def admin_links():
 
     admin_links = f"Not Secure (do not use it - only if others not work):\n   {watashi.get_account_panel_link(owner, server_ip,is_https=True)}\n"
 
-    domains = Domain.get_domains()
+    # watashi v12.3.63dev: these are the panel sign-in links, so a
+    # sub-link-only domain belongs here (get_domains hides it since 49)
+    domains = Domain.get_domains(include_sub_link_only=True)
     admin_links += f"Secure:\n"
     if not any([d for d in domains if 'sslip.io' not in d.domain]):
         admin_links += f"   (not signed) {watashi.get_account_panel_link(owner, server_ip)}\n"
@@ -314,7 +316,8 @@ def admin_links():
 def admin_path():
     admin = AdminUser.get_super_admin()
     # WTF is the owner and server_id?
-    domain = Domain.get_domains()[0]
+    # watashi v12.3.63dev: the sign-in path wants sub-link-only domains too
+    domain = Domain.get_domains(include_sub_link_only=True)[0]
     print(watashi.get_account_panel_link(admin, domain, prefere_path_only=True))
 
 

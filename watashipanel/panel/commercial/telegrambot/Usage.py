@@ -55,7 +55,9 @@ def get_usage_msg(uuid, domain=None):
         expire_rel = user_data['expire_rel']
         reset_day = user_data['reset_day']
 
-        domain = domain or Domain.get_domains()[0]
+        # watashi v12.3.63dev: this builds the share link, so sub-link-only
+        # domains belong here (get_domains hides them since 49)
+        domain = domain or Domain.get_domains(include_sub_link_only=True)[0]
         user_link = watashi.get_account_panel_link(user, domain.domain)
         with force_locale(user.lang or hconfig(ConfigEnum.lang)):
             msg = f"""{_('<a href="%(user_link)s"> %(user)s</a>',user_link=user_link ,user=user.name if user.name != "default" else "")}\n\n"""

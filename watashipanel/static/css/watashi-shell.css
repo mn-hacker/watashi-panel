@@ -668,6 +668,33 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
             background: linear-gradient(145deg, var(--bg-modal), var(--bg-card)) !important;
         }
 
+        /* watashi v12.3.62dev: the side-rail editor shell — a slim intro rail
+           beside the form (layout 6) whose body keeps boxed sections (layout 3).
+           The inbounds, outbounds and routing editors share it. */
+        .modal-split { display: flex; align-items: stretch; min-height: 0; }
+        .modal-rail { position: relative; width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 10px;
+            padding: 22px 18px 18px; box-sizing: border-box;
+            background: radial-gradient(140% 120% at 0% 0%, rgb(var(--ws-a-600) / 0.16), transparent 65%), var(--bg-card); }
+        .modal-rail:where(:root[dir="rtl"], :root[dir="rtl"] *) { border-inline-end: 1px solid var(--border-color); border-radius: 0 14px 14px 0; }
+        .modal-rail:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { border-inline-start: 1px solid var(--border-color); border-radius: 14px 0 0 14px; }
+        .modal-rail-icon { width: 42px; height: 42px; border-radius: 13px; display: inline-flex; align-items: center; justify-content: center;
+            font-size: 17px; background: rgb(var(--ws-a-600) / .16); color: rgb(var(--ws-a-400)); }
+        .modal-rail-title { font-size: 15.5px; font-weight: 700; color: var(--text-main); margin: 2px 0 0; line-height: 1.6; }
+        .modal-rail-text { font-size: 11.5px; color: var(--text-muted); line-height: 1.9; margin: 0; }
+        .modal-rail-foot { margin-top: auto; padding-top: 12px; font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 7px; }
+        .modal-rail-foot i { color: rgb(var(--ws-b-400)); }
+        .modal-rail .modal-close { position: absolute; top: 12px; inset-inline-end: 12px; }
+        .modal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+        .modal-split .modal-header { padding-top: 18px; }
+        .modal-split .modal-body { flex: 1; min-height: 0; overflow-y: auto; }
+        @media (max-width: 700px) {
+            .modal-split { flex-direction: column; }
+            .modal-rail { width: auto; }
+            .modal-rail:where(:root[dir="rtl"], :root[dir="rtl"] *) { border-inline-end: 0; border-bottom: 1px solid var(--border-color); border-radius: 14px 14px 0 0; }
+            .modal-rail:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { border-inline-start: 0; border-bottom: 1px solid var(--border-color); border-radius: 14px 14px 0 0; }
+            .modal-rail-foot { display: none; }
+        }
+
         .nav-category { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; opacity: 0; transition: opacity 0.2s ease; } .nav-category:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { margin: 16px 0 8px 16px; } .nav-category:where(:root[dir="rtl"], :root[dir="rtl"] *) { margin: 16px 16px 8px 0; } /* watashi v12.3.44dev: right-to-left twin */
         .sidebar.expanded .nav-category { opacity: 0.7; transition-delay: 0.1s; }
 

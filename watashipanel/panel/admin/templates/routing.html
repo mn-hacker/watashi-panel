@@ -68,16 +68,21 @@
     <div class="rt-empty {{ 'show' if not rows }}" id="rtEmpty">
         <i class="fa-solid fa-route rt-empty-icon"></i>
         {{ _('No hand built rule yet. The cores route the traffic fine without one; write the first when a connection needs its own exit.') }}
-        <br><button type="button" class="btn btn-primary" onclick="document.getElementById('btnNew').click()"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
+        <br><button type="button" class="btn btn-green" onclick="document.getElementById('btnNew').click()"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
     </div>
 </div>
 
 <div class="modal-overlay" id="rtEditModal">
-    <div class="modal-box" style="max-width: 640px;">
-        <div class="modal-header">
-            <div class="modal-title"><i class="fa-solid fa-route" style="color: var(--primary-purple, rgb(var(--ws-a-600)));"></i> <span id="rtModalTitle"></span></div>
+    <div class="modal-box" style="max-width: 880px; padding: 0; overflow: hidden;">
+        <div class="modal-split">
+        <aside class="modal-rail">
             <button type="button" class="modal-close" onclick="rtHide()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
+            <span class="modal-rail-icon"><i class="fa-solid fa-route"></i></span>
+            <h3 class="modal-rail-title" id="rtModalTitle"></h3>
+            <p class="modal-rail-text">{{ _('A hand built rule decides which connection takes which exit. The cores match from the top down, so order matters.') }}</p>
+            <span class="modal-rail-foot"><i class="fa-solid fa-arrow-down-short-wide"></i> {{ _('First match wins — keep the narrow rules on top') }}</span>
+        </aside>
+        <div class="modal-main">
         <div class="modal-body" style="overflow-x: hidden;">
             <div class="rt-msg bad" id="rtErrors"></div>
 
@@ -143,6 +148,8 @@
             <button type="button" class="btn btn-primary" id="btnSave"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save') }}</button>
             <button type="button" class="btn btn-secondary" onclick="rtHide()">{{ _('Close') }}</button>
         </div>
+        </div>
+        </div>
     </div>
 </div>
 
@@ -207,11 +214,13 @@
     .rt-empty-icon { font-size: 32px; color: var(--rt-violet); margin-bottom: 10px; display: block; }
 
     .rt-card:hover { border-color: rgb(var(--ws-a-600) / .35); }
-    .rt-sec { border-top: 1px solid var(--border-color); padding: 15px 2px 6px; margin-top: 8px; }
-    .rt-sec:first-of-type { border-top: 0; margin-top: 0; padding-top: 2px; }
+    .rt-sec { padding: 2px 2px 6px; margin-top: 14px; border-top: 1px solid var(--border-color); }
+    .rt-sec:first-of-type { margin-top: 0; border-top: 0; padding-top: 2px; }
+    .rt-sec-title { font-size: 11px; font-weight: 700; color: rgb(var(--ws-a-400)); letter-spacing: .4px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .rt-sec-title::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
     .rt-sec-title { display: flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
-    .rt-sec-ic { width: 27px; height: 27px; border-radius: 9px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
-        background: rgb(var(--ws-a-600) / .12); color: rgb(var(--ws-a-400)); font-size: 12px; }
+    .rt-sec-ic { width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+        background: transparent; color: rgb(var(--ws-a-400)); font-size: 11px; }
     .rt-field { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; min-width: 0; }
     .rt-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
     .rt-field .form-input { background: var(--bg-body); border-radius: 10px; min-height: 38px; }

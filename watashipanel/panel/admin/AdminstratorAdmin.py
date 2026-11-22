@@ -361,7 +361,9 @@ class AdminstratorAdmin(AdminLTEModelView):
 
     def _ul_formatter(view, context, model, name):
 
-        return Markup(" ".join([watashi.get_html_user_link(model, d) for d in Domain.get_domains()]))
+        # watashi v12.3.63dev: share links, so sub-link-only domains belong
+        # here too (get_domains hides them by default since 49)
+        return Markup(" ".join([watashi.get_html_user_link(model, d) for d in Domain.get_domains(include_sub_link_only=True)]))
 
     @property
     def can_create(self):
