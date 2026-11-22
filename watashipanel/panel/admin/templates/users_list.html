@@ -340,9 +340,16 @@
         .sub-link-btn { flex: 1; min-width: 0; display: flex; align-items: center; gap: 9px; padding: 11px 13px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-body); color: var(--text-main); cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.2s; } .sub-link-btn:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { text-align: left; } .sub-link-btn:where(:root[dir="rtl"], :root[dir="rtl"] *) { text-align: right; }{# watashi v12.3.44dev: right-to-left twin #}
         .sub-link-btn:hover { border-color: var(--primary-purple); background: rgb(var(--ws-a-500) / 0.08); transform: translateY(-1px); }
         .sub-link-name { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .sub-link-badge { flex-shrink: 0; font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 6px; border-radius: 5px; }
-        .sub-link-badge.cdn { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-        .sub-link-badge.direct { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .sub-link-badge { flex-shrink: 0; font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 6px; border-radius: 5px; white-space: nowrap; }
+        {# watashi v12.3.68dev: the exact colours the domains page paints these modes with, so a badge says the same thing in the same colour in both places #}
+        .sub-link-badge.direct { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25); }
+        .sub-link-badge.cdn { background: rgba(59, 130, 246, 0.12); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.25); }
+        .sub-link-badge.autocdn { background: rgb(var(--ws-a-600) / 0.12); color: rgb(var(--ws-a-600)); border: 1px solid rgb(var(--ws-a-600) / 0.25); }
+        .sub-link-badge.relay { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
+        .sub-link-badge.fake { background: rgba(107, 114, 128, 0.12); color: #9ca3af; border: 1px solid rgba(107, 114, 128, 0.25); }
+        .sub-link-badge.oldxtls { background: rgba(234, 179, 8, 0.12); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.25); }
+        .sub-link-badge.reality { background: rgb(var(--ws-b-500) / 0.12); color: rgb(var(--ws-b-500)); border: 1px solid rgb(var(--ws-b-500) / 0.25); }
+        .sub-link-badge.sub { background: rgba(96, 165, 250, 0.12); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.25); }
         .sub-link-badge.current { background: rgb(var(--ws-a-500) / 0.15); color: var(--primary-purple); }{# watashi v12.3.44dev: palette colour #}
         .sub-link-qr { flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-body); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
         .sub-link-qr:hover { color: var(--primary-purple); border-color: var(--primary-purple); }
@@ -1575,12 +1582,19 @@
                     label.textContent = item.label || item.domain || '';
 
                     var badge = document.createElement('span');
-                    badge.className = 'sub-link-badge ' + (item.current ? 'current' : item.kind);
-                    badge.textContent = item.current ? {{ _('Current')|tojson }} : (item.kind === 'cdn' ? 'CDN' : {{ _('Direct')|tojson }});
+                    {# watashi v12.3.68dev: the badge is the domain's own mode name and colour, exactly as the domains page paints it; being the current domain adds a second purple marker #}
+                    badge.className = 'sub-link-badge ' + (item.tone || item.kind || 'direct');
+                    badge.textContent = item.badge || (item.kind === 'cdn' ? 'CDN' : {{ _('Direct')|tojson }});
 
                     btn.appendChild(icon);
                     btn.appendChild(label);
                     btn.appendChild(badge);
+                    if (item.current) {
+                        var cur = document.createElement('span');
+                        cur.className = 'sub-link-badge current';
+                        cur.textContent = {{ _('Current')|tojson }};
+                        btn.appendChild(cur);
+                    }
                     btn.addEventListener('click', function () {
                         copyText(item.link).then(function () {
                             toast({{ _('Subscription link copied')|tojson }}, 'success');

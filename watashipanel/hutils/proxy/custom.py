@@ -100,9 +100,10 @@ WS_STACK_PORTS = {
 # and the ? is only there when a pair follows.
 PATH_BODY = r'[A-Za-z0-9._~\-]{1,120}(?:/[A-Za-z0-9._~\-]+)*'
 PATH_QUERY = r'[A-Za-z0-9._~\-]+=[A-Za-z0-9._~\-]*(?:&[A-Za-z0-9._~\-]+=[A-Za-z0-9._~\-]*)*'
-# the root / alone is fine, anything else needs a nonempty first segment, so
-# //bad and /a//b stay out
-PATH_RE = re.compile(rf'^/(?:{PATH_BODY}(?:\?{PATH_QUERY})?)?$')
+# the root / alone is fine, and (watashi v12.3.68dev) so is /?ed=2080 - the
+# query may sit right on the root when the client only sends early data;
+# anything else needs a nonempty first segment, so //bad and /a//b stay out
+PATH_RE = re.compile(rf'^/(?:{PATH_BODY}(?:\?{PATH_QUERY})?|\?{PATH_QUERY})?$')
 SERVICE_RE = re.compile(r'^[A-Za-z0-9._\-]{1,100}$')
 HOST_RE = re.compile(r'^(?=.{1,253}$)[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$')
 SHORT_ID_RE = re.compile(r'^(?:[0-9a-f]{2}){0,8}$')

@@ -179,13 +179,16 @@ def commander(command: Command, run_in_background=True, **kwargs: str | int) -> 
 
 
 def ws_commander_cmd(command: str) -> list:
-    """The sudo line every root-side call runs. The shebang of the deployed
-    commander points at a venv the sandbox does not have, so the sandbox venv
-    python runs it explicitly; on a real server the shebang works and this
-    stays the same shape."""
-    return ['sudo', '/vercel/sandbox/repo/ws-venv/bin/python',
-            os.path.abspath(os.path.join(os.environ['WATASHI_CONFIG_PATH'], 'common/commander.py')),
-            command]
+    """The sudo line every root-side call runs. On a real server the deployed
+    commander runs straight through its shebang - exactly the one command the
+    sudoers rule (/etc/sudoers.d/watashi) allows without a password, so sudo
+    never asks for a terminal. Only the sandbox, whose .venv313 does not
+    exist, falls back to its own venv python."""
+    commander_path = os.path.abspath(os.path.join(
+        os.environ['WATASHI_CONFIG_PATH'], 'common/commander.py'))
+    if os.path.exists('/opt/watashi-manager/.venv313/bin/python'):
+        return ['sudo', commander_path, command]
+    return ['sudo', '/vercel/sandbox/repo/ws-venv/bin/python', commander_path, command]
 
 
 def ws_custom_inbounds(action: str, payload: str | None = None, timeout: int = 90) -> tuple[bool, str]:

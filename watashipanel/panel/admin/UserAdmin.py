@@ -1023,9 +1023,17 @@ class UserAdmin(AdminLTEModelView):
     def ws_user_links(self, user):
         """Every subscription link for this user, one entry per panel domain.
 
+        watashi v12.3.68dev: the pre-49 rule is back. Once the admin defines
+        sub-link-only domains, the share list is exactly that - the domain the
+        admin is on right now first, then only the sub-link domains, no CDN or
+        direct extras. With no sub-link domains defined, every usable domain
+        shows up (current first), exactly like before.
+
         The domain list is resolved once per request and cached on flask.g,
         otherwise a 50 row page would hit the database 50 times.
         """
+        from .DomainAdmin import ws_mode_label, ws_mode_tone
+
         domains = getattr(g, '_ws_link_domains', None)
         if domains is None:
             try:
@@ -1041,7 +1049,7 @@ class UserAdmin(AdminLTEModelView):
         except Exception:
             host = ''
 
-        direct, cdn, seen = [], [], set()
+        sub_only, direct, cdn, seen, current = [], [], [], set(), None
         for d in domains:
             name = (d.domain or '').strip()
             if '*' in name:
@@ -1055,16 +1063,44 @@ class UserAdmin(AdminLTEModelView):
             except Exception:
                 continue
             mode = getattr(d.mode, 'name', str(d.mode or ''))
-            is_cdn = mode in ('cdn', 'auto_cdn_ip')
             entry = {
                 'label': (d.alias or name),
                 'domain': name,
                 'link': link,
-                'kind': 'cdn' if is_cdn else 'direct',
+                # kind still drives the row icon; tone/badge carry the domain
+                # page's own colour and name for this mode
+                'kind': 'cdn' if mode in ('cdn', 'auto_cdn_ip', 'relay', 'worker') else 'direct',
+                'tone': ws_mode_tone(mode),
+                'badge': str(ws_mode_label(mode)),
                 'current': name == host,
             }
-            (cdn if is_cdn else direct).append(entry)
-        return direct + cdn
+            if entry['current']:
+                current = entry
+            if mode == 'sub_link_only':
+                sub_only.append(entry)
+            elif entry['kind'] == 'cdn':
+                cdn.append(entry)
+            else:
+                direct.append(entry)
+
+        if current is None and host:
+            # the domain the admin is on is not in the panel list (an IP or an
+            # unlisted host) - the Current Domain entry always existed, so it
+            # still gets one
+            try:
+                link = watashi.get_account_panel_link(user, host)
+                link += '#' + hutils.encode.unicode_slug(user.name or '')
+                current = {'label': host, 'domain': host, 'link': link,
+                           'kind': 'direct', 'tone': 'direct', 'badge': '',
+                           'current': True}
+            except Exception:
+                current = None
+
+        head = [current] if current else []
+        if sub_only:
+            # sub-link domains are defined: the list is current + them, done
+            return head + sub_only
+        return head + direct + cdn
 
     def ws_user_protocols(self, user):
         """Protocols the panel has enabled, flagged on/off for this user.
