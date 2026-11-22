@@ -1100,17 +1100,16 @@ class UserAdmin(AdminLTEModelView):
                 current = None
 
         head = [current] if current else []
-        # watashi v12.3.71dev: the row the admin is on already heads the list -
-        # the same domain picked up by the mode loops above must not repeat
-        # below it (entering the panel through a sub link showed it twice)
+        # watashi v12.3.72dev: the sub-link check must run on the sub list
+        # BEFORE the current row is deduped out of it - an admin with a single
+        # sub-link domain who enters through it emptied the list here and fell
+        # through to direct + cdn, which is how every domain came back. The
+        # same dedupe guards the no-sub branch: the current row is already
+        # head, it must not repeat in direct.
         head_domains = {e['domain'] for e in head}
-        sub_only = [e for e in sub_only if e['domain'] not in head_domains]
-        direct = [e for e in direct if e['domain'] not in head_domains]
-        cdn = [e for e in cdn if e['domain'] not in head_domains]
         if sub_only:
-            # sub-link domains are defined: the list is current + them, done
-            return head + sub_only
-        return head + direct + cdn
+            return head + [e for e in sub_only if e['domain'] not in head_domains]
+        return head + [e for e in direct if e['domain'] not in head_domains] + cdn
 
     def ws_user_protocols(self, user):
         """Protocols the panel has enabled, flagged on/off for this user.

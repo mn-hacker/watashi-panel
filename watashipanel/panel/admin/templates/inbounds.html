@@ -1103,6 +1103,15 @@
                 if (k === 'ss2022_method') { E.ss2022_key = ''; byId('ibF_ss2022_key').value = ''; }
             });
         });
+        // watashi v12.3.72dev: the address input has no entry in TEXTS, so the
+        // typed value never landed in E.address - the save then stored an empty
+        // address and the user's address surfaced only as the host header
+        var ibAddrEl = byId('ibF_address');
+        if (ibAddrEl) {
+            ibAddrEl.addEventListener('input', function () {
+                if (E) { E.address = ibAddrEl.value; }
+            });
+        }
         CHECKS.forEach(function (k) {
             var el = byId('ibF_' + k);
             if (el) { el.addEventListener('change', function () { if (E) { E[k] = el.checked; } }); }
