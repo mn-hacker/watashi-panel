@@ -154,6 +154,14 @@
     .ib-details { margin-top: 12px; border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 13px; }
     .ib-details summary { cursor: pointer; font-size: 12px; font-weight: 700; color: var(--text-main); }
     .ib-warn-line { font-size: 11.5px; color: var(--ib-amber); line-height: 1.8; }
+    /* watashi v12.3.58dev: the panel's own dropdown in its form flavour, the
+       same flavour users_list gives its filters */
+    .ib-select-hidden { display: none !important; }
+    .dropdown-container.form-dropdown { width: 100%; }
+    .dropdown-container.form-dropdown .dropdown-trigger { background: var(--bg-body); padding: 10px 12px; border-radius: 8px; box-shadow: none; width: 100%; box-sizing: border-box; }
+    .dropdown-container.form-dropdown .dropdown-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dropdown-container.open.form-dropdown .dropdown-trigger { border-color: var(--primary-purple); box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.1); }
+    .dropdown-container.dropup .dropdown-menu { top: auto; bottom: calc(100% + 8px); transform-origin: bottom center; }
 </style>
 
 <div class="ib-wrap">
@@ -1091,6 +1099,74 @@
         CHECKS.forEach(function (k) {
             var el = byId('ibF_' + k);
             if (el) { el.addEventListener('change', function () { if (E) { E[k] = el.checked; } }); }
+        });
+
+        // watashi v12.3.58dev: the browser's own shutter is replaced with the
+        // panel's dropdown. The original select stays in the DOM, hidden, so
+        // every reader of select.value keeps working; the dropdown only
+        // writes the value into it, and a programmatic write (the paint()
+        // above) is caught by the value accessor so the label keeps up.
+        function ibSyncSelect(sel) {
+            var cont = sel.nextElementSibling;
+            if (!cont || !cont.classList.contains('dropdown-container')) { return; }
+            var opt = sel.options[sel.selectedIndex];
+            cont.querySelector('.dropdown-trigger span').textContent = opt ? opt.textContent : '';
+            qa('.dropdown-option', cont).forEach(function (item) {
+                item.classList.toggle('selected', item.getAttribute('data-value') === sel.value);
+            });
+        }
+        function ibEnhanceSelect(sel) {
+            if (sel.getAttribute('data-ib-enhanced')) { return; }
+            sel.setAttribute('data-ib-enhanced', '1');
+            sel.classList.add('ib-select-hidden');
+            var cont = document.createElement('div');
+            cont.className = 'dropdown-container form-dropdown';
+            cont.innerHTML = '<div class="dropdown-trigger"><span></span><i class="fa-solid fa-chevron-down"></i></div>' +
+                             '<div class="dropdown-menu"></div>';
+            sel.parentNode.insertBefore(cont, sel.nextSibling);
+            var trigger = cont.querySelector('.dropdown-trigger');
+            var menu = cont.querySelector('.dropdown-menu');
+            Array.prototype.forEach.call(sel.options, function (opt) {
+                var item = document.createElement('div');
+                item.className = 'dropdown-option';
+                item.setAttribute('data-value', opt.value);
+                item.textContent = opt.textContent;
+                menu.appendChild(item);
+                item.addEventListener('click', function (ev) {
+                    ev.stopPropagation();
+                    sel.value = opt.value;
+                    ibSyncSelect(sel);
+                    cont.classList.remove('open');
+                    sel.dispatchEvent(new Event('change'));
+                    if (typeof paint === 'function') { paint(); }
+                });
+            });
+            trigger.addEventListener('click', function (ev) {
+                ev.stopPropagation();
+                qa('.dropdown-container.open').forEach(function (other) {
+                    if (other !== cont) { other.classList.remove('open'); }
+                });
+                if (!cont.classList.contains('open')) {
+                    var tRect = trigger.getBoundingClientRect();
+                    var clip = cont.closest('.modal-body') || document.documentElement;
+                    var cRect = clip.getBoundingClientRect();
+                    var menuH = menu.scrollHeight || menu.offsetHeight || 200;
+                    var spaceBelow = cRect.bottom - tRect.bottom;
+                    var spaceAbove = tRect.top - cRect.top;
+                    cont.classList.toggle('dropup', spaceBelow < menuH + 16 && spaceAbove > spaceBelow);
+                }
+                cont.classList.toggle('open');
+            });
+            var desc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+            Object.defineProperty(sel, 'value', {
+                get: function () { return desc.get.call(this); },
+                set: function (v) { desc.set.call(this, v); ibSyncSelect(this); }
+            });
+            ibSyncSelect(sel);
+        }
+        qa('#ibEditModal select').forEach(ibEnhanceSelect);
+        document.addEventListener('click', function () {
+            qa('.dropdown-container.open').forEach(function (c) { c.classList.remove('open'); });
         });
 
         function clearMsgs() {

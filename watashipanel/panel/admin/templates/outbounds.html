@@ -1,261 +1,471 @@
 {% extends 'theme_layout.html' %}
 {% set active_page = 'outbounds' %}
-{% block title %}{{ _('Outbounds') }}{% endblock %}
+{# watashi v12.3.58dev: the Outbounds page rebuilt on the panel's own design
+   language — the same pieces the Inbounds and Nodes pages use (banner, result
+   bar, card grid, state pills, chips, the shared modal-box editor, segmented
+   buttons, toggles). The ob- prefix belongs to this page alone, the same way
+   the Inbounds page owns ib-. #}
+{% block header_actions %}
+<button type="button" class="btn btn-primary" id="obRefreshBtn" onclick="location.reload()"><i class="fa-solid fa-rotate"></i> {{ _('Refresh') }}</button>
+<button type="button" class="btn btn-green" id="btnNew"><i class="fa-solid fa-plus"></i> {{ _('New outbound') }}</button>
+{% endblock %}
 
 {% block body %}
-<div class="page-card">
-  <div class="page-head">
-    <h1><i class="fa-solid fa-paper-plane"></i> {{ _('Outbounds') }}</h1>
-    <p class="page-desc">{{ _('The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules.') }}</p>
-  </div>
+<div class="ob-wrap">
+    <div class="ob-banner">
+        <i class="fa-solid fa-paper-plane"></i>
+        <div class="ob-banner-text">
+            <p>{{ _('The hand built outbounds of the advanced mode. An outbound sends nothing by itself; the traffic reaches it through the routing rules.') }}</p>
+            <p><b><i class="fa-solid fa-gauge-simple"></i> {{ _('Is it heavy on the server?') }}</b> {{ _('No. An outbound is one more entry in the same core the panel already runs, and the live test below asks the exit for its real IP and country through the tunnel itself.') }}</p>
+        </div>
+    </div>
 
-  <div class="row-btns">
-    <button type="button" class="btn btn-primary" id="btnNew"><i class="fa-solid fa-plus"></i> {{ _('New Outbound') }}</button>
-    <span class="spacer"></span>
-    <span id="testResult"></span>
-  </div>
+    <div class="ob-bar" id="obBar">
+        <div class="ob-bar-top">
+            <i class="fa-solid fa-circle-info" id="obBarIcon"></i>
+            <div class="ob-bar-text" id="obBarText"></div>
+        </div>
+    </div>
 
-  <table class="table" id="outTable">
-    <thead><tr>
-      <th>{{ _('Tag') }}</th>
-      <th>{{ _('Protocol') }}</th>
-      <th>{{ _('Address') }}</th>
-      <th>{{ _('Port') }}</th>
-      <th>{{ _('Core') }}</th>
-      <th>{{ _('Connect') }}</th>
-      <th>{{ _('Status') }}</th>
-      <th>{{ _('Actions') }}</th>
-    </tr></thead>
-    <tbody>
-      {% for r in rows %}
-      <tr data-id="{{ r.id }}">
-        <td class="cell-tag">{{ r.tag_name }}</td>
-        <td>{{ r.protocol }}</td>
-        <td class="cell-addr">{{ r.address }}:{{ r.port }}</td>
-        <td>{{ r.core }}</td>
-        <td class="cell-connect" id="connect-{{ r.id }}">
-          {% if r.probe_ok %}<span class="badge bg-success" title="{{ r.probe_at }}">{{ r.probe_ip }}{% if r.probe_country %} · {{ r.probe_country }}{% endif %} · {{ r.probe_latency }}ms</span>
-          {% elif r.probe_at %}<span class="badge bg-danger" title="{{ r.probe_at }}">{{ _('Failed') }}</span>
-          {% else %}<span class="badge bg-secondary">—</span>{% endif %}
-        </td>
-        <td>{% if r.enable %}<span class="badge bg-success">{{ _('Enabled') }}</span>{% else %}<span class="badge bg-secondary">{{ _('Disabled') }}</span>{% endif %}</td>
-        <td class="cell-actions">
-          <button class="btn btn-sm btn-primary" onclick="editRow({{ r.id }})"><i class="fa-solid fa-pen"></i></button>
-          <button class="btn btn-sm btn-warning" onclick="testRow({{ r.id }})"><i class="fa-solid fa-vial"></i></button>
-          <button class="btn btn-sm btn-info" onclick="connectRow({{ r.id }})" title="{{ _('Live connect test') }}"><i class="fa-solid fa-globe"></i></button>
-          <button class="btn btn-sm btn-secondary" onclick="toggleRow({{ r.id }})"><i class="fa-solid fa-power-off"></i></button>
-          <button class="btn btn-sm btn-danger" onclick="deleteRow({{ r.id }})"><i class="fa-solid fa-trash"></i></button>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <div class="ob-grid" id="obGrid">
+        {% for r in rows %}
+        <div class="ob-card st-{{ 'serving' if r.enable else 'off' }}" data-id="{{ r.id }}">
+            <div class="ob-beam"></div>
+            <div class="ob-head">
+                <div class="ob-title">
+                    <span class="ob-name">{{ r.remark or r.tag_name }}</span>
+                    <span class="ob-tagline">{{ r.tag_name }}</span>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" {{ 'checked' if r.enable }} onchange="toggleRow({{ r.id }})"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ob-chips">
+                <span class="ob-chip c">{{ r.protocol }}</span>
+                <span class="ob-chip port">{{ r.address }}:{{ r.port }}</span>
+                <span class="ob-chip dim">{{ r.core }}</span>
+            </div>
+            <div class="ob-probe" id="connect-{{ r.id }}">
+                {% if r.probe_ok %}
+                <span class="ob-state st-serving"><i class="fa-solid fa-circle-check"></i> {{ r.probe_ip }}{% if r.probe_country %} · {{ r.probe_country }}{% endif %} · {{ r.probe_latency }}ms</span>
+                {% elif r.probe_at %}
+                <span class="ob-state st-down"><i class="fa-solid fa-circle-xmark"></i> {{ _('Failed') }}</span>
+                {% else %}
+                <span class="ob-state"><i class="fa-solid fa-circle-question"></i> {{ _('Not tested yet') }}</span>
+                {% endif %}
+            </div>
+            <div class="ob-actions">
+                <button class="ob-icon-btn" onclick="connectRow({{ r.id }})" title="{{ _('Live connect test') }}"><i class="fa-solid fa-globe"></i></button>
+                <button class="ob-icon-btn" onclick="testRow({{ r.id }})" title="{{ _('Config check') }}"><i class="fa-solid fa-vial"></i></button>
+                <button class="ob-icon-btn" onclick="editRow({{ r.id }})" title="{{ _('Edit') }}"><i class="fa-solid fa-pen"></i></button>
+                <button class="ob-icon-btn danger" onclick="deleteRow({{ r.id }})" title="{{ _('Delete') }}"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="ob-empty {{ 'show' if not rows }}" id="obEmpty">
+        <i class="fa-solid fa-paper-plane ob-empty-icon"></i>
+        {{ _('No hand built outbound yet. The panel works fine without one; build the first when a routing rule needs its own exit.') }}
+        <br><button type="button" class="btn btn-primary" onclick="document.getElementById('btnNew').click()"><i class="fa-solid fa-plus"></i> {{ _('New outbound') }}</button>
+    </div>
 </div>
 
-<div class="modal-overlay" id="editOverlay">
-  <div class="modal-card">
-    <h3 id="modalTitle">{{ _('New Outbound') }}</h3>
-    <input type="hidden" id="fId">
-    <label>{{ _('Tag') }} <input id="fTag" maxlength="64"></label>
-    <label>{{ _('Remark') }} <input id="fRemark" maxlength="128"></label>
-    <label>{{ _('Fallbacks') }} <input id="fFallbacks" placeholder="{{ _('Fallbacks placeholder') }}"></label>
-    <label>{{ _('Protocol') }}
-      <select id="fProto">
-        {% for p in xray_protocols %}<option value="{{ p }}">{{ p }}</option>{% endfor %}
-        {% for p in singbox_protocols if p not in xray_protocols %}<option value="{{ p }}">{{ p }} (sing-box)</option>{% endfor %}
-      </select>
-    </label>
-    <label>{{ _('Address') }} <input id="fAddress"></label>
-    <label>{{ _('Port') }} <input id="fPort" type="number" min="1" max="65535" value="443"></label>
-    <label>{{ _('Network') }}
-      <select id="fNet">
-        <option value="tcp">tcp</option><option value="ws">ws</option><option value="grpc">grpc</option>
-        <option value="httpupgrade">httpupgrade</option><option value="xhttp">xhttp</option><option value="quic">quic</option>
-      </select>
-    </label>
-    <label>{{ _('Security') }}
-      <select id="fSec">
-        <option value="none">none</option><option value="tls">tls</option><option value="reality">reality</option>
-      </select>
-    </label>
-    <div id="advFields">
-      <label>{{ _('UUID') }} <input id="fUuid"></label>
-      <label>{{ _('Password') }} <input id="fPassword"></label>
-      <label>{{ _('Encryption method') }} <input id="fMethod" placeholder="aes-256-gcm"></label>
-      <label>SNI <input id="fSni"></label>
-      <label>{{ _('Path') }} <input id="fPath" placeholder="/ws"></label>
-      <label>Host <input id="fHost"></label>
-      <label>serviceName <input id="fService"></label>
-      <label>publicKey <input id="fPbk"></label>
-      <label>shortId <input id="fSid"></label>
-      <label>fingerprint <input id="fFp" placeholder="chrome"></label>
-      <label class="check"><input type="checkbox" id="fInsecure"> {{ _('Allow insecure TLS') }}</label>
-      <label class="check"><input type="checkbox" id="fMux"> Mux</label>
+<div class="modal-overlay" id="obEditModal">
+    <div class="modal-box" style="max-width: 640px;">
+        <div class="modal-header">
+            <div class="modal-title"><i class="fa-solid fa-paper-plane" style="color: var(--primary-purple, rgb(var(--ws-a-600)));"></i> <span id="obModalTitle"></span></div>
+            <button type="button" class="modal-close" onclick="obHide()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" style="overflow-x: hidden;">
+            <div class="ob-msg bad" id="obErrors"></div>
+            <div class="ob-msg good" id="obPassed"></div>
+
+            <div class="ob-sec">
+                <div class="ob-sec-title"><i class="fa-solid fa-sliders"></i> {{ _('Basics') }}</div>
+                <input type="hidden" id="fId">
+                <div class="ob-field">
+                    <label for="fRemark">{{ _('Name') }}</label>
+                    <input type="text" class="form-input" dir="auto" id="fRemark" maxlength="128" placeholder="{{ _('For example: my exit behind node two') }}">
+                </div>
+                <div class="ob-field">
+                    <label for="fTag">{{ _('Tag') }}</label>
+                    <input type="text" class="form-input" dir="ltr" id="fTag" maxlength="64" placeholder="{{ _('Left empty, one is coined for you') }}">
+                </div>
+                <div class="ob-field">
+                    <label>{{ _('Protocol') }}</label>
+                    <div class="ob-proto-group">
+                        <span class="ob-core-label">xray</span>
+                        <div class="ob-seg" id="segProto">
+                            <button type="button" data-v="vless">VLESS</button>
+                            <button type="button" data-v="vmess">VMess</button>
+                            <button type="button" data-v="trojan">Trojan</button>
+                            <button type="button" data-v="shadowsocks">Shadowsocks</button>
+                            <button type="button" data-v="socks">SOCKS</button>
+                            <button type="button" data-v="http">HTTP</button>
+                            <button type="button" data-v="wireguard">WireGuard</button>
+                        </div>
+                    </div>
+                    <div class="ob-proto-group">
+                        <span class="ob-core-label">sing-box</span>
+                        <div class="ob-seg" id="segProtoSb">
+                            <button type="button" data-v="hysteria2">Hysteria2</button>
+                            <button type="button" data-v="tuic">TUIC</button>
+                            <button type="button" data-v="shadowtls">ShadowTLS</button>
+                            <button type="button" data-v="ss2022">SS2022</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ob-row">
+                    <div class="ob-field">
+                        <label for="fAddress">{{ _('Address') }}</label>
+                        <input type="text" class="form-input" dir="ltr" id="fAddress" placeholder="exit.example.com">
+                    </div>
+                    <div class="ob-field">
+                        <label for="fPort">{{ _('Port') }}</label>
+                        <input type="number" class="form-input" dir="ltr" id="fPort" min="1" max="65535" placeholder="443">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ob-sec">
+                <div class="ob-sec-title"><i class="fa-solid fa-lock"></i> {{ _('Security and transport') }}</div>
+                <div class="ob-field">
+                    <label>{{ _('Security') }}</label>
+                    <div class="ob-seg" id="segSecurity">
+                        <button type="button" data-v="none">none</button>
+                        <button type="button" data-v="tls">TLS</button>
+                        <button type="button" data-v="reality">Reality</button>
+                    </div>
+                </div>
+                <div class="ob-field">
+                    <label for="fNetwork">{{ _('Transport') }}</label>
+                    <select class="form-input" id="fNetwork">
+                        <option value="tcp">TCP</option><option value="ws">WebSocket</option>
+                        <option value="grpc">gRPC</option><option value="httpupgrade">HTTPUpgrade</option>
+                        <option value="xhttp">XHTTP</option><option value="quic">QUIC</option>
+                    </select>
+                </div>
+                <div class="ob-row">
+                    <div class="ob-field">
+                        <label for="fSni">{{ _('SNI') }}</label>
+                        <input type="text" class="form-input" dir="ltr" id="fSni" placeholder="example.com">
+                    </div>
+                    <div class="ob-field">
+                        <label for="fUuid">{{ _('UUID / password') }}</label>
+                        <input type="text" class="form-input" dir="ltr" id="fUuid">
+                    </div>
+                </div>
+                <div class="ob-field">
+                    <label>{{ _('Fallbacks') }}</label>
+                    <input type="text" class="form-input" dir="ltr" id="fFallbacks" placeholder="tag1, tag2">
+                    <span class="ob-hint">{{ _('Tried in order when this outbound fails its live test.') }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnSave"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save') }}</button>
+            <button type="button" class="btn btn-secondary" onclick="obHide()">{{ _('Close') }}</button>
+        </div>
     </div>
-    <div class="modal-btns">
-      <button class="btn btn-primary" id="btnSave">{{ _('Save') }}</button>
-      <button class="btn btn-secondary" id="btnTest">{{ _('Test') }}</button>
-      <button class="btn btn-secondary" id="btnClose">{{ _('Close') }}</button>
-    </div>
-  </div>
 </div>
 
 <style>
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 60; }
-.modal-overlay.show { display: flex; }
-.modal-card { background: var(--panel-bg, #16181d); color: var(--text, #eee); padding: 24px; border-radius: 12px; width: min(560px, 94vw); max-height: 88vh; overflow: auto; }
-.modal-card label { display: block; margin-bottom: 10px; }
-.modal-card input:not([type=checkbox]), .modal-card select { width: 100%; margin-top: 4px; }
-.modal-btns { display: flex; gap: 8px; margin-top: 14px; }
-.row-btns { display: flex; align-items: center; gap: 10px; margin: 12px 0; }
-.spacer { flex: 1; }
-.page-desc { color: var(--text-muted, #999); font-size: .92em; }
+    .ob-wrap { display: flex; flex-direction: column; gap: 13px; padding-bottom: 16px;
+        --ob-violet: rgb(var(--ws-a-600)); --ob-cyan: rgb(var(--ws-b-400)); --ob-green: #10b981; --ob-amber: #f59e0b; --ob-red: #ef4444; --ob-blue: #3b82f6; }
+    .ob-banner { position: relative; overflow: hidden; background:
+            radial-gradient(120% 180% at 100% 0%, rgb(var(--ws-a-600) / 0.12), transparent 60%), var(--bg-card);
+        border: 1px solid var(--border-color); border-radius: 14px; padding: 12px 15px; display: flex;
+        align-items: flex-start; gap: 12px; color: var(--text-muted); font-size: 12px; line-height: 1.9; }
+    .ob-banner > i { color: var(--ob-violet); font-size: 15px; flex-shrink: 0; margin-top: 4px; }
+    .ob-banner b { color: var(--text-main); font-weight: 600; }
+    .ob-banner-text { flex: 1; min-width: 0; }
+    .ob-banner-text p { margin: 0; }
+    .ob-banner-text p + p { margin-top: 4px; }
+
+    .ob-bar { display: none; border-radius: 14px; padding: 12px 15px; border: 1px solid var(--border-color);
+        background: var(--bg-card); font-size: 12.5px; color: var(--text-main); line-height: 1.85; }
+    .ob-bar.show { display: block; }
+    .ob-bar-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .ob-bar-top > i { font-size: 15px; }
+    .ob-bar-text { flex: 1; min-width: 200px; word-break: break-word; }
+    .ob-bar.run { border-color: rgba(59, 130, 246, 0.5); }
+    .ob-bar.run .ob-bar-top > i { color: var(--ob-blue); }
+    .ob-bar.good { border-color: rgba(16, 185, 129, 0.5); }
+    .ob-bar.good .ob-bar-top > i { color: var(--ob-green); }
+    .ob-bar.bad { border-color: rgba(239, 68, 68, 0.5); }
+    .ob-bar.bad .ob-bar-top > i { color: var(--ob-red); }
+
+    .ob-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 13px; }
+    .ob-card { position: relative; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-color);
+        border-radius: 14px; padding: 15px 15px 12px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .ob-beam { position: absolute; inset-inline: 0; top: 0; height: 2px; background: var(--border-color); }
+    .ob-card.st-serving .ob-beam { background: linear-gradient(90deg, transparent, var(--ob-green), var(--ob-cyan), transparent); }
+    .ob-card.st-off { opacity: 0.82; }
+
+    .ob-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .ob-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .ob-name { font-size: 14px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ob-tagline { font-size: 11px; color: var(--text-muted); direction: ltr; text-align: start; unicode-bidi: plaintext; }
+    .ob-head .toggle-switch { transform: scale(0.8); flex-shrink: 0; }
+
+    .ob-chips { display: flex; flex-wrap: wrap; gap: 6px; direction: ltr; justify-content: flex-start; }
+    .ob-chip { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 8px; background: var(--bg-body);
+        border: 1px solid var(--border-color); color: var(--text-main); white-space: nowrap; }
+    .ob-chip.c { color: #f472b6; border-color: rgba(244, 114, 182, .35); }
+    .ob-chip.port { color: var(--ob-amber); border-color: rgba(245, 158, 11, .35); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .ob-chip.dim { color: var(--text-muted); }
+
+    .ob-probe { min-height: 22px; }
+    .ob-state { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 700; padding: 3px 9px;
+        border-radius: 999px; white-space: nowrap; border: 1px solid var(--border-color); color: var(--text-muted); }
+    .ob-state.st-serving { color: var(--ob-green); background: rgba(16, 185, 129, .12); border-color: rgba(16, 185, 129, .3); }
+    .ob-state.st-down { color: var(--ob-red); background: rgba(239, 68, 68, .12); border-color: rgba(239, 68, 68, .3); }
+
+    .ob-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 2px; }
+    .ob-icon-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px;
+        padding: 5px 9px; cursor: pointer; font-size: 12px; }
+    .ob-icon-btn:hover { border-color: var(--ob-violet); color: rgb(var(--ws-a-400)); }
+    .ob-icon-btn.danger:hover { border-color: var(--ob-red); color: var(--ob-red); }
+
+    .ob-empty { display: none; text-align: center; padding: 40px 20px; background: var(--bg-card); border: 1px dashed var(--border-color);
+        border-radius: 14px; color: var(--text-muted); font-size: 13px; line-height: 1.9; }
+    .ob-empty.show { display: block; }
+    .ob-empty-icon { font-size: 32px; color: var(--ob-violet); margin-bottom: 10px; display: block; }
+
+    .ob-sec { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 13px 13px; margin-top: 12px; }
+    .ob-sec:first-of-type { margin-top: 0; }
+    .ob-sec-title { font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+    .ob-sec-title i { color: var(--ob-violet); }
+    .ob-field { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
+    .ob-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
+    .ob-hint { font-size: 11px; color: var(--text-muted); line-height: 1.85; }
+    .ob-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+    @media (max-width: 640px) { .ob-row { grid-template-columns: 1fr; } }
+    .ob-seg { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ob-seg button { padding: 7px 13px; border-radius: 9px; border: 1px solid var(--border-color); background: var(--bg-body);
+        color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: border-color .2s, background .2s; }
+    .ob-seg button:hover:not(:disabled) { border-color: var(--ob-blue); }
+    .ob-seg button.on { border-color: var(--ob-blue); background: rgba(59, 130, 246, 0.14); color: #60a5fa; }
+    .ob-proto-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .ob-proto-group + .ob-proto-group { margin-top: 8px; }
+    .ob-core-label { font-size: 10.5px; font-weight: 700; color: var(--text-muted); min-width: 56px; direction: ltr; text-align: start; }
+
+    .ob-msg { display: none; border-radius: 9px; padding: 8px 11px; font-size: 12px; line-height: 1.8; margin-bottom: 8px; word-break: break-word; }
+    .ob-msg.show { display: block; }
+    .ob-msg.bad { color: var(--ob-red); background: rgba(239, 68, 68, .08); border: 1px solid rgba(239, 68, 68, .25); }
+    .ob-msg.good { color: var(--ob-green); background: rgba(16, 185, 129, .08); border: 1px solid rgba(16, 185, 129, .25); }
+
+    /* watashi v12.3.58dev: the panel's own dropdown in its form flavour */
+    .ob-select-hidden { display: none !important; }
+    .dropdown-container.form-dropdown { width: 100%; }
+    .dropdown-container.form-dropdown .dropdown-trigger { background: var(--bg-body); padding: 10px 12px; border-radius: 8px; box-shadow: none; width: 100%; box-sizing: border-box; }
+    .dropdown-container.form-dropdown .dropdown-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dropdown-container.open.form-dropdown .dropdown-trigger { border-color: var(--primary-purple); box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.1); }
+    .dropdown-container.dropup .dropdown-menu { top: auto; bottom: calc(100% + 8px); transform-origin: bottom center; }
 </style>
 
 <script>
-const API = location.pathname.replace(/\/+$/, '') + '/';
-const I18N = {
+const OB_ROWS = {{ rows | tojson }};
+const OB_I18N = {
   saved: {{ _('Saved') | tojson }},
   deleted: {{ _('Deleted') | tojson }},
   failed: {{ _('Request failed') | tojson }},
-  newOut: {{ _('New Outbound') | tojson }},
-  editOut: {{ _('Edit Outbound') | tojson }},
-  coreAccepts: {{ _('The core accepts this outbound') | tojson }},
-  confirmDelete: {{ _('Delete this outbound?') | tojson }},
+  newOut: {{ _('New outbound') | tojson }},
+  editOut: {{ _('Edit outbound') | tojson }},
+  sure: {{ _('Delete this outbound?') | tojson }},
+  testing: {{ _('The core is checking the config…') | tojson }},
+  probing: {{ _('The core is asking the exit for its IP…') | tojson }},
 };
-let ROWS = [];
+const OB_API = location.pathname;
 
-function obOverlay(show) { document.getElementById('editOverlay').classList.toggle('show', show); }
-function say(ok, text) {
-  const el = document.getElementById('testResult');
-  el.textContent = text;
-  el.style.color = ok ? 'var(--primary-green, #4c1)' : 'var(--primary-red, #f45)';
+function obShow() { document.getElementById('obEditModal').classList.add('show'); }
+function obHide() { document.getElementById('obEditModal').classList.remove('show'); }
+
+function obSay(kind, text) {
+  const bar = document.getElementById('obBar');
+  bar.className = 'ob-bar show ' + (kind || '');
+  document.getElementById('obBarText').textContent = text || '';
 }
 
-function gather() {
-  return {
-    id: document.getElementById('fId').value || null,
-    tag_name: document.getElementById('fTag').value.trim(),
-    remark: document.getElementById('fRemark').value.trim(),
-    protocol: document.getElementById('fProto').value,
-    address: document.getElementById('fAddress').value.trim(),
-    port: parseInt(document.getElementById('fPort').value || '443', 10),
-    network: document.getElementById('fNet').value,
-    security: document.getElementById('fSec').value,
-    settings: {
-      uuid: document.getElementById('fUuid').value.trim(),
-      password: document.getElementById('fPassword').value,
-      method: document.getElementById('fMethod').value.trim(),
-      sni: document.getElementById('fSni').value.trim(),
-      path: document.getElementById('fPath').value.trim(),
-      host: document.getElementById('fHost').value.trim(),
-      serviceName: document.getElementById('fService').value.trim(),
-      pbk: document.getElementById('fPbk').value.trim(),
-      sid: document.getElementById('fSid').value.trim(),
-      fingerprint: document.getElementById('fFp').value.trim(),
-      insecure: document.getElementById('fInsecure').checked,
-      mux_enable: document.getElementById('fMux').checked,
-    },
-  };
-}
-
-function fill(row) {
-  document.getElementById('fId').value = row.id || '';
-  document.getElementById('fTag').value = row.tag_name || '';
-  document.getElementById('fRemark').value = row.remark || '';
-  document.getElementById('fProto').value = row.protocol || 'vless';
-  document.getElementById('fAddress').value = row.address || '';
-  document.getElementById('fPort').value = row.port || 443;
-  document.getElementById('fNet').value = row.network || 'tcp';
-  document.getElementById('fSec').value = row.security || 'none';
-  const s = row.settings || {};
-  document.getElementById('fUuid').value = s.uuid || '';
-  document.getElementById('fPassword').value = s.password || '';
-  document.getElementById('fMethod').value = s.method || '';
-  document.getElementById('fSni').value = s.sni || '';
-  document.getElementById('fPath').value = s.path || '';
-  document.getElementById('fHost').value = s.host || '';
-  document.getElementById('fService').value = s.serviceName || '';
-  document.getElementById('fPbk').value = s.pbk || '';
-  document.getElementById('fSid').value = s.sid || '';
-  document.getElementById('fFp').value = s.fingerprint || '';
-  document.getElementById('fInsecure').checked = !!s.insecure;
-  document.getElementById('fMux').checked = !!s.mux_enable;
-  document.getElementById('fFallbacks').value = (row.fallbacks || []).join(', ');
-}
-
-async function post(path, body) {
-  const res = await fetch(API + path, {
-    method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-    body: JSON.stringify(body || {}),
-  });
+async function obPost(path, body) {
+  const res = await fetch(OB_API + path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                          body: JSON.stringify(body || {})});
   return res.json();
 }
 
-function editRow(id) {
-  const row = ROWS.find(r => r.id === id) || {};
-  document.getElementById('modalTitle').textContent = I18N.editOut;
-  fill(row);
-  obOverlay(true);
+function obSeg(id, value) {
+  const seg = document.getElementById(id);
+  seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === value));
+}
+function obSegVal(id, fallback) {
+  const on = document.querySelector('#' + id + ' button.on');
+  return on ? on.dataset.v : fallback;
 }
 
-async function testRow(id) {
-  const row = ROWS.find(r => r.id === id) || {};
-  say(true, '…');
-  const res = await post('test', row);
-  say(res.success, res.message || I18N.failed);
-}
+function obFind(id) { return OB_ROWS.find(r => r.id === id); }
 
-async function connectRow(id) {
+window.editRow = (id) => {
+  const r = obFind(id); if (!r) return;
+  document.getElementById('obModalTitle').textContent = OB_I18N.editOut;
+  document.getElementById('fId').value = r.id;
+  document.getElementById('fRemark').value = r.remark || '';
+  document.getElementById('fTag').value = r.tag_name || '';
+  document.getElementById('fAddress').value = r.address || '';
+  document.getElementById('fPort').value = r.port || 443;
+  document.getElementById('fSni').value = (r.settings && r.settings.sni) || '';
+  document.getElementById('fUuid').value = (r.settings && (r.settings.uuid || r.settings.password)) || '';
+  document.getElementById('fNetwork').value = r.network || 'tcp';
+  document.getElementById('fFallbacks').value = (r.fallbacks || []).join(', ');
+  const protoSeg = ['vless','vmess','trojan','shadowsocks','socks','http','wireguard'].includes(r.protocol) ? 'segProto' : 'segProtoSb';
+  obSeg(protoSeg, r.protocol);
+  obSeg('segSecurity', r.security || 'none');
+  obShow();
+};
+
+window.toggleRow = async (id) => { await obPost('toggle', {id}); location.reload(); };
+window.deleteRow = async (id) => {
+  if (!confirm(OB_I18N.sure)) return;
+  await obPost('delete', {id});
+  location.reload();
+};
+
+window.testRow = async (id) => {
+  obSay('run', OB_I18N.testing);
+  const r = obFind(id) || {};
+  const res = await obPost('test', r);
+  obSay(res.success ? 'good' : 'bad', res.message || (res.success ? OB_I18N.saved : OB_I18N.failed));
+};
+
+window.connectRow = async (id) => {
   const cell = document.getElementById('connect-' + id);
   const old = cell ? cell.innerHTML : '';
-  if (cell) cell.innerHTML = '<span class="badge bg-secondary">…</span>';
-  const res = await post('connect', { id });
+  if (cell) cell.innerHTML = '<span class="ob-state"><i class="fa-solid fa-spinner fa-spin"></i> …</span>';
+  obSay('run', OB_I18N.probing);
+  const res = await obPost('connect', {id});
   if (res.success && cell) {
-    cell.innerHTML = '<span class="badge bg-success">' + (res.exit_ip || '') +
+    cell.innerHTML = '<span class="ob-state st-serving"><i class="fa-solid fa-circle-check"></i> ' + (res.exit_ip || '') +
       (res.country ? ' · ' + res.country : '') + ' · ' + (res.latency_ms || 0) + 'ms</span>';
-    say(true, I18N.saved);
+    obSay('good', OB_I18N.saved);
   } else {
-    if (cell) cell.innerHTML = old;
-    say(false, res.message || I18N.failed);
+    if (cell) cell.innerHTML = '<span class="ob-state st-down"><i class="fa-solid fa-circle-xmark"></i> ' + (OB_I18N.failed) + '</span>';
+    obSay('bad', res.message || OB_I18N.failed);
   }
-}
-
-async function toggleRow(id) {
-  const res = await post('toggle', { id });
-  if (res.success) location.reload(); else say(false, res.message || I18N.failed);
-}
-
-async function deleteRow(id) {
-  if (!confirm(I18N.confirmDelete)) return;
-  const res = await post('delete', { id });
-  if (res.success) location.reload(); else say(false, res.message || I18N.failed);
-}
+};
 
 document.getElementById('btnNew').onclick = () => {
-  document.getElementById('modalTitle').textContent = I18N.newOut;
-  fill({});
-  obOverlay(true);
-};
-document.getElementById('btnClose').onclick = () => obOverlay(false);
-document.getElementById('btnSave').onclick = async () => {
-  const res = await post('save', gather());
-  if (res.success) {
-    const body = gather();
-    const saved = res.row || {};
-    if (saved.id && body.settings) {
-      const chain = document.getElementById('fFallbacks').value.split(',').map(s => s.trim()).filter(Boolean);
-      await post('fallbacks', { id: saved.id, fallbacks: chain });
-    }
-    location.reload();
-  } else { say(false, res.message || I18N.failed); }
-};
-document.getElementById('btnTest').onclick = async () => {
-  say(true, '…');
-  const res = await post('test', gather());
-  say(res.success, res.message || I18N.failed);
+  document.getElementById('obModalTitle').textContent = OB_I18N.newOut;
+  document.getElementById('fId').value = '';
+  document.getElementById('fRemark').value = '';
+  document.getElementById('fTag').value = '';
+  document.getElementById('fAddress').value = '';
+  document.getElementById('fPort').value = 443;
+  document.getElementById('fSni').value = '';
+  document.getElementById('fUuid').value = '';
+  document.getElementById('fFallbacks').value = '';
+  obSeg('segProto', 'vless'); obSeg('segSecurity', 'none');
+  document.getElementById('fNetwork').value = 'tcp';
+  obShow();
 };
 
-ROWS = {{ rows | tojson }};
+for (const segId of ['segProto', 'segProtoSb', 'segSecurity']) {
+  document.getElementById(segId).addEventListener('click', (ev) => {
+    const b = ev.target.closest('button'); if (!b) return;
+    obSeg(segId, b.dataset.v);
+  });
+}
+
+document.getElementById('btnSave').onclick = async () => {
+  const protocol = obSegVal('segProto') ? obSegVal('segProto') : obSegVal('segProtoSb', 'vless');
+  const body = {
+    id: document.getElementById('fId').value || null,
+    remark: document.getElementById('fRemark').value.trim(),
+    tag_name: document.getElementById('fTag').value.trim(),
+    protocol: protocol,
+    address: document.getElementById('fAddress').value.trim(),
+    port: parseInt(document.getElementById('fPort').value) || 443,
+    security: obSegVal('segSecurity', 'none'),
+    network: document.getElementById('fNetwork').value,
+    enable: true,
+    settings: {
+      sni: document.getElementById('fSni').value.trim(),
+      uuid: document.getElementById('fUuid').value.trim(),
+      password: document.getElementById('fUuid').value.trim(),
+    },
+  };
+  const res = await obPost('save', body);
+  if (res.success) {
+    const chain = document.getElementById('fFallbacks').value.split(',').map(s => s.trim()).filter(Boolean);
+    if (res.row && res.row.id && chain.length) await obPost('fallbacks', {id: res.row.id, fallbacks: chain});
+    obSay('good', OB_I18N.saved);
+    setTimeout(() => location.reload(), 350);
+  } else {
+    obSay('bad', res.message || OB_I18N.failed);
+  }
+};
+
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') obHide(); });
+
+// watashi v12.3.58dev: the browser's own shutter is replaced with the panel's
+// dropdown. The original select stays in the DOM, hidden, so every reader of
+// select.value keeps working; the dropdown only writes the value into it.
+function obSyncSelect(sel) {
+  const cont = sel.nextElementSibling;
+  if (!cont || !cont.classList.contains('dropdown-container')) return;
+  const opt = sel.options[sel.selectedIndex];
+  cont.querySelector('.dropdown-trigger span').textContent = opt ? opt.textContent : '';
+  cont.querySelectorAll('.dropdown-option').forEach(item =>
+    item.classList.toggle('selected', item.dataset.value === sel.value));
+}
+function obEnhanceSelect(sel) {
+  if (sel.dataset.obEnhanced) return;
+  sel.dataset.obEnhanced = '1';
+  sel.classList.add('ob-select-hidden');
+  const cont = document.createElement('div');
+  cont.className = 'dropdown-container form-dropdown';
+  cont.innerHTML = '<div class="dropdown-trigger"><span></span><i class="fa-solid fa-chevron-down"></i></div>' +
+                   '<div class="dropdown-menu"></div>';
+  sel.parentNode.insertBefore(cont, sel.nextSibling);
+  const trigger = cont.querySelector('.dropdown-trigger');
+  const menu = cont.querySelector('.dropdown-menu');
+  Array.from(sel.options).forEach(opt => {
+    const item = document.createElement('div');
+    item.className = 'dropdown-option';
+    item.dataset.value = opt.value;
+    item.textContent = opt.textContent;
+    menu.appendChild(item);
+    item.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      sel.value = opt.value;
+      obSyncSelect(sel);
+      cont.classList.remove('open');
+      sel.dispatchEvent(new Event('change'));
+    });
+  });
+  trigger.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    document.querySelectorAll('.dropdown-container.open').forEach(other => {
+      if (other !== cont) other.classList.remove('open');
+    });
+    if (!cont.classList.contains('open')) {
+      const tRect = trigger.getBoundingClientRect();
+      const clip = cont.closest('.modal-body') || document.documentElement;
+      const cRect = clip.getBoundingClientRect();
+      const menuH = menu.scrollHeight || menu.offsetHeight || 200;
+      const spaceBelow = cRect.bottom - tRect.bottom;
+      const spaceAbove = tRect.top - cRect.top;
+      cont.classList.toggle('dropup', spaceBelow < menuH + 16 && spaceAbove > spaceBelow);
+    }
+    cont.classList.toggle('open');
+  });
+  const desc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+  Object.defineProperty(sel, 'value', {
+    get: function () { return desc.get.call(this); },
+    set: function (v) { desc.set.call(this, v); obSyncSelect(this); }
+  });
+  obSyncSelect(sel);
+}
+document.querySelectorAll('#obEditModal select').forEach(obEnhanceSelect);
+document.addEventListener('click', () => {
+  document.querySelectorAll('.dropdown-container.open').forEach(c => c.classList.remove('open'));
+});
 </script>
 {% endblock %}

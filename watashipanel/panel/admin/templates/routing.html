@@ -1,142 +1,329 @@
 {% extends 'theme_layout.html' %}
 {% set active_page = 'routing' %}
+{# watashi v12.3.58dev: the Routing page rebuilt on the panel's own design
+   language — the same pieces the Outbounds and Inbounds pages use (banner,
+   result bar, state pills, chips, the shared modal-box editor, the panel's
+   own dropdowns instead of the browser's). The rt- prefix belongs to this
+   page alone, the same way the Outbounds page owns ob-. The rules stay a
+   numbered stack on purpose: they run top down, so the order is the meaning. #}
 {% block title %}{{ _('Routing') }}{% endblock %}
 
+{% block header_actions %}
+<button type="button" class="btn btn-secondary" id="rtTestX"><i class="fa-solid fa-vial"></i> xray</button>
+<button type="button" class="btn btn-secondary" id="rtTestS"><i class="fa-solid fa-vial"></i> sing-box</button>
+<button type="button" class="btn btn-primary" id="rtRefreshBtn" onclick="location.reload()"><i class="fa-solid fa-rotate"></i> {{ _('Refresh') }}</button>
+<button type="button" class="btn btn-green" id="btnNew"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
+{% endblock %}
+
 {% block body %}
-<div class="page-card">
-  <div class="page-head">
-    <h1><i class="fa-solid fa-route"></i> {{ _('Routing') }}</h1>
-    <p class="page-desc">{{ _('The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped.') }}</p>
-  </div>
+<div class="rt-wrap">
+    <div class="rt-banner">
+        <i class="fa-solid fa-route"></i>
+        <div class="rt-banner-text">
+            <p>{{ _('The hand built routing rules of the advanced mode. The rules run top down: the first rule that matches a connection sends it to its target and the rest are skipped.') }}</p>
+            <p><b><i class="fa-solid fa-gauge-simple"></i> {{ _('Is it heavy on the server?') }}</b> {{ _('No. A rule is one more line in the same routing section the core already reads, and the tests in the header ask the real binary to check it before anything reaches the server.') }}</p>
+        </div>
+    </div>
 
-  <div class="row-btns">
-    <button type="button" class="btn btn-primary" id="btnNew"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
-    <span class="spacer"></span>
-    <button type="button" class="btn btn-secondary" id="btnTestX"><i class="fa-solid fa-vial"></i> xray</button>
-    <button type="button" class="btn btn-secondary" id="btnTestS"><i class="fa-solid fa-vial"></i> sing-box</button>
-    <span id="testResult"></span>
-  </div>
+    <div class="rt-bar" id="rtBar">
+        <div class="rt-bar-top">
+            <i class="fa-solid fa-circle-info" id="rtBarIcon"></i>
+            <div class="rt-bar-text" id="rtBarText"></div>
+        </div>
+    </div>
 
-  <table class="table" id="ruleTable">
-    <thead><tr>
-      <th>#</th>
-      <th>{{ _('Name') }}</th>
-      <th>{{ _('Match') }}</th>
-      <th>{{ _('Target') }}</th>
-      <th>{{ _('Core') }}</th>
-      <th>{{ _('Status') }}</th>
-      <th>{{ _('Actions') }}</th>
-    </tr></thead>
-    <tbody>
-      {% for r in rows %}
-      <tr data-id="{{ r.id }}">
-        <td>{{ r.order }}</td>
-        <td class="cell-tag">{{ r.remark }}</td>
-        <td class="cell-addr">
-          {% if r.domains %}<span class="badge bg-info">D: {{ r.domains | join(', ') | truncate(40) }}</span>{% endif %}
-          {% if r.ips %}<span class="badge bg-info">IP: {{ r.ips | join(', ') | truncate(30) }}</span>{% endif %}
-          {% if r.ports %}<span class="badge bg-secondary">:{{ r.ports }}</span>{% endif %}
-          {% if r.protocol %}<span class="badge bg-secondary">{{ r.protocol }}</span>{% endif %}
-          {% if r.network != 'both' %}<span class="badge bg-secondary">{{ r.network }}</span>{% endif %}
-          {% if not r.domains and not r.ips and not r.ports and not r.protocol %}<span class="badge bg-warning">{{ _('Everything') }}</span>{% endif %}
-        </td>
-        <td><span class="badge bg-primary">{{ r.target }}</span></td>
-        <td>{{ r.core }}</td>
-        <td>{% if r.enable %}<span class="badge bg-success">{{ _('Enabled') }}</span>{% else %}<span class="badge bg-secondary">{{ _('Disabled') }}</span>{% endif %}</td>
-        <td class="cell-actions">
-          <button class="btn btn-sm btn-secondary" onclick="moveRow({{ r.id }}, 'up')"><i class="fa-solid fa-arrow-up"></i></button>
-          <button class="btn btn-sm btn-secondary" onclick="moveRow({{ r.id }}, 'down')"><i class="fa-solid fa-arrow-down"></i></button>
-          <button class="btn btn-sm btn-primary" onclick="editRow({{ r.id }})"><i class="fa-solid fa-pen"></i></button>
-          <button class="btn btn-sm btn-secondary" onclick="toggleRow({{ r.id }})"><i class="fa-solid fa-power-off"></i></button>
-          <button class="btn btn-sm btn-danger" onclick="deleteRow({{ r.id }})"><i class="fa-solid fa-trash"></i></button>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <div class="rt-list" id="rtList">
+        {% for r in rows %}
+        <div class="rt-card st-{{ 'on' if r.enable else 'off' }}" data-id="{{ r.id }}">
+            <div class="rt-num">{{ r.order }}</div>
+            <div class="rt-main">
+                <div class="rt-head">
+                    <div class="rt-title">
+                        <span class="rt-name">{{ r.remark or _('Rule') }} {{ r.order }}</span>
+                    </div>
+                    <label class="toggle-switch"><input type="checkbox" {{ 'checked' if r.enable }} onchange="toggleRow({{ r.id }})"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="rt-chips">
+                    <span class="rt-chip target"><i class="fa-solid fa-arrow-right-long"></i> {{ r.target }}</span>
+                    {% if r.domains %}<span class="rt-chip">D: {{ r.domains | join(', ') | truncate(40) }}</span>{% endif %}
+                    {% if r.ips %}<span class="rt-chip">IP: {{ r.ips | join(', ') | truncate(30) }}</span>{% endif %}
+                    {% if r.ports %}<span class="rt-chip">:{{ r.ports }}</span>{% endif %}
+                    {% if r.protocol %}<span class="rt-chip">{{ r.protocol }}</span>{% endif %}
+                    {% if r.network != 'both' %}<span class="rt-chip dim">{{ r.network }}</span>{% endif %}
+                    {% if r.inbound_tags %}<span class="rt-chip dim"><i class="fa-solid fa-arrows-turn-right"></i> {{ r.inbound_tags | join(', ') | truncate(30) }}</span>{% endif %}
+                    {% if not r.domains and not r.ips and not r.ports and not r.protocol %}<span class="rt-chip all">{{ _('Everything') }}</span>{% endif %}
+                    <span class="rt-chip dim">{{ r.core }}</span>
+                </div>
+            </div>
+            <div class="rt-actions">
+                <button class="rt-icon-btn" onclick="moveRow({{ r.id }}, 'up')" title="{{ _('Move up') }}"><i class="fa-solid fa-arrow-up"></i></button>
+                <button class="rt-icon-btn" onclick="moveRow({{ r.id }}, 'down')" title="{{ _('Move down') }}"><i class="fa-solid fa-arrow-down"></i></button>
+                <button class="rt-icon-btn" onclick="editRow({{ r.id }})" title="{{ _('Edit') }}"><i class="fa-solid fa-pen"></i></button>
+                <button class="rt-icon-btn danger" onclick="deleteRow({{ r.id }})" title="{{ _('Delete') }}"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="rt-empty {{ 'show' if not rows }}" id="rtEmpty">
+        <i class="fa-solid fa-route rt-empty-icon"></i>
+        {{ _('No hand built rule yet. The cores route the traffic fine without one; write the first when a connection needs its own exit.') }}
+        <br><button type="button" class="btn btn-primary" onclick="document.getElementById('btnNew').click()"><i class="fa-solid fa-plus"></i> {{ _('New Rule') }}</button>
+    </div>
 </div>
 
-<div class="modal-overlay" id="editOverlay">
-  <div class="modal-card">
-    <h3 id="modalTitle">{{ _('New Rule') }}</h3>
-    <input type="hidden" id="fId">
-    <label>{{ _('Name') }} <input id="fRemark" maxlength="128"></label>
-    <label>{{ _('Target') }}
-      <select id="fTarget">
-        {% for t in targets %}<option value="{{ t.value }}">{{ t.label }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>{{ _('Core') }}
-      <select id="fCore">
-        {% for c in cores %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>{{ _('Domains') }} <textarea id="fDomains" rows="3" placeholder="geosite:google&#10;domain:openai.com&#10;example.com"></textarea></label>
-    <label>{{ _('IPs') }} <textarea id="fIps" rows="3" placeholder="geoip:ir&#10;1.2.3.0/24"></textarea></label>
-    <label>{{ _('Ports') }} <input id="fPorts" placeholder="443 or 8000-9000"></label>
-    <label>{{ _('Protocol') }}
-      <select id="fProtocol">
-        {% for p in protocols %}<option value="{{ p }}">{{ p or _('None') }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>{{ _('Network') }}
-      <select id="fNetwork">
-        {% for n in networks %}<option value="{{ n }}">{{ n }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>{{ _('Inbound tags') }} <textarea id="fInbounds" rows="2" placeholder="custom-in-myin"></textarea></label>
-    <div class="modal-btns">
-      <button class="btn btn-primary" id="btnSave">{{ _('Save') }}</button>
-      <button class="btn btn-secondary" id="btnClose">{{ _('Close') }}</button>
+<div class="modal-overlay" id="rtEditModal">
+    <div class="modal-box" style="max-width: 640px;">
+        <div class="modal-header">
+            <div class="modal-title"><i class="fa-solid fa-route" style="color: var(--primary-purple, rgb(var(--ws-a-600)));"></i> <span id="rtModalTitle"></span></div>
+            <button type="button" class="modal-close" onclick="rtHide()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" style="overflow-x: hidden;">
+            <div class="rt-msg bad" id="rtErrors"></div>
+
+            <div class="rt-sec">
+                <div class="rt-sec-title"><i class="fa-solid fa-sliders"></i> {{ _('Basics') }}</div>
+                <input type="hidden" id="fId">
+                <div class="rt-field">
+                    <label for="fRemark">{{ _('Name') }}</label>
+                    <input type="text" class="form-input" dir="auto" id="fRemark" maxlength="128" placeholder="{{ _('For example: Iran direct, AI detour') }}">
+                </div>
+                <div class="rt-field">
+                    <label>{{ _('Target') }}</label>
+                    <select class="form-input" id="fTarget">
+                        {% for t in targets %}<option value="{{ t.value }}">{{ t.label }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="rt-field">
+                    <label>{{ _('Core') }}</label>
+                    <select class="form-input" id="fCore">
+                        {% for c in cores %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="rt-sec">
+                <div class="rt-sec-title"><i class="fa-solid fa-filter"></i> {{ _('What it matches') }}</div>
+                <div class="rt-field">
+                    <label for="fDomains">{{ _('Domains') }}</label>
+                    <textarea class="form-input" dir="ltr" id="fDomains" rows="3" placeholder="geosite:google&#10;domain:openai.com&#10;example.com"></textarea>
+                    <span class="rt-hint">{{ _('One per line. Prefixes like geosite: and domain: are welcome.') }}</span>
+                </div>
+                <div class="rt-field">
+                    <label for="fIps">{{ _('IPs') }}</label>
+                    <textarea class="form-input" dir="ltr" id="fIps" rows="3" placeholder="geoip:ir&#10;1.2.3.0/24"></textarea>
+                </div>
+                <div class="rt-row">
+                    <div class="rt-field">
+                        <label for="fPorts">{{ _('Ports') }}</label>
+                        <input type="text" class="form-input" dir="ltr" id="fPorts" placeholder="443 or 8000-9000">
+                    </div>
+                    <div class="rt-field">
+                        <label>{{ _('Protocol') }}</label>
+                        <select class="form-input" id="fProtocol">
+                            {% for p in protocols %}<option value="{{ p }}">{{ p or _('None') }}</option>{% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="rt-row">
+                    <div class="rt-field">
+                        <label>{{ _('Network') }}</label>
+                        <select class="form-input" id="fNetwork">
+                            {% for n in networks %}<option value="{{ n }}">{{ n }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="rt-field">
+                        <label for="fInbounds">{{ _('Inbound tags') }}</label>
+                        <input type="text" class="form-input" dir="ltr" id="fInbounds" placeholder="custom-in-myin, in-1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnSave"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save') }}</button>
+            <button type="button" class="btn btn-secondary" onclick="rtHide()">{{ _('Close') }}</button>
+        </div>
     </div>
-  </div>
 </div>
 
 <style>
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 60; }
-.modal-overlay.show { display: flex; }
-.modal-card { background: var(--panel-bg, #16181d); color: var(--text, #eee); padding: 24px; border-radius: 12px; width: min(560px, 94vw); max-height: 88vh; overflow: auto; }
-.modal-card label { display: block; margin-bottom: 10px; }
-.modal-card input:not([type=checkbox]), .modal-card select, .modal-card textarea { width: 100%; margin-top: 4px; }
-.modal-btns { display: flex; gap: 8px; margin-top: 14px; }
-.row-btns { display: flex; align-items: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
-.spacer { flex: 1; }
-.page-desc { color: var(--text-muted, #999); font-size: .92em; }
-.cell-actions { white-space: nowrap; }
-.cell-actions .btn { margin: 1px; }
+    .rt-wrap { display: flex; flex-direction: column; gap: 13px; padding-bottom: 16px;
+        --rt-violet: rgb(var(--ws-a-600)); --rt-cyan: rgb(var(--ws-b-400)); --rt-green: #10b981; --rt-amber: #f59e0b; --rt-red: #ef4444; --rt-blue: #3b82f6; }
+    .rt-banner { position: relative; overflow: hidden; background:
+            radial-gradient(120% 180% at 100% 0%, rgb(var(--ws-a-600) / 0.12), transparent 60%), var(--bg-card);
+        border: 1px solid var(--border-color); border-radius: 14px; padding: 12px 15px; display: flex;
+        align-items: flex-start; gap: 12px; color: var(--text-muted); font-size: 12px; line-height: 1.9; }
+    .rt-banner > i { color: var(--rt-violet); font-size: 15px; flex-shrink: 0; margin-top: 4px; }
+    .rt-banner b { color: var(--text-main); font-weight: 600; }
+    .rt-banner-text { flex: 1; min-width: 0; }
+    .rt-banner-text p { margin: 0; }
+    .rt-banner-text p + p { margin-top: 4px; }
+
+    .rt-bar { display: none; border-radius: 14px; padding: 12px 15px; border: 1px solid var(--border-color);
+        background: var(--bg-card); font-size: 12.5px; color: var(--text-main); line-height: 1.85; }
+    .rt-bar.show { display: block; }
+    .rt-bar-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .rt-bar-top > i { font-size: 15px; }
+    .rt-bar-text { flex: 1; min-width: 200px; word-break: break-word; }
+    .rt-bar.run { border-color: rgba(59, 130, 246, 0.5); }
+    .rt-bar.run .rt-bar-top > i { color: var(--rt-blue); }
+    .rt-bar.good { border-color: rgba(16, 185, 129, 0.5); }
+    .rt-bar.good .rt-bar-top > i { color: var(--rt-green); }
+    .rt-bar.bad { border-color: rgba(239, 68, 68, 0.5); }
+    .rt-bar.bad .rt-bar-top > i { color: var(--rt-red); }
+
+    .rt-list { display: flex; flex-direction: column; gap: 10px; }
+    .rt-card { position: relative; overflow: hidden; display: flex; align-items: center; gap: 13px;
+        background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 13px 15px; min-width: 0; }
+    .rt-card::before { content: ''; position: absolute; inset-inline-start: 0; top: 0; bottom: 0; width: 3px; background: var(--border-color); }
+    .rt-card.st-on::before { background: linear-gradient(180deg, transparent, var(--rt-green), var(--rt-cyan), transparent); }
+    .rt-card.st-off { opacity: 0.75; }
+    .rt-num { flex-shrink: 0; width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+        background: rgb(var(--ws-a-600) / 0.1); color: var(--rt-violet); font-size: 13px; font-weight: 800;
+        border: 1px solid rgb(var(--ws-a-600) / 0.25); direction: ltr; }
+    .rt-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+    .rt-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .rt-title { flex: 1; min-width: 0; }
+    .rt-name { font-size: 14px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+    .rt-head .toggle-switch { transform: scale(0.8); flex-shrink: 0; }
+
+    .rt-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rt-chip { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 8px; background: var(--bg-body);
+        border: 1px solid var(--border-color); color: var(--text-main); white-space: nowrap; direction: ltr; }
+    .rt-chip i { font-size: 10px; }
+    .rt-chip.target { color: var(--rt-violet); border-color: rgb(var(--ws-a-600) / 0.35); background: rgb(var(--ws-a-600) / 0.07); }
+    .rt-chip.all { color: var(--rt-amber); border-color: rgba(245, 158, 11, .35); }
+    .rt-chip.dim { color: var(--text-muted); }
+
+    .rt-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .rt-icon-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px;
+        padding: 5px 9px; cursor: pointer; font-size: 12px; }
+    .rt-icon-btn:hover { border-color: var(--rt-violet); color: rgb(var(--ws-a-400)); }
+    .rt-icon-btn.danger:hover { border-color: var(--rt-red); color: var(--rt-red); }
+
+    .rt-empty { display: none; text-align: center; padding: 40px 20px; background: var(--bg-card); border: 1px dashed var(--border-color);
+        border-radius: 14px; color: var(--text-muted); font-size: 13px; line-height: 1.9; }
+    .rt-empty.show { display: block; }
+    .rt-empty-icon { font-size: 32px; color: var(--rt-violet); margin-bottom: 10px; display: block; }
+
+    .rt-sec { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 13px 13px; margin-top: 12px; }
+    .rt-sec:first-of-type { margin-top: 0; }
+    .rt-sec-title { font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+    .rt-sec-title i { color: var(--rt-violet); }
+    .rt-field { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
+    .rt-field > label { font-size: 12px; font-weight: 600; color: var(--text-main); }
+    .rt-hint { font-size: 11px; color: var(--text-muted); line-height: 1.85; }
+    .rt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+    @media (max-width: 640px) { .rt-row { grid-template-columns: 1fr; } }
+
+    .rt-msg { display: none; border-radius: 9px; padding: 8px 11px; font-size: 12px; line-height: 1.8; margin-bottom: 8px; word-break: break-word; }
+    .rt-msg.show { display: block; }
+    .rt-msg.bad { color: var(--rt-red); background: rgba(239, 68, 68, .08); border: 1px solid rgba(239, 68, 68, .25); }
+
+    /* the panel's own dropdown, in its form flavour (same as users_list) */
+    .rt-select-hidden { display: none !important; }
+    .dropdown-container.form-dropdown { width: 100%; }
+    .dropdown-container.form-dropdown .dropdown-trigger { background: var(--bg-body); padding: 10px 12px; border-radius: 8px; box-shadow: none; width: 100%; box-sizing: border-box; }
+    .dropdown-container.form-dropdown .dropdown-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dropdown-container.open.form-dropdown .dropdown-trigger { border-color: var(--primary-purple); box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.1); }
+    .dropdown-container.dropup .dropdown-menu { top: auto; bottom: calc(100% + 8px); transform-origin: bottom center; }
 </style>
 
 <script>
-const I18N = {
+const RT_ROWS = {{ rows | tojson }};
+const RT_I18N = {
   saved: {{ _('Saved') | tojson }},
   deleted: {{ _('Deleted') | tojson }},
   failed: {{ _('Request failed') | tojson }},
   newRule: {{ _('New Rule') | tojson }},
   editRule: {{ _('Edit Rule') | tojson }},
   sure: {{ _('Delete this rule?') | tojson }},
+  testing: {{ _('The core is checking the routing…') | tojson }},
 };
-const API = location.pathname;
-const ROWS = {{ rows | tojson }};
+const RT_API = location.pathname;
 
-function obOverlay(show) { document.getElementById('editOverlay').classList.toggle('show', show); }
+function rtShow() { document.getElementById('rtEditModal').classList.add('show'); }
+function rtHide() { document.getElementById('rtEditModal').classList.remove('show'); }
 
-async function post(path, body) {
-  const res = await fetch(API + path, {method: 'POST', headers: {'Content-Type': 'application/json'},
-                                       body: JSON.stringify(body || {})});
+function rtSay(kind, text) {
+  const bar = document.getElementById('rtBar');
+  bar.className = 'rt-bar show ' + (kind || '');
+  document.getElementById('rtBarText').textContent = text || '';
+}
+
+async function rtPost(path, body) {
+  const res = await fetch(RT_API + path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                           body: JSON.stringify(body || {})});
   return res.json();
 }
 
-function say(ok, text) {
-  const el = document.getElementById('testResult');
-  el.textContent = text || '';
-  el.style.color = ok ? 'var(--ok, #4cc38a)' : 'var(--danger, #ff6b6b)';
+function rtFind(id) { return RT_ROWS.find(r => r.id === id); }
+
+/* watashi v12.3.58dev: the browser's own shutter is replaced with the panel's
+   dropdown. The original select stays in the DOM, hidden, so every reader of
+   select.value keeps working; the dropdown only writes the value into it. */
+function rtEnhanceSelect(sel) {
+  if (sel.dataset.rtEnhanced) return;
+  sel.dataset.rtEnhanced = '1';
+  sel.classList.add('rt-select-hidden');
+  const cont = document.createElement('div');
+  cont.className = 'dropdown-container form-dropdown';
+  cont.innerHTML = '<div class="dropdown-trigger"><span></span><i class="fa-solid fa-chevron-down"></i></div>' +
+                   '<div class="dropdown-menu"></div>';
+  sel.parentNode.insertBefore(cont, sel.nextSibling);
+  const trigger = cont.querySelector('.dropdown-trigger');
+  const label = trigger.querySelector('span');
+  const menu = cont.querySelector('.dropdown-menu');
+  Array.from(sel.options).forEach(opt => {
+    const item = document.createElement('div');
+    item.className = 'dropdown-option';
+    item.dataset.value = opt.value;
+    item.textContent = opt.textContent;
+    menu.appendChild(item);
+    item.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      sel.value = opt.value;
+      rtSyncSelect(sel);
+      cont.classList.remove('open');
+      sel.dispatchEvent(new Event('change'));
+    });
+  });
+  trigger.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    document.querySelectorAll('.dropdown-container.open').forEach(other => {
+      if (other !== cont) other.classList.remove('open');
+    });
+    if (!cont.classList.contains('open')) {
+      const tRect = trigger.getBoundingClientRect();
+      const clip = cont.closest('.modal-body') || document.documentElement;
+      const cRect = clip.getBoundingClientRect();
+      const menuH = menu.scrollHeight || menu.offsetHeight || 200;
+      const spaceBelow = cRect.bottom - tRect.bottom;
+      const spaceAbove = tRect.top - cRect.top;
+      cont.classList.toggle('dropup', spaceBelow < menuH + 16 && spaceAbove > spaceBelow);
+    }
+    cont.classList.toggle('open');
+  });
+  rtSyncSelect(sel);
 }
 
-function findRow(id) { return ROWS.find(r => r.id === id); }
+function rtSyncSelect(sel) {
+  const cont = sel.nextElementSibling;
+  if (!cont || !cont.classList.contains('dropdown-container')) return;
+  const opt = sel.options[sel.selectedIndex];
+  cont.querySelector('.dropdown-trigger span').textContent = opt ? opt.textContent : '';
+  cont.querySelectorAll('.dropdown-option').forEach(item =>
+    item.classList.toggle('selected', item.dataset.value === sel.value));
+}
+
+document.querySelectorAll('#rtEditModal select').forEach(rtEnhanceSelect);
+document.addEventListener('click', () => {
+  document.querySelectorAll('.dropdown-container.open').forEach(c => c.classList.remove('open'));
+});
 
 window.editRow = (id) => {
-  const r = findRow(id);
-  document.getElementById('modalTitle').textContent = I18N.editRule;
+  const r = rtFind(id); if (!r) return;
+  document.getElementById('rtModalTitle').textContent = RT_I18N.editRule;
   document.getElementById('fId').value = r.id;
   document.getElementById('fRemark').value = r.remark || '';
   document.getElementById('fTarget').value = r.target;
@@ -146,29 +333,27 @@ window.editRow = (id) => {
   document.getElementById('fPorts').value = r.ports || '';
   document.getElementById('fProtocol').value = r.protocol || '';
   document.getElementById('fNetwork').value = r.network || 'both';
-  document.getElementById('fInbounds').value = (r.inbound_tags || []).join('\n');
-  obOverlay(true);
+  document.getElementById('fInbounds').value = (r.inbound_tags || []).join(', ');
+  ['fTarget', 'fCore', 'fProtocol', 'fNetwork'].forEach(n => rtSyncSelect(document.getElementById(n)));
+  rtShow();
 };
 
-window.moveRow = async (id, way) => { await post('move', {id, way}); location.reload(); };
-window.toggleRow = async (id) => { await post('toggle', {id}); location.reload(); };
+window.moveRow = async (id, way) => { await rtPost('move', {id, way}); location.reload(); };
+window.toggleRow = async (id) => { await rtPost('toggle', {id}); location.reload(); };
 window.deleteRow = async (id) => {
-  if (!confirm(I18N.sure)) return;
-  await post('delete', {id});
+  if (!confirm(RT_I18N.sure)) return;
+  await rtPost('delete', {id});
   location.reload();
 };
 
 document.getElementById('btnNew').onclick = () => {
-  document.getElementById('modalTitle').textContent = I18N.newRule;
-  for (const el of document.querySelectorAll('.modal-card input, .modal-card select, .modal-card textarea')) {
-    if (el.type === 'checkbox') { el.checked = false; continue; }
+  document.getElementById('rtModalTitle').textContent = RT_I18N.newRule;
+  for (const el of document.querySelectorAll('#rtEditModal input:not([type=hidden]), #rtEditModal select, #rtEditModal textarea')) {
     el.value = el.tagName === 'SELECT' ? el.options[0].value : '';
   }
-  document.getElementById('fId').value = '';
-  obOverlay(true);
+  ['fTarget', 'fCore', 'fProtocol', 'fNetwork'].forEach(n => rtSyncSelect(document.getElementById(n)));
+  rtShow();
 };
-
-document.getElementById('btnClose').onclick = () => obOverlay(false);
 
 document.getElementById('btnSave').onclick = async () => {
   const body = {
@@ -181,21 +366,31 @@ document.getElementById('btnSave').onclick = async () => {
     ports: document.getElementById('fPorts').value.trim(),
     protocol: document.getElementById('fProtocol').value,
     network: document.getElementById('fNetwork').value,
-    inbound_tags: document.getElementById('fInbounds').value.split('\n').map(s => s.trim()).filter(Boolean),
+    inbound_tags: document.getElementById('fInbounds').value.split(',').map(s => s.trim()).filter(Boolean),
   };
-  const res = await post('save', body);
-  say(res.success, res.success ? I18N.saved : (res.message || I18N.failed));
-  if (res.success) setTimeout(() => location.reload(), 400);
+  const res = await rtPost('save', body);
+  if (res.success) {
+    rtSay('good', RT_I18N.saved);
+    setTimeout(() => location.reload(), 400);
+  } else {
+    const box = document.getElementById('rtErrors');
+    box.textContent = res.message || RT_I18N.failed;
+    box.classList.add('show');
+    rtSay('bad', res.message || RT_I18N.failed);
+  }
 };
 
 async function testCore(core) {
-  say(true, '...');
-  const res = await post('test', {core});
-  say(res.success, res.message || (res.success ? 'ok' : I18N.failed));
+  rtSay('run', RT_I18N.testing);
+  const res = await rtPost('test', {core});
+  rtSay(res.success ? 'good' : 'bad', res.message || (res.success ? RT_I18N.saved : RT_I18N.failed));
 }
-document.getElementById('btnTestX').onclick = () => testCore('xray');
-document.getElementById('btnTestS').onclick = () => testCore('singbox');
+document.getElementById('rtTestX').onclick = () => testCore('xray');
+document.getElementById('rtTestS').onclick = () => testCore('singbox');
 
-document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') obOverlay(false); });
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') rtHide(); });
+document.getElementById('rtEditModal').addEventListener('click', (ev) => {
+  if (ev.target.classList.contains('modal-overlay')) rtHide();
+});
 </script>
 {% endblock %}
