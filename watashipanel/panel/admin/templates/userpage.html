@@ -337,7 +337,7 @@
 			// server renders one language only (the page locale), so the two
 			// sets of live labels travel with UP and paint() swaps them.
 			l10n: {
-				en: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
+				en: { dir: 'ltr', hello: 'Good morning', sub: 'Welcome to your own dashboard', note: 'Notice',
 					used: 'Used', left: 'Left', days: 'days', unlim: 'Unlimited',
 					rhythm: 'The rhythm of the package', links: 'Subscription links', short: 'Short link', guide: 'Setup guide',
 					bot: 'Telegram bot', sup: 'Support', powered: 'Powered by' },
@@ -345,14 +345,19 @@
 					used: 'مصرف‌شده', left: 'باقی‌مانده', days: 'روز', unlim: 'نامحدود',
 					rhythm: 'ریتم بسته', links: 'لینک‌های اشتراک', short: 'لینک کوتاه', guide: 'راهنمای نصب',
 					bot: 'ربات تلگرام', sup: 'پشتیبانی', powered: 'قدرت‌گرفته از' },
-				ru: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
-					used: {{ _('Used') | tojson }}, left: {{ _('Left') | tojson }}, days: {{ _('days') | tojson }}, unlim: {{ _('Unlimited') | tojson }},
-					rhythm: {{ _('The rhythm of the package') | tojson }}, links: {{ _('Subscription links') | tojson }}, short: {{ _('Short link') | tojson }}, guide: {{ _('Setup guide') | tojson }},
-					bot: {{ _('Telegram bot') | tojson }}, sup: {{ _('Support') | tojson }}, powered: {{ _('Powered by') | tojson }} },
-				zh: { dir: 'ltr', hello: {{ _('Good morning') | tojson }}, sub: {{ _('Welcome to your own dashboard') | tojson }}, note: {{ _('Notice') | tojson }},
-					used: {{ _('Used') | tojson }}, left: {{ _('Left') | tojson }}, days: {{ _('days') | tojson }}, unlim: {{ _('Unlimited') | tojson }},
-					rhythm: {{ _('The rhythm of the package') | tojson }}, links: {{ _('Subscription links') | tojson }}, short: {{ _('Short link') | tojson }}, guide: {{ _('Setup guide') | tojson }},
-					bot: {{ _('Telegram bot') | tojson }}, sup: {{ _('Support') | tojson }}, powered: {{ _('Powered by') | tojson }} }
+				/* watashi v12.3.53dev: ru and zh used to run their words through
+				   _() at render time, which translated them into the ADMIN's
+				   language, so picking Russian or Chinese repainted the preview
+				   in Persian and looked broken. Every block now carries its own
+				   words, the way fa always did. */
+				ru: { dir: 'ltr', hello: 'Доброе утро', sub: 'Добро пожаловать в свой дашборд', note: 'Уведомление',
+					used: 'Использовано', left: 'Осталось', days: 'дн.', unlim: 'Безлимит',
+					rhythm: 'Ритм пакета', links: 'Ссылки на подписку', short: 'Короткая ссылка', guide: 'Руководство по настройке',
+					bot: 'Telegram-бот', sup: 'Поддержка', powered: 'Работает на' },
+				zh: { dir: 'ltr', hello: '早上好', sub: '欢迎使用您的个人面板', note: '通知',
+					used: '已用', left: '剩余', days: '天', unlim: '不限量',
+					rhythm: '套餐节奏', links: '订阅链接', short: '短链接', guide: '设置指南',
+					bot: 'Telegram 机器人', sup: '支持', powered: '技术支持' }
 			}
 		};
 		var $ = function (id) { return document.getElementById(id); };
@@ -445,10 +450,15 @@
 			lbox.innerHTML = '';
 			if (draft.logo) { var im = new Image(); im.alt = ''; im.src = draft.logo; lbox.appendChild(im); } else { lbox.innerHTML = '<i class="fa-solid fa-image"></i>'; }
 			$('udLogoDrop').disabled = !draft.logo;
-			$('pvHello').textContent = pick('hello') || L.hello;
-			$('pvSub').textContent = pick('sub_hello') || L.sub;
+			/* watashi v12.3.53dev: the greeting follows the language switch.
+			   The old pick() fell through to the word an admin above saved,
+			   which is always non-empty, so the same sentence sat on every
+			   language. Only the words this admin actually keeps (typed here
+			   or saved on this level) may override the sample. */
+			$('pvHello').textContent = (draft.hello || '').trim() || L.hello;
+			$('pvSub').textContent = (draft.sub_hello || '').trim() || L.sub;
 			var note = pick('note'), site = pick('support');
-			$('pvNoteT').textContent = pick('note_title') || L.note;
+			$('pvNoteT').textContent = (draft.note_title || '').trim() || L.note;
 			$('pvNoteB').textContent = note;
 			$('pvNoteB').hidden = !note;
 			$('pvNoteL').textContent = site;
