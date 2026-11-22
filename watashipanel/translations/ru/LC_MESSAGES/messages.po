@@ -4901,6 +4901,9 @@ msgstr "@F@ должен быть UUID. Нажмите кнопку с куби�
 msgid "@F@ may only hold English letters and digits, with no slash or space."
 msgstr "@F@ может содержать только английские буквы и цифры, без слэша и пробела."
 
+msgid "@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535."
+msgstr "@F@ должен быть диапазоном портов, например 61001-62000: первый порт меньше второго, оба от 1024 до 65535."
+
 msgid "@F@ must be a port number, or several of them split by a comma."
 msgstr "@F@ должен быть номером порта или несколькими, разделёнными запятой."
 

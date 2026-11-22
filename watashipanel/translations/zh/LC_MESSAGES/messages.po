@@ -4882,6 +4882,9 @@ msgstr "@F@ 必须是 UUID。点击骰子按钮可生成新的。"
 msgid "@F@ may only hold English letters and digits, with no slash or space."
 msgstr "@F@ 只能包含英文字母和数字，不能有斜杠或空格。"
 
+msgid "@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535."
+msgstr "@F@ 必须是端口区间，例如 61001-62000：第一个端口小于第二个端口，两者都在 1024 到 65535 之间。"
+
 msgid "@F@ must be a port number, or several of them split by a comma."
 msgstr "@F@ 必须是端口号，或用逗号分隔的多个端口。"
 

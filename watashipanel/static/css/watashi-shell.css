@@ -1421,6 +1421,17 @@ a, button, .btn, .nav-item, input[type="checkbox"], .toggle-slider, .slider, .ta
         }
         .nav-menu:where(:root:not([dir="rtl"]), :root:not([dir="rtl"]) *) { padding-right: 7px !important; } /* watashi v12.3.44dev: right-to-left twin */
         .nav-menu:where(:root[dir="rtl"], :root[dir="rtl"] *) { padding-left: 7px !important; }
+        /* watashi v12.3.53dev: the one-sided scroll-bar gutter above leans the
+           collapsed rail's icon column 3.5px off centre (right in LTR, left in
+           RTL - the "icons sit towards the border" report), and the label still
+           occupying its flex slot pushes the glyph to the row edge for the
+           remaining few px. In the folded rail both are removed: the gutter
+           becomes symmetric and the row centres its glyph for real, with the
+           hidden label taken out of the flow so it can hold the icon hostage.
+           The expanded sidebar keeps its old geometry untouched. */
+        .sidebar:not(.expanded) .nav-menu { padding: 8px 2px !important; scrollbar-gutter: auto; }
+        .sidebar:not(.expanded) .nav-item-header { justify-content: center; padding-inline: 0 !important; margin-inline: 0 !important; }
+        .sidebar:not(.expanded) .nav-text { position: absolute; visibility: hidden; }
         .nav-menu::-webkit-scrollbar { width: 11px !important; }
         .nav-menu::-webkit-scrollbar-track { background: transparent !important; }
         .nav-menu::-webkit-scrollbar-thumb {

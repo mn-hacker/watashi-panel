@@ -4986,6 +4986,9 @@ msgstr "@F@ must be a UUID. Press the dice button to build a fresh one."
 msgid "@F@ may only hold English letters and digits, with no slash or space."
 msgstr "@F@ may only hold English letters and digits, with no slash or space."
 
+msgid "@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535."
+msgstr "@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535."
+
 msgid "@F@ must be a port number, or several of them split by a comma."
 msgstr "@F@ must be a port number, or several of them split by a comma."
 

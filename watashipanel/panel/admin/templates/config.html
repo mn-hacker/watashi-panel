@@ -262,6 +262,8 @@
             <button type="button" class="st-mini" onclick="stNewPath(this)" title="{{ _('Build a new one') }}"><i class="fa-solid fa-dice"></i></button>
             {% elif kind == 'port' %}
             <button type="button" class="st-mini" onclick="stNewPort(this)" title="{{ _('Pick a free port') }}"><i class="fa-solid fa-dice"></i></button>
+            {% elif kind == 'port_hop' %}
+            <button type="button" class="st-mini" onclick="stNewPortHop(this)" title="{{ _('Build a new one') }}"><i class="fa-solid fa-dice"></i></button>
             {% else %}
             <button type="button" class="st-mini" onclick="stCopy(this)" title="{{ _('Copy') }}"><i class="fa-regular fa-copy"></i></button>
             {% endif %}
@@ -554,6 +556,27 @@
             var p = 0, guard = 0;
             do { p = 20000 + Math.floor(Math.random() * 40000); guard++; } while (used[String(p)] && guard < 60);
             el.value = String(p);
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            wsToast(T.madeNew, 'success');
+        };
+
+        /* watashi v12.3.53dev: the hysteria port hopper rolls a band, not one
+           port - a single port would pass the old form but would mean no
+           hopping at all. The band keeps the panel's own 1000-port width and
+           never overlaps the ports already written elsewhere in the settings. */
+        window.stNewPortHop = function (btn) {
+            var el = boxOf(btn);
+            var used = {};
+            document.querySelectorAll('.st-row input').forEach(function (i) {
+                String(i.value || '').split(/[,\s]+/).forEach(function (p) { p = p.trim(); if (/^\d+$/.test(p)) used[p] = 1; });
+            });
+            var lo = 0, hi = 0, guard = 0;
+            do {
+                lo = 1024 + Math.floor(Math.random() * (65535 - 1024 - 999));
+                hi = lo + 999;
+                guard++;
+            } while (guard < 60 && Object.keys(used).some(function (p) { return p >= lo && p <= hi; }));
+            el.value = lo + '-' + hi;
             el.dispatchEvent(new Event('input', { bubbles: true }));
             wsToast(T.madeNew, 'success');
         };

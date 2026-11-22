@@ -6895,6 +6895,9 @@ msgstr "مقدار @F@ باید یک UUID باشد. برای ساخت یک مق�
 msgid "@F@ may only hold English letters and digits, with no slash or space."
 msgstr "مقدار @F@ فقط می‌تواند حروف انگلیسی و عدد باشد؛ بدون اسلش و فاصله."
 
+msgid "@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535."
+msgstr "@F@ باید یک بازهٔ پورت مثل 61001-62000 باشد؛ پورت اول کوچک‌تر از پورت دوم و هر دو بین 1024 و 65535."
+
 msgid "@F@ must be a port number, or several of them split by a comma."
 msgstr "مقدار @F@ باید یک شمارهٔ پورت باشد، یا چند پورت که با ویرگول از هم جدا شده‌اند."
 

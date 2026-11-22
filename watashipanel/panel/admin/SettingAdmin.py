@@ -423,7 +423,7 @@ def get_config_form():
                         c.value = ws_new_path()
                         ws_note_fresh(c.key)
 
-                if 'port' in c.key.name and 'transport' not in c.key.name:
+                if 'port' in c.key.name and 'transport' not in c.key.name and c.key != ConfigEnum.port_hop_range:
                     if c.key in [ConfigEnum.http_ports, ConfigEnum.tls_ports]:
                         validators.append(wtf.validators.Regexp("^(\\d+)(,\\d+)*$|^$", re.IGNORECASE, ws_port_msg(c.key)))
                         if not c.value:
@@ -437,6 +437,21 @@ def get_config_form():
                 # watashi v12.2.77: the new max split is a range like the rest
                 if c.key in [ConfigEnum.tls_fragment_size, ConfigEnum.tls_fragment_sleep, ConfigEnum.tls_padding_length, ConfigEnum.wireguard_noise_trick, ConfigEnum.xray_finalmask_maxsplit]:
                     validators.append(wtf.validators.Regexp("^\\d+-\\d+$|^$", re.IGNORECASE, ws_pair_msg(c.key)))
+                # watashi v12.3.53dev: the hysteria port hopper takes a band like
+                # 61001-62000, not a single port - the old name check above
+                # ("port" in the key) forced the one-port shape onto it and made
+                # the panel refuse its own default. The shape regex keeps the
+                # a-b look, the band check keeps the numbers real (smaller
+                # first, both inside 1024-65535) with its own message.
+                if c.key == ConfigEnum.port_hop_range:
+                    validators.append(wtf.validators.Regexp("^\\d+-\\d+$|^$", re.IGNORECASE, ws_pair_msg(c.key)))
+
+                    def _ws_band_check(form, field, _key=c.key):
+                        from watashipanel.hutils.proxy import port_hop
+                        if str(field.data or '').strip() and port_hop.parse_range(field.data) is None:
+                            raise wtf.validators.ValidationError(ws_port_hop_msg(_key))
+
+                    validators.append(_ws_band_check)
                 # mux and hysteria validations
                 if c.key in [ConfigEnum.hysteria_up_mbps, ConfigEnum.hysteria_down_mbps, ConfigEnum.mux_max_connections, ConfigEnum.mux_min_streams, ConfigEnum.mux_max_streams,
                              ConfigEnum.mux_brutal_down_mbps, ConfigEnum.mux_brutal_up_mbps, ConfigEnum.user_limit_block_hours, ConfigEnum.user_limit_default, ConfigEnum.hwid_limit_default,
@@ -865,6 +880,8 @@ def ws_kind_of(key):
         return "uuid"
     if n.startswith("path_") or "proxy_path" in n:
         return "path"
+    if n == "port_hop_range":
+        return "port_hop"  # watashi v12.3.53dev: the hopper rolls a band, not one port
     if "port" in n and "transport" not in n:
         return "port"
     return "text"
@@ -967,6 +984,10 @@ def ws_num_msg(key):
 
 def ws_pair_msg(key):
     return str(_("@F@ must be two numbers with a dash between them, for example 10-20.")).replace("@F@", ws_label(key))
+
+
+def ws_port_hop_msg(key):
+    return str(_("@F@ must be a port band like 61001-62000: the first port smaller than the second, both between 1024 and 65535.")).replace("@F@", ws_label(key))
 
 
 def ws_port_reserved_msg():
