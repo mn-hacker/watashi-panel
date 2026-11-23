@@ -405,10 +405,19 @@ try {
         // use the hamburger toggle instead of auto hover-expand.
         // watashi v12.2.130cd: any-hover / any-pointer, so a touch screen does not take
         // the mouse away from a machine that has one.
-        const canHover = window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
+        // watashi v12.3.75dev: Chromium on touchscreen laptops can misreport a
+        // machine that has a mouse as hover-less (tablet mode ignores the mouse;
+        // Firefox on the same hardware reports it right). the query is only the
+        // starting guess now: the first real mouse pointermove upgrades it and
+        // wires the hover rail up then. never downgrades - a mouse event from a
+        // browser that lied is still a real mouse.
+        var canHover = window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
+        var railWired = false;
+        var enableHoverRail = function () {
+            if (railWired) { return; }
+            railWired = true;
 
         // Auto expand-on-hover only on real mouse devices (and unless in compact mode)
-        if (canHover) {
             // watashi v12.2.90: the rail used to close on the bare mouseleave
             // event, and reaching for its own scrollbar is precisely the move
             // that fires it. the thumb sits at the very edge of the rail, the
@@ -495,7 +504,16 @@ try {
                     lastMenuTop = menuEl.scrollTop;
                 });
             }
-        }
+        };
+        if (canHover) { enableHoverRail(); }
+        // a machine the query called touch-less gets the rail the moment a real
+        // mouse is seen moving over the page.
+        window.addEventListener('pointermove', function (ev) {
+            if (!canHover && ev.pointerType === 'mouse') {
+                canHover = true;
+                enableHoverRail();
+            }
+        }, { passive: true });
 
         // Toggle button logic
         if (toggleBtn) {

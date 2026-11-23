@@ -254,7 +254,12 @@
         border: 1px dashed var(--border-color); border-radius: 10px; }
     .nd-covers-note { font-size: 10px; color: var(--text-muted); }
     .nd-cover { font-size: 10.5px; padding: 2px 8px; border-radius: 999px; color: var(--text-main);
-        background: rgb(var(--ws-b-400) / 0.07); border: 1px solid rgb(var(--ws-b-400) / 0.25); }
+        background: rgb(var(--ws-b-400) / 0.07); border: 1px solid rgb(var(--ws-b-400) / 0.25);
+        display: inline-flex; align-items: center; gap: 5px; cursor: pointer; user-select: none; }
+    .nd-cover input { accent-color: var(--nd-cyan); margin: 0; width: 11px; height: 11px; }
+    .nd-cover input:disabled { cursor: not-allowed; }
+    .nd-cover.on { border-color: rgb(var(--ws-b-400) / 0.55); background: rgb(var(--ws-b-400) / 0.12); }
+    .nd-cover:not(.on) { opacity: 0.55; text-decoration: line-through; }
 </style>
 
 <div class="nd-wrap">
@@ -453,7 +458,12 @@
                       </div>
                       <div class="nd-covers nd-hidden" id="ndCovers{{ key }}{{ loop.index0 }}">
                         <span class="nd-covers-note">{{ _('This rule-set covers:') }}</span>
-                        {% for cover in covers %}<span class="nd-cover">{{ cover }}</span>{% endfor %}
+                        {% for cover in covers %}
+                        {% set cid = nd_cover_ids.get(site, [])[loop.index0] if nd_cover_ids.get(site) else loop.index0 %}
+                        {% set full = site ~ ':' ~ cid %}
+                        {% set cov_on = full not in nd.cover_excluded %}
+                        <label class="nd-cover{% if cov_on %} on{% endif %}" title="{{ _('Tick what rides behind Warp') }}"><input type="checkbox" class="nd-cover-box" data-cgroup="{{ site }}" value="{{ full }}"{% if cov_on %} checked{% endif %}{% if not nd_cover_rules.get(site, {}).get(cid|string) %} disabled{% endif %} onchange="ndCoverPaint(this)"><span>{{ cover }}</span></label>
+                        {% endfor %}
                       </div>
                       {% else %}
                       <label class="nd-site{% if site not in nd.excluded %} in{% endif %}"><input type="checkbox" class="nd-site-box" data-group="{{ key }}" value="{{ site }}"{% if site not in nd.excluded %} checked{% endif %} onchange="ndSitePaint(this)"><span>{{ site }}</span><em>{{ _('rule-set') }}</em></label>
@@ -932,6 +942,12 @@
         // watashi v12.3.77dev: open the "what does this rule-set cover" list
         // under a geo chip. The chip stays a working on/off switch; the arrow
         // only folds the coverage row.
+        // watashi v12.3.78dev: a chip the admin unticked paints struck-through;
+        // its direct rule (or drop from the parent group) happens in the backend.
+        window.ndCoverPaint = function (box) {
+            box.closest('.nd-cover').classList.toggle('on', box.checked);
+        };
+
         window.ndToggleCovers = function (key, idx) {
             var row = byId('ndCovers' + key + idx);
             if (!row) { return; }
@@ -952,9 +968,16 @@
                 var group = box.getAttribute('data-group');
                 if (!box.checked && picked.indexOf(group) >= 0) { out.push(box.value); }
             });
+            // watashi v12.3.78dev: the unticked covers of the ticked rule-sets.
+            // A cover of an unticked rule-set rides with its group — dropped here.
+            var covOut = [];
+            qa('.nd-cover-box').forEach(function (box) {
+                var grp = box.getAttribute('data-cgroup');
+                if (!box.disabled && !box.checked && picked.indexOf(grp) >= 0) { covOut.push(box.value); }
+            });
             var btn = byId('ndRouteSave');
             if (!claim('routing', btn, TXT.busy)) { return; }
-            ask({ action: 'routing', mode: mode, presets: picked, excluded: out, sites: byId('ndSites').value })
+            ask({ action: 'routing', mode: mode, presets: picked, excluded: out, cover_excluded: covOut, sites: byId('ndSites').value })
                 .then(function (data) {
                     var good = after(data);
                     release(btn, good);

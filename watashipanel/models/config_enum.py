@@ -152,6 +152,10 @@ class ConfigEnum(metaclass=FastEnum):
     # bare domain is unique across groups). Hidden: the Nodes page owns it,
     # same reason as warp_presets above.
     warp_excluded = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config, hide_in_virtual_child=True)
+    # watashi v12.3.78dev: the covers (sub-services) unticked inside the geosite
+    # rule-sets, "group:cover_id" comma separated ("google:youtube"). Hidden:
+    # the Nodes page owns it, same reason as warp_excluded above.
+    warp_cover_rules = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config, hide_in_virtual_child=True)
     dns_server = _StrConfigDscr(ConfigCategory.general, ApplyMode.apply_config, hide_in_virtual_child=True)
     reality_fallback_domain = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config)  # removed
     reality_server_names = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config)  # removed

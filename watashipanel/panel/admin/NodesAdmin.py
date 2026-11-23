@@ -79,6 +79,48 @@ WS_PRESET_COVERS = {
     'speedtest': ['Speedtest (Ookla)'],
 }
 
+# watashi v12.3.78dev: what each cover chip is worth in the routing. The chips
+# under a group used to be display only — the whole rule-set rode as one. A
+# cover the admin unticks gets a direct rule placed BEFORE the parent group's
+# WARP rule (first match wins), so youtube can stay off while google rides.
+# Covers with their own geosite category use it; the rest carry the known
+# domains of that service. Covers with no entry here have no split, so their
+# chips stay disabled in the modal.
+WS_COVER_RULES = {
+    'google': {
+        'youtube':       {'geo': 'youtube'},
+        'gemini':        {'geo': 'google-gemini'},
+        'gmail':         {'dom': ['mail.google.com', 'gmail.com', 'googlemail.com']},
+        'drive':         {'dom': ['drive.google.com', 'docs.google.com']},
+        'play':          {'dom': ['play.google.com']},
+        'maps':          {'dom': ['maps.google.com', 'googleusercontent.com']},
+        'photos':        {'dom': ['photos.google.com']},
+        'cloud':         {'dom': ['cloud.google.com', 'console.cloud.google.com']},
+        'android':       {'geo': 'firebase'},
+        'blogger':       {'dom': ['blogger.com', 'blogspot.com']},
+    },
+    'openai': {
+        'chatgpt':       {'geo': 'openai'},
+        'api':           {'dom': ['api.openai.com']},
+        'sora':          {'dom': ['sora.com', 'sora.chatgpt.com']},
+        'auth':          {'dom': ['auth.openai.com', 'auth0.com']},
+    },
+}
+
+# stable ids the UI and the templates both speak (index into WS_PRESET_COVERS)
+WS_COVER_IDS = {
+    'google':  ['search', 'youtube', 'gemini', 'gmail', 'drive', 'play', 'maps', 'photos', 'cloud', 'android', 'blogger'],
+    'openai':  ['chatgpt', 'api', 'sora', 'auth'],
+    'netflix': ['app'],
+    'spotify': ['app'],
+    'tiktok':  ['app'],
+    'bytedance': ['capcut', 'services'],
+    'reddit':  ['app'],
+    'nvidia':  ['app'],
+    'unity':   ['app'],
+    'speedtest': ['app'],
+}
+
 # The engine settings that live in engine.conf. node.sh refuses anything else.
 # watashi v12.3.73dev: masque joins — the watashi-masque engine (usque) serves
 # the same SOCKS port, so the panel treats it as a fourth working mode.
@@ -244,11 +286,33 @@ def ws_state():
     # not on this list counts as in — so a group's fresh upstream sites are
     # picked up without the panel knowing them.
     node['excluded'] = [s for s in str(hconfig(ConfigEnum.warp_excluded) or '').split(',') if s.strip()]
+    # watashi v12.3.78dev: the covers the admin unticked inside the geosite
+    # rule-sets ("google:youtube" shape) — these get a direct rule before the
+    # parent's WARP rule in the routing templates.
+    node['cover_excluded'] = ws_cover_excluded_now()
     node['has_key'] = bool(str(hconfig(ConfigEnum.warp_plus_code) or '').strip())
     node['busy'] = bool(node.get('job'))
     if not str(node.get('server_ip', '') or '').strip():
         node['server_ip'] = ws_server_ip()
     return node, error
+
+
+def ws_cover_excluded_now():
+    """The stored warp_cover_rules minus anything this build no longer knows —
+    the modal renders the ticks straight from this."""
+    try:
+        stored = str(hconfig(ConfigEnum.warp_cover_rules) or '')
+    except BaseException:
+        return []
+    out = []
+    for item in stored.split(','):
+        item = item.strip().lower()
+        if ':' not in item:
+            continue
+        grp, _, cov = item.partition(':')
+        if grp in WS_COVER_IDS and cov in WS_COVER_IDS[grp] and item not in out:
+            out.append(item)
+    return out
 
 
 def ws_clean_sites(text):
@@ -294,6 +358,7 @@ class NodesAdmin(FlaskView):
         return render_template('nodes.html', node=node, node_error=error,
                                nd_presets=WS_PRESETS, nd_countries=WS_COUNTRIES,
                                nd_presets_sites=WS_PRESET_SITES, nd_presets_covers=WS_PRESET_COVERS,
+                               nd_cover_ids=WS_COVER_IDS, nd_cover_rules=WS_COVER_RULES,
                                nd_names=nd_names, nd_notes=nd_notes, nd_icons=nd_icons,
                                nd_csrf=ws_form_token())
 
@@ -382,6 +447,19 @@ class NodesAdmin(FlaskView):
                 known.update(WS_PRESET_SITES.get(p, {}).get('dom', []))
             out = [s for s in out if s in known]
             set_hconfig(ConfigEnum.warp_excluded, ','.join(sorted(set(out))))
+            # watashi v12.3.78dev: covers unticked inside the geosite rule-sets.
+            # Only ids this build knows are kept; a cover of a group that left
+            # the pick is dropped with it.
+            raw_cov = data.get('cover_excluded')
+            if isinstance(raw_cov, str):
+                raw_cov = [s for s in raw_cov.split(',') if s.strip()]
+            cov = [str(s).strip().lower() for s in (raw_cov or [])]
+            cov_clean = []
+            for item in cov:
+                grp, sep, cid = item.partition(':')
+                if sep and grp in keep and grp in WS_COVER_IDS and cid in WS_COVER_IDS[grp] and item not in cov_clean:
+                    cov_clean.append(item)
+            set_hconfig(ConfigEnum.warp_cover_rules, ','.join(sorted(set(cov_clean))))
             # a node that is off stays off: the routing mode only picks
             # between "the chosen groups" and "everything".
             if str(hconfig(ConfigEnum.warp_mode) or 'disable') != 'disable':
