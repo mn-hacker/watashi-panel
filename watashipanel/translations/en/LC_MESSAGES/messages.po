@@ -7783,4 +7783,3 @@ msgstr ""
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr ""
-

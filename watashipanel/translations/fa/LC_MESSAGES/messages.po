@@ -12377,4 +12377,3 @@ msgstr "قانون دستی تصمیم می‌گیرد کدام اتصال به 
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "اولین تطبیق برنده است — قوانین محدودتر را بالا نگه دار"
-

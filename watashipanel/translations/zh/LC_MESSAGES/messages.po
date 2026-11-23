@@ -7247,4 +7247,3 @@ msgstr "手动创建的规则决定哪个连接走哪个出口。核心自上而
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "首个匹配生效 — 把更严格的规则放在上面"
-

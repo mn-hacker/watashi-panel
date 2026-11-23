@@ -201,22 +201,34 @@ def auth_before_request():
             # perfectly valid session. Without force, the sign in view simply
             # sends a signed-in visitor back to their panel.
             return redirect(hurl_for('common_bp.LoginView:index', next=request.path))
+
+        ses_id = session.get('_admin_id') if is_admin_path else session.get('_user_id')
+        ses_account = None
+        if ses_id:
+            try:
+                ses_account = AdminUser.by_id(int(str(ses_id).split('_')[-1])) if is_admin_path else User.by_id(int(str(ses_id).split('_')[-1]))
+            except BaseException:
+                ses_account = None
+
+        # watashi v12.3.74dev: the /admin/ panel lives under the owner's uuid,
+        # so on an admin path the uuid is the panel address, not the visitor.
+        # The uuid resolved to the owner and the id check below then logged
+        # out every admin who had signed in with a username and password —
+        # agents, plain admins and custom modes were thrown out on their very
+        # next click after signing in. A signed-in admin session answers an
+        # admin path by itself; the magic-link rule underneath keeps judging
+        # the user pages and a visit with no admin session at all.
+        if is_admin_path and ses_account and hutils.flask.is_admin_role(ses_account.role):
+            account = ses_account
         # watashi v12.2.130cg: a password column left NULL is not a password, but
         # None != "" is true, so those accounts were being logged straight out.
-        if (account.password or "") != "" and "api/v1/tgbot/" not in request.path:
+        elif (account.password or "") != "" and "api/v1/tgbot/" not in request.path:
             # watashi v12.3.73dev: the magic link of an account that carries a
             # password used to wipe a perfectly valid session of that same
             # account (users were thrown out right after signing in, the
             # moment they opened their own panel link). The link is only a
             # shortcut: when the visitor is already signed in as this very
             # account, let the link pass instead of logging them out.
-            ses_id = session.get('_admin_id') if is_admin_path else session.get('_user_id')
-            ses_account = None
-            if ses_id:
-                try:
-                    ses_account = AdminUser.by_id(int(str(ses_id).split('_')[-1])) if is_admin_path else User.by_id(int(str(ses_id).split('_')[-1]))
-                except BaseException:
-                    ses_account = None
             if not (ses_account and ses_account.id == account.id):
                 return logout_redirect()
         if is_admin_path:

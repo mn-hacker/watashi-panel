@@ -38,7 +38,9 @@ from watashipanel.panel.run_commander import commander, Command
 WS_PRESETS = ('ir', 'google', 'ai', 'streaming', 'social', 'dev', 'tools')
 
 # The engine settings that live in engine.conf. node.sh refuses anything else.
-WS_MODES = ('warp', 'gool', 'cfon')
+# watashi v12.3.73dev: masque joins — the watashi-masque engine (usque) serves
+# the same SOCKS port, so the panel treats it as a fourth working mode.
+WS_MODES = ('warp', 'gool', 'cfon', 'masque')
 WS_IPVS = ('auto', '4', '6')
 WS_COUNTRIES = ('AT', 'AU', 'BE', 'BG', 'CA', 'CH', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI',
                 'FR', 'GB', 'HR', 'HU', 'IE', 'IN', 'IT', 'JP', 'LV', 'NL', 'NO', 'PL',
@@ -187,6 +189,8 @@ def ws_state():
     # still ask for the warp flag, because there it is the whole point.
     carrying = str(node.get('carrying', '')) == 'yes'
     mode = str(node['settings'].get('MODE', '') or 'warp')
+    # watashi v12.3.73dev: masque leaves through cloudflare too (warp=on holds),
+    # but its engine speaks HTTP/3 — the trace answer is the same shape as warp.
     if mode == 'cfon':
         node['working'] = carrying
     else:

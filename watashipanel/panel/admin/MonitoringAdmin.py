@@ -42,7 +42,10 @@ def _clean_unknown(value):
 class MonitoringAdmin(FlaskView):
     """Admin view for monitoring user devices (HWID)."""
 
-    decorators = [login_required({Role.super_admin, Role.admin, Role.custom})]
+    # watashi v12.3.75dev: the agent role joins the role check so the users
+    # page heartbeat (api_online_status, capability 'users') answers for
+    # agents too; the monitoring page itself stays closed by capability
+    decorators = [login_required({Role.super_admin, Role.admin, Role.agent, Role.custom})]
 
     def index(self):
         """Main device-monitoring page."""

@@ -58,6 +58,11 @@ WS_ENDPOINT_CAPS = (
     # removing a node is server work, not dashboard work
     ('admin.Dashboard:remove_child', 'nodes'),
     ('admin.Dashboard:', 'dashboard'),
+    # watashi v12.3.75dev: the users page reads its live online badges from the
+    # monitoring heartbeat every 30s, so that one endpoint follows the users
+    # capability instead of the whole monitoring page. Without it an agent,
+    # who owns the users page, was thrown out of the panel by the badge fetch.
+    ('admin.MonitoringAdmin:api_online_status', 'users'),
     ('admin.MonitoringAdmin:', 'monitoring'),
     ('admin.UsageAdmin:', 'usage'),
     ('admin.AccountAdmin:', 'account'),

@@ -7266,4 +7266,3 @@ msgstr "Созданное вручную правило решает, како�
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "Первое совпадение побеждает — держите узкие правила сверху"
-

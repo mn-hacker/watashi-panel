@@ -265,6 +265,7 @@
                             <div class="nd-sub" id="ndSub">
                                 {%- if nd_set.MODE == 'cfon' %}{{ _('Psiphon, through the warp-plus engine') }}
                                 {%- elif nd_set.MODE == 'gool' %}{{ _('Cloudflare twice over, through the warp-plus engine') }}
+                                {%- elif nd_set.MODE == 'masque' %}{{ _('Cloudflare over MASQUE (HTTP/3), through the watashi-masque engine') }}
                                 {%- else %}{{ _('Cloudflare, through the warp-plus engine') }}{% endif -%}
                             </div>
                         </div>
@@ -438,8 +439,9 @@
                     <button type="button" data-v="warp" onclick="ndSeg('MODE', 'warp')">{{ _('Plain WARP') }}</button>
                     <button type="button" data-v="gool" onclick="ndSeg('MODE', 'gool')">{{ _('WARP in WARP (gool)') }}</button>
                     <button type="button" data-v="cfon" onclick="ndSeg('MODE', 'cfon')">{{ _('Psiphon (cfon)') }}</button>
+                    <button type="button" data-v="masque" onclick="ndSeg('MODE', 'masque')">{{ _('MASQUE (HTTP/3)') }}</button>
                 </div>
-                <span class="nd-hint">{{ _('WARP in WARP takes one more hop and is usually the steadier of the two. Psiphon lets you pick which country the traffic comes out of.') }}</span>
+                <span class="nd-hint">{{ _('WARP in WARP takes one more hop and is usually the steadier of the two. Psiphon lets you pick which country the traffic comes out of. MASQUE rides HTTP/3 on port 443, the hardest of the four to block.') }}</span>
             </div>
 
             <div class="nd-field nd-hidden" id="ndCountryField">
@@ -534,6 +536,7 @@
             subWarp: {{ _('Cloudflare, through the warp-plus engine') | tojson }},
             subGool: {{ _('Cloudflare twice over, through the warp-plus engine') | tojson }},
             subPsiphon: {{ _('Psiphon, through the warp-plus engine') | tojson }},
+            subMasque: {{ _('Cloudflare over MASQUE (HTTP/3), through the watashi-masque engine') | tojson }},
             {# watashi v12.2.129.1: gettext interpolates the moment it is called, so
                asking for the raw pattern threw KeyError: 'n'. We hand it a marker
                instead and the javascript below swaps the marker for the real count. #}
@@ -664,7 +667,7 @@
             byId('ndBadgeWord').textContent = node.plus ? TXT.plus
                 : (node.working ? (ndMode === 'cfon' ? TXT.psiphonWorking : TXT.working) : (node.on ? TXT.dead : TXT.off));
             var sub = byId('ndSub');
-            if (sub) { sub.textContent = ndMode === 'cfon' ? TXT.subPsiphon : (ndMode === 'gool' ? TXT.subGool : TXT.subWarp); }
+            if (sub) { sub.textContent = ndMode === 'cfon' ? TXT.subPsiphon : (ndMode === 'gool' ? TXT.subGool : (ndMode === 'masque' ? TXT.subMasque : TXT.subWarp)); }
             var srv = byId('ndServerIp');
             if (srv) {
                 srv.className = 'nd-hop-v nd-ltr' + (node.server_ip ? '' : ' nd-quiet');
