@@ -282,6 +282,16 @@ def auth_before_request():
         # print("loggining in")
         if not g.is_admin:
             return
+        # watashi v12.3.76dev: one gate for every admin page, here and not only
+        # inside the view decorators. The decorators each view carries were the
+        # only line of defence, so any view that lost or never had one left its
+        # whole page open to an agent or a custom account — the reason the same
+        # permission bug kept coming back. This runs on every request, before
+        # any view, and asks the same question the decorators ask: does this
+        # account's mode own the part of the panel this endpoint belongs to?
+        from watashipanel.models.admin_perms import ws_endpoint_allowed
+        if not ws_endpoint_allowed(account, request.endpoint):
+            return ws_access_denied()  # type: ignore
         if next_url is None:
             return
         # watashi v12.3.73dev: this return must not swallow a uuid panel link.

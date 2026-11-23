@@ -202,9 +202,15 @@ def ws_endpoint_allowed(account, endpoint):
         return True  # not an admin account, other guards decide
     cap = ws_endpoint_cap(endpoint)
     if cap is None:
-        # a corner nobody mapped: the three fixed modes keep whatever their
-        # role already allowed, a hand made account gets nothing extra
+        # watashi v12.3.76dev: a panel corner nobody mapped is no longer a
+        # free pass. the three fixed modes fall back to their role's default
+        # answer (super_admin yes, admin/agent judged by their own caps list
+        # carrying the generic 'panel' right), a hand made account gets
+        # nothing unmapped. this is the hole that let a stripped or missing
+        # decorator open a whole page to an agent.
+        if mode == 'super_admin':
+            return True
         if mode == 'custom':
             return not ws_is_panel_endpoint(endpoint)
-        return True
+        return False
     return cap in ws_granted(account)
