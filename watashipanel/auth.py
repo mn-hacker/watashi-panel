@@ -196,11 +196,29 @@ def auth_before_request():
         account = get_account_by_uuid(g.uuid, is_admin_path)
         # print(account)
         if not account:
-            return logout_redirect()
+            # watashi v12.3.73dev: an unknown uuid (stale bookmark, typo) used
+            # to bounce with force=1, and the forced sign in page then wiped a
+            # perfectly valid session. Without force, the sign in view simply
+            # sends a signed-in visitor back to their panel.
+            return redirect(hurl_for('common_bp.LoginView:index', next=request.path))
         # watashi v12.2.130cg: a password column left NULL is not a password, but
         # None != "" is true, so those accounts were being logged straight out.
         if (account.password or "") != "" and "api/v1/tgbot/" not in request.path:
-            return logout_redirect()
+            # watashi v12.3.73dev: the magic link of an account that carries a
+            # password used to wipe a perfectly valid session of that same
+            # account (users were thrown out right after signing in, the
+            # moment they opened their own panel link). The link is only a
+            # shortcut: when the visitor is already signed in as this very
+            # account, let the link pass instead of logging them out.
+            ses_id = session.get('_admin_id') if is_admin_path else session.get('_user_id')
+            ses_account = None
+            if ses_id:
+                try:
+                    ses_account = AdminUser.by_id(int(str(ses_id).split('_')[-1])) if is_admin_path else User.by_id(int(str(ses_id).split('_')[-1]))
+                except BaseException:
+                    ses_account = None
+            if not (ses_account and ses_account.id == account.id):
+                return logout_redirect()
         if is_admin_path:
             next_url = request.url
             next_url = next_url.replace(f'/{g.uuid}/', '/admin/')
@@ -254,7 +272,12 @@ def auth_before_request():
             return
         if next_url is None:
             return
-        if not g.user_agent['is_browser']:
+        # watashi v12.3.73dev: this return must not swallow a uuid panel link.
+        # A non-browser visit to a uuid link (curl, some webviews) fell through
+        # to the uuid view, which bounced to the sign in page with force=1 and
+        # dropped the session there. A uuid request always has a next_url, so
+        # it is redirected like a browser visit instead of falling through.
+        if not g.user_agent['is_browser'] and not g.uuid:
             return
         if ".webmanifest" in request.path:
             return
