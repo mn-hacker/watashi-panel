@@ -80,10 +80,15 @@ def login_user(user: AdminUser | User, remember=False, duration=None, force=Fals
 
     account_id = user.get_id()  # type: ignore
     # print('account_id', account_id)
+    # watashi v12.3.77dev: one session, one account. A link (or a sign in) for
+    # the other side must not leave the previous side's id behind, or the old
+    # session resurfaces on the next bare-path visit.
     if user.role in {Role.super_admin, Role.admin, Role.agent, Role.custom}:
         session["_admin_id"] = account_id
+        session.pop("_user_id", None)
     else:
         session["_user_id"] = account_id
+        session.pop("_admin_id", None)
     # session["_fresh"] = fresh
     # session["_id"] = current_app.login_manager._session_identifier_generator()  # type: ignore
 
@@ -202,40 +207,23 @@ def auth_before_request():
             # sends a signed-in visitor back to their panel.
             return redirect(hurl_for('common_bp.LoginView:index', next=request.path))
 
-        ses_id = session.get('_admin_id') if is_admin_path else session.get('_user_id')
-        ses_account = None
-        if ses_id:
-            try:
-                ses_account = AdminUser.by_id(int(str(ses_id).split('_')[-1])) if is_admin_path else User.by_id(int(str(ses_id).split('_')[-1]))
-            except BaseException:
-                ses_account = None
-
-        # watashi v12.3.74dev: the /admin/ panel lives under the owner's uuid,
-        # so on an admin path the uuid is the panel address, not the visitor.
-        # The uuid resolved to the owner and the id check below then logged
-        # out every admin who had signed in with a username and password —
-        # agents, plain admins and custom modes were thrown out on their very
-        # next click after signing in. A signed-in admin session answers an
-        # admin path by itself; the magic-link rule underneath keeps judging
-        # the user pages and a visit with no admin session at all.
-        if is_admin_path and ses_account and hutils.flask.is_admin_role(ses_account.role):
-            account = ses_account
-        # watashi v12.2.130cg: a password column left NULL is not a password, but
-        # None != "" is true, so those accounts were being logged straight out.
-        elif (account.password or "") != "" and "api/v1/tgbot/" not in request.path:
-            # watashi v12.3.73dev: the magic link of an account that carries a
-            # password used to wipe a perfectly valid session of that same
-            # account (users were thrown out right after signing in, the
-            # moment they opened their own panel link). The link is only a
-            # shortcut: when the visitor is already signed in as this very
-            # account, let the link pass instead of logging them out.
-            if not (ses_account and ses_account.id == account.id):
-                return logout_redirect()
+        # watashi v12.3.77dev: a panel link is the address of a panel — whoever
+        # opens it, its account takes over the session with its own permissions,
+        # whatever the previous session held. The two rules this replaces each
+        # fixed one scenario and re-created the other: a signed-in admin session
+        # outranking the uuid kept the owner inside their own panel when they
+        # opened another account's link, and a passworded link throwing a
+        # stranger to the sign in page read to the owner as "the agent sees
+        # everything". Neither guard is missed: a username+password sign in
+        # always lands on a uuid-less address (login.py redirects to
+        # /{proxy_path}/), so it is never undone here, and an unknown uuid above
+        # still never touches the session.
         if is_admin_path:
             next_url = request.url
             next_url = next_url.replace(f'/{g.uuid}/', '/admin/')
             next_url = next_url.replace("/admin/admin/", '/admin/')
-            next_url = next_url.replace("http://", "https://")
+            if request.is_secure:
+                next_url = next_url.replace("http://", "https://")
 
     elif apikey := (request.headers.get(API_KEY_HEADER) or request.headers.get(LEGACY_API_KEY_HEADER)):
         account = get_account_by_api_key(apikey, is_admin_path)
