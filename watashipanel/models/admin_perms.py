@@ -55,9 +55,28 @@ WS_MODE_CAPS = {
 # which part of the panel an endpoint belongs to; matched by prefix so every
 # helper route of a page follows the page itself
 WS_ENDPOINT_CAPS = (
+    # watashi v12.3.77dev: the sign in view is not a panel page — it is the
+    # corner that ends a session. The strict unmapped rule below logged the
+    # rejection of exactly that corner, so an admin or an agent clicking
+    # "خروج از حساب" bounced back to the dashboard still signed in. Every
+    # mode carries 'account', and a signed out visitor is not judged here.
+    ('common_bp.LoginView:', 'account'),
+    # watashi v12.3.77dev: the v2 admin API is part of the pages themselves —
+    # the dashboard pulls its live numbers from server_status, so blocking the
+    # api here loaded the page with an access flash and empty widgets. Each
+    # mapping mirrors the roles that api class's own login_required already
+    # carries: server_status and me serve the dashboard/account, user and
+    # users serve the users page, admin_user serves the admins page, log
+    # feeds the actions page.
+    ('api_admin.AdminServerStatusApi', 'dashboard'),
+    ('api_admin.AdminInfoApi', 'account'),
+    ('api_admin.UserApi', 'users'),
+    ('api_admin.UsersApi', 'users'),
+    ('api_admin.AdminUserApi', 'admins'),
+    ('api_admin.AdminUsersApi', 'admins'),
+    ('api_admin.AdminLogApi', 'actions'),
     # removing a node is server work, not dashboard work
-    ('admin.Dashboard:remove_child', 'nodes'),
-    ('admin.Dashboard:', 'dashboard'),
+    ('admin.Dashboard:remove_child', 'nodes'),    ('admin.Dashboard:', 'dashboard'),
     # watashi v12.3.75dev: the users page reads its live online badges from the
     # monitoring heartbeat every 30s, so that one endpoint follows the users
     # capability instead of the whole monitoring page. Without it an agent,

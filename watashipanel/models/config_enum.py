@@ -147,6 +147,11 @@ class ConfigEnum(metaclass=FastEnum):
     # it; a raw text box on the settings page would be a second, silent
     # way to break the routing.
     warp_presets = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config, hide_in_virtual_child=True)
+    # watashi v12.3.77dev: the sites the admin unticked inside the chosen
+    # groups, comma separated ("google:youtube.com" shape is not needed — a
+    # bare domain is unique across groups). Hidden: the Nodes page owns it,
+    # same reason as warp_presets above.
+    warp_excluded = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config, hide_in_virtual_child=True)
     dns_server = _StrConfigDscr(ConfigCategory.general, ApplyMode.apply_config, hide_in_virtual_child=True)
     reality_fallback_domain = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config)  # removed
     reality_server_names = _StrConfigDscr(ConfigCategory.hidden, ApplyMode.apply_config)  # removed

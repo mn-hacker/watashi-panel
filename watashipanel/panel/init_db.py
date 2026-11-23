@@ -2052,6 +2052,11 @@ def _ws_init_db():
     # set_hconfig(ConfigEnum.db_version,103)
     db_version = current_db_version()
     if db_version == latest_db_version():
+        # watashi v12.3.77dev: the enum columns are still taught the words this
+        # build knows on a database that is already at the newest version — a
+        # new ConfigEnum member (warp_excluded this round) otherwise died with
+        # "Data truncated" the first time the panel wrote it.
+        add_new_enum_values()
         return
     # watashi v12.2.130: from here on the tables are rewritten, so this is where a
     # copy of the settings is taken.

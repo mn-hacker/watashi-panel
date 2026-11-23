@@ -37,6 +37,28 @@ from watashipanel.panel.run_commander import commander, Command
 # and never taken from the browser as they came.
 WS_PRESETS = ('ir', 'google', 'ai', 'streaming', 'social', 'dev', 'tools')
 
+# watashi v12.3.77dev: the sites inside every group, exposed so the admin can
+# untick parts of a group. 'geo' entries are geosite rule-set names (they ride
+# MetaCubeX's remote rule-sets and follow that list's updates), 'dom' entries
+# are plain domains this repo adds by hand. This dict is the single source: the
+# Nodes page reads it to render the per-group pickers and the routing
+# templates receive the admin's final pick, so a site added upstream only
+# reaches the panel when it lands here (or by hand in the sites box).
+WS_PRESET_SITES = {
+    'google':    {'geo': ['google'],
+                  'dom': []},
+    'ai':        {'geo': ['openai'],
+                  'dom': ['openai.com', 'ai.com']},
+    'streaming': {'geo': ['netflix', 'spotify', 'tiktok', 'bytedance'],
+                  'dom': ['lookmovie2.to', '9anime.me', 'livechart.me', 'myanimelist.net', 'tunetank.com', 'kmplayer.com']},
+    'social':    {'geo': ['reddit'],
+                  'dom': ['snapchat.com', 'clubhouse.com', 'omegle.com', 'behance.net']},
+    'dev':       {'geo': ['nvidia', 'unity'],
+                  'dom': ['developer.mozilla.org', 'flutter.dev', 'xda-developers.com', 'gamebanana.com', 'sourcemod.net', 'alliedmods.net', 'pagespeed.web.dev', 'alldatasheet.com', 'pixelexperience.org', 'evolution-x.org', 'kenvyra.xyz', 'spark-os.live', 'pixelos.net', 'adbtc.top']},
+    'tools':     {'geo': ['speedtest'],
+                  'dom': ['ip.gs', 'ipinfo.io', 'freepik.com', 'flaticon.com', 'adobe.com', 'remini.com', 'giglio.com', 'homedepot.com', 'axieinfinity.com']},
+}
+
 # The engine settings that live in engine.conf. node.sh refuses anything else.
 # watashi v12.3.73dev: masque joins — the watashi-masque engine (usque) serves
 # the same SOCKS port, so the panel treats it as a fourth working mode.
@@ -198,6 +220,10 @@ def ws_state():
     node['plus'] = str(node.get('warp', '')) == 'plus'
     node['presets'] = ws_presets_now()
     node['sites'] = str(hconfig(ConfigEnum.warp_sites) or '')
+    # watashi v12.3.77dev: sites unticked inside the chosen groups. Anything
+    # not on this list counts as in — so a group's fresh upstream sites are
+    # picked up without the panel knowing them.
+    node['excluded'] = [s for s in str(hconfig(ConfigEnum.warp_excluded) or '').split(',') if s.strip()]
     node['has_key'] = bool(str(hconfig(ConfigEnum.warp_plus_code) or '').strip())
     node['busy'] = bool(node.get('job'))
     if not str(node.get('server_ip', '') or '').strip():
@@ -230,8 +256,25 @@ class NodesAdmin(FlaskView):
 
     def index(self):
         node, error = ws_state()
+        # watashi v12.3.77dev: the per-group site pickers read the shared site
+        # dict; the display names stay here next to the icons they already use.
+        nd_names = {'ir': _('Golden sites'), 'google': _('Google'), 'ai': _('AI sites'),
+                    'streaming': _('Streaming sites'), 'social': _('Social media'),
+                    'dev': _('Dev & tools'), 'tools': _('Tools & startup')}
+        nd_notes = {'ir': _('All Iranian sites go out of the tunnel.'),
+                    'google': _('Search, blog, photos and other Google services.'),
+                    'ai': _('AI service sites. Untick the ones you do not want behind Warp.'),
+                    'streaming': _('Streaming sites and music. Untick what you do not need behind Warp.'),
+                    'social': _('Reddit, Snapchat, Clubhouse and other social sites.'),
+                    'dev': _('Development, gaming, startup and learning sites.'),
+                    'tools': _('Design sites, estimates and specialized tools.')}
+        nd_icons = {'ir': 'fa-solid fa-star', 'google': 'fab fa-google', 'ai': 'fa-solid fa-robot',
+                    'streaming': 'fa-solid fa-film', 'social': 'fa-solid fa-crown',
+                    'dev': 'fa-solid fa-code', 'tools': 'fa-solid fa-toolbox'}
         return render_template('nodes.html', node=node, node_error=error,
                                nd_presets=WS_PRESETS, nd_countries=WS_COUNTRIES,
+                               nd_presets_sites=WS_PRESET_SITES,
+                               nd_names=nd_names, nd_notes=nd_notes, nd_icons=nd_icons,
                                nd_csrf=ws_form_token())
 
     def _json(self, payload, code=200):
@@ -306,6 +349,19 @@ class NodesAdmin(FlaskView):
             # unticking the last group used to switch it straight back on.
             set_hconfig(ConfigEnum.warp_presets, ','.join(keep) if keep else 'none')
             set_hconfig(ConfigEnum.warp_sites, sites)
+            # watashi v12.3.77dev: the unticked sites inside the chosen groups.
+            # Only domains this panel actually knows can be excluded; a hand
+            # written site goes through the sites box, not here.
+            raw_out = data.get('excluded')
+            if isinstance(raw_out, str):
+                raw_out = [s for s in raw_out.split(',') if s.strip()]
+            out = [str(s).strip().lower() for s in (raw_out or [])]
+            known = set()
+            for p in keep:
+                known.update(WS_PRESET_SITES.get(p, {}).get('geo', []))
+                known.update(WS_PRESET_SITES.get(p, {}).get('dom', []))
+            out = [s for s in out if s in known]
+            set_hconfig(ConfigEnum.warp_excluded, ','.join(sorted(set(out))))
             # a node that is off stays off: the routing mode only picks
             # between "the chosen groups" and "everything".
             if str(hconfig(ConfigEnum.warp_mode) or 'disable') != 'disable':
