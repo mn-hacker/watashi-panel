@@ -1,6 +1,6 @@
 # This file is auto-generated using common/update_version.py
 # from watashipanel import  __version__
-__version__ = '12.3.76dev'
+__version__ = '12.3.77dev'
 __release_date__ = '2026-11-23'
-__release_time__ = '22:18:00'
+__release_time__ = '22:49:00'
 is_released_version = False

@@ -245,6 +245,16 @@
     .nd-site input { accent-color: var(--nd-cyan); margin: 0; }
     .nd-site.in { color: var(--text-main); border-color: rgb(var(--ws-b-400) / 0.45); background: rgb(var(--ws-b-400) / 0.07); }
     .nd-site em { font-style: normal; font-size: 9px; opacity: 0.65; border: 1px solid var(--border-color); border-radius: 6px; padding: 0 4px; }
+    .nd-site-wrap { display: inline-flex; align-items: center; gap: 4px; }
+    .nd-covers-open { border: 1px solid var(--border-color); background: transparent; color: var(--text-muted);
+        border-radius: 8px; width: 22px; height: 26px; cursor: pointer; font-size: 9px;
+        display: inline-flex; align-items: center; justify-content: center; }
+    .nd-covers-open:hover { color: var(--text-main); border-color: rgb(var(--ws-b-400) / 0.5); }
+    .nd-covers { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; width: 100%; padding: 6px 10px;
+        border: 1px dashed var(--border-color); border-radius: 10px; }
+    .nd-covers-note { font-size: 10px; color: var(--text-muted); }
+    .nd-cover { font-size: 10.5px; padding: 2px 8px; border-radius: 999px; color: var(--text-main);
+        background: rgb(var(--ws-b-400) / 0.07); border: 1px solid rgb(var(--ws-b-400) / 0.25); }
 </style>
 
 <div class="nd-wrap">
@@ -435,7 +445,19 @@
                     {% if key != 'ir' %}
                     <div class="nd-group-sites nd-hidden" id="ndSites{{ key }}">
                       {% for site in nd_presets_sites.get(key, {}).get('geo', []) %}
+                      {% set covers = nd_presets_covers.get(site, []) %}
+                      {% if covers %}
+                      <div class="nd-site-wrap{% if site not in nd.excluded %} in{% endif %}" id="ndWrap{{ key }}{{ loop.index0 }}">
+                        <label class="nd-site"><input type="checkbox" class="nd-site-box" data-group="{{ key }}" value="{{ site }}"{% if site not in nd.excluded %} checked{% endif %} onchange="ndSitePaint(this)"><span>{{ site }}</span><em>{{ _('rule-set') }}</em></label>
+                        <button type="button" class="nd-covers-open" onclick="ndToggleCovers('{{ key }}', {{ loop.index0 }})" title="{{ _('What does this rule-set cover') }}"><i class="fa-solid fa-chevron-down"></i></button>
+                      </div>
+                      <div class="nd-covers nd-hidden" id="ndCovers{{ key }}{{ loop.index0 }}">
+                        <span class="nd-covers-note">{{ _('This rule-set covers:') }}</span>
+                        {% for cover in covers %}<span class="nd-cover">{{ cover }}</span>{% endfor %}
+                      </div>
+                      {% else %}
                       <label class="nd-site{% if site not in nd.excluded %} in{% endif %}"><input type="checkbox" class="nd-site-box" data-group="{{ key }}" value="{{ site }}"{% if site not in nd.excluded %} checked{% endif %} onchange="ndSitePaint(this)"><span>{{ site }}</span><em>{{ _('rule-set') }}</em></label>
+                      {% endif %}
                       {% endfor %}
                       {% for site in nd_presets_sites.get(key, {}).get('dom', []) %}
                       <label class="nd-site{% if site not in nd.excluded %} in{% endif %}"><input type="checkbox" class="nd-site-box" data-group="{{ key }}" value="{{ site }}"{% if site not in nd.excluded %} checked{% endif %} onchange="ndSitePaint(this)"><span>{{ site }}</span></label>
@@ -905,6 +927,18 @@
 
         window.ndSitePaint = function (box) {
             box.closest('.nd-site').classList.toggle('in', box.checked);
+        };
+
+        // watashi v12.3.77dev: open the "what does this rule-set cover" list
+        // under a geo chip. The chip stays a working on/off switch; the arrow
+        // only folds the coverage row.
+        window.ndToggleCovers = function (key, idx) {
+            var row = byId('ndCovers' + key + idx);
+            if (!row) { return; }
+            row.classList.toggle('nd-hidden');
+            var wrap = byId('ndWrap' + key + idx);
+            var icon = wrap && wrap.querySelector('.nd-covers-open i');
+            if (icon) { icon.classList.toggle('fa-chevron-down'); icon.classList.toggle('fa-chevron-up'); }
         };
 
         window.ndSaveRoute = function () {

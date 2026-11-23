@@ -59,6 +59,26 @@ WS_PRESET_SITES = {
                   'dom': ['ip.gs', 'ipinfo.io', 'freepik.com', 'flaticon.com', 'adobe.com', 'remini.com', 'giglio.com', 'homedepot.com', 'axieinfinity.com']},
 }
 
+# watashi v12.3.77dev: what each geosite rule-set actually covers, shown in the
+# Nodes page so "Google" is not a black box. These are display strings under
+# each geo entry — the routing rule itself stays `geosite:<name>`, so the real
+# domain list inside the rule-set follows the upstream dat updates by itself
+# and does not depend on anything written here. v2fly names (github.com/
+# v2fly/domain-list-community) are the ones both cores ship.
+WS_PRESET_COVERS = {
+    'google': ['جستجو', 'یوتیوب', 'جمینی (Gemini)', 'Gmail', 'Google Drive', 'Google Play',
+               'Google Maps', 'Google Photos', 'Google Cloud', 'Android / Firebase', 'Blogger'],
+    'openai': ['ChatGPT', 'API OpenAI', 'Sora', 'Auth OpenAI'],
+    'netflix': ['Netflix وب و اپ'],
+    'spotify': ['Spotify وب و اپ'],
+    'tiktok': ['TikTok وب'],
+    'bytedance': ['CapCut', 'سرویس‌های ByteDance'],
+    'reddit': ['Reddit وب و اپ'],
+    'nvidia': ['NVIDIA (GeForce، درایور، CUDA)'],
+    'unity': ['Unity (asset store، مجوزها)'],
+    'speedtest': ['Speedtest (Ookla)'],
+}
+
 # The engine settings that live in engine.conf. node.sh refuses anything else.
 # watashi v12.3.73dev: masque joins — the watashi-masque engine (usque) serves
 # the same SOCKS port, so the panel treats it as a fourth working mode.
@@ -273,7 +293,7 @@ class NodesAdmin(FlaskView):
                     'dev': 'fa-solid fa-code', 'tools': 'fa-solid fa-toolbox'}
         return render_template('nodes.html', node=node, node_error=error,
                                nd_presets=WS_PRESETS, nd_countries=WS_COUNTRIES,
-                               nd_presets_sites=WS_PRESET_SITES,
+                               nd_presets_sites=WS_PRESET_SITES, nd_presets_covers=WS_PRESET_COVERS,
                                nd_names=nd_names, nd_notes=nd_notes, nd_icons=nd_icons,
                                nd_csrf=ws_form_token())
 
