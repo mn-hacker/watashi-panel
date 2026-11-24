@@ -357,6 +357,14 @@ class LoginView(FlaskView):
             if model and (model.username or '').strip() and (model.password or '').strip():
                 login_user(model, force=True)
                 ws_forget_misses(typed)
+                if admin_side:
+                    # watashi v12.3.57dev: a fresh sign-in belongs in the bell tray
+                    try:
+                        import time as _time
+                        from watashipanel.panel.ws_bell_feed import ws_push_admin_event
+                        ws_push_admin_event(model.id, 'sign-in: ' + (model.username or 'admin'), 'success', {'ts': int(_time.time() * 1000)})
+                    except Exception:
+                        pass
                 return redirect(f'/{g.proxy_path}/')
         missed = ws_note_miss(typed)
         waiting = ws_wait_left(typed)

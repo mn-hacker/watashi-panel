@@ -117,6 +117,17 @@ def init_app(app):
     # admin_bp.add_url_rule('/admin/quicksetup/',endpoint="quicksetup",view_func=QuickSetup.index,methods=["GET"])
     # admin_bp.add_url_rule('/admin/quicksetup/',endpoint="quicksetup-save", view_func=QuickSetup.save,methods=["POST"])
 
+    # watashi v12.3.57dev: the bell's polling feed
+    from watashipanel.panel import ws_bell_feed
+    from watashipanel.auth import login_required
+
+    @admin_bp.route('/bell/feed/')
+    @login_required()
+    def bell_feed():
+        after = request.args.get('after', type=float)
+        return render_template('bell_feed.json',
+                               entries=ws_bell_feed.ws_read_feed(g.account.id, after))
+
     app.add_url_rule("/<proxy_path>/admin/static/<filename>/", endpoint="admin.static")  # fix bug in admin with blueprint
 
     flask_bp.debug = True

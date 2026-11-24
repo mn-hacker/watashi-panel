@@ -388,6 +388,239 @@ try {
             };
         })();
 } catch (err) { if (window.console) { console.error(err); } }
+// ---- notification bell ----
+    try {
+        var WS_BELL_MAX = 50;
+        var wsBell = {
+            account: '',
+            items: [],
+            open: false,
+            btn: null,
+            panel: null,
+            key: function () { return 'watashi-bell-' + (this.account || 'anon'); },
+            readAccount: function () {
+                var n = document.querySelector('.ws-prof-name');
+                this.account = (n && n.textContent ? n.textContent.trim() : '') || 'anon';
+            },
+            load: function () {
+                this.readAccount();
+                var raw = null;
+                try { raw = window.localStorage.getItem(this.key()); } catch (err) { raw = null; }
+                try { this.items = raw ? JSON.parse(raw) : []; } catch (err) { this.items = []; }
+                if (!Array.isArray(this.items)) this.items = [];
+            },
+            save: function () {
+                try {
+                    window.localStorage.setItem(this.key(), JSON.stringify(this.items.slice(0, WS_BELL_MAX)));
+                } catch (err) { /* a full or blocked storage must never break a toast */ }
+            },
+            unread: function () {
+                var u = 0;
+                for (var i = 0; i < this.items.length; i++) { if (!this.items[i].r) u++; }
+                return u;
+            },
+            add: function (message, type, extra) {
+                var more = extra || {};
+                var act = more.action && more.action.url ? { url: String(more.action.url), label: more.action.label || '', method: more.action.method || 'post' } : null;
+                this.items.unshift({ m: String(message), t: type || 'info', ts: Date.now(), r: false, a: act });
+                this.items = this.items.slice(0, WS_BELL_MAX);
+                this.save();
+                this.paint();
+                if (this.btn) {
+                    this.btn.classList.remove('ws-bell-ring');
+                    // the class is re-added on the next frame so a burst of
+                    // messages rings again instead of looking frozen
+                    var b = this.btn;
+                    window.requestAnimationFrame(function () { b.classList.add('ws-bell-ring'); });
+                    window.setTimeout(function () { b.classList.remove('ws-bell-ring'); }, 1300);
+                }
+            },
+            paint: function () {
+                if (!this.panel) return;
+                var words = window.WS_BELL_WORDS || {};
+                var list = document.getElementById('wsBellList');
+                var badge = document.getElementById('wsBellBadge');
+                var un = this.unread();
+                if (badge) {
+                    if (un > 0) {
+                        badge.hidden = false;
+                        badge.textContent = un > 99 ? '99+' : String(un);
+                    } else {
+                        badge.hidden = true;
+                    }
+                }
+                if (!list) return;
+                list.innerHTML = '';
+                if (!this.items.length) {
+                    var empty = document.createElement('div');
+                    empty.className = 'ws-bell-empty';
+                    empty.textContent = words.empty || 'No notifications yet';
+                    list.appendChild(empty);
+                    return;
+                }
+                for (var i = 0; i < this.items.length; i++) {
+                    list.appendChild(this.row(this.items[i], i, words));
+                }
+            },
+            row: function (item, index, words) {
+                var self = this;
+                var li = document.createElement('div');
+                li.className = 'ws-bell-item ws-bell-' + (['success', 'error', 'warning', 'info'].indexOf(item.t) >= 0 ? item.t : 'info') + (item.r ? '' : ' ws-bell-unread');
+                var icon = document.createElement('div');
+                icon.className = 'ws-bell-item-icon';
+                var ic = document.createElement('i');
+                ic.className = { success: 'fa-solid fa-circle-check', error: 'fa-solid fa-circle-xmark', warning: 'fa-solid fa-triangle-exclamation', info: 'fa-solid fa-circle-info' }[item.t] || 'fa-solid fa-circle-info';
+                icon.appendChild(ic);
+                var body = document.createElement('div');
+                body.className = 'ws-bell-item-body';
+                var text = document.createElement('div');
+                text.className = 'ws-bell-item-text';
+                text.textContent = item.m;
+                var meta = document.createElement('div');
+                meta.className = 'ws-bell-item-meta';
+                meta.textContent = self.ago(item.ts, words);
+                body.appendChild(text);
+                body.appendChild(meta);
+                li.appendChild(icon);
+                li.appendChild(body);
+                if (item.a && item.a.url) {
+                    var go = document.createElement('button');
+                    go.type = 'button';
+                    go.className = 'ws-bell-item-go';
+                    go.textContent = item.a.label || '>';
+                    go.addEventListener('click', function (ev) {
+                        ev.stopPropagation();
+                        item.r = true;
+                        self.save();
+                        if (String(item.a.method || 'post').toLowerCase() === 'get') {
+                            window.location.href = item.a.url;
+                        } else {
+                            // the same hidden form post a toast button uses
+                            var form = document.createElement('form');
+                            form.method = 'post';
+                            form.action = item.a.url;
+                            form.style.display = 'none';
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                    li.appendChild(go);
+                }
+                return li;
+            },
+            ago: function (ts, words) {
+                var s = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+                if (s < 60) return words.just_now || 'just now';
+                var m = Math.floor(s / 60);
+                if (m < 60) return (words.minutes_ago || '{n}m ago').replace('{n}', String(m));
+                var h = Math.floor(m / 60);
+                if (h < 24) return (words.hours_ago || '{n}h ago').replace('{n}', String(h));
+                return (words.days_ago || '{n}d ago').replace('{n}', String(Math.floor(h / 24)));
+            },
+            setOpen: function (want) {
+                this.open = !!want;
+                if (this.panel) this.panel.hidden = !this.open;
+                if (this.btn) this.btn.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+                if (!this.open) {
+                    // closing the tray is what reads it: while it is open the
+                    // fresh rows stay bold and the badge still counts them
+                    var dirty = false;
+                    for (var i = 0; i < this.items.length; i++) { if (!this.items[i].r) { this.items[i].r = true; dirty = true; } }
+                    if (dirty) { this.save(); this.paint(); }
+                }
+            }
+        };
+
+        // every new toast leaves a copy in the tray; a twin (the counter bump
+        // of a message already on screen) has already been recorded once
+        var origToast = window.wsToast;
+        window.wsToast = function (message, type, duration, extra) {
+            var el = origToast.apply(window, arguments);
+            try {
+                if (message && el && el.getAttribute && !el.getAttribute('data-ws-seen')) {
+                    wsBell.add(String(message), type, extra);
+                }
+            } catch (err) { if (window.console) { console.error(err); } }
+            return el;
+        };
+
+        // phase 2: the server's own events (node down, backup done, a sign-in
+        // from somewhere else) reach the tray through a light poll; seen ones
+        // are remembered by message text so a poll overlap never doubles a row
+        wsBell.poll = function () {
+            var cfg = window.WS_BELL_FEED;
+            if (!cfg || !cfg.url) return;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', cfg.url + (this.lastTs ? '?after=' + this.lastTs : ''), true);
+            xhr.addEventListener('load', function () {
+                if (xhr.status !== 200) return;
+                var entries = [];
+                try { entries = JSON.parse(xhr.responseText) || []; } catch (err) { return; }
+                for (var i = 0; i < entries.length; i++) {
+                    var e = entries[i];
+                    if (!e || !e.m) continue;
+                    if (wsBell.seen && wsBell.seen[e.m + '|' + (e.ts || 0)]) continue;
+                    if (wsBell.seen) wsBell.seen[e.m + '|' + (e.ts || 0)] = 1;
+                    wsBell.add(String(e.m), e.k || 'info', null);
+                    if (e.ts && (!wsBell.lastTs || e.ts > wsBell.lastTs)) wsBell.lastTs = e.ts;
+                }
+            });
+            xhr.send();
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            wsBell.seen = {};
+            for (var i = 0; i < wsBell.items.length; i++) { wsBell.seen[wsBell.items[i].m + '|' + (wsBell.items[i].ts || 0)] = 1; }
+            var bellTimer = window.setInterval(function () { wsBell.poll(); }, (window.WS_BELL_FEED && window.WS_BELL_FEED.interval) || 20000);
+            window.setTimeout(function () { wsBell.poll(); }, 1200);
+            // the interval handle stays on the window so a hot reload does not stack timers
+            if (window.__wsBellTimer) window.clearInterval(window.__wsBellTimer);
+            window.__wsBellTimer = bellTimer;
+            window.wsBell = wsBell; // pages (and the e2e tests) can force a poll
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            wsBell.btn = document.getElementById('wsBellBtn');
+            wsBell.panel = document.getElementById('wsBellPanel');
+            if (!wsBell.btn || !wsBell.panel) return;
+            var words = window.WS_BELL_WORDS || {};
+            var title = document.getElementById('wsBellTitle');
+            var mark = document.getElementById('wsBellMarkAll');
+            var clear = document.getElementById('wsBellClear');
+            if (title) title.textContent = words.title || 'Notifications';
+            if (mark) {
+                mark.textContent = words.mark_all || 'Mark all read';
+                mark.addEventListener('click', function () {
+                    for (var i = 0; i < wsBell.items.length; i++) { wsBell.items[i].r = true; }
+                    wsBell.save();
+                    wsBell.paint();
+                });
+            }
+            if (clear) {
+                clear.textContent = words.clear || 'Clear';
+                clear.addEventListener('click', function () {
+                    wsBell.items = [];
+                    // a cleared tray may re-show a server event on the next poll:
+                    // the user asked for a clean slate, so forget what was seen
+                    wsBell.seen = {};
+                    wsBell.lastTs = 0;
+                    wsBell.save();
+                    wsBell.paint();
+                });
+            }
+            wsBell.btn.addEventListener('click', function (ev) {
+                ev.stopPropagation();
+                wsBell.setOpen(!wsBell.open);
+            });
+            document.addEventListener('click', function (ev) {
+                if (wsBell.open && wsBell.panel && !wsBell.panel.contains(ev.target)) wsBell.setOpen(false);
+            });
+            document.addEventListener('keydown', function (ev) {
+                if (ev.key === 'Escape' && wsBell.open) wsBell.setOpen(false);
+            });
+            wsBell.load();
+            wsBell.paint();
+        });
+    } catch (err) { if (window.console) { console.error(err); } }
 // ---- compact sidebar ----
     document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('sidebar');

@@ -206,6 +206,27 @@ msgstr "👥 امکان اضافه کردن ادمین فرعی"
 msgid "Cancel"
 msgstr "لغو"
 
+msgid "Notifications"
+msgstr "اعلان‌ها"
+
+msgid "Mark all read"
+msgstr "همه خوانده شد"
+
+msgid "No notifications yet"
+msgstr "هنوز اعلانی نیست"
+
+msgid "just now"
+msgstr "همین حالا"
+
+msgid "{n}m ago"
+msgstr "{n} دقیقه پیش"
+
+msgid "{n}h ago"
+msgstr "{n} ساعت پیش"
+
+msgid "{n}d ago"
+msgstr "{n} روز پیش"
+
 msgid "Change"
 msgstr "تغییر"
 

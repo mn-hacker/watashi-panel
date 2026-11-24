@@ -257,6 +257,11 @@ def backup_task(force: bool = False, quiet: bool = False):
             json.dump(dbdict, fp, indent=2, sort_keys=True, default=str)
     except Exception as problem:
         logger.error(f'watashi: the backup could not be written to {dst}: {problem}')
+        try:
+            from watashipanel.panel.ws_bell_feed import ws_push_all_admins
+            ws_push_all_admins(f"backup failed: {problem}", 'error')
+        except Exception:
+            pass
         return {'status': 'failed', 'reason': str(problem), 'file': dst}
     # watashi v12.2.107: the bare file name used to be printed here as well,
     # one line above the dict. the logger line at the end of this task already
@@ -282,6 +287,12 @@ def backup_task(force: bool = False, quiet: bool = False):
                     logger.exception(e)
     if not quiet:  # watashi v12.2.130x: the console command prints this itself
         logger.info(f"watashi: a backup was written to {dst}; it went to {sent} admin(s); {pruned} old file(s) removed")
+    # watashi v12.3.57dev: the bell tells the admins the backup finished
+    try:
+        from watashipanel.panel.ws_bell_feed import ws_push_all_admins
+        ws_push_all_admins(f"backup: {os.path.basename(dst)} ({pruned} old file(s) removed)", 'success')
+    except Exception:
+        pass
     return {'status': 'ok', 'file': dst, 'sent': sent, 'pruned': pruned}
 
 

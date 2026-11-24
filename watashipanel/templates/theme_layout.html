@@ -64,7 +64,9 @@
     <script>
         // watashi v12.3.43dev: what the frame's scripts need from the server
         window.WS_UI_CFG = { save: {{ hurl_for('admin.PersonalizeAdmin:save') | tojson }}, csrf: {{ ws_layout_csrf() | tojson }} };
+        window.WS_BELL_FEED = { url: {{ hurl_for('admin.bell_feed') | tojson }}, interval: 20000 };
         window.WS_CONFIRM_WORDS = { remove: {{ _('Delete') | tojson }}, cancel: {{ _('Cancel') | tojson }} };
+        window.WS_BELL_WORDS = { title: {{ _('Notifications') | tojson }}, mark_all: {{ _('Mark all read') | tojson }}, clear: {{ _('Clear') | tojson }}, empty: {{ _('No notifications yet') | tojson }}, just_now: {{ _('just now') | tojson }}, minutes_ago: {{ _('{n}m ago') | tojson }}, hours_ago: {{ _('{n}h ago') | tojson }}, days_ago: {{ _('{n}d ago') | tojson }} };
         var WS_PROF_ON = {{ _('on')|tojson }};
         var WS_PROF_OFF = {{ _('off')|tojson }};
         // until watashi-shell.js is in, a delete button does nothing at all rather
@@ -225,6 +227,25 @@
                     <i class="fa-brands fa-github"></i> Star <span id="gh-star-count">★ ...</span>
                 </a>
                 {# watashi v12.3.43dev: the star count is read by watashi-shell.js now, once every six hours #}
+
+                {# the notification bell: every toast leaves a copy here, the badge
+                   counts the unread ones and the tray survives a page reload #}
+                <div class="ws-bell-wrap" id="wsBellWrap">
+                    <button type="button" class="ws-bell-btn" id="wsBellBtn" aria-haspopup="true" aria-expanded="false" title="{{ _('Notifications') }}">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="ws-bell-badge" id="wsBellBadge" hidden></span>
+                    </button>
+                    <div class="ws-bell-panel" id="wsBellPanel" hidden>
+                        <div class="ws-bell-head">
+                            <span class="ws-bell-head-title" id="wsBellTitle"></span>
+                            <div class="ws-bell-head-acts">
+                                <button type="button" class="ws-bell-link" id="wsBellMarkAll"></button>
+                                <button type="button" class="ws-bell-link ws-bell-clear" id="wsBellClear"></button>
+                            </div>
+                        </div>
+                        <div class="ws-bell-list" id="wsBellList"></div>
+                    </div>
+                </div>
 
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
