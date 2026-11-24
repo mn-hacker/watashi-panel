@@ -230,16 +230,25 @@
     .dm-pick input:checked + span { border-color: var(--primary-purple, rgb(var(--ws-a-600))); color: var(--primary-purple, rgb(var(--ws-a-600))); background: rgb(var(--ws-a-600) / 0.1); }{# watashi v12.3.44dev: palette colour #}
     .dm-pick input:checked + span::before { opacity: 1; }
     .dm-pick input:focus-visible + span { box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.15); }{# watashi v12.3.44dev: palette colour #}
-    /* watashi v12.3.57dev: the config chips of the domain window — the same
-       pattern as the protocols row of the users page: on = delivered, off =
-       struck through and grey. (Not the .dm-chip of the mode cards above.) */
-    .dm-pick-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-body); color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.25s ease; direction: ltr; unicode-bidi: isolate; font-family: inherit; }
-    .dm-pick-chip i { font-size: 9px; opacity: 1; transition: opacity 0.2s ease; }
-    .dm-pick-chip.on { border-color: var(--primary-purple, rgb(var(--ws-a-600))); color: var(--primary-purple, rgb(var(--ws-a-600))); background: rgb(var(--ws-a-600) / 0.1); }
-    .dm-pick-chip:not(.on) { text-decoration: line-through; opacity: 0.55; }
-    .dm-pick-chip:not(.on) i { opacity: 0; }
-    .dm-pick-chip:focus-visible { box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.15); outline: none; }
-    #dmAllowed { max-height: 168px; overflow-y: auto; padding: 2px; scrollbar-width: thin; }
+    /* watashi v12.3.57dev: the config picker of the domain window — a copy of
+       the users-page protocols box: framed box, the N/M counter on top with a
+       save status, uppercase tags, on = purple fill, off = struck through.
+       (Not the .dm-chip of the mode cards above.) */
+    .dm-proto-box { border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-body); padding: 8px 9px; }
+    .dm-proto-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 7px; }
+    .dm-proto-count { font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); direction: ltr; unicode-bidi: isolate; }
+    .dm-proto-status { font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); opacity: 0; transition: opacity 0.2s; }
+    .dm-proto-status.on { opacity: 1; }
+    .dm-proto-status.saved { color: var(--primary-green); opacity: 1; }
+    .dm-proto-status.failed { color: var(--primary-red); opacity: 1; }
+    .dm-proto-list { display: flex; flex-wrap: wrap; gap: 5px; max-height: 96px; overflow-y: auto; scrollbar-width: thin; }
+    .dm-proto-tag { padding: 4px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; font-family: inherit; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.05); color: var(--text-muted); transition: all 0.15s; direction: ltr; unicode-bidi: isolate; }
+    .dm-proto-tag:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .dm-proto-tag.on { background: rgb(var(--ws-a-500) / 0.16); border-color: rgb(var(--ws-a-500) / 0.5); color: var(--text-main); }
+    .dm-proto-tag.off { text-decoration: line-through; opacity: 0.55; }
+    .dm-proto-tag.dm-proto-all { background: rgba(59, 130, 246, 0.14); border-color: rgba(59, 130, 246, 0.45); color: #3b82f6; }
+    .dm-proto-tag.dm-proto-all.off { background: rgba(255, 255, 255, 0.05); border-color: var(--border-color); color: var(--text-muted); text-decoration: none; opacity: 1; }
+    .dm-proto-empty { font-size: 11px; color: var(--text-muted); }
     .dm-all-count { color: var(--text-muted); font-size: 11px; font-weight: 400; margin-inline-start: 6px; direction: ltr; unicode-bidi: isolate; }
 
     .dm-confirm { text-align: center; padding: 30px 24px; }
@@ -531,9 +540,20 @@
                        edit mode they save at once; in create mode they ride
                        with the form. #}
                     <div class="form-group full-width dm-field" id="dmAllowedField" data-modes="{{ ' '.join(['direct cdn auto_cdn_ip relay worker reality special_reality_tcp special_reality_xhttp special_reality_grpc old_xtls_direct']) }}">
-                        <label class="form-label"><i class="fa-solid fa-plug"></i> {{ _('Configs this domain delivers') }} <span class="dm-all-count" id="dmAllowedCount"></span></label>
-                        <div class="dm-picks" id="dmAllowed">
-                            {% for px in ws_proxies %}<button type="button" class="dm-pick-chip on" data-name="{{ px.name }}" onclick="wsDomAllowedToggle(this)"><span>{{ px.name }}</span><i class="fa-solid fa-check"></i></button>{% endfor %}
+                        <label class="form-label"><i class="fa-solid fa-plug"></i> {{ _('Configs this domain delivers') }}</label>
+                        <div class="dm-proto-box" id="dmAllowedBox" onclick="event.stopPropagation()">
+                            <div class="dm-proto-head">
+                                <span class="dm-proto-count" id="dmAllowedCount"></span>
+                                <span class="dm-proto-status" id="dmAllowedStatus"></span>
+                            </div>
+                            <div class="dm-proto-list" id="dmAllowed">
+                                {% if ws_proxies %}
+                                <button type="button" class="dm-proto-tag dm-proto-all" data-proto-all title="{{ _('Turn every config on or off') }}">{{ _('All') }}</button>
+                                {% for px in ws_proxies %}<button type="button" class="dm-proto-tag" data-name="{{ px.name }}" title="{{ px.name }}" onclick="wsDomAllowedToggle(this)">{{ px.name }}</button>{% endfor %}
+                                {% else %}
+                                <span class="dm-proto-empty">{{ _('No configs are enabled in the panel.') }}</span>
+                                {% endif %}
+                            </div>
                         </div>
                         <span class="dm-hintline" id="dmAllowedHint">{{ _('Switch a config off to stop this domain from delivering it. The config keeps running on the server.') }}</span>
                     </div>
@@ -704,6 +724,9 @@
         orderSaved: {{ _('The new order is saved. Your users see it in their next update.')|tojson }},
         orderFail: {{ _('The new order could not be saved.')|tojson }},
         allowedFail: {{ _('The config list of this domain could not be saved.')|tojson }},
+        allowedFailShort: {{ _('Save failed')|tojson }},
+        allowedSaved: {{ _('Saved')|tojson }},
+        active: {{ _('ACTIVE')|tojson }},
         orderLocked: {{ _('Take the search and the mode filter off first, then the cards can be moved.')|tojson }},
         edit: {{ _('Edit the domain')|tojson }},
         copied: {{ _('The domain is on your clipboard.')|tojson }},
@@ -1126,23 +1149,41 @@
             }, 260);
         };
 
-        // config chips ----------------------------------------------------
+        // config picker ----------------------------------------------------
         // watashi v12.3.57dev: null means "every enabled config" (the old
         // behaviour and the create default); a list means exactly those.
+        // The box copies the users-page protocols box: N/M counter on top, a
+        // save status beside it, an "All" tag and the config tags.
         var wsDomAllowedState = null;
+        function wsDomAllowedStatus(cls, text) {
+            var el = byId('dmAllowedStatus');
+            if (!el) return;
+            el.className = 'dm-proto-status' + (cls ? ' ' + cls : '');
+            el.textContent = text || '';
+            if (cls) {
+                window.setTimeout(function () { el.className = 'dm-proto-status'; el.textContent = ''; }, 1600);
+            }
+        }
         function paintAllowed() {
-            var chips = qa("#dmAllowed .dm-pick-chip");
+            var chips = qa('#dmAllowed .dm-proto-tag[data-name]');
             var on = 0;
             chips.forEach(function (chip) {
                 var mine = wsDomAllowedState === null || wsDomAllowedState.indexOf(chip.dataset.name) >= 0;
                 chip.classList.toggle('on', mine);
+                chip.classList.toggle('off', !mine);
                 if (mine) {
                     on = on + 1;
                 }
             });
             var counter = byId('dmAllowedCount');
             if (counter) {
-                counter.textContent = on + ' / ' + chips.length;
+                counter.textContent = on + ' / ' + chips.length + ' ' + (TXT.active || 'ACTIVE');
+            }
+            var all = byId('dmAllowed').querySelector('.dm-proto-all');
+            if (all) {
+                var every = chips.length && on === chips.length;
+                all.classList.toggle('on', every);
+                all.classList.toggle('off', !every);
             }
             var field = byId('dmAllowedField');
             if (field) {
@@ -1153,12 +1194,18 @@
                 hidden.value = (wsDomAllowedState === null ? [] : wsDomAllowedState).join(',');
             }
         }
-        window.wsDomAllowedToggle = wsDomAllowedToggle;
         function wsDomAllowedToggle(chip) {
+            if (chip.hasAttribute('data-proto-all')) {
+                // the blue "All" tag: one click back to the flexible state
+                wsDomAllowedState = null;
+                paintAllowed();
+                wsDomAllowedSave();
+                return;
+            }
             var name = chip.dataset.name;
             var nowOn = !chip.classList.contains('on');
             // First switch-off pins the list; the flexible "all" state ends.
-            wsDomAllowedState = (wsDomAllowedState === null ? qa("#dmAllowed .dm-pick-chip").map(function (c) { return c.dataset.name; }) : wsDomAllowedState.slice());
+            wsDomAllowedState = (wsDomAllowedState === null ? qa('#dmAllowed .dm-proto-tag[data-name]').map(function (c) { return c.dataset.name; }) : wsDomAllowedState.slice());
             if (nowOn) {
                 if (wsDomAllowedState.indexOf(name) < 0) {
                     wsDomAllowedState.push(name);
@@ -1166,26 +1213,35 @@
             } else {
                 wsDomAllowedState = wsDomAllowedState.filter(function (n) { return n !== name; });
             }
-            if (wsDomAllowedState.length === qa("#dmAllowed .dm-pick-chip").length) {
+            if (wsDomAllowedState.length === qa('#dmAllowed .dm-proto-tag[data-name]').length) {
                 wsDomAllowedState = null;  // everything on again = the flexible state
             }
             paintAllowed();
+            wsDomAllowedSave();
+        }
+        window.wsDomAllowedToggle = wsDomAllowedToggle;
+        function wsDomAllowedSave() {
             var currentId = wsDomEditingId();
             var row = currentId ? rowOf(currentId) : null;
-            if (row) {
-                window.fetch(URLS.allowed, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: row.id, allowed: wsDomAllowedState || [] })
-                }).then(function (answer) { return answer.json(); }).then(function (data) {
-                    if (!data || !data.ok) {
-                        window.wsToast((data && data.msg) || TXT.allowedFail, 'error');
-                    }
-                }).catch(function () {
-                    window.wsToast(TXT.allowedFail, 'error');
-                });
+            if (!row) {
+                return;  // create mode: the pick rides with the form
             }
+            window.fetch(URLS.allowed, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: row.id, allowed: wsDomAllowedState || [] })
+            }).then(function (answer) { return answer.json(); }).then(function (data) {
+                if (!data || !data.ok) {
+                    wsDomAllowedStatus('failed', TXT.allowedFailShort);
+                    window.wsToast((data && data.msg) || TXT.allowedFail, 'error');
+                } else {
+                    wsDomAllowedStatus('saved', TXT.allowedSaved);
+                }
+            }).catch(function () {
+                wsDomAllowedStatus('failed', TXT.allowedFailShort);
+                window.wsToast(TXT.allowedFail, 'error');
+            });
         }
         function wsDomEditingId() {
             return window.wsDomCurrentId || null;

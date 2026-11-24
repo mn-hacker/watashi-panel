@@ -7247,3 +7247,20 @@ msgstr "手动创建的规则决定哪个连接走哪个出口。核心自上而
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "首个匹配生效 — 把更严格的规则放在上面"
+msgid "Configs this domain delivers"
+msgstr "此域名提供的配置"
+
+msgid "Switch a config off to stop this domain from delivering it. The config keeps running on the server."
+msgstr "关闭某个配置后，此域名将不再提供它。配置仍会在服务器上运行。"
+
+msgid "Turn every config on or off"
+msgstr "开启或关闭所有配置"
+
+msgid "No configs are enabled in the panel."
+msgstr "面板中没有已启用的配置。"
+
+msgid "Save failed"
+msgstr "保存失败"
+
+msgid "ACTIVE"
+msgstr "个启用"

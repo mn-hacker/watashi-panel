@@ -12401,3 +12401,17 @@ msgstr "قانون دستی تصمیم می‌گیرد کدام اتصال به 
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "اولین تطبیق برنده است — قوانین محدودتر را بالا نگه دار"
+msgid "Configs this domain delivers"
+msgstr "کانفیگ‌هایی که این دامنه تحویل می‌دهد"
+
+msgid "Switch a config off to stop this domain from delivering it. The config keeps running on the server."
+msgstr "یک کانفیگ را خاموش کن تا این دامنه دیگر آن را تحویل ندهد. کانفیگ همچنان روی سرور اجرا می‌شود."
+
+msgid "Turn every config on or off"
+msgstr "روشن یا خاموش‌کردن همه‌ی کانفیگ‌ها"
+
+msgid "No configs are enabled in the panel."
+msgstr "هیچ کانفیگی در پنل فعال نیست."
+
+msgid "ACTIVE"
+msgstr "فعال"

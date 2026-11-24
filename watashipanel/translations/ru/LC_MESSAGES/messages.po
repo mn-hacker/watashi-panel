@@ -7266,3 +7266,20 @@ msgstr "Созданное вручную правило решает, како�
 
 msgid "First match wins — keep the narrow rules on top"
 msgstr "Первое совпадение побеждает — держите узкие правила сверху"
+msgid "Configs this domain delivers"
+msgstr "Конфигурации, которые отдаёт этот домен"
+
+msgid "Switch a config off to stop this domain from delivering it. The config keeps running on the server."
+msgstr "Выключите конфигурацию, чтобы домен её не отдавал. Конфигурация продолжает работать на сервере."
+
+msgid "Turn every config on or off"
+msgstr "Включить или выключить все конфигурации"
+
+msgid "No configs are enabled in the panel."
+msgstr "В панели нет включённых конфигураций."
+
+msgid "Save failed"
+msgstr "Не сохранено"
+
+msgid "ACTIVE"
+msgstr "АКТИВНЫХ"
