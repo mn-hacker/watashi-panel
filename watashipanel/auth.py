@@ -205,6 +205,13 @@ def auth_before_request():
             # to bounce with force=1, and the forced sign in page then wiped a
             # perfectly valid session. Without force, the sign in view simply
             # sends a signed-in visitor back to their panel.
+            # watashi v12.3.57dev fix: a dead uuid must not leave the previous
+            # session standing. The reported replay: open a deleted user's link
+            # (bounce to sign in, session kept), then a healthy user's link
+            # (session taken over), then reload the dead link — the stale
+            # session in the cookie answered and drew the healthy user's panel
+            # under a dead address. The bounce now signs out first.
+            logout_user()
             return redirect(hurl_for('common_bp.LoginView:index', next=request.path))
 
         # watashi v12.3.77dev: a panel link is the address of a panel — whoever

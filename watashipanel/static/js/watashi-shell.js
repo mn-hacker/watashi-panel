@@ -318,23 +318,31 @@ try {
                     if (killed) return;
                     killed = true;
                     el.classList.remove('ws-toast-in');
+                    el.classList.add('ws-toast-out');
                     setTimeout(function () {
                         if (el.parentNode) el.parentNode.removeChild(el);
                     }, 320);
                 }
+                // a waiting (button-carrying) toast counts down even while the
+                // pointer rests on it — otherwise it could sit there all day
                 var life = typeof duration === 'number' && duration > 0 ? duration : 2600;
+                // watashi v12.3.57dev: a message with a button used to wait forever.
+                // It now waits up to 30s, then leaves on its own — the bell keeps
+                // a copy, so the action is not lost, only the screen is cleared.
+                var waits = waits && life < 30000 ? false : waits;
+                if (waits) { life = 30000; }
                 var left = life;
                 var since = 0;
                 var timer = null;
                 function run() {
-                    if (waits || killed) return;
+                    if (killed) return;
                     since = Date.now();
                     timer = setTimeout(kill, left);
                 }
                 function hold() {
                     // A pointer resting on a message means it is being read, so
                     // the countdown stops and later picks up where it left off.
-                    if (waits || timer === null) return;
+                    if (timer === null) return;
                     clearTimeout(timer);
                     timer = null;
                     left = Math.max(left - (Date.now() - since), 1000);
@@ -518,8 +526,23 @@ try {
                 return (words.days_ago || '{n}d ago').replace('{n}', String(Math.floor(h / 24)));
             },
             setOpen: function (want) {
+                var self = this;
+                var wasOpen = this.open;
                 this.open = !!want;
-                if (this.panel) this.panel.hidden = !this.open;
+                if (this.panel) {
+                    if (this.open) {
+                        this.panel.hidden = false;
+                        this.panel.classList.remove('ws-closing');
+                        this.panel.classList.add('ws-open');
+                    } else if (wasOpen) {
+                        // close through its own soft animation, then hide
+                        this.panel.classList.remove('ws-open');
+                        this.panel.classList.add('ws-closing');
+                        window.setTimeout(function () {
+                            if (!self.open) { self.panel.hidden = true; self.panel.classList.remove('ws-closing'); }
+                        }, 230);
+                    }
+                }
                 if (this.btn) this.btn.setAttribute('aria-expanded', this.open ? 'true' : 'false');
                 if (!this.open) {
                     // closing the tray is what reads it: while it is open the
