@@ -851,6 +851,21 @@ class DomainAdmin(AdminLTEModelView):
             mode_changed = bool(sa_inspect(model).attrs.mode.history.has_changes())
         except BaseException as err:
             logger.debug(f"watashi: cannot tell whether the mode changed: {err}")
+        # watashi v12.3.57dev: the create window sends the picked proxies with
+        # the form itself (the edit window saves through ws_allowed on its own,
+        # its field is disabled, so it never arrives here). A missing or empty
+        # value keeps the old behaviour: every enabled proxy.
+        names = request.form.get('ws_allowed_names')
+        if is_created and names is not None:
+            valid = set(p['name'] for p in self.ws_enabled_proxies())
+            picked = []
+            for name in names.split(','):
+                name = name.strip()
+                if name and name in valid and name not in picked:
+                    picked.append(name)
+            if len(valid) and picked and len(picked) == len(valid):
+                picked = []
+            model.allowed_proxies = ','.join(picked) or None
         # Sanitize domain input
         model.domain = (model.domain or '').lower().strip()
         if model.download_domain and model.domain==model.download_domain.domain:
@@ -1138,6 +1153,10 @@ class DomainAdmin(AdminLTEModelView):
             'download_id': download_id,
             'shown': shown,
             'shown_ids': shown_ids,
+            # watashi v12.3.57dev: the proxies this domain hands out. A domain
+            # with no saved list (the old rows) hands out every enabled proxy.
+            'allowed': (model.get_allowed_proxies() if hasattr(model, 'get_allowed_proxies') else []),
+            'allowed_all': not (model.allowed_proxies if hasattr(model, 'allowed_proxies') else ''),
             # watashi v12.2.130at: the place this domain holds. The page draws
             # the number out of the position, this is only what was saved.
             'order': int(getattr(model, 'sort_order', 0) or 0),
@@ -1215,6 +1234,7 @@ class DomainAdmin(AdminLTEModelView):
             kwargs['ws_resolve_ip_modes'] = ' '.join(WS_MODE_RESOLVE_IP)
             kwargs['ws_server_ips'] = ws_server_ips()
             kwargs['ws_may_write'] = self.ws_may_write()
+            kwargs['ws_proxies'] = self.ws_enabled_proxies()
             kwargs['ws_csrf'] = self.ws_form_token()
         return super().render(template, **kwargs)
 
@@ -1280,6 +1300,53 @@ class DomainAdmin(AdminLTEModelView):
             'busy': str(_('Applying...')),
             'text': str(_('The change is saved. Press the button so it reaches the configs.')),
         }
+
+    def ws_enabled_proxies(self):
+        'watashi v12.3.57dev: the proxies the admin has switched on, the only ones a domain may pick.'
+        try:
+            from watashipanel.hutils.proxy.shared import get_proxies
+            return [{'name': p.name, 'label': p.name} for p in get_proxies(0, only_enabled=True)]
+        except BaseException as err:
+            logger.error(f'watashi: cannot read the enabled proxies: {err}')
+            return []
+
+    @expose('/ws_allowed/', methods=['POST'])
+    def ws_allowed(self):
+        """watashi v12.3.57dev: picks the proxies one domain hands out.
+
+        The page sends the names from the chips of the edit window. An empty
+        list means every enabled proxy, which is what the panel has always
+        done. The configs keep running on the server; only the delivery in the
+        subscriptions changes, so nothing here needs the apply step.
+        """
+        if not self.is_accessible() or not self.ws_may_write():
+            return jsonify({'ok': False, 'msg': __('You are not allowed to change the domains.')}), 403
+        body = request.get_json(silent=True) or {}
+        model = self.ws_pick(body)
+        if not model:
+            return jsonify({'ok': False, 'msg': __('This domain is not on this server any more.')}), 404
+        enabled = self.ws_enabled_proxies()
+        valid = set(p['name'] for p in enabled)
+        picked = []
+        for name in (body.get('allowed') or []):
+            name = str(name).strip()
+            if name and name in valid and name not in picked:
+                picked.append(name)
+        if enabled and len(picked) == len(enabled):
+            picked = []  # every chip on: keep the flexible "all" state
+        try:
+            model.allowed_proxies = ','.join(picked) or None
+            db.session.commit()
+        except BaseException as err:
+            db.session.rollback()
+            logger.error(f'watashi: cannot save the proxies of the domain: {err}')
+            return jsonify({'ok': False, 'msg': __('The change could not be saved.')}), 500
+        try:
+            if hutils.node.is_child():
+                hutils.node.run_node_op_in_bg(hutils.node.child.sync_with_parent, *[hutils.node.child.SyncFields.domains])
+        except BaseException as err:
+            logger.debug(f'watashi: cannot tell the parent about the change: {err}')
+        return jsonify({'ok': True, 'allowed': picked, 'domain': model.domain})
 
     @expose('/ws_toggle/', methods=['POST'])
     def ws_toggle(self):

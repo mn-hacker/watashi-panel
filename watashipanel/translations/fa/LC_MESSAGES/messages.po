@@ -3841,6 +3841,9 @@ msgstr "گزارشی یافت نشد"
 msgid "No data yet"
 msgstr "هنوز داده‌ای نیست"
 
+msgid "Other"
+msgstr "سایر"
+
 msgid "Last 30 Days"
 msgstr "30 روز اخیر"
 

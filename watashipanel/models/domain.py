@@ -72,9 +72,16 @@ class Domain(db.Model):
     # same order. A database that never saw this column, and a domain that was
     # never arranged, both read as nothing, which counts as the far end.
     sort_order = db.Column(db.Integer, nullable=True, default=0)
+    # watashi v12.3.57dev: the proxy names this domain delivers. An empty (or
+    # missing) list means every enabled proxy, which is what panels before
+    # this column always did.
+    allowed_proxies = db.Column(db.Text, nullable=True, default=None)
 
     def __repr__(self):
         return f'{self.domain}'
+
+    def get_allowed_proxies(self):
+        return [x.strip() for x in str(self.allowed_proxies or '').split(',') if x.strip()]
 
     def get_cdn_ips_parsed(self):
         ips = re.split('[ \t\r\n;,]+', self.cdn_ip.strip())
@@ -104,6 +111,8 @@ class Domain(db.Model):
             # watashi v12.2.130at: the order travels with a backup, otherwise a
             # restore would put every domain back in the order of its id.
             'sort_order': int(self.sort_order or 0),
+            # watashi v12.3.57dev: which proxies this domain hands out ('' = all)
+            'allowed_proxies': ','.join(self.get_allowed_proxies()),
         }
         if dump_child_id:
             data['child_id'] = self.child_id
@@ -132,6 +141,10 @@ class Domain(db.Model):
         # one name it does not know. Which domain comes first is a decision of
         # this node anyway, and the backup still carries it.
         domain_dict.pop('sort_order', None)
+        # watashi v12.3.57dev: same reason as sort_order — a parent on an older
+        # panel would refuse the whole sync over a name it does not know. The
+        # backup still carries it, and the node reads its own column.
+        domain_dict.pop('allowed_proxies', None)
         from watashipanel.panel.commercial.restapi.v2.parent.schema import DomainSchema
         return DomainSchema().load(domain_dict)
 
@@ -295,6 +308,9 @@ class Domain(db.Model):
             dbdomain.sort_order = int(domain.get('sort_order') or 0)
         except BaseException:
             dbdomain.sort_order = 0
+        # watashi v12.3.57dev: the proxy whitelist of this domain. A missing or
+        # empty value means every enabled proxy (the old behaviour).
+        dbdomain.allowed_proxies = str(domain.get('allowed_proxies', '') or '')
         show_domains = domain.get('show_domains', [])
         dbdomain.show_domains = Domain.query.filter(Domain.domain.in_(show_domains)).all()
         dl_domain=domain.get("download_domain")

@@ -25,7 +25,7 @@ from loguru import logger
 # watashi v12.2.129: _v155 adds warp_presets, which the Nodes page and
 # both routing templates read to decide what goes behind a node.
 # watashi v12.3.41dev: _v159 adds the two switches of the advanced mode.
-MAX_DB_VERSION = 160  # watashi v12.2.130an
+MAX_DB_VERSION = 161  # watashi v12.3.57dev
 
 def _v150(child_id):
     # watashi v12.2.97: the salamander obfs password was the panel's own
@@ -226,6 +226,18 @@ def _v140(child_id):
         db.session.rollback()  # watashi v12.2.70
         pass
     logger.info("Added the per-admin data limit column")
+
+
+def _v161(child_id):
+    # watashi v12.3.57dev: per-domain proxy control. The column stores the
+    # proxy names a domain hands out ('' = every enabled proxy, which is what
+    # panels before this column always did). Guarded like _v139.
+    try:
+        db_execute("ALTER TABLE domain ADD COLUMN allowed_proxies TEXT")
+    except Exception:
+        db.session.rollback()  # watashi v12.2.70
+        pass  # column already exists
+    logger.info("Added the per-domain proxy control column")
 
 
 def _v160(child_id):

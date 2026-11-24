@@ -408,6 +408,10 @@ def get_valid_proxies(domains: list[Domain], only_tunnels: bool | None = None) -
         # it is skipped even when a caller hands it over by mistake.
         if domain.mode == DomainType.sub_link_only:
             continue
+        # watashi v12.3.57dev: the admin picked the proxies this domain hands
+        # out ('' keeps the old behaviour: every enabled proxy). The configs
+        # keep running on the server; they only stop being delivered.
+        domain_allowed = domain.get_allowed_proxies()
         if domain.child_id not in configsmap:
             configsmap[domain.child_id] = get_hconfigs(domain.child_id)
             proxeismap[domain.child_id] = get_proxies(domain.child_id, only_enabled=True)
@@ -418,6 +422,8 @@ def get_valid_proxies(domains: list[Domain], only_tunnels: bool | None = None) -
             ips = hutils.network.get_domain_ips_cached(domain.domain)
         for proxy in proxeismap[domain.child_id]:
             if disabled_proxies and proxy.name in disabled_proxies:
+                continue
+            if domain_allowed and proxy.name not in domain_allowed:
                 continue
             # watashi: tunnel separation v12.2.59
             tunnel = is_tunnel_proto(proxy.proto)

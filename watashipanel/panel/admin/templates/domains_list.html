@@ -230,6 +230,17 @@
     .dm-pick input:checked + span { border-color: var(--primary-purple, rgb(var(--ws-a-600))); color: var(--primary-purple, rgb(var(--ws-a-600))); background: rgb(var(--ws-a-600) / 0.1); }{# watashi v12.3.44dev: palette colour #}
     .dm-pick input:checked + span::before { opacity: 1; }
     .dm-pick input:focus-visible + span { box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.15); }{# watashi v12.3.44dev: palette colour #}
+    /* watashi v12.3.57dev: the config chips of the domain window — the same
+       pattern as the protocols row of the users page: on = delivered, off =
+       struck through and grey. (Not the .dm-chip of the mode cards above.) */
+    .dm-pick-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-body); color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.25s ease; direction: ltr; unicode-bidi: isolate; font-family: inherit; }
+    .dm-pick-chip i { font-size: 9px; opacity: 1; transition: opacity 0.2s ease; }
+    .dm-pick-chip.on { border-color: var(--primary-purple, rgb(var(--ws-a-600))); color: var(--primary-purple, rgb(var(--ws-a-600))); background: rgb(var(--ws-a-600) / 0.1); }
+    .dm-pick-chip:not(.on) { text-decoration: line-through; opacity: 0.55; }
+    .dm-pick-chip:not(.on) i { opacity: 0; }
+    .dm-pick-chip:focus-visible { box-shadow: 0 0 0 3px rgb(var(--ws-a-600) / 0.15); outline: none; }
+    #dmAllowed { max-height: 168px; overflow-y: auto; padding: 2px; scrollbar-width: thin; }
+    .dm-all-count { color: var(--text-muted); font-size: 11px; font-weight: 400; margin-inline-start: 6px; direction: ltr; unicode-bidi: isolate; }
 
     .dm-confirm { text-align: center; padding: 30px 24px; }
     .dm-confirm-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
@@ -374,6 +385,20 @@
                         </span>
                     </div>
                     <div class="dm-fact">
+                        <span class="dm-fact-key"><i class="fa-solid fa-plug"></i> {{ _('Configs') }}</span>
+                        <span class="dm-fact-val">
+                            {# watashi v12.3.57dev: the per-domain pick, at a glance. An empty list means every enabled config. #}
+                            {% set _total = ws_proxies|length %}
+                            {% if row.sub_only or not _total %}
+                            <span class="dm-ip quiet"><i class="fa-solid fa-minus"></i> —</span>
+                            {% elif row.allowed and row.allowed|length < _total %}
+                            <span class="dm-ip cloud"><i class="fa-solid fa-plug"></i> <bdi class="dm-num">{{ row.allowed|length }} / {{ _total }}</bdi></span>
+                            {% else %}
+                            <span class="dm-ip quiet"><i class="fa-solid fa-circle-check"></i> {{ _('All') }}</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="dm-fact">
                         <span class="dm-fact-key"><i class="fa-solid fa-power-off"></i> {{ _('Active') }}</span>
                         <span class="dm-fact-val">
                             {% if ws_may_write %}
@@ -495,10 +520,23 @@
                     <div class="form-group full-width dm-field dm-off" id="dmSubNote" data-modes="sub_link_only">
                         <div class="dm-note"><i class="fa-solid fa-link"></i> {{ _('This domain only serves the subscription link and carries no user traffic.') }}</div>
                     </div>
+                    <input type="hidden" name="ws_allowed_names" id="dmAllowedNames" value="">
                 </div>
 
                 <div class="dm-form-section"><i class="fa-solid fa-share-nodes"></i> {{ _('Subscription settings') }}</div>
                 <div class="form-grid">
+                    {# watashi v12.3.57dev: which configs this domain hands out.
+                       The chips follow the protocols row of the users page: on
+                       means delivered, off means struck through and grey. In
+                       edit mode they save at once; in create mode they ride
+                       with the form. #}
+                    <div class="form-group full-width dm-field" id="dmAllowedField" data-modes="{{ ' '.join(['direct cdn auto_cdn_ip relay worker reality special_reality_tcp special_reality_xhttp special_reality_grpc old_xtls_direct']) }}">
+                        <label class="form-label"><i class="fa-solid fa-plug"></i> {{ _('Configs this domain delivers') }} <span class="dm-all-count" id="dmAllowedCount"></span></label>
+                        <div class="dm-picks" id="dmAllowed">
+                            {% for px in ws_proxies %}<button type="button" class="dm-pick-chip on" data-name="{{ px.name }}" onclick="wsDomAllowedToggle(this)"><span>{{ px.name }}</span><i class="fa-solid fa-check"></i></button>{% endfor %}
+                        </div>
+                        <span class="dm-hintline" id="dmAllowedHint">{{ _('Switch a config off to stop this domain from delivering it. The config keeps running on the server.') }}</span>
+                    </div>
                     <div class="form-group full-width dm-field">
                         <label class="form-label"><i class="fa-solid fa-eye"></i> {{ _('Domains listed in the subscription of this domain') }}</label>
                         <div class="dm-picks" id="dmShown">
@@ -656,6 +694,7 @@
         toggle: {{ get_url('.ws_toggle')|tojson }},
         forget: {{ get_url('.ws_forget')|tojson }},
         order: {{ get_url('.ws_order')|tojson }},
+        allowed: {{ get_url('.ws_allowed')|tojson }},
         {# watashi v12.3.39dev #}
         certForce: {{ get_url('.ws_cert_force')|tojson }},
         certStatus: {{ get_url('.ws_cert_status')|tojson }}
@@ -664,6 +703,7 @@
         add: {{ _('Add Domain')|tojson }},
         orderSaved: {{ _('The new order is saved. Your users see it in their next update.')|tojson }},
         orderFail: {{ _('The new order could not be saved.')|tojson }},
+        allowedFail: {{ _('The config list of this domain could not be saved.')|tojson }},
         orderLocked: {{ _('Take the search and the mode filter off first, then the cards can be moved.')|tojson }},
         edit: {{ _('Edit the domain')|tojson }},
         copied: {{ _('The domain is on your clipboard.')|tojson }},
@@ -1048,6 +1088,7 @@
 
         window.wsDomOpen = function (id) {
             var row = id ? rowOf(id) : null;
+            window.wsDomCurrentId = id || null;
             var form = byId('dmForm');
             if (!form) {
                 return;
@@ -1071,6 +1112,12 @@
                 box.checked = picked.indexOf(mine) >= 0;
                 box.parentNode.style.display = (row && String(row.id) === box.value) ? 'none' : '';
             });
+            // watashi v12.3.57dev: the config chips. A domain with no saved
+            // pick (null) runs the flexible "every enabled config" state.
+            // Edit mode saves at once; create mode keeps them part of the
+            // form until the domain exists.
+            wsDomAllowedState = row ? (row.allowed_all ? null : (row.allowed || []).slice()) : null;
+            paintAllowed();
             paintFields();
             tellPicked();
             show('dmFormModal');
@@ -1078,6 +1125,71 @@
                 byId('dmDomain').focus();
             }, 260);
         };
+
+        // config chips ----------------------------------------------------
+        // watashi v12.3.57dev: null means "every enabled config" (the old
+        // behaviour and the create default); a list means exactly those.
+        var wsDomAllowedState = null;
+        function paintAllowed() {
+            var chips = qa("#dmAllowed .dm-pick-chip");
+            var on = 0;
+            chips.forEach(function (chip) {
+                var mine = wsDomAllowedState === null || wsDomAllowedState.indexOf(chip.dataset.name) >= 0;
+                chip.classList.toggle('on', mine);
+                if (mine) {
+                    on = on + 1;
+                }
+            });
+            var counter = byId('dmAllowedCount');
+            if (counter) {
+                counter.textContent = on + ' / ' + chips.length;
+            }
+            var field = byId('dmAllowedField');
+            if (field) {
+                field.classList.toggle('dm-off', !chips.length);
+            }
+            var hidden = byId('dmAllowedNames');
+            if (hidden) {
+                hidden.value = (wsDomAllowedState === null ? [] : wsDomAllowedState).join(',');
+            }
+        }
+        window.wsDomAllowedToggle = wsDomAllowedToggle;
+        function wsDomAllowedToggle(chip) {
+            var name = chip.dataset.name;
+            var nowOn = !chip.classList.contains('on');
+            // First switch-off pins the list; the flexible "all" state ends.
+            wsDomAllowedState = (wsDomAllowedState === null ? qa("#dmAllowed .dm-pick-chip").map(function (c) { return c.dataset.name; }) : wsDomAllowedState.slice());
+            if (nowOn) {
+                if (wsDomAllowedState.indexOf(name) < 0) {
+                    wsDomAllowedState.push(name);
+                }
+            } else {
+                wsDomAllowedState = wsDomAllowedState.filter(function (n) { return n !== name; });
+            }
+            if (wsDomAllowedState.length === qa("#dmAllowed .dm-pick-chip").length) {
+                wsDomAllowedState = null;  // everything on again = the flexible state
+            }
+            paintAllowed();
+            var currentId = wsDomEditingId();
+            var row = currentId ? rowOf(currentId) : null;
+            if (row) {
+                window.fetch(URLS.allowed, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: row.id, allowed: wsDomAllowedState || [] })
+                }).then(function (answer) { return answer.json(); }).then(function (data) {
+                    if (!data || !data.ok) {
+                        window.wsToast((data && data.msg) || TXT.allowedFail, 'error');
+                    }
+                }).catch(function () {
+                    window.wsToast(TXT.allowedFail, 'error');
+                });
+            }
+        }
+        function wsDomEditingId() {
+            return window.wsDomCurrentId || null;
+        }
 
         // health ----------------------------------------------------------
         function ask(url, body) {
